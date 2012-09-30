@@ -1,6 +1,3 @@
-require './models'
-require './helpers'
-
 class Thesis < Sinatra::Base
 
   get '/' do
