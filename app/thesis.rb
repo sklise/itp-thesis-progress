@@ -1,7 +1,9 @@
-class Thesis < Sinatra::Base
+
+class ThesisApp < Sinatra::Base
+  # use ThesisHelpers
 
   get '/' do
-
+    erb :front_page
   end
 
   # If you're a teacher, links to your sections and a "blog feed" of recent

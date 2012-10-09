@@ -1,10 +1,12 @@
 require 'bundler'
 Bundler.require
 
-$LOAD_PATH.unshift(::File.expand_path('app', ::File.dirname(__FILE__)))
+# $LOAD_PATH.unshift(::File.expand_path('app', ::File.dirname(__FILE__)))
 
-require 'app'
-require 'models'
-require 'helpers'
+Dir["./app/*.rb"].each {|file| require file }
+# require './app/helpers'
+# require './app/thesis'
 
-run Thesis
+run Rack::URLMap.new({
+  "/" => ThesisApp.new
+})
