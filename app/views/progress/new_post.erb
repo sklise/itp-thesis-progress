@@ -1,0 +1,19 @@
+<form id="progress-new" action="/progress/save" method="POST">
+  <ul id="progress-category">
+    <li>Research</li>
+    <li>Design</li>
+    <li>Production</li>
+  </ul>
+  <input type="hidden" name="category"/>
+
+  <h3>
+    <input type="text" name="title" placeholder="Title of Post..."/>
+  </h3>
+
+  <textarea name="content" placeholder="Write your post here..."></textarea>
+
+  <button id="private">Private</button>
+  <button id="public">Public</button>
+
+  <input type="submit" name="publish" value="Publish"/>
+</form>

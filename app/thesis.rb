@@ -1,4 +1,3 @@
-
 class ThesisApp < Sinatra::Base
   # use ThesisHelpers
 

@@ -1,0 +1,113 @@
+html {
+  font-family: "Proxima Nova", "Helvetica", sans-serif;
+  font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: inherit;
+  font-family: "Myriad Pro", "Helvetica", sans-serif;
+  font-weight: 700;
+  line-height: 1.4em;
+  margin: 1em 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+h1 {
+  font-size: 47.123px;
+  margin: 0.25em 0 0.5em;
+}
+
+h2 {
+  font-size: 43.263px;
+  margin: 0.5em 0;
+}
+
+h3 {
+  font-size: 29.124px;
+  margin: 0.5em 0;
+}
+
+h4 {
+  font-size: 26.739px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+p {
+  line-height: 1.5em;
+  margin: 1em 0;
+  width: 600px;
+}
+
+/* PROGRESS
+_____________________________________________________________________________*/
+#progress-new {
+  width: 600px;
+}
+
+#progress-category li {
+  display: inline-block;
+}
+
+#progress-new h2 {
+  margin: 0;
+}
+
+#progress-new textarea, #progress-new input[type="text"] {
+  border: none;
+  display: block;
+  font: inherit;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+}
+
+#progress-new textarea:focus, #progress-new input[type="text"]:focus {
+  outline: 0px none transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  }
+
+
+#progress-new input[type="text"] {
+}
+
+#progress-new textarea {
+  height: 600px;
+  line-height: 1.6em;
+}
+
+
+/* Skeleton
+_____________________________________________________________________________*/
+#top, #middle, #bottom {
+}
+
+#main-content {
+  margin: 0 auto;
+  width: 1020px;
+}
+
+/* Formatting
+_____________________________________________________________________________*/
+.smaller {
+  font-size: 16.526px;
+}
+
+.smallest {
+  font-size: 11.125px;
+}
