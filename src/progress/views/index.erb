@@ -1,0 +1,22 @@
+<% @posts.each do |post| %>
+  <div class="post">
+
+    <h2>
+      <a href="<%= post.url %>"><%= post.title %></a>
+    </h2>
+
+    <div class="meta">
+      <% if post.private %>
+      <span class="private">PRIVATE</span>
+      <% end %>
+      <span class="published"><%= post.published %></span>
+      <span class="category"><%= post.category %></span>
+      <a href="<%= post.url %>/edit">EDIT</a>
+    </div>
+
+    <div class="post-content">
+      <%= markdown(post.content || "") %>
+    </div>
+
+  </div>
+<% end %>

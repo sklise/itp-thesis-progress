@@ -1,0 +1,94 @@
+blockquote {
+  margin-bottom: 25px;
+  margin-top: 25px;
+  font-size: 26px;
+  line-height: 50px;
+  font-style: italic;
+  font-weight: 400;
+  text-align: left;
+  text-indent: 16px;
+  font-family: Lato;
+}
+
+code {
+  color: #555;
+  font-family: 'source code pro';
+  font-size: 70%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'lato';
+  font-weight: 700;
+  line-height: 1.4em;
+  margin: 1em 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+h2 {
+  margin: 25px 0;
+  text-transform: capitalize;
+  font-size: 38px;
+  line-height: 44px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-style: normal;
+  padding: 25px 0 0 0;
+}
+
+p {
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'source sans pro';
+  line-height: 1.5em;
+  margin: 1em 0 1.6em;
+}
+
+pre {
+  overflow-x: scroll;
+}
+
+.meta {
+  margin-bottom: 25px;
+  font-size: 0.875em;
+  letter-spacing: 0.07142857142857142em;
+  color: #666464;
+  font-family: 'source code pro';
+  font-style: normal;
+  font-weight: 100;
+  line-height: 1.8488095147269112em;
+}
+
+.meta .private {
+  color: #fd6969;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+p.intro {
+  margin-bottom: 1.0416666666666667em;
+  line-height: 2.0833333333333335em;
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0px;
+  font-family: source-sans-pro;
+}
+
+/* POSTS_____________________________________________________________________*/
+.post-content>h2 {
+  font-size: 30px;
+}
+
+h2 a {
+  color: #000;
+  text-decoration: none;
+}
+
+.private-post h2 a {
+  color: red;
+}
+
+h1, h2, h3, h4, h5, h6, p, pre {
+  width: 600px;
+}

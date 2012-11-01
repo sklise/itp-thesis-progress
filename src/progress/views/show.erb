@@ -1,0 +1,12 @@
+<div class="post single">
+  <h2><%= @post.title %></h2>
+
+  <div class="meta">
+    <span class="published"><%= @post.published %></span>
+    <span class="category"><%= @post.category %></span>
+  </div>
+
+  <div class="post-content">
+    <%= markdown @post.content %>
+  </div>
+</div>

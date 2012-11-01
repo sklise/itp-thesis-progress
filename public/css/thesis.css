@@ -1,26 +1,31 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldset, form, label, article, aside, canvas, footer, header, hgroup, nav, section, audio, video {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
 html {
   font-family: "Proxima Nova", "Helvetica", sans-serif;
   font-size: 18px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font: inherit;
-  font-family: "Myriad Pro", "Helvetica", sans-serif;
-  font-weight: 700;
-  line-height: 1.4em;
-  margin: 1em 0;
-  padding: 0;
-  vertical-align: baseline;
+body {
+  line-height: 1;
 }
 
 h1 {
   font-size: 47.123px;
   margin: 0.25em 0 0.5em;
-}
-
-h2 {
-  font-size: 43.263px;
-  margin: 0.5em 0;
 }
 
 h3 {
@@ -41,54 +46,54 @@ h6 {
   text-transform: uppercase;
 }
 
-p {
-  line-height: 1.5em;
-  margin: 1em 0;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, div figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+  position: relative;
+}
+
+button {
+  border: none;
+  color: #fff;
+  display: block;
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  outline: none;
+  min-width: 125px;
+  padding: 0.5em 1em 0.3em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+/* POST FORM_________________________________________________________________*/
+#progress-form {
   width: 600px;
 }
 
-/* PROGRESS FORM
-_____________________________________________________________________________*/
-#progress-new {
-  width: 600px;
+#progress-category {
+  list-style: none;
 }
 
 #progress-category li {
   display: inline-block;
 }
 
-#progress-new h2 {
-  margin: 0;
-}
-
-#progress-new input[type="text"] {
+#progress-form input[type="text"] {
   border: none;
   display: block;
   font: inherit;
   padding: 10px;
   position: relative;
   width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
-
-}
-
-#progress-new textarea:focus, #progress-new input[type="text"]:focus {
-  outline: 0px none transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  }
-
-
-#progress-new input[type="text"] {
 }
 
 .expanding-area{
   position: relative;
-  background: #fff;
   min-height: 300px;
 }
 
@@ -96,7 +101,7 @@ _____________________________________________________________________________*/
 .expanding-area pre {
   font: inherit;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   outline: 0;
   border: 0;
   line-height: 1.6em;
@@ -105,9 +110,6 @@ _____________________________________________________________________________*/
 }
 
 .expanding-area textarea {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
 }
@@ -133,8 +135,28 @@ _____________________________________________________________________________*/
   visibility: hidden;
 }
 
-/* Skeleton
-_____________________________________________________________________________*/
+#progress-form input[type="text"],
+#progress-form textarea {
+  border-left: 4px solid transparent;
+}
+
+#progress-form input[type="text"]:focus,
+#progress-form textarea:focus {
+  border-left: 4px solid #1f45f7;
+  outline: 0px none transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.publish button {
+  display: inline-block;
+}
+
+/* END POST FORM_____________________________________________________________*/
+
+
+/* SKELETON__________________________________________________________________*/
 #top, #middle, #bottom {
 }
 
@@ -143,8 +165,7 @@ _____________________________________________________________________________*/
   width: 1020px;
 }
 
-/* Formatting
-_____________________________________________________________________________*/
+/* FORMATTING________________________________________________________________*/
 .smaller {
   font-size: 16.526px;
 }
