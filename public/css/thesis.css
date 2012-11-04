@@ -149,8 +149,16 @@ button {
   appearance: none;
 }
 
+#progress-form input[type="radio"] {
+  display: none;
+}
+
 .publish button {
   display: inline-block;
+}
+
+input[type="radio"][checked=true] + label{
+  color: red;
 }
 
 /* END POST FORM_____________________________________________________________*/

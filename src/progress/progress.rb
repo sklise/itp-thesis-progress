@@ -14,6 +14,7 @@ class ProgressApp < Sinatra::Base
   end
 
   get '/new' do
+    @categories = Category.all
     @post = Post.new
     erb :new_post
   end

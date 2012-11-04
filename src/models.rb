@@ -13,7 +13,6 @@ class Post
   property :updated_at, DateTime
 
   property :category_id, Integer, required: false
-  property :category_name, String, required: false
 
   belongs_to :category
 
@@ -33,7 +32,7 @@ class Category
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String, key: true
+  property :name, String
 
   has n, :posts
 
