@@ -1,6 +1,9 @@
 class ThesisApp < Sinatra::Base
   # use ThesisHelpers
 
+  set :views, Proc.new { File.join(root, "views") }
+  set :erb, layout: :'../../views/layout'
+
   get '/' do
     erb :front_page
   end
@@ -30,7 +33,8 @@ class ThesisApp < Sinatra::Base
 
   end
 
-  get '/login' do
-    "login"
+  not_found do
+    flash.error = "not found"
+    redirect '/' # catch redirects to GET '/session'
   end
 end

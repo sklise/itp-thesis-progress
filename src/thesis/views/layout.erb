@@ -14,22 +14,6 @@
     </div>
   </div>
 
-  <div id="flash">
-    <% [:error, :success].each do |name| %>
-      <% if flash.has?(name) %>
-      <div class="message-<%= name %>">
-        <%= flash[name] %>
-      </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <% if env['warden'].authenticated? %>
-    <form method="post" action="/session/logout">
-      <input type="submit" value="LOGOUT" />
-    </form>
-  <% end %>
-
   <div id="middle">
     <div id="main-content">
     <%= yield %>

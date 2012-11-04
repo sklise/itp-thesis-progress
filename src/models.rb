@@ -33,6 +33,7 @@ class Category
 
   property :id, Serial
   property :name, String
+  property :year, Integer
 
   has n, :posts
 
@@ -41,5 +42,21 @@ class Category
   end
 end
 
+class User
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :netid, String
+  property :password, String
+  property :year, Integer
+
+  def self.authenticate(netid, password)
+    user = self.first(netid: netid)
+    user if user && user.password == password
+  end
+end
+
 DataMapper.finalize
 DataMapper.auto_upgrade!
+
+User.create(netid: 'ab1234', password: 'thesis', year: 2012)
