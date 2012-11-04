@@ -1,16 +1,20 @@
 require 'redcarpet'
 
 class ProgressApp < Sinatra::Base
+  register WillPaginate::Sinatra
+  register Sinatra::Warden
+
   set :views, Proc.new { File.join(root, "views") }
-  set :erb, :layout => :'../../views/layout'
+  set :erb, layout: :'../../views/layout'
 
   get '/' do
-    @posts = Post.all(order: :created_at.desc)
+    @posts = Post.paginate(page: 1, order: :created_at.desc)
     erb :index
   end
 
   get '/page/:page_number' do
-
+    @posts = Post.paginate(page: params[:page_number], order: :created_at.desc)
+    erb :index
   end
 
   get '/new' do

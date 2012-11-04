@@ -29,4 +29,8 @@ class ThesisApp < Sinatra::Base
   get '/years/:year/sections/:section' do
 
   end
+
+  get '/login' do
+    "login"
+  end
 end

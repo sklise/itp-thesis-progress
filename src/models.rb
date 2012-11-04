@@ -25,7 +25,7 @@ class Post
     "/progress/#{time}/#{title}"
   end
 
-  # self.per_page = 10
+  self.per_page = 10
 end
 
 class Category
