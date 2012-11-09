@@ -2,7 +2,6 @@ require 'bundler'
 Bundler.require
 require 'rack/flash'
 require 'redcarpet'
-# $LOAD_PATH.unshift(::File.expand_path('app', ::File.dirname(__FILE__)))
 
 Dir["./src/*.rb"].each {|file| require file }
 Dir["./src/*/*.rb"].each {|file| require file }

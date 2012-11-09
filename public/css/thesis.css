@@ -23,9 +23,29 @@ body {
   line-height: 1;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'lato';
+  font-weight: 700;
+  line-height: 1.4em;
+  margin: 1em 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
 h1 {
-  font-size: 47.123px;
-  margin: 0.25em 0 0.5em;
+  font-size: 20px;
+  margin: 0 0 0.5em;
+}
+
+h2 {
+  margin: 25px 0;
+  text-transform: capitalize;
+  font-size: 42px;
+  line-height: 48px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-style: normal;
+  padding: 25px 0 0 0;
 }
 
 h3 {
@@ -53,6 +73,14 @@ footer, header, hgroup, menu, nav, section {
   position: relative;
 }
 
+p {
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'source sans pro';
+  line-height: 1.5em;
+  margin: 1em 0 1.6em;
+}
+
 button {
   border: none;
   color: #fff;
@@ -68,110 +96,89 @@ button {
   text-transform: uppercase;
 }
 
-/* POST FORM_________________________________________________________________*/
-#progress-form {
-  width: 600px;
+blockquote {
+  margin-bottom: 25px;
+  margin-top: 25px;
+  font-size: 26px;
+  line-height: 50px;
+  font-style: italic;
+  font-weight: 400;
+  text-align: left;
+  text-indent: 16px;
+  font-family: Lato;
 }
 
-#progress-category {
-  list-style: none;
+code {
+  color: #555;
+  font-family: 'source code pro';
+  font-size: 70%;
 }
 
-#progress-category li {
-  display: inline-block;
+pre {
+  overflow-x: scroll;
 }
 
-#progress-form input[type="text"] {
-  border: none;
-  display: block;
-  font: inherit;
-  padding: 10px;
-  position: relative;
-  width: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.expanding-area{
-  position: relative;
-  min-height: 300px;
-}
-
-.expanding-area textarea,
-.expanding-area pre {
-  font: inherit;
-  margin: 0;
-  padding: 10px;
-  outline: 0;
-  border: 0;
-  line-height: 1.6em;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-.expanding-area textarea {
-  width: 100%;
-  height: 100%;
-}
-
-.expanding-area.active > textarea {
-  /* Hide any scrollbars */
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  /* Remove WebKit user-resize widget */
-  resize: none;
-}
-
-.expanding-area > pre {
-  display: none;
-}
-
-.expanding-area.active > pre {
-  display: block;
-  /* Hide the text; just using it for sizing */
-  visibility: hidden;
-}
-
-#progress-form input[type="text"],
-#progress-form textarea {
-  border-left: 4px solid transparent;
-}
-
-#progress-form input[type="text"]:focus,
-#progress-form textarea:focus {
-  border-left: 4px solid #1f45f7;
-  outline: 0px none transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-#progress-form input[type="radio"] {
-  display: none;
-}
-
-.publish button {
-  display: inline-block;
-}
-
-input[type="radio"][checked=true] + label{
-  color: red;
-}
-
-/* END POST FORM_____________________________________________________________*/
-
-
-/* SKELETON__________________________________________________________________*/
+/* STRUCTURE_________________________________________________________________*/
 #top, #middle, #bottom {
 }
 
-#main-content {
-  margin: 0 auto;
-  width: 1020px;
+
+#left-sidebar, #main-content, #right-sidebar {
+  float: left;
 }
+
+#left-sidebar {
+  margin-right: 30px;
+  width: 140px;
+}
+
+#header, #middle {
+  clear: both;
+  max-width: 63.75em;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+/* END STRUCTURE_____________________________________________________________*/
+
+/* HEADER____________________________________________________________________*/
+
+#header img {
+  width: 150px;
+}
+
+#header img, #main-nav {
+  float: left;
+}
+
+#header ul {
+  list-style-type: none;
+}
+
+#header ul li {
+  display: block;
+  float: left;
+  height: 2.65em;
+  line-height: 1.5em;
+  padding: 0.65em 0.25em 0.5em;
+}
+
+#main-nav ul {
+  float: left;
+  margin: 0 1em;
+}
+
+#account-nav {
+  float: right;
+  font-size: 90%;
+}
+
+#header a {
+  color: black;
+  text-decoration: none;
+}
+
+/* END HEADER________________________________________________________________*/
 
 /* FORMATTING________________________________________________________________*/
 .smaller {

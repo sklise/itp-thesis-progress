@@ -16,7 +16,7 @@ class AuthenticationManager < Sinatra::Base
   end
 
   # This should maybe be a delete request...
-  post '/logout' do
+  get '/logout' do
     env['warden'].raw_session.inspect
     env['warden'].logout
     flash.success = 'Successfully logged out'

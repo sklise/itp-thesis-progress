@@ -13,8 +13,10 @@ class Post
   property :updated_at, DateTime
 
   property :category_id, Integer, required: false
+  property :assignment_id, Integer, required: false
 
   belongs_to :category
+  belongs_to :assignment
 
   def published
     created_at.strftime("%B %e, %Y")
@@ -42,6 +44,27 @@ class Category
   end
 end
 
+class Section
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :name, String
+end
+
+class Assignment
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :title, String
+  property :content, Text
+
+  property :due_at, DateTime
+  property :created_at, DateTime
+  property :updated_at, DateTime
+
+  has n, :posts
+end
+
 class User
   include DataMapper::Resource
 
@@ -49,6 +72,7 @@ class User
   property :netid, String
   property :password, String
   property :year, Integer
+  property :role, String
 
   def self.authenticate(netid, password)
     user = self.first(netid: netid)

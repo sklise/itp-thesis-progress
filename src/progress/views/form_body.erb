@@ -1,6 +1,6 @@
 <ul id="progress-category">
   <% @categories.each do |category| %>
-  <input type="radio" value="<%= category.id %>" name="post[category]" id="category-<%= category.id %>">
+  <input type="radio" value="<%= category.id %>" name="post[category_id]" id="category-<%= category.id %>">
   <label for="category-<%= category.id %>"><%= category.name %></label>
   <% end %>
 </ul>

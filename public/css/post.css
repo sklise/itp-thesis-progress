@@ -1,52 +1,97 @@
-blockquote {
-  margin-bottom: 25px;
-  margin-top: 25px;
-  font-size: 26px;
-  line-height: 50px;
-  font-style: italic;
-  font-weight: 400;
-  text-align: left;
-  text-indent: 16px;
-  font-family: Lato;
+/* POST FORM_________________________________________________________________*/
+#progress-form {
+  width: 600px;
 }
 
-code {
-  color: #555;
-  font-family: 'source code pro';
-  font-size: 70%;
+#progress-category {
+  list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'lato';
-  font-weight: 700;
-  line-height: 1.4em;
-  margin: 1em 0;
-  padding: 0;
-  vertical-align: baseline;
+#progress-category li {
+  display: inline-block;
 }
 
-h2 {
-  margin: 25px 0;
-  text-transform: capitalize;
-  font-size: 38px;
-  line-height: 44px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  font-style: normal;
-  padding: 25px 0 0 0;
+#progress-form input[type="text"] {
+  border: none;
+  display: block;
+  font: inherit;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-p {
-  font-style: normal;
-  font-weight: 400;
-  font-family: 'source sans pro';
-  line-height: 1.5em;
-  margin: 1em 0 1.6em;
+.expanding-area{
+  position: relative;
+  min-height: 300px;
 }
 
-pre {
-  overflow-x: scroll;
+.expanding-area textarea,
+.expanding-area pre {
+  font: inherit;
+  margin: 0;
+  padding: 10px;
+  outline: 0;
+  border: 0;
+  line-height: 1.6em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
+
+.expanding-area textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.expanding-area.active > textarea {
+  /* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+}
+
+.expanding-area > pre {
+  display: none;
+}
+
+.expanding-area.active > pre {
+  display: block;
+  /* Hide the text; just using it for sizing */
+  visibility: hidden;
+}
+
+#progress-form input[type="text"],
+#progress-form textarea {
+  border-left: 4px solid transparent;
+}
+
+#progress-form input[type="text"]:focus,
+#progress-form textarea:focus {
+  border-left: 4px solid #1f45f7;
+  outline: 0px none transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#progress-form input[type="radio"] {
+  display: none;
+}
+
+.publish button {
+  display: inline-block;
+}
+
+input[type="radio"][checked=true] + label{
+  color: red;
+}
+
+/* END POST FORM_____________________________________________________________*/
 
 .meta {
   margin-bottom: 25px;
@@ -76,6 +121,11 @@ p.intro {
 }
 
 /* POSTS_____________________________________________________________________*/
+.post {
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+
 .post-content>h2 {
   font-size: 30px;
 }
@@ -89,6 +139,7 @@ h2 a {
   color: red;
 }
 
-h1, h2, h3, h4, h5, h6, p, pre {
+#middle h1, #middle h2, #middle h3, #middle h4, #middle h5, #middle h6,
+#middle p, #middle pre {
   width: 600px;
 }

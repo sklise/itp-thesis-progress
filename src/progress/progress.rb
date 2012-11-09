@@ -42,6 +42,7 @@ class ProgressApp < Sinatra::Base
   end
 
   get '/:year/:month/:date/:title/:edit/?' do
+    @categories = Category.all
     date = Date.parse("#{params[:year]}/#{params[:month]}/#{params[:date]}")
     @post = Post.first(title: params[:title], created_at: (date..(date+1)))
     erb :edit
@@ -54,9 +55,11 @@ class ProgressApp < Sinatra::Base
     @post.update(params[:post])
 
     if @post.save
-      "oyez"
+      flash.success = "Post updated successfully"
+      redirect @post.url
     else
-      "onoz"
+      flash.error = "We had a problem updating your post..."
+      redirect "#{@post.url}/edit"
     end
   end
 
