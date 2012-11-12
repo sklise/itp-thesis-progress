@@ -140,6 +140,7 @@ h2 a {
 }
 
 #middle h1, #middle h2, #middle h3, #middle h4, #middle h5, #middle h6,
-#middle p, #middle pre {
+#middle p, #middle pre,
+.skinny {
   width: 600px;
 }

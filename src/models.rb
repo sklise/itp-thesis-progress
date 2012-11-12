@@ -1,3 +1,8 @@
+require 'data_mapper'
+require 'dm-postgres-adapter'
+require 'will_paginate'
+require 'will_paginate/data_mapper'
+
 DataMapper.setup(:default,
   ENV['DATABASE_URL'] || "postgres://localhost/thesisprog")
 
@@ -12,11 +17,13 @@ class Post
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  property :user_id, Integer, required: true
   property :category_id, Integer, required: false
   property :assignment_id, Integer, required: false
 
   belongs_to :category
   belongs_to :assignment
+  belongs_to :user
 
   def published
     created_at.strftime("%B %e, %Y")
@@ -44,11 +51,30 @@ class Category
   end
 end
 
+class Link
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :type, String
+  property :url, String
+  property :name, String
+
+  property :thesis_id, Integer
+
+  belongs_to :thesis
+
+  def anchor_tag
+    "<a href='#{url}' target='_blank'>#{name}</a>"
+  end
+end
+
 class Section
   include DataMapper::Resource
 
   property :id, Serial
   property :name, String
+
+  has n, :assignments, through: :assignmentsecion
 end
 
 class Assignment
@@ -56,13 +82,36 @@ class Assignment
 
   property :id, Serial
   property :title, String
-  property :content, Text
+  property :brief, Text
 
   property :due_at, DateTime
   property :created_at, DateTime
   property :updated_at, DateTime
 
   has n, :posts
+  has n, :sections, through: :assignmentsecion
+end
+
+class AssignmentSection
+  include DataMapper::Resource
+
+  belongs_to :section, key: true
+  belongs_to :assignment, key: true
+end
+
+class Thesis
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :title, String
+  property :elevator_pitch, Text
+  property :description, Text
+  property :image, String
+
+  property :user_id, Integer
+
+  belongs_to :user
+  has n, :links
 end
 
 class User
@@ -78,9 +127,16 @@ class User
     user = self.first(netid: netid)
     user if user && user.password == password
   end
+
+  def completed_assignments
+    post.all(:assignment_id.not => nil)
+  end
+
+  has 1, :thesis
+  has n, :posts
 end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-User.create(netid: 'ab1234', password: 'thesis', year: 2012)
+# User.create(netid: 'ab1234', password: 'thesis', year: 2012)

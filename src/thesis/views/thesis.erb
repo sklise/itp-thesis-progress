@@ -1,0 +1,17 @@
+<h1><%= @thesis.title %></h1>
+
+<img src="<%= @thesis.image %>" />
+
+<div class="elevator-pitch skinny">
+  <%= @thesis.elevator_pitch %>
+</div>
+
+<div class="description skinny">
+  <%= @thesis.description %>
+</div>
+
+<ul class="skinny">
+  <% @thesis.links.each do |link| %>
+  <li><%= link.anchor_tag %></li>
+  <% end %>
+</ul>

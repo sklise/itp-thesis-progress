@@ -122,21 +122,24 @@ pre {
 #top, #middle, #bottom {
 }
 
+#header, #middle {
+  clear: both;
+  max-width: 63.75em;
+  margin: 0 auto;
+  overflow: auto;
+}
 
 #left-sidebar, #main-content, #right-sidebar {
   float: left;
 }
 
 #left-sidebar {
-  margin-right: 30px;
-  width: 140px;
+  margin-right: 2%;
+  width: 14%;
 }
 
-#header, #middle {
-  clear: both;
-  max-width: 63.75em;
-  margin: 0 auto;
-  overflow: auto;
+#main-content {
+  max-width: 84%;
 }
 
 /* END STRUCTURE_____________________________________________________________*/
@@ -187,4 +190,12 @@ pre {
 
 .smallest {
   font-size: 11.125px;
+}
+
+/* THESIS____________________________________________________________________*/
+.elevator-pitch {
+  font-size: 130%;
+  font-style: italic;
+  line-height: 1.7em;
+  margin: 1em 0;
 }

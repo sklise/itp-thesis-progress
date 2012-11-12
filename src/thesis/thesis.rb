@@ -1,40 +1,19 @@
-class ThesisApp < Sinatra::Base
-  # use ThesisHelpers
+# This is the app for students to edit and view their thesis
 
+class ThesisApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
+  before do
+    env['warden'].authenticate!
+  end
+
   get '/' do
-    erb :front_page
+    @thesis = Thesis.first(:user => env['warden'].user)
+    erb :thesis
   end
 
-  # If you're a teacher, links to your sections and a "blog feed" of recent
-  # posts by your students.
-  get '/dashboard' do
+  post '/update' do
 
-  end
-
-  get '/students/:name' do
-
-  end
-
-  # Big 'ol list of everyone from that year and links to the sections
-  get '/years/:year' do
-
-  end
-
-  # Year listed by section
-  get '/years/:year/sections' do
-
-  end
-
-  # An individual section
-  get '/years/:year/sections/:section' do
-
-  end
-
-  not_found do
-    flash.error = "not found"
-    redirect '/' # catch redirects to GET '/session'
   end
 end

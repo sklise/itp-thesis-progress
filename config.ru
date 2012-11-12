@@ -38,17 +38,12 @@ builder = Rack::Builder.new do
     config.failure_app = self
   end
 
-  map '/' do
-    run ThesisApp
-  end
+  # Hook up the apps
+  map ('/')         { run Main }
+  map ('/progress') { run ProgressApp }
+  map ('/session' ) { run AuthenticationManager }
+  map ('/thesis' )  { run ThesisApp }
 
-  map '/session' do
-    run AuthenticationManager
-  end
-
-  map '/progress' do
-    run ProgressApp
-  end
 end
 
 run builder
