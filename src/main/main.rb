@@ -1,6 +1,7 @@
 class Main < Sinatra::Base
 
   set :views, Proc.new { File.join(root, "views") }
+  set :static, true
   set :erb, layout: :'../../views/layout'
 
   get '/' do
@@ -33,7 +34,7 @@ class Main < Sinatra::Base
   end
 
   not_found do
-    flash.error = "not found"
+    flash.error = "Could not find #{request.fullpath}"
     redirect '/' # catch redirects to GET '/session'
   end
 end

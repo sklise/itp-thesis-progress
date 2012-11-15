@@ -66,6 +66,37 @@ h6 {
   text-transform: uppercase;
 }
 
+input {
+  border: 1px solid #aaa;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font: inherit;
+  padding: 0.3em 0.28em 0.2em;
+}
+
+input[type="submit"] {
+  font: inherit;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+input[type="submit"]:hover {
+  border-color: #777;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  display: block;
+  margin: 0 0 0.3em;
+  position: relative;
+}
+
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, div figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -198,4 +229,15 @@ pre {
   font-style: italic;
   line-height: 1.7em;
   margin: 1em 0;
+}
+
+/* LOGIN_____________________________________________________________________*/
+#login-form {
+  background-color: #ffe87a;
+  padding: 1.4em;
+}
+
+#login-form input {
+  display: inline-block;
+  margin-right: 0.5em;
 }

@@ -1,7 +1,7 @@
-<h2>Steven Klise</h2>
-<h3>Shep.info</h3>
-<h4>A web chat bot and website and things</h4>
-<h5>Research</h5>
-<h6>Results</h6>
+<h2>Welcome to the ITP Thesis Site</h2>
 
-<p>Nostalgia for an older, more authentic New York is a powerful force that bewitches the city’s long-time residents along with recent transplants, visitors, and people all over the world who will never actually set foot in any of the five boroughs. There is no single version of that nostalgia, but it always draws heavily upon different instances of twentieth-century New York and is most easily observed in the city’s tourist infrastructure: the Empire State Building, Broadway musicals, the Carnegie Deli. Woody Allen’s films captured the essence of that “real” New York and Seinfeld looked back at it as it receded into history. More recent variants of this nostalgia idealize the downtown punk/art scenes of the 1970s when the city was looser and cheaper (but dirtier and more dangerous).</p>
+<%= erb :'../../authentication/views/login', layout: false %>
+
+<% if env['warden'].authenticate? %>
+
+<% end %>

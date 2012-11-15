@@ -74,7 +74,16 @@ class Section
   property :id, Serial
   property :name, String
 
-  has n, :assignments, through: :assignmentsecion
+  def students
+    users.all(:role => "student")
+  end
+
+  def advisor
+    users.first(:role => "advisor")
+  end
+
+  has n, :assignments, through: Resource
+  has n, :users, through: Resource
 end
 
 class Assignment
@@ -89,14 +98,7 @@ class Assignment
   property :updated_at, DateTime
 
   has n, :posts
-  has n, :sections, through: :assignmentsecion
-end
-
-class AssignmentSection
-  include DataMapper::Resource
-
-  belongs_to :section, key: true
-  belongs_to :assignment, key: true
+  has n, :sections, through: Resource
 end
 
 class Thesis
@@ -123,6 +125,15 @@ class User
   property :year, Integer
   property :role, String
 
+  # Scopes
+  def self.advisors
+    all role: "advisor"
+  end
+
+  def self.students
+    all role: "student"
+  end
+
   def self.authenticate(netid, password)
     user = self.first(netid: netid)
     user if user && user.password == password
@@ -134,9 +145,8 @@ class User
 
   has 1, :thesis
   has n, :posts
+  has n, :sections, through: Resource
 end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
-
-# User.create(netid: 'ab1234', password: 'thesis', year: 2012)
