@@ -1,6 +1,5 @@
 require 'bundler'
 Bundler.require
-require 'rack/flash'
 require 'redcarpet'
 
 Dir["./src/*.rb"].each {|file| require file }
@@ -40,10 +39,11 @@ builder = Rack::Builder.new do
   end
 
   # Hook up the apps
-  map ('/')         { run Main }
-  map ('/progress') { run ProgressApp }
-  map ('/session' ) { run AuthenticationManager }
-  map ('/thesis' )  { run ThesisApp }
+  map ('/')             { run Main }
+  map ('/progress')     { run ProgressApp }
+  map ('/session' )     { run AuthenticationManager }
+  map ('/thesis' )      { run ThesisApp }
+  map ('/assignments')  { run AssignmentsApp }
 
 end
 

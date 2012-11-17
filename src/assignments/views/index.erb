@@ -1,0 +1,20 @@
+<% @assignments.each do |assignment| %>
+  <div>
+  <h3><%= assignment.title %></h3>
+
+  <div>
+    <%= assignment.brief %>
+  </div>
+
+  <h3>Sections</h3>
+  <ul>
+  <% assignment.sections.each do |section| %>
+    <li><%= section.name %></li>
+  <% end %>
+  </ul>
+
+  <h3>Due: <%= assignment.due_at %></h3>
+
+  <a href="/assignments/<%= assignment.year %>/<%= assignment.id %>/edit">Edit</a>
+  </div>
+<% end %>

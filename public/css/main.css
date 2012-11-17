@@ -66,37 +66,6 @@ h6 {
   text-transform: uppercase;
 }
 
-input {
-  border: 1px solid #aaa;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font: inherit;
-  padding: 0.3em 0.28em 0.2em;
-}
-
-input[type="submit"] {
-  font: inherit;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-input[type="submit"]:hover {
-  border-color: #777;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  display: block;
-  margin: 0 0 0.3em;
-  position: relative;
-}
-
-
 /* HTML5 display-role reset for older browsers */
 article, aside, details, div figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -153,11 +122,15 @@ pre {
 #top, #middle, #bottom {
 }
 
-#header, #middle {
+#header, #middle, #footer {
   clear: both;
-  max-width: 63.75em;
+  max-width: 63.75rem;
   margin: 0 auto;
   overflow: auto;
+}
+
+#middle {
+  min-height: 400px;
 }
 
 #left-sidebar, #main-content, #right-sidebar {
@@ -214,6 +187,14 @@ pre {
 
 /* END HEADER________________________________________________________________*/
 
+/* FOOTER____________________________________________________________________*/
+#footer {
+  font-size: 80%;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+/* END FOOTER________________________________________________________________*/
+
 /* FORMATTING________________________________________________________________*/
 .smaller {
   font-size: 16.526px;
@@ -240,4 +221,67 @@ pre {
 #login-form input {
   display: inline-block;
   margin-right: 0.5em;
+}
+
+/* FORMS_____________________________________________________________________*/
+
+input, textarea {
+  border: 1px solid #aaa;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font: inherit;
+  margin: 0 0 1em 0;
+  padding: 0.3em 0.28em 0.2em;
+}
+
+input[type="submit"],
+.button-labels label {
+  background-color: #ccc;
+  font: inherit;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+input[type="submit"]:hover {
+  border-color: #777;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  display: block;
+  position: relative;
+}
+
+.action-buttons {
+  clear: both;
+  display: block;
+  margin: 1.5em 0;
+}
+
+.button-labels input {
+  display: none;
+}
+
+.button-labels label {
+  padding: 0.3em 1em 0.2em;
+  margin: 0.2em;
+  display: inline-block;
+}
+
+.button-labels label:hover {
+  background-color: rgb(45, 149, 245);
+}
+
+input[checked] + label {
+  background-color: red;
+}
+
+/* Colors for action-buttons */
+input[type="submit"].submit {
+  background-color: rgb(130, 186, 208);
 }

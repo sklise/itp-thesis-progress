@@ -1,0 +1,40 @@
+<script>
+  jQuery(function() {
+    $('.button-labels label').click(function() {
+      var checkedState = $(this).prev('input')[0].attributes['checked'];
+
+      if(typeof(checkedState) === "undefined") {
+        $(this).prev()[0].setAttribute('checked','true');
+        console.log('check it')
+      } else {
+        console.log('remove it')
+        $(this).prev()[0].removeAttribute('checked');
+      }
+
+    });
+  })
+</script>
+<h2>Create a new Assignment</h2>
+<form action="/assignments/new" method="post" class="form">
+  <input name="assignment[title]" id="assignment-title" type="text" value="<%= @assignment.title %>" placeholder="Title of Assignment"/>
+
+  <div class="expanding-area">
+    <pre><span></span><br></pre>
+    <textarea placeholder="Write the assignment brief here..." name="assignment[brief]" id="assignment-brief"><%= @assignment.brief %></textarea>
+  </div>
+
+  <h4>Due Date</h4>
+  <input type="text" name="assignment[due_at]" id="assignment-due-at" value="<%= @assignment.due_at.strftime("%m/%d/%y") if @assignment.due_at %>" />
+
+  <h4>Sections</h4>
+  <fieldset class="button-labels">
+  <% @sections.each do |section| %>
+    <input id="section-<%= section.id %>" type="checkbox" name="assignment[sections][]" value="<%= section.id %>" />
+    <label for="section-<%= section.id %>"><%= section.name %></label>
+  <% end %>
+  </fieldset>
+
+  <div class="action-buttons">
+    <input class="submit" type="submit" value="Create New Assignment" />
+  </div>
+</form>

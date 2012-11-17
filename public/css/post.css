@@ -11,8 +11,8 @@
   display: inline-block;
 }
 
-#progress-form input[type="text"] {
-  border: none;
+#progress-form input[type="text"],
+.form input[type="text"] {
   display: block;
   font: inherit;
   padding: 10px;
@@ -22,18 +22,17 @@
   -moz-appearance: none;
 }
 
-.expanding-area{
+.expanding-area {
   position: relative;
   min-height: 300px;
+  margin-bottom: 1em;
 }
 
 .expanding-area textarea,
 .expanding-area pre {
   font: inherit;
-  margin: 0;
   padding: 10px;
   outline: 0;
-  border: 0;
   line-height: 1.6em;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -71,9 +70,11 @@
 }
 
 #progress-form input[type="text"]:focus,
-#progress-form textarea:focus {
-  border-left: 4px solid #1f45f7;
-  outline: 0px none transparent;
+#progress-form textarea:focus,
+.form textarea:focus,
+.form input[type="text"]:focus {
+  border: 1px solid #1f45f7;
+  outline: 1px solid #1f45f7;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
