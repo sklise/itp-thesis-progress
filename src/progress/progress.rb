@@ -26,11 +26,14 @@ class ProgressApp < Sinatra::Base
 
   post '/new' do
     @post = Post.new(params[:post])
+
+    @post.user = env['warden'].user
+
     if @post.save
-      puts "save"
+      flash.success = "Post Saved"
       redirect "/progress"
     else
-      # flash message
+      flash.error "There was an issue creating that post"
       redirect "/progress/new"
     end
   end

@@ -99,6 +99,22 @@ class Assignment
 
   has n, :posts
   has n, :sections, through: Resource
+
+  # Return list of assignments associated with the current user's sections.
+  def self.own(user)
+    assignments = all
+    x = []
+    assignments.each do |a|
+      x << a.id if (a.sections & user.sections).length > 0
+    end
+
+    assignments.all(id: x, :order => :due_at.asc)
+  end
+
+  def year
+    created_at.year
+  end
+
 end
 
 class Thesis
@@ -141,6 +157,10 @@ class User
 
   def completed_assignments
     post.all(:assignment_id.not => nil)
+  end
+
+  def advisor?
+    role == "advisor"
   end
 
   has 1, :thesis

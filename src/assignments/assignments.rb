@@ -3,12 +3,13 @@ class AssignmentsApp < Sinatra::Base
   set :erb, layout: :'../../views/layout'
 
   # index
-  get '/' do
+  get '/?' do
+    @assignments = Assignment.all
     erb :index
   end
 
   # new
-  get '/new' do
+  get '/new/?' do
     @assignment = Assignment.new
     @sections = Section.all
 
@@ -17,12 +18,16 @@ class AssignmentsApp < Sinatra::Base
 
   # create
   post '/new' do
-    raise params[:assignment].inspect
     @assignment = Assignment.new(params[:assignment])
+
+    # Link @assignment to the specified Sections.
+    params[:sections].each do |section_id|
+      @assignment.assignment_sections << AssignmentSection.new(section_id: section_id)
+    end
 
     if @assignment.save
       flash.success = "Assignment saved successfully."
-      redirect "/assignments"
+      redirect "/assignments/#{@assignment.year}/#{@assignment.id}"
     else
       flash.error = "We've encountered a problem."
       redirect "/assignments/new"
@@ -30,13 +35,13 @@ class AssignmentsApp < Sinatra::Base
   end
 
   # show
-  get '/:year/:id' do
+  get '/:year/:id/?' do
     @assignment = Assignment.first(params[:id])
     erb :show
   end
 
   # edit
-  get '/:year/:id/edit' do
+  get '/:year/:id/edit/?' do
     @assignment = Assignment.first(params[:id])
     erb :edit
   end

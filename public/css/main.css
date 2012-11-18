@@ -81,7 +81,7 @@ p {
   margin: 1em 0 1.6em;
 }
 
-button {
+/*button {
   border: none;
   color: #fff;
   display: block;
@@ -94,7 +94,7 @@ button {
   padding: 0.5em 1em 0.3em;
   position: relative;
   text-transform: uppercase;
-}
+}*/
 
 blockquote {
   margin-bottom: 25px;
@@ -185,6 +185,10 @@ pre {
   text-decoration: none;
 }
 
+#flash {
+  margin: 0 auto;
+  width: 40em;
+}
 /* END HEADER________________________________________________________________*/
 
 /* FOOTER____________________________________________________________________*/
@@ -225,7 +229,7 @@ pre {
 
 /* FORMS_____________________________________________________________________*/
 
-input, textarea {
+input, textarea, button {
   border: 1px solid #aaa;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -236,17 +240,21 @@ input, textarea {
 }
 
 input[type="submit"],
+.action-buttons button,
 .button-labels label {
-  background-color: #ccc;
+  background-color: #bbb;
+  color: #fff;
   font: inherit;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  padding-left: 1em;
-  padding-right: 1em;
+  margin-right: 0.25em;
+  padding: 0.45em 1em;
+  vertical-align: baseline;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+button:hover {
   border-color: #777;
 }
 
@@ -277,7 +285,8 @@ input[type="password"] {
   background-color: rgb(45, 149, 245);
 }
 
-input[checked] + label {
+input[checked] + label,
+label.checked {
   background-color: red;
 }
 
@@ -285,3 +294,48 @@ input[checked] + label {
 input[type="submit"].submit {
   background-color: rgb(130, 186, 208);
 }
+/* END FORMS_________________________________________________________________*/
+
+/* EXPANDING AREA____________________________________________________________*/
+.expanding-area {
+  position: relative;
+  min-height: 300px;
+  margin-bottom: 1em;
+}
+
+.expanding-area textarea,
+.expanding-area pre {
+  font: inherit;
+  padding: 10px;
+  outline: 0;
+  line-height: 1.6em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.expanding-area textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.expanding-area.active > textarea {
+  /* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+}
+
+.expanding-area > pre {
+  display: none;
+}
+
+.expanding-area.active > pre {
+  display: block;
+  /* Hide the text; just using it for sizing */
+  visibility: hidden;
+}
+/* END EXPANDING AREA________________________________________________________*/
