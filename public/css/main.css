@@ -38,14 +38,20 @@ h1 {
 }
 
 h2 {
-  margin: 25px 0;
-  text-transform: capitalize;
   font-size: 42px;
+  font-style: normal;
+  font-weight: 600;
   line-height: 48px;
   letter-spacing: 1px;
-  font-weight: 600;
-  font-style: normal;
-  padding: 25px 0 0 0;
+  margin: 25px 0;
+  padding: 0 0;
+  text-transform: capitalize;
+}
+
+h2.page-title {
+  margin: 0 0 25px;
+  font-size: 30px;
+  line-height: 1.4em;
 }
 
 h3 {
@@ -132,6 +138,7 @@ pre {
 
 #middle {
   min-height: 400px;
+  padding-top: 1em;
 }
 
 #left-sidebar, #main-content, #right-sidebar {
@@ -240,6 +247,16 @@ input, textarea, button {
   padding: 0.3em 0.28em 0.2em;
 }
 
+input[type=text] {
+  display: block;
+  font: inherit;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 input[type="submit"],
 .action-buttons button,
 .button-labels label {
@@ -272,23 +289,32 @@ input[type="password"] {
   margin: 1.5em 0;
 }
 
+.button-labels {
+  margin-bottom: 1em;
+}
+
 .button-labels input {
   display: none;
 }
 
 .button-labels label {
-  padding: 0.3em 1em 0.2em;
+  padding: 0.35em 1em 0.25em;
   margin: 0.2em;
   display: inline-block;
 }
 
 .button-labels label:hover {
-  background-color: rgb(45, 149, 245);
+  background-color: rgb(65, 159, 255);
 }
 
 input[checked] + label,
 label.checked {
-  background-color: red;
+  background-color: rgb(40, 140, 240);
+}
+
+input[checked] + label:hover,
+label.checked:hover {
+  background-color: rgb(40, 140, 255);
 }
 
 /* Colors for action-buttons */

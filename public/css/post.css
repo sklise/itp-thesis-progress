@@ -1,24 +1,4 @@
 /* POST FORM_________________________________________________________________*/
-#progress-category {
-  list-style: none;
-}
-
-#progress-category li {
-  display: inline-block;
-}
-
-#progress-form input[type="text"],
-.form input[type="text"] {
-  display: block;
-  font: inherit;
-  padding: 10px;
-  position: relative;
-  width: 100%;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-
 #progress-form input[type="text"]:focus,
 #progress-form textarea:focus,
 .form textarea:focus,
@@ -31,13 +11,14 @@
   appearance: none;
 }
 
-#progress-form input[type="radio"] {
-  display: none;
-}
-
-
 input[type="radio"][checked=true] + label{
   color: red;
+}
+
+.meta-form-elements {
+  /*border: 1px solid #ddd;*/
+  margin-bottom: 1.5em;
+  width: 600px;
 }
 
 /* END POST FORM_____________________________________________________________*/

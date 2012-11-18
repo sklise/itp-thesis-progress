@@ -1,22 +1,28 @@
+<h3>
+  <input type="text" name="post[title]" placeholder="Title of Post..." value="<%= @post.title %>"/>
+</h3>
+
+<div class="meta-form-elements">
+<h6>Category</h6>
 <fieldset class="button-labels">
-  <strong>Category:</strong>
   <% @categories.each do |category| %>
-  <input type="radio" value="<%= category.id %>" name="post[category_id]" id="category-<%= category.id %>">
+  <input type="radio" value="<%= category.id %>" name="post[category_id]" id="category-<%= category.id %>" <%= "checked" if @post.category == category %>>
   <label for="category-<%= category.id %>"><%= category.name %></label>
   <% end %>
 </fieldset>
 
-<h4>Assignments</h4>
+<h6>Assignments</h6>
 <fieldset class="button-labels">
+  <% if @post.assignment %>
+  <input type="radio" checked value="<%= @post.assignment_id %>" name="post[assignment_id]" id="assignment-<%= @post.assignment_id %>">
+  <label for="assignment-<%= @post.assignment_id %>"><%= @post.assignment.title %></label>
+  <% end %>
   <% env['warden'].user.open_assignments.each do |assignment| %>
-  <input type="radio" value="<%= assignment.id %>" name="post[assignment_id]" id="assignment-<%= assignment.id %>">
+  <input type="radio" value="<%= assignment.id %>" name="post[assignment_id]" id="assignment-<%= assignment.id %>" >
   <label for="assignment-<%= assignment.id %>"><%= assignment.title %></label>
   <% end %>
 </fieldset>
-
-<h3>
-  <input type="text" name="post[title]" placeholder="Title of Post..." value="<%= @post.title %>"/>
-</h3>
+</div>
 
 <div class="expanding-area">
   <pre><span></span><br></pre>
