@@ -51,6 +51,7 @@ class Category
   end
 end
 
+# LINK_________________________________________________________________________
 class Link
   include DataMapper::Resource
 
@@ -68,6 +69,7 @@ class Link
   end
 end
 
+# SECTION______________________________________________________________________
 class Section
   include DataMapper::Resource
 
@@ -86,6 +88,7 @@ class Section
   has n, :users, through: Resource
 end
 
+# ASSIGNMENT___________________________________________________________________
 class Assignment
   include DataMapper::Resource
 
@@ -117,6 +120,7 @@ class Assignment
 
 end
 
+# THESIS_______________________________________________________________________
 class Thesis
   include DataMapper::Resource
 
@@ -132,6 +136,7 @@ class Thesis
   has n, :links
 end
 
+# USER_________________________________________________________________________
 class User
   include DataMapper::Resource
 
@@ -155,12 +160,43 @@ class User
     user if user && user.password == password
   end
 
-  def completed_assignments
-    post.all(:assignment_id.not => nil)
-  end
-
+  # Return whether or not user is an advisor.
   def advisor?
     role == "advisor"
+  end
+
+  # Return User's posts that are assignments
+  def completed_assignments
+    if self.posts.length == 0
+      []
+    else
+      assignment_posts = self.posts.all(:assignment_id.not => nil)
+
+      assignment_ids = []
+
+      assignment_posts.each do |post|
+        assignment_ids << post.assignment_id
+      end
+
+      assignment_ids
+    end
+  end
+
+  #
+  def open_assignments
+    if advisor?
+      return []
+    end
+
+    assignments = []
+
+    sections.each do |section|
+      section.assignments.each do |assignment|
+        assignments << assignment if !completed_assignments.include? assignment.id
+      end
+    end
+
+    assignments
   end
 
   has 1, :thesis
