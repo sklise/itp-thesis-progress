@@ -1,6 +1,8 @@
 <h2>Welcome to the ITP Thesis Site</h2>
 
+<% if !env['warden'].authenticated? %>
 <%= erb :'../../authentication/views/login', layout: false %>
+<% end %>
 
 <% if env['warden'].authenticate? %>
 
