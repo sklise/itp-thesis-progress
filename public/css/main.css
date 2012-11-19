@@ -129,6 +129,10 @@ pre {
 #top, #middle, #bottom {
 }
 
+#top {
+  background-color: #efefef;
+}
+
 #header, #middle, #footer {
   clear: both;
   max-width: 63.75rem;
@@ -247,7 +251,8 @@ input, textarea, button {
   padding: 0.3em 0.28em 0.2em;
 }
 
-input[type=text] {
+input[type=text],
+input[type=password] {
   display: block;
   font: inherit;
   padding: 10px;
@@ -366,3 +371,10 @@ input[type="submit"].submit {
   visibility: hidden;
 }
 /* END EXPANDING AREA________________________________________________________*/
+
+.other-assignment {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 2em;
+  padding: 0.6em 0;
+  margin: 0 0 0.7em ;
+}

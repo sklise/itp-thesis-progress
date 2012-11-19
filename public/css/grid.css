@@ -1,0 +1,19 @@
+.row {
+  clear: both;
+  display: block;
+  overflow-y: auto;
+}
+
+.one-half-column {
+  float: left;
+  margin: 0 1%;
+  width: 49%;
+}
+
+.one-half-column:first-child {
+  margin-left: 0%;
+}
+.one-half-column:last-child {
+  margin-right: 0%;
+}
+

@@ -1,12 +1,3 @@
-<script>
-  jQuery(function() {
-    $("#assignment-due-at").datepicker({"dateFormat": "yy-mm-dd"})
-    $('.button-labels label').click(function() {
-      $(this).toggleClass('checked')
-    });
-  });
-</script>
-
 <h2 class="page-title">Create a new Assignment</h2>
 <form action="/assignments/new" method="post" class="form">
   <input name="assignment[title]" id="assignment-title" type="text" value="<%= @assignment.title %>" placeholder="Title of Assignment"/>
