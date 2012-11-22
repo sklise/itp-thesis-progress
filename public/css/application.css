@@ -306,7 +306,7 @@ input[type="submit"].submit {
 /* EXPANDING AREA____________________________________________________________*/
 .expanding-area {
   position: relative;
-  min-height: 300px;
+  min-height: 200px;
   margin-bottom: 1em;
 }
 
@@ -347,28 +347,42 @@ input[type="submit"].submit {
 }
 /* END EXPANDING AREA________________________________________________________*/
 
-  select {width: 100%;}
+select {width: 100%;}
 
-  form {
-    width: 43em;
-  }
+form {
+  width: 43em;
+}
 
-  input[type='text'],
-  textarea {
-    -webkit-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-    -moz-box-shadow   : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-    box-shadow        : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-  }
+input[type='text'],
+textarea {
+  -webkit-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
+  -moz-box-shadow   : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
+  box-shadow        : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
+}
 
-  input[type='text']:focus,
-  textarea:focus {
-    border: 1px solid #1f45f7;
-    outline: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
+input[type='text']:focus,
+textarea:focus {
+  border: 1px solid #1f45f7;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
-  .form-field {
-    margin: 3em 0;
-  }
+.form-field {
+  margin: 3em 0;
+}
+
+#char-count {
+  font-family: "Source Code Pro";
+  font-size: 80%;
+  margin-top: -1em;
+  text-align: right;
+}
+
+#char-count.over {
+  color: red;
+}
+#char-count.danger-zone {
+  color: maroon;
+}

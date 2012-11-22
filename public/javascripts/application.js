@@ -1,4 +1,52 @@
-function supports_html5_storage() {
+// http://www.alistapart.com/articles/expanding-text-areas-made-elegant/
+function makeExpandingArea(container) {
+ var area = container.querySelector('textarea');
+ var span = container.querySelector('span');
+
+ remainingCharacters(area.value);
+
+ if (area.addEventListener) {
+   area.addEventListener('input', function() {
+    remainingCharacters(area.value);
+    span.textContent = area.value;
+   }, false);
+   span.textContent = area.value;
+ } else if (area.attachEvent) {
+   // IE8 compatibility
+   area.attachEvent('onpropertychange', function() {
+    remainingCharacters(area.value);
+     span.innerText = area.value;
+   });
+   span.innerText = area.value;
+ }
+ // Enable extra CSS
+ container.className += ' active';
+}
+
+window.onload = function() {
+  var areas = document.getElementsByClassName('expanding-area');
+  var l = areas.length;
+
+  while (l--) {
+   makeExpandingArea(areas[l]);
+  }
+}
+
+var remainingCharacters = function (text) {
+  var charCount = $('#char-count')
+  var remaining = charCount.data()['max'] - text.length;
+  charCount.html(remaining);
+  if (remaining <= 0) {
+    charCount.removeClass().addClass('over')
+  } else if (remaining < 100) {
+    charCount.removeClass().addClass('danger-zone')
+  } else {
+    console.log('ok')
+    charCount.removeClass()
+  }
+}
+
+var supports_html5_storage = function () {
   try {
     return 'localStorage' in window && window['localStorage'] !== null;
   } catch (e) {
