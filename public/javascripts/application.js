@@ -6,15 +6,23 @@ function supports_html5_storage() {
   }
 }
 
-var saveOnUpdate = function (event) {
+var saveSelectOnUpdate = function (event) {
+  var select = $(event.target);
+  var selected = [];
+  select.find('option:selected').each(function () {
+    selected.push($(this).val())
+  });
 
+  localStorage[select.attr("name")] = selected;
+}
+
+var saveOnUpdate = function (event) {
   var input = event.srcElement;
-  console.log(input)
-  localStorage[$(input).attr('name')] = $(input).val()
+  localStorage[$(input).attr('name')] = $(input).val();
 }
 
 var loadLocalStorage = function () {
-  console.log("loading local storage")
+  console.log("loading local storage");
 
   for (i = 0; i < localStorage.length; i++) {
     var key = localStorage.key(i);
@@ -22,19 +30,26 @@ var loadLocalStorage = function () {
 
     var element = $('[name='+key+']');
 
-    element.val(value);
+    if(element.prop("tagName") === "SELECT") {
+      var vals = value.split(",");
+      element.val(vals).trigger("liszt:updated");
+    } else {
+      element.val(value);
+    }
   }
 }
 
 jQuery(function () {
   if(supports_html5_storage() === true ) {
-    console.log('ready to rock')
+    console.log('ready to rock');
     loadLocalStorage();
   } else {
     $('#flash').append('<div class="error">Your browser does not support local storage, be careful.</div>');
   }
-  $('.chzn-select').chosen()
 
-  $('input').keyup(saveOnUpdate);
+  $('.chzn-select').chosen();
+
+  $('input[name]').keyup(saveOnUpdate);
   $('textarea').keyup(saveOnUpdate);
+  $('.chzn-select').chosen().change(saveSelectOnUpdate);
 });
