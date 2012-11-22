@@ -1,0 +1,374 @@
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldset, form, label, article, aside, canvas, footer, header, hgroup, nav, section, audio, video {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+html {
+  font-family: "Proxima Nova", "Helvetica", sans-serif;
+  font-size: 18px;
+}
+
+body {
+  line-height: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'lato';
+  font-weight: 700;
+  line-height: 1.4em;
+  margin: 0.25em 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 0.5em;
+}
+
+h2 {
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: 1px;
+  margin: 25px 0;
+  padding: 0 0;
+  text-transform: capitalize;
+}
+
+h2.page-title {
+  margin: 0 0 25px;
+  font-size: 30px;
+  line-height: 1.4em;
+}
+
+h3 {
+  font-size: 29.124px;
+  margin: 0.85em 0 0.4em;
+}
+
+h4 {
+  font-size: 24px;
+  margin: 0.25em 0;
+}
+
+h5 {
+  font-size: 22px;
+}
+
+h6 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, div figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+  position: relative;
+}
+
+p {
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'source sans pro';
+  line-height: 1.5em;
+  margin: 1em 0;
+}
+
+/*button {
+  border: none;
+  color: #fff;
+  display: block;
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  outline: none;
+  min-width: 125px;
+  padding: 0.5em 1em 0.3em;
+  position: relative;
+  text-transform: uppercase;
+}*/
+
+blockquote {
+  margin-bottom: 25px;
+  margin-top: 25px;
+  font-size: 26px;
+  line-height: 50px;
+  font-style: italic;
+  font-weight: 400;
+  text-align: left;
+  text-indent: 16px;
+  font-family: Lato;
+}
+
+code {
+  color: #555;
+  font-family: 'source code pro';
+  font-size: 70%;
+}
+
+pre {
+  overflow-x: scroll;
+}
+
+/* STRUCTURE_________________________________________________________________*/
+#top, #middle, #bottom {
+}
+
+#top {
+  background-color: #efefef;
+}
+
+#header, #middle, #footer {
+  clear: both;
+  max-width: 63.75rem;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+#middle {
+  min-height: 400px;
+  padding-top: 1em;
+}
+
+#left-sidebar, #main-content, #right-sidebar {
+  float: left;
+}
+
+#left-sidebar {
+  margin-right: 2%;
+  width: 14%;
+}
+
+#main-content {
+  max-width: 84%;
+}
+
+/* END STRUCTURE_____________________________________________________________*/
+
+/* HEADER____________________________________________________________________*/
+
+#header img {
+  width: 150px;
+  margin-right: 1em;
+}
+
+#header img, #main-nav {
+  float: left;
+}
+
+#header h1 {
+  margin: .55em 0 0;
+}
+
+#header p {
+  font-size: 90%;
+  margin: 0.5em 0;
+  line-height: 1.2em;
+}
+
+#header a {
+  color: black;
+  text-decoration: none;
+}
+
+#flash {
+  margin: 0 auto;
+  width: 40em;
+}
+/* END HEADER________________________________________________________________*/
+
+/* FOOTER____________________________________________________________________*/
+#footer {
+  font-size: 80%;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+/* END FOOTER________________________________________________________________*/
+
+/* LOGIN_____________________________________________________________________*/
+#login-form {
+  background-color: #ffe87a;
+  padding: 1.4em;
+}
+
+#login-form input {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+/* FORMS_____________________________________________________________________*/
+
+input, textarea, button {
+  border: 1px solid #aaa;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font: inherit;
+  margin: 0 0 1em 0;
+  padding: 0.3em 0.28em 0.2em;
+}
+
+input[type=text],
+input[type=password] {
+  display: block;
+  font: inherit;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="submit"],
+.action-buttons button,
+.button-labels label {
+  background-color: #bbb;
+  color: #fff;
+  font: inherit;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-right: 0.25em;
+  padding: 0.45em 1em 0.35em;
+  line-height: 1em;
+  vertical-align: middle;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  border-color: #777;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  display: block;
+  position: relative;
+}
+
+.action-buttons {
+  clear: both;
+  display: block;
+  margin: 1.5em 0;
+}
+
+.button-labels {
+  margin-bottom: 1em;
+}
+
+.button-labels input {
+  display: none;
+}
+
+.button-labels label {
+  padding: 0.35em 1em 0.25em;
+  margin: 0.2em;
+  display: inline-block;
+}
+
+.button-labels label:hover {
+  background-color: rgb(65, 159, 255);
+}
+
+input[checked] + label,
+label.checked {
+  background-color: rgb(40, 140, 240);
+}
+
+input[checked] + label:hover,
+label.checked:hover {
+  background-color: rgb(40, 140, 255);
+}
+
+/* Colors for action-buttons */
+input[type="submit"].submit {
+  background-color: #1f85f7;
+  border: 1px solid #1f45f7;
+}
+/* END FORMS_________________________________________________________________*/
+
+/* EXPANDING AREA____________________________________________________________*/
+.expanding-area {
+  position: relative;
+  min-height: 300px;
+  margin-bottom: 1em;
+}
+
+.expanding-area textarea,
+.expanding-area pre {
+  font: inherit;
+  padding: 10px;
+  outline: 0;
+  line-height: 1.6em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.expanding-area textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.expanding-area.active > textarea {
+  /* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+}
+
+.expanding-area > pre {
+  display: none;
+}
+
+.expanding-area.active > pre {
+  display: block;
+  /* Hide the text; just using it for sizing */
+  visibility: hidden;
+}
+/* END EXPANDING AREA________________________________________________________*/
+
+  select {width: 100%;}
+
+  form {
+    width: 43em;
+  }
+
+  input[type='text'],
+  textarea {
+    -webkit-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
+    -moz-box-shadow   : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
+    box-shadow        : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
+  }
+
+  input[type='text']:focus,
+  textarea:focus {
+    border: 1px solid #1f45f7;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .form-field {
+    margin: 3em 0;
+  }
