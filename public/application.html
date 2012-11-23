@@ -2,21 +2,21 @@
 <html>
 <head>
 <title>Thesis Application 2013</title>
-<link rel="stylesheet" href="/css/application.css" type="text/css">
-<link rel="stylesheet" href="/css/chosen.css" type="text/css">
-<script src="/javascripts/jquery.js" type="text/javascript"></script>
-<script src="/javascripts/chosen.jquery.js" type="text/javascript"></script>
-<script src="/javascripts/application.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/application.css" type="text/css">
+<link rel="stylesheet" href="css/chosen.css" type="text/css">
+<script src="javascripts/jquery.js" type="text/javascript"></script>
+<script src="javascripts/chosen.jquery.js" type="text/javascript"></script>
+<script src="javascripts/application.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="top">
     <div id="header">
-      <a href="/"><img src="/images/logo_maybe.png" alt="ITP THESIS" /></a>
+      <img src="/images/logo_maybe.png" alt="ITP THESIS" />
 
-    <h1>Thesis Application</h1>
+      <h1>Thesis Application</h1>
 
-    <p>As you work on this application it will be saved locally, so if the internet breaks up or you accidentally close the browser the information will stick around. <strong>But you must use the same browser on the same computer</strong> to retrieve your saved form.</p>
-    </div>
+      <p>As you work on this application it will be saved locally, so if the internet breaks up or you accidentally close the browser the information will stick around. <strong>But you must use the same browser on the same computer</strong> to retrieve your saved form.</p>
+      </div>
   </div>
 
   <div id="flash">
@@ -26,8 +26,10 @@
   <div id="middle">
 
     <form action="/inspect" method="POST">
-      <h3>Steve Klise</h3>
+      <h3 id="your-name">&nbsp;</h3>
+      <h4 id="netid">netid</h4>
 
+      <input type="hidden" name="netid" value=""/>
       <input type="text" name="preferred_name" placeholder="Preferred First Name">
 
 

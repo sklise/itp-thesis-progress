@@ -41,7 +41,6 @@ var remainingCharacters = function (text) {
   } else if (remaining < 100) {
     charCount.removeClass().addClass('danger-zone')
   } else {
-    console.log('ok')
     charCount.removeClass()
   }
 }
@@ -88,6 +87,11 @@ var loadLocalStorage = function () {
 }
 
 jQuery(function () {
+  var netid = $('h4#netid').html()
+  var name = $('option[value='+netid+']').html()
+  console.log(name)
+  $('#your-name').html(name);
+
   if(supports_html5_storage() === true ) {
     console.log('ready to rock');
     loadLocalStorage();
