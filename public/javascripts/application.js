@@ -23,6 +23,7 @@ function makeExpandingArea(container) {
  container.className += ' active';
 }
 
+// initialize expanding areas.
 window.onload = function() {
   var areas = document.getElementsByClassName('expanding-area');
   var l = areas.length;
@@ -68,6 +69,27 @@ var saveOnUpdate = function (event) {
   localStorage[$(input).attr('name')] = $(input).val();
 }
 
+var saveLabelInputs = function (event) {
+  // The input is just before the label.
+  window.checkbox = $(event.target).prev()[0];
+
+  if (typeof localStorage["labels"] === "undefined" || localStorage["labels"] === null) {
+    labels = []
+  } else {
+    labels = JSON.parse(localStorage["labels"])
+  }
+
+  // This is weird, the value of .checked reflects the state before clicking.
+  // So .checked == false => the box is now checked.
+  if (checkbox.checked) {
+    labels = _.without(labels, checkbox.value)
+  } else {
+    labels.push(checkbox.value)
+  }
+
+  localStorage["labels"] = JSON.stringify(labels)
+}
+
 var loadLocalStorage = function () {
   console.log("loading local storage");
 
@@ -75,25 +97,60 @@ var loadLocalStorage = function () {
     var key = localStorage.key(i);
     var value = localStorage.getItem(key);
 
-    var element = $('[name='+key+']');
-
-    if(element.prop("tagName") === "SELECT") {
-      var vals = value.split(",");
-      element.val(vals).trigger("liszt:updated");
+    if (key === "labels") {
+      loadCheckbox(value)
     } else {
-      element.val(value);
+      loadInput(key, value)
     }
   }
 }
 
+var loadCheckbox = function (value) {
+  var checkedBoxValues = JSON.parse(value)
+
+  checkedBoxValues.forEach(function (v) {
+    var input = $('input[value="'+v+'"]')
+    input.attr('checked','checked')
+    input.next().addClass('checked')
+  });
+
+}
+
+var loadInput = function (key, value) {
+  var element = $('[name="'+key+'"]');
+
+  if (element.prop("tagName") === "SELECT") {
+    var vals = value.split(",");
+    element.val(vals).trigger("liszt:updated");
+  } else if (element.attr("type") === "checkbox") {
+    console.log(value)
+  } else {
+    element.val(value);
+  }
+}
+
 jQuery(function () {
+
+  $('.button-labels label').click(function() {
+    $(this).toggleClass('checked')
+    var input = $(this).prev()
+
+    if (input.attr('checked') !== "undefined") {
+      input.removeAttr('checked');
+    }
+  });
+
   var netid = $('h4#netid').html()
   var name = $('option[value='+netid+']').html()
-  console.log(name)
-  $('#your-name').html(name);
+
+  if (typeof name === 'undefined') {
+    $('#your-name').html("Your netid doesn't match a member of the class of 2013")
+  } else {
+    $('#your-name').html(name);
+  }
+
 
   if(supports_html5_storage() === true ) {
-    console.log('ready to rock');
     loadLocalStorage();
   } else {
     $('#flash').append('<div class="error">Your browser does not support local storage, be careful.</div>');
@@ -101,7 +158,8 @@ jQuery(function () {
 
   $('.chzn-select').chosen();
 
-  $('input[name]').keyup(saveOnUpdate);
+  $('input[type=text]').keyup(saveOnUpdate);
+  $('.button-labels label').mouseup(saveLabelInputs);
   $('textarea').keyup(saveOnUpdate);
   $('.chzn-select').chosen().change(saveSelectOnUpdate);
 });

@@ -1,12 +1,12 @@
 jQuery(function() {
   $('.button-labels label').click(function() {
-      var input = $(this).prev()
+    var input = $(this).prev()
 
-      if ($(input).attr('type') === "radio") {
-        $(this).siblings().removeAttr('checked');
-        $(this).siblings().removeClass('checked');
-      }
+    if ($(input).attr('type') === "radio") {
+      $(this).siblings().removeAttr('checked');
+      $(this).siblings().removeClass('checked');
+    }
 
-      $(this).toggleClass('checked')
+    $(this).toggleClass('checked')
   });
 });

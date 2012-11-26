@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="css/application.css" type="text/css">
 <link rel="stylesheet" href="css/chosen.css" type="text/css">
 <script src="javascripts/jquery.js" type="text/javascript"></script>
+<script src="javascripts/underscore.js" type="text/javascript"></script>
 <script src="javascripts/chosen.jquery.js" type="text/javascript"></script>
 <script src="javascripts/application.js" type="text/javascript"></script>
 </head>
@@ -35,67 +36,71 @@
 
       <div class="form-field">
         <h3>Description of Thesis Idea</h3>
-        <p>Do you know what your thesis project will be? If not, do you have an idea of the topic, the medium, the area you are interested in developing? Write it down in under 600 characters.</p>
+        <p>Do you know what your thesis project will be? If not, write down the general idea of the topic, the medium, the area you are interested in developing? Write it down in under 600 characters.</p>
+
+        <div id="char-count-container">
+          Characters Remaining:
+          <span id="char-count" data-max=600>600</span>
+        </div>
 
         <div class="expanding-area">
           <pre><span></span><br></pre>
           <textarea name="description"></textarea>
         </div>
-        <div id="char-count" data-max=600>600</div>
       </div>
 
-
-      <div class='form-field'>
+      <div class='form-field checkboxes'>
         <h3>Tags & Keywords</h3>
 
-        <p>Select the tags that are relevant to your thesis idea. If none of these are relevant add a keyword that is relevant. List of proposed tags below and suggest we only have space for one write-in field.</p>
-
-        <select class="chzn-select" multiple data-placeholder="Choose tags for your idea..." name="labels">
-          <option value="animals">animals</option>
-          <option value="animation">animation</option>
-          <option value="architecture">architecture</option>
-          <option value="assistive tech">assistive tech</option>
-          <option value="data visualization">data visualization</option>
-          <option value="education/learning">education/learning</option>
-          <option value="entertainment">entertainment</option>
-          <option value="environment">environment</option>
-          <option value="exhibition design">exhibition design</option>
-          <option value="film/video/documentary">film/video/documentary</option>
-          <option value="game design">game design</option>
-          <option value="health/medicine/wellness">health/medicine/wellness</option>
-          <option value="installation">installation</option>
-          <option value="iPad">iPad</option>
-          <option value="Kinect">Kinect</option>
-          <option value="language processing">language processing</option>
-          <option value="living systems">living systems</option>
-          <option value="mobile">mobile</option>
-          <option value="musical interfaces">musical interfaces</option>
-          <option value="performance">performance</option>
-          <option value="physical computing">physical computing</option>
-          <option value="political">political</option>
-          <option value="product design">product design</option>
-          <option value="projection mapping">projection mapping</option>
-          <option value="research">research</option>
-          <option value="robotics">robotics</option>
-          <option value="screen-based art">screen-based art</option>
-          <option value="sculpture">sculpture</option>
-          <option value="site-specific">site-specific</option>
-          <option value="social/community">social/community</option>
-          <option value="social computing">social computing</option>
-          <option value="sound/audio">sound/audio</option>
-          <option value="storytelling/narrative">storytelling/narrative</option>
-          <option value="sustainibility">sustainibility</option>
-          <option value="urban intervention">urban intervention</option>
-          <option value="user interface">user interface</option>
-          <option value="video">video</option>
-          <option value="virtual worlds">virtual worlds</option>
-          <option value="wearables web">wearables web</option>
-        </select>
+        <p>Select the tags that are relevant to your thesis idea.</p>
+        <div class="button-labels">
+        <input id="animals" name="labels[]" type="checkbox" value="animals"/><label for="animals">  animals</label>
+        <input id="animation" name="labels[]" type="checkbox" value="animation"/><label for="animation">  animation</label>
+        <input id="architecture" name="labels[]" type="checkbox" value="architecture"/><label for="architecture">  architecture</label>
+        <input id="assistive tech" name="labels[]" type="checkbox" value="assistive tech"/><label for="assistive tech">  assistive tech</label>
+        <input id="datavisualization" name="labels[]" type="checkbox" value="data visualization"/><label for="datavisualization">  data visualization</label>
+        <input id="educationlearning" name="labels[]" type="checkbox" value="education/learning"/><label for="educationlearning">  education/learning</label>
+        <input id="entertainment" name="labels[]" type="checkbox" value="entertainment"/><label for="entertainment">  entertainment</label>
+        <input id="environment" name="labels[]" type="checkbox" value="environment"/><label for="environment">  environment</label>
+        <input id="exhibitiondesign" name="labels[]" type="checkbox" value="exhibition design"/><label for="exhibitiondesign">  exhibition design</label>
+        <input id="filmvideodocumentary" name="labels[]" type="checkbox" value="film/video/documentary"/><label for="filmvideodocumentary">  film/video/documentary</label>
+        <input id="gamedesign" name="labels[]" type="checkbox" value="game design"/><label for="gamedesign">  game design</label>
+        <input id="healthmedicinewellness" name="labels[]" type="checkbox" value="health/medicine/wellness"/><label for="healthmedicinewellness">  health/medicine/wellness</label>
+        <input id="installation" name="labels[]" type="checkbox" value="installation"/><label for="installation">  installation</label>
+        <input id="iPad" name="labels[]" type="checkbox" value="iPad"/><label for="iPad">  iPad</label>
+        <input id="Kinect" name="labels[]" type="checkbox" value="Kinect"/><label for="Kinect">  Kinect</label>
+        <input id="languageprocessing" name="labels[]" type="checkbox" value="language processing"/><label for="languageprocessing">  language processing</label>
+        <input id="livingsystems" name="labels[]" type="checkbox" value="living systems"/><label for="livingsystems">  living systems</label>
+        <input id="mobile" name="labels[]" type="checkbox" value="mobile"/><label for="mobile">  mobile</label>
+        <input id="musicalinterfaces" name="labels[]" type="checkbox" value="musical interfaces"/><label for="musicalinterfaces">  musical interfaces</label>
+        <input id="performance" name="labels[]" type="checkbox" value="performance"/><label for="performance">  performance</label>
+        <input id="physicalcomputing" name="labels[]" type="checkbox" value="physical computing"/><label for="physicalcomputing">  physical computing</label>
+        <input id="political" name="labels[]" type="checkbox" value="political"/><label for="political">  political</label>
+        <input id="productdesign" name="labels[]" type="checkbox" value="product design"/><label for="productdesign">  product design</label>
+        <input id="projectionmapping" name="labels[]" type="checkbox" value="projection mapping"/><label for="projectionmapping">  projection mapping</label>
+        <input id="research" name="labels[]" type="checkbox" value="research"/><label for="research">  research</label>
+        <input id="robotics" name="labels[]" type="checkbox" value="robotics"/><label for="robotics">  robotics</label>
+        <input id="screen-based-art" name="labels[]" type="checkbox" value="screen-based art"/><label for="screen-based-art">  screen-based art</label>
+        <input id="sculpture" name="labels[]" type="checkbox" value="sculpture"/><label for="sculpture">  sculpture</label>
+        <input id="site-specific" name="labels[]" type="checkbox" value="site-specific"/><label for="site-specific">  site-specific</label>
+        <input id="socialcommunity" name="labels[]" type="checkbox" value="social/community"/><label for="socialcommunity">  social/community</label>
+        <input id="social omputing" name="labels[]" type="checkbox" value="social computing"/><label for="socialcomputing">  social computing</label>
+        <input id="soundaudio" name="labels[]" type="checkbox" value="sound/audio"/><label for="soundaudio">  sound/audio</label>
+        <input id="storytellingnarrative" name="labels[]" type="checkbox" value="storytelling/narrative"/><label for="storytellingnarrative">  storytelling/narrative</label>
+        <input id="sustainibility" name="labels[]" type="checkbox" value="sustainibility"/><label for="sustainibility">  sustainibility</label>
+        <input id="urbanintervention" name="labels[]" type="checkbox" value="urban intervention"/><label for="urbanintervention">  urban intervention</label>
+        <input id="userinterface" name="labels[]" type="checkbox" value="user interface"/><label for="userinterface">  user interface</label>
+        <input id="video" name="labels[]" type="checkbox" value="video"/><label for="video">  video</label>
+        <input id="virtualworlds" name="labels[]" type="checkbox" value="virtual worlds"/><label for="virtualworlds">  virtual worlds</label>
+        <input id="wearablesweb" name="labels[]" type="checkbox" value="wearables web"/><label for="wearablesweb">  wearables web</label>
+        </div>
+        <p>If none of these are relevant type <strong>one</strong> keyword that is relevant.</p>
+        <input name="write-in-label" type="text" />
 
       </div>
 
       <div class='form-field'>
-        <h3>Preferred Classmates</h3>
+        <h3>People You Work Well With</h3>
 
         <p>Choose the names of up to 6 people in your class that you would like to have in your thesis group. While we cannot guarantee that we will be able to match you with your preferences, last year we were able to put everyone with at least one person they wanted to be with.</p>
 
@@ -235,7 +240,7 @@
       <div class='form-field'>
         <h3>Personal Site/Blog/Portfolio</h3>
         <p>If you have a blog, portfolio or website, please provide the URL to give the Thesis Advisors a chance to learn more about you.</p>
-        <input type="text" type="application[url]" placeholder="http://"/>
+        <input type="text" name="url" placeholder="http://"/>
       </div>
 
 

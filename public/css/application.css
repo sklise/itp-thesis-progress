@@ -16,7 +16,7 @@ html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldse
 }
 
 html {
-  font-family: "Proxima Nova", "Helvetica", sans-serif;
+  font-family: "Source Sans Pro", "Helvetica", sans-serif;
   font-size: 18px;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'lato';
+  font-family: 'lato', sans-serif;
   font-weight: 700;
   line-height: 1.4em;
   margin: 0.25em 0;
@@ -84,7 +84,6 @@ footer, header, hgroup, menu, nav, section {
 p {
   font-style: normal;
   font-weight: 400;
-  font-family: 'source sans pro';
   line-height: 1.5em;
   margin: 1em 0;
 }
@@ -118,7 +117,7 @@ blockquote {
 
 code {
   color: #555;
-  font-family: 'source code pro';
+  font-family: 'source code pro', mono-space;
   font-size: 70%;
 }
 
@@ -277,29 +276,40 @@ input[type="password"] {
 }
 
 .button-labels label {
-  padding: 0.35em 1em 0.25em;
-  margin: 0.2em;
+  padding: 0.35em .6em 0.25em;
+  margin: 0 1% .4em 0;
   display: inline-block;
+  width: 31.6666666%;
+  position: relative;
+  display: inline-block;
+  background-color: #eee;
+  border: 1px solid #bbb;
+  color: #000;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  -moz-box-shadow   : 0 1px 0 rgba(0,0,0,0.05);
+  box-shadow        : 0 1px 0 rgba(0,0,0,0.05);
 }
 
 .button-labels label:hover {
-  background-color: rgb(65, 159, 255);
+  background-color: #ddd;
+  cursor: pointer;
 }
 
 input[checked] + label,
 label.checked {
-  background-color: rgb(40, 140, 240);
+  background-color: rgb(65, 159, 255);
 }
 
 input[checked] + label:hover,
 label.checked:hover {
-  background-color: rgb(40, 140, 255);
+  background-color: rgb(95, 180, 255);
 }
 
 /* Colors for action-buttons */
 input[type="submit"].submit {
-  background-color: #1f85f7;
-  border: 1px solid #1f45f7;
+  background-color: #119632;
+  border: 1px solid #117432;
+  letter-spacing: .07em;
 }
 /* END FORMS_________________________________________________________________*/
 
@@ -307,7 +317,6 @@ input[type="submit"].submit {
 .expanding-area {
   position: relative;
   min-height: 200px;
-  margin-bottom: 1em;
 }
 
 .expanding-area textarea,
@@ -360,6 +369,8 @@ textarea {
   box-shadow        : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
 }
 
+
+
 input[type='text']:focus,
 textarea:focus {
   border: 1px solid #1f45f7;
@@ -373,16 +384,25 @@ textarea:focus {
   margin: 3em 0;
 }
 
-#char-count {
-  font-family: "Source Code Pro";
+#char-count-container {
+  font-family: "Source Code Pro", monospace;
   font-size: 80%;
-  margin-top: -1em;
+  margin: .15em 0 .25em;
   text-align: right;
 }
 
-#char-count.over {
-  color: red;
+#char-count {
+  font-weight: bold;
 }
+
+#char-count.over {
+  color: rgb(255, 0, 0);
+}
+
 #char-count.danger-zone {
-  color: maroon;
+  color: rgb(207, 9, 9);
+}
+
+.checkboxes {
+  overflow-y: auto;
 }
