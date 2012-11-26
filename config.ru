@@ -27,7 +27,6 @@ builder = Rack::Builder.new do
     end
   end
 
-  use Rack::Static, :root => 'public', :urls => %w[/], :try => ['.html', 'index.html', '/index.html']
   use Rack::MethodOverride
   use Rack::Session::Cookie
   use Rack::Flash, accessorize: [:error, :success]

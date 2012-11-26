@@ -2,6 +2,7 @@ class Main < Sinatra::Base
 
   set :views, Proc.new { File.join(root, "views") }
   set :static, true
+  set :public_folder, Proc.new { File.join(root, "../../public") }
   set :erb, layout: :'../../views/layout'
 
   get '/' do
@@ -31,6 +32,10 @@ class Main < Sinatra::Base
   # An individual section
   get '/years/:year/sections/:section' do
 
+  end
+
+  post "/inspect" do
+    raise params.inspect
   end
 
   not_found do
