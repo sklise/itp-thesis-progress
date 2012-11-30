@@ -12,12 +12,12 @@
 <body>
   <div id="top">
     <div id="header">
-      <img src="/images/logo_maybe.png" alt="ITP THESIS" />
+      <img src="images/logo_maybe.png" alt="ITP THESIS" />
 
       <h1>Thesis Application</h1>
 
-      <p>As you work on this application it will be saved locally, so if the internet breaks up or you accidentally close the browser the information will stick around. <strong>But you must use the same browser on the same computer</strong> to retrieve your saved form.</p>
-      </div>
+      <p>As you work on this application it will be saved locally in your browser, so if the internet breaks up or you accidentally close the browser the information will stick around.</p>
+    </div>
   </div>
 
   <div id="flash">
@@ -26,13 +26,11 @@
 
   <div id="middle">
 
-    <form action="/inspect" method="POST">
+    <form action="https://itpthesisprogress.herokuapp.com/applications/submit" method="POST">
       <h3 id="your-name">&nbsp;</h3>
       <h4 id="netid">netid</h4>
 
       <input type="hidden" name="netid" value=""/>
-      <input type="text" name="preferred_name" placeholder="Preferred First Name">
-
 
       <div class="form-field">
         <h3>Description of Thesis Idea</h3>
@@ -104,7 +102,7 @@
 
         <p>Choose the names of up to 6 people in your class that you would like to have in your thesis group. While we cannot guarantee that we will be able to match you with your preferences, last year we were able to put everyone with at least one person they wanted to be with.</p>
 
-        <select class="chzn-select" name="classmates" data-placeholder="Names of your classmates..." multiple>
+        <select class="chzn-select" name="preferred_classmates" data-placeholder="Names of your classmates..." multiple>
           <option value='me42'>Marlon Evans</option>
           <option value='mc194'>MV Carbon</option>
           <option value='kat283'>Kody Trauger</option>

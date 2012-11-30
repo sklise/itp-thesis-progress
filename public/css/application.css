@@ -135,7 +135,7 @@ pre {
 
 #header, #middle, #footer {
   clear: both;
-  max-width: 63.75rem;
+  max-width: 43rem;
   margin: 0 auto;
   overflow: auto;
 }
@@ -155,7 +155,7 @@ pre {
 }
 
 #main-content {
-  max-width: 84%;
+
 }
 
 /* END STRUCTURE_____________________________________________________________*/
@@ -359,7 +359,7 @@ input[type="submit"].submit {
 select {width: 100%;}
 
 form {
-  width: 43em;
+  width: 100%;
 }
 
 input[type='text'],

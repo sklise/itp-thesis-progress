@@ -73,8 +73,22 @@ end
 class Section
   include DataMapper::Resource
 
+  before :save, :ensure_slug
+
   property :id, Serial
   property :name, String
+  property :year, Integer, default: Date.today.year
+  property :slug, Slug
+
+  def ensure_slug
+    if self.slug.nil?
+      self.slug = name.lowercase
+    end
+  end
+
+  def path
+    "/#{year}/#{slug}"
+  end
 
   def students
     users.all(:role => "student")
@@ -142,9 +156,11 @@ class User
 
   property :id, Serial
   property :netid, String
+  property :first_name, String
+  property :last_name, String
   property :password, String
   property :year, Integer
-  property :role, String
+  property :role, String, default: "student"
 
   # Scopes
   def self.advisors
@@ -200,8 +216,30 @@ class User
   end
 
   has 1, :thesis
+  has 1, :application
   has n, :posts
   has n, :sections, through: Resource
+end
+
+# APPLICATION__________________________________________________________________
+class Application
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :description, Text
+  property :write_in, String
+  property :strengths, String
+  property :help, String
+  property :url, String
+
+  property :labels, String
+  property :preferred_classmates, String
+
+  property :user_id, Integer
+
+  belongs_to :user
+
+  attr_accessor :mutually_preferred, :preferred_by, :prefers
 end
 
 DataMapper.finalize

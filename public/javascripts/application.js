@@ -106,6 +106,10 @@ var loadLocalStorage = function () {
 }
 
 var loadCheckbox = function (value) {
+  if (value.length === 0) {
+    return false;
+  }
+
   var checkedBoxValues = JSON.parse(value)
 
   checkedBoxValues.forEach(function (v) {
@@ -113,7 +117,6 @@ var loadCheckbox = function (value) {
     input.attr('checked','checked')
     input.next().addClass('checked')
   });
-
 }
 
 var loadInput = function (key, value) {
@@ -123,7 +126,7 @@ var loadInput = function (key, value) {
     var vals = value.split(",");
     element.val(vals).trigger("liszt:updated");
   } else if (element.attr("type") === "checkbox") {
-    console.log(value)
+    console.log('hi', key, value)
   } else {
     element.val(value);
   }
