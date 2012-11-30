@@ -73,10 +73,10 @@ var saveLabelInputs = function (event) {
   // The input is just before the label.
   window.checkbox = $(event.target).prev()[0];
 
-  if (typeof localStorage["labels"] === "undefined" || localStorage["labels"] === null) {
+  if (typeof localStorage["labels[]"] === "undefined" || localStorage["labels[]"] === null) {
     labels = []
   } else {
-    labels = JSON.parse(localStorage["labels"])
+    labels = JSON.parse(localStorage["labels[]"])
   }
 
   // This is weird, the value of .checked reflects the state before clicking.
@@ -87,7 +87,7 @@ var saveLabelInputs = function (event) {
     labels.push(checkbox.value)
   }
 
-  localStorage["labels"] = JSON.stringify(labels)
+  localStorage["labels[]"] = JSON.stringify(labels)
 }
 
 var loadLocalStorage = function () {
@@ -97,7 +97,7 @@ var loadLocalStorage = function () {
     var key = localStorage.key(i);
     var value = localStorage.getItem(key);
 
-    if (key === "labels") {
+    if (key === "labels[]") {
       loadCheckbox(value)
     } else {
       loadInput(key, value)
