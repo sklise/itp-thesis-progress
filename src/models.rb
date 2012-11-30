@@ -10,6 +10,8 @@ class Post
   include DataMapper::Resource
 
   property :id, Serial, key: true
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :title, String
   property :content, Text
   property :private, Boolean
@@ -41,6 +43,8 @@ class Category
   include DataMapper::Resource
 
   property :id, Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :name, String
   property :year, Integer
 
@@ -56,6 +60,8 @@ class Link
   include DataMapper::Resource
 
   property :id, Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :type, String
   property :url, String
   property :name, String
@@ -76,6 +82,8 @@ class Section
   before :save, :ensure_slug
 
   property :id, Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :name, String
   property :year, Integer, default: Date.today.year
   property :slug, Slug
@@ -107,12 +115,12 @@ class Assignment
   include DataMapper::Resource
 
   property :id, Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :title, String
   property :brief, Text
 
   property :due_at, DateTime
-  property :created_at, DateTime
-  property :updated_at, DateTime
 
   has n, :posts
   has n, :sections, through: Resource
@@ -139,6 +147,8 @@ class Thesis
   include DataMapper::Resource
 
   property :id, Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :title, String
   property :elevator_pitch, Text
   property :description, Text
@@ -155,6 +165,8 @@ class User
   include DataMapper::Resource
 
   property :id, Serial
+  property :created_at, DateTime
+  property :updated_at, DateTime
   property :netid, String
   property :first_name, String
   property :last_name, String
@@ -234,6 +246,9 @@ class Application
 
   property :labels, String
   property :preferred_classmates, String
+
+  property :created_at, DateTime
+  property :updated_at, DateTime
 
   property :user_id, Integer
 
