@@ -4,7 +4,7 @@ class ApplicationApp < Sinatra::Base
 
 
   post '/submit' do
-    @user = User.find(netid: params[:netid])
+    @user = User.first(netid: params[:netid])
 
     @application = @user.application || Application.new
 
