@@ -21,7 +21,8 @@ class ApplicationApp < Sinatra::Base
     if @user.save
       "success!"
     else
-      "uhoh, go find Steve!"
+
+      "#{@user.inspect} <br> <br> #{@application.inspect}"
     end
   end
 end
