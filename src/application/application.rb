@@ -12,6 +12,8 @@ class ApplicationApp < Sinatra::Base
       @user = User.new
     end
 
+    puts @user.inspect
+
     @application = @user.application || Application.new
 
     @application.description          = params[:description]
@@ -22,6 +24,10 @@ class ApplicationApp < Sinatra::Base
     @application.labels               = params[:labels].join(",")
     @application.preferred_classmates = params[:preferred_classmates].join(",")
     @application.user_id = @user.id
+
+    puts "application valid? "
+    puts @application.valid?
+    puts @application.inspect
 
     @user.application = @application
 
