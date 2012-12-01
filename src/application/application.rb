@@ -25,16 +25,12 @@ class ApplicationApp < Sinatra::Base
     @application.preferred_classmates = params[:preferred_classmates].join(",")
     @application.user_id = @user.id
 
-    puts "application valid? "
-    puts @application.valid?
-    puts @application.inspect
-
     @user.application = @application
 
     if @user.save
       "success!"
     else
-      "There was an error. Please contact Steve for help."
+      "There was an error. Please contact Steve for help. <br> #{@application.inspect}<br>#{@user.inspect}"
     end
   end
 end
