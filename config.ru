@@ -39,10 +39,10 @@ builder = Rack::Builder.new do
 
   # Hook up the apps
   map ('/')             { run Main }
-  map ('/progress')     { run ProgressApp }
-  map ('/session' )     { run AuthenticationManager }
-  map ('/thesis' )      { run ThesisApp }
-  map ('/assignments')  { run AssignmentsApp }
+  # map ('/progress')     { run ProgressApp }
+  # map ('/session' )     { run AuthenticationManager }
+  # map ('/thesis' )      { run ThesisApp }
+  # map ('/assignments')  { run AssignmentsApp }
   map ('/applications')  { run ApplicationApp }
 end
 
