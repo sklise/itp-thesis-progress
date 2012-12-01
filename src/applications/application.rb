@@ -14,13 +14,13 @@ class ApplicationApp < Sinatra::Base
 
     @application = @user.application || Application.new
 
-    @application.description          = params[:description]
-    @application.write_in             = params[:write_in_label]
-    @application.strengths            = params[:strengths]
-    @application.help                 = params[:help]
-    @application.url                  = params[:url]
-    @application.labels               = params[:labels].join(",")
-    @application.preferred_classmates = params[:preferred_classmates].join(",")
+    @application.description          = params[:description] || ""
+    @application.write_in             = params[:write_in_label] || ""
+    @application.strengths            = params[:strengths]|| ""
+    @application.help                 = params[:help]|| ""
+    @application.url                  = params[:url] || ""
+    @application.labels               = (params[:labels] || [""]).join(",")
+    @application.preferred_classmates = (params[:preferred_classmates] || [""]).join(",")
     @application.user_id = @user.id
 
     @user.application = @application

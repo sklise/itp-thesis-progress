@@ -133,7 +133,6 @@ var loadInput = function (key, value) {
 }
 
 jQuery(function () {
-
   $('.button-labels label').click(function() {
     $(this).toggleClass('checked')
     var input = $(this).prev()
@@ -165,4 +164,11 @@ jQuery(function () {
   $('.button-labels label').mouseup(saveLabelInputs);
   $('textarea').keyup(saveOnUpdate);
   $('.chzn-select').chosen().change(saveSelectOnUpdate);
+
+  $('form').submit(function () {
+    if ($('[name=description]').val().length > 600) {
+      alert("Please limit your description to 600 characters or less.");
+      return false;
+    }
+  })
 });
