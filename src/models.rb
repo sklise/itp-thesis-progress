@@ -244,7 +244,7 @@ class Application
   property :help, String
   property :url, String
 
-  property :labels, String
+  property :labels, Text
   property :preferred_classmates, String
 
   property :created_at, DateTime
