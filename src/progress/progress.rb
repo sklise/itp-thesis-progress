@@ -33,7 +33,7 @@ class ProgressApp < Sinatra::Base
       flash.success = "Post Saved"
       redirect "/progress"
     else
-      flash.error "There was an issue creating that post"
+      flash.error = "There was an issue creating that post"
       redirect "/progress/new"
     end
   end

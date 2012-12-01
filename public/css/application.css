@@ -187,8 +187,23 @@ pre {
 }
 
 #flash {
-  margin: 0 auto;
-  width: 40em;
+  margin: 1em auto;
+  text-align: center;
+}
+
+.message-success,
+.message-error {
+  padding: 1em;
+}
+
+.message-success {
+  border: 2px solid rgb(42, 194, 78);
+  background-color: rgba(57, 248, 102, 0.35);
+}
+
+.message-error {
+  border: 2px solid rgb(194, 66, 42);
+  background-color: rgba(248, 57, 57, 0.35);
 }
 /* END HEADER________________________________________________________________*/
 

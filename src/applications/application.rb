@@ -1,13 +1,12 @@
 class ApplicationApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
-  set :erb, layout: :'../../views/layout'
 
   post '/submit' do
     @user = User.first(netid: params[:netid])
 
     if @user.nil?
       # CRAP!
-      @user = User.new
+      @user = User.new(netid: params[:netid])
     end
 
     @application = @user.application || Application.new
@@ -24,9 +23,12 @@ class ApplicationApp < Sinatra::Base
     @user.application = @application
 
     if @user.save
-      "success!"
+      flash.success = "Congratulations, your thesis application has been submitted. Enjoy the rest of your Saturday."
     else
-      "There was an error. Please contact Steve for help. <br> #{@application.inspect}<br>#{@user.inspect}"
+      puts DateTime.now.to_s + "  >>>>  #{@application.inspect} //// #{@user.inspect}"
+      flash.error = "There was an error saving your application. Please be sure you have filled out all fields properly and try again. If this problem persists, please contact Steve either in the Residents' Office or by email at sk3453@nyu.edu."
     end
+
+    erb :submit
   end
 end

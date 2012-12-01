@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thesis</title>
+  <link rel="stylesheet" href="/css/application.css" type="text/css">
+  <script src="/javascripts/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="middle">
+
+    <div id="main-content" style="width:30em;margin: 0 auto;float: none;text-align: center;">
+
+      <a href="/" ><img style="width:300px" src="/images/logo_maybe.png" alt="ITP THESIS" /></a>
+
+      <div id="flash">
+        <% [:error, :success].each do |name| %><% if flash.has?(name) %>
+          <div class="message-<%= name %>">
+            <%= flash[name] %>
+          </div>
+        <% end %><% end %>
+      </div>
+      <%= yield %>
+      <p style="font-size: 80%">Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
+    </div>
+  </div>
+</body>
+</html>
