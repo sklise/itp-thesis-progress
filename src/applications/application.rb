@@ -10,8 +10,6 @@ class ApplicationApp < Sinatra::Base
       @user = User.new
     end
 
-    puts @user.inspect
-
     @application = @user.application || Application.new
 
     @application.description          = params[:description] || ""

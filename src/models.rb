@@ -239,13 +239,13 @@ class Application
 
   property :id, Serial
   property :description, Text
-  property :write_in, String
-  property :strengths, String
-  property :help, String
-  property :url, String
+  property :write_in, Text
+  property :strengths, Text
+  property :help, Text
+  property :url, Text
 
   property :labels, Text
-  property :preferred_classmates, String
+  property :preferred_classmates, Text
 
   property :created_at, DateTime
   property :updated_at, DateTime
