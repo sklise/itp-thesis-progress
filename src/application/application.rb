@@ -2,8 +2,6 @@ class ApplicationApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
-  require 'json'
-
   post '/submit' do
     @user = User.first(netid: params[:netid])
 
