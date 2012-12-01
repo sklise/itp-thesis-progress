@@ -14,8 +14,6 @@ class ApplicationApp < Sinatra::Base
 
     @application = @user.application || Application.new
 
-    raise params.inspect
-
     @application.description          = params[:description]
     @application.write_in             = params[:write_in_label]
     @application.strengths            = params[:strengths]
