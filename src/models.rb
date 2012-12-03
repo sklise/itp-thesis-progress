@@ -227,6 +227,14 @@ class User
     assignments
   end
 
+  def self.has_application(yes_or_no=nil)
+    if yes_or_no.nil? || yes_or_no
+      self.all(:application.not => nil)
+    else
+      self.all(:application => nil)
+    end
+  end
+
   has 1, :thesis
   has 1, :application
   has n, :posts
@@ -255,6 +263,15 @@ class Application
   belongs_to :user
 
   attr_accessor :mutually_preferred, :preferred_by, :prefers
+end
+
+# TAGS_________________________________________________________________________
+class Tag
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :name, String
+
 end
 
 DataMapper.finalize

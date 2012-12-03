@@ -88,6 +88,10 @@ p {
   margin: 1em 0 1.6em;
 }
 
+ul {
+  list-style: none;
+}
+
 /*button {
   border: none;
   color: #fff;
@@ -155,7 +159,7 @@ pre {
 }
 
 #main-content {
-  max-width: 84%;
+  width: 100%;
 }
 
 /* END STRUCTURE_____________________________________________________________*/
@@ -264,7 +268,8 @@ input[type=password] {
 
 input[type="submit"],
 .action-buttons button,
-.button-labels label {
+.button-labels label,
+.button-labels a {
   background-color: #bbb;
   color: #fff;
   font: inherit;
@@ -302,23 +307,34 @@ input[type="password"] {
   display: none;
 }
 
-.button-labels label {
-  padding: 0.35em 1em 0.25em;
+.button-labels label,
+.button-labels a {
+  background-color: rgb(121,121,121);
+  padding: 0.35em 0.6em 0.29em;
   margin: 0.2em;
   display: inline-block;
+  letter-spacing: 0.1em;
 }
 
-.button-labels label:hover {
+#sorting a {
+  text-decoration: none;
+  font-size: 85%;
+}
+
+.button-labels label:hover,
+.button-labels a:hover {
   background-color: rgb(65, 159, 255);
 }
 
 input[checked] + label,
-label.checked {
+label.checked,
+.button-labels a.checked {
   background-color: rgb(40, 140, 240);
 }
 
 input[checked] + label:hover,
-label.checked:hover {
+label.checked:hover,
+.button-labels a.checked:hover {
   background-color: rgb(40, 140, 255);
 }
 

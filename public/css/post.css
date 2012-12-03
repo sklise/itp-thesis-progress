@@ -23,15 +23,20 @@ input[type="radio"][checked=true] + label{
 
 /* END POST FORM_____________________________________________________________*/
 
+.meta-link,
 .meta {
-  margin-bottom: 25px;
   font-size: 0.875em;
-  letter-spacing: 0.07142857142857142em;
   color: #666464;
-  font-family: 'source code pro';
   font-style: normal;
   font-weight: 100;
-  line-height: 1.8488095147269112em;
+  /*line-height: 1.8488095147269112em;*/
+}
+
+.meta {
+  margin-bottom: 25px;
+  letter-spacing: 0.07142857142857142em;
+  font-family: 'source code pro';
+
 }
 
 .meta .private {

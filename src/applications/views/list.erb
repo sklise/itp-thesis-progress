@@ -1,0 +1,62 @@
+<script>
+  var filters = [];
+
+  jQuery(function () {
+
+    $('.button-labels a').click(function () {
+      $(this).toggleClass('checked');
+      console.log($(this))
+
+      var thisTag = $(this).data()['tagname']
+
+      if (_.contains(filters, thisTag)) {
+        filters.pop(thisTag)
+      } else {
+        filters.push(thisTag)
+      }
+
+      filterStudents();
+      return false;
+    });
+  });
+
+  var filterStudents = function () {
+    var students = $('.students li');
+    var reg = new RegExp(filters.join("|"), "g")
+    students.each(function(){
+      match = $(this).data()['tags'].match(reg)
+      if ( match === null ) { $(this).hide() }
+      else { $(this).show() }
+    });
+  }
+</script>
+
+<div class="col-5">
+  <h3>Submitted Applications (<%= @submitted.length %>)</h3>
+  <ul class="students">
+  <% @submitted.each do |user| %>
+    <li data-tags="<%= user.application.labels %>"><%= user.first_name %> <%= user.last_name %></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class="col-7">
+  <h3>Sort by Tags</h3>
+
+  <p>Clicking a tag will filter the list. Click multiple tags to find </p>
+
+  <p>Clear All</p>
+  <%= erb :tags, layout: false %>
+</div>
+
+<div class="col-4">
+  <h3>No Application (<%= @no_application.length %>)</h3>
+  <ul>
+  <% @no_application.each do |user| %>
+    <li>
+      <%= user.first_name %> <%= user.last_name %>
+      <a class="meta-link" href="mailto:<%= user.netid %>@nyu.edu">Send an email</a>
+    </li>
+  <% end %>
+  </ul>
+</div>

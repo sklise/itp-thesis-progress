@@ -1,5 +1,13 @@
 class ApplicationApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
+  set :erb, layout: :'../../views/layout'
+
+  get '/admin/list' do
+    @users = User.all(year: 2013, order: :first_name)
+    @no_application = @users.has_application(false)
+    @submitted = @users.has_application
+    erb :list
+  end
 
   post '/submit' do
     @user = User.first(netid: params[:netid])
@@ -29,6 +37,6 @@ class ApplicationApp < Sinatra::Base
       flash.error = "There was an error saving your application. Please be sure you have filled out all fields properly and try again. If this problem persists, please contact Steve either in the Residents' Office or by email at sk3453@nyu.edu."
     end
 
-    erb :submit
+    erb :submit, layout: './views/layout'
   end
 end
