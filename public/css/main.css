@@ -15,7 +15,7 @@ html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldse
 }
 
 html {
-  font-family: "Proxima Nova", "Helvetica", sans-serif;
+  font-family: 'source sans pro', "Helvetica", sans-serif;
   font-size: 18px;
 }
 
@@ -65,7 +65,8 @@ h4 {
 }
 
 h5 {
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: normal;
 }
 
 h6 {
