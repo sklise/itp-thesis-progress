@@ -177,6 +177,7 @@ pre {
 }
 
 #main-content {
+  overflow-y: hidden;
   width: 100%;
 }
 
@@ -411,4 +412,21 @@ input[type="submit"].submit {
   margin-bottom: 2em;
   padding: 0.6em 0;
   margin: 0 0 0.7em ;
+}
+
+/* printed-tags are li elements styled to improve glanceability on the printed
+page */
+ul.printed-tags {
+  clear: both;
+  overflow: auto;
+}
+
+ul.printed-tags li {
+  display: inline;
+  float: left;
+  letter-spacing: 0.05em;
+  padding: .5em 1em;
+  text-align: center;
+  width: 30%;
+  font-family: "Georgia";
 }

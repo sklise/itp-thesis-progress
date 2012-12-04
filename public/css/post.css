@@ -79,3 +79,7 @@ h2 a {
 .skinny {
   max-width: 600px;
 }
+
+#main-content p {
+  max-width: 100%;
+}

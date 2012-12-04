@@ -6,14 +6,14 @@
 
 
   <h3>Description of Thesis Idea</h3>
-  <%= @user.application.description %>
+  <p><%= @user.application.description %></p>
 
   <h3>Tags</h3>
-  <div class="button-labels">
+  <ul class="printed-tags">
   <% @user.application.tags.each do |tag| %>
-    <a href="#"><%= tag %></a>
+    <li><%= tag.capitalize.split(" ").map{|x| x.capitalize}.join(" ") %></li>
   <% end %>
-  </div>
+  </ul>
 
   <% if @user.application.write_in %>
   <p><strong><%= @user.application.write_in %></strong></p>
