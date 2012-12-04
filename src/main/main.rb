@@ -5,6 +5,10 @@ class Main < Sinatra::Base
   set :public_folder, Proc.new { File.join(root, "../../public") }
   set :erb, layout: :'../../views/layout'
 
+  before do
+    redirect '/applications'
+  end
+
   get '/' do
     erb :front_page
   end

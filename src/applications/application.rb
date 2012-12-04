@@ -9,10 +9,6 @@ class ApplicationApp < Sinatra::Base
   end
 
   get '/' do
-    'hi'
-  end
-
-  get '/admin/list' do
     @users = User.all(year: 2013, order: :first_name)
     @applications = Application.all
     @no_application = @users.has_application(false)
