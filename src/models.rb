@@ -235,6 +235,10 @@ class User
     end
   end
 
+  def to_s
+    "#{first_name} #{last_name}"
+  end
+
   has 1, :thesis
   has 1, :application
   has n, :posts
@@ -273,7 +277,13 @@ class Application
     self.user_id = user.id
   end
 
-  attr_accessor :mutually_preferred, :preferred_by, :prefers
+  def tags
+    labels.split(",")
+  end
+
+  def requested
+    preferred_classmates.split(",")
+  end
 end
 
 # TAGS_________________________________________________________________________

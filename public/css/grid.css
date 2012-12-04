@@ -92,5 +92,12 @@ Change widths as necessary
 /* WIDESCREEN */
 /* Increased body size for legibility */
 @media only screen and (min-width: 1400px) {
-  body {font-size:116.75%; background:url('../images/28px_grid_bg.gif') 0 1.25em; max-width:1440px} /* 18.5px / 28px */
+  body {
+    font-size: 120%;
+    background: url('../images/28px_grid_bg.gif') 0 1.25em;
+  } /* 18.5px / 28px */
+
+  #main-content {
+    max-width: 1440px;
+  }
 }

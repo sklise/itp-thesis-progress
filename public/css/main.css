@@ -317,7 +317,7 @@ input[type="password"] {
   letter-spacing: 0.1em;
 }
 
-#sorting a {
+.button-labels a {
   text-decoration: none;
   font-size: 85%;
 }
