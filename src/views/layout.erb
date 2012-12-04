@@ -10,7 +10,6 @@
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
   <script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
   <script src="/javascripts/underscore.js" type="text/javascript"></script>
-  <script src="/javascripts/backbone.js" type="text/javascript"></script>
   <script src="/javascripts/expandingtextarea.js" type="text/javascript"></script>
 
   <script src="/javascripts/main.js" type="text/javascript"></script>
@@ -30,7 +29,7 @@
       </div>
 
       <div id="account-nav">
-      <% if env['warden'].authenticated? %>
+      <% if false #env['warden'].authenticated? %>
         <ul>
           <li><a href="/thesis">Thesis</a></li>
           <li><a href="/progress">Progress</a></li>
