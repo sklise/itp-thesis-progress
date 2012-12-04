@@ -1,0 +1,52 @@
+<div class="col-8">
+  <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+  <p><a href="mailto:<%= @user.netid %>@nyu.edu"><%= @user.netid %></a></p>
+
+
+  <h3>Description of Thesis Idea</h3>
+  <%= @user.application.description %>
+
+  <h3>Tags</h3>
+  <div class="button-labels">
+  <% @user.application.tags.each do |tag| %>
+    <a href="#"><%= tag %></a>
+  <% end %>
+  </div>
+
+  <% if @user.application.write_in %>
+  <p><strong><%= @user.application.write_in %></strong></p>
+  <% end %>
+
+  <h3>Strengths</h3>
+  <%= @user.application.strengths %>
+
+  <h3>Areas for Help</h3>
+  <%= @user.application.help %>
+
+  <h3>Personal Site</h3>
+  <p><a target="_blank" href="<%= @user.application.url %>"><%= @user.application.url %></a></p>
+</div>
+
+<div class="col-4">
+  <h3>Requested Classmates</h3>
+  <h4>Requited</h4>
+  <ul>
+  <% (@mentioned & @mentioned_by).each do |user| %>
+    <li><a href="/applications/<%= user.netid %>"><%= user %></a></li>
+  <% end %>
+  </ul>
+
+  <h4>Unrequited</h4>
+  <ul>
+  <% (@mentioned - (@mentioned & @mentioned_by)).each do |user| %>
+    <li><a href="/applications/<%= user.netid %>"><%= user %></a></li>
+  <% end %>
+  </ul>
+
+  <h4>Others who asked for <%= @user.first_name %></h4>
+  <ul>
+  <% (@mentioned_by - (@mentioned & @mentioned_by)).each do |user| %>
+    <li><a href="/applications/<%= user.netid %>"><%= user %></a></li>
+  <% end %>
+  </ul>
+</div>

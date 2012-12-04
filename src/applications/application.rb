@@ -2,8 +2,13 @@ class ApplicationApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
+  get '/' do
+    'hi'
+  end
+
   get '/admin/list' do
     @users = User.all(year: 2013, order: :first_name)
+    @applications = Application.all
     @no_application = @users.has_application(false)
     @submitted = @users.has_application
     erb :list
@@ -30,5 +35,19 @@ class ApplicationApp < Sinatra::Base
     end
 
     erb :submit, layout: :'layout'
+  end
+
+  get '/:netid' do
+    @user = User.first netid: params[:netid]
+
+    if @user.nil?
+      flash.error "The user you requested does not exist."
+      redirect '/applications/?'
+    end
+
+    @mentioned_by = Application.all(:preferred_classmates.like => "%"+@user.netid+"%").user
+    @mentioned = User.all(netid: @user.application.requested)
+
+    erb :show
   end
 end

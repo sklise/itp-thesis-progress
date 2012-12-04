@@ -31,11 +31,12 @@
   }
 </script>
 
+
 <div class="col-5">
   <h3>Submitted Applications (<%= @submitted.length %>)</h3>
   <ul class="students">
   <% @submitted.each do |user| %>
-    <li data-tags="<%= user.application.labels %>"><%= user.first_name %> <%= user.last_name %></li>
+    <li data-tags="<%= user.application.labels %>"><a href="/applications/<%= user.netid %>"><%= user.first_name %> <%= user.last_name %></a></li>
   <% end %>
   </ul>
 </div>
@@ -54,7 +55,7 @@
   <ul>
   <% @no_application.each do |user| %>
     <li>
-      <%= user.first_name %> <%= user.last_name %>
+      <a href="/applications/<%= user.netid %>"><%= user.first_name %> <%= user.last_name %></a>
       <a class="meta-link" href="mailto:<%= user.netid %>@nyu.edu">Send an email</a>
     </li>
   <% end %>
