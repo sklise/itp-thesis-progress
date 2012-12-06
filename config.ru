@@ -37,13 +37,17 @@ builder = Rack::Builder.new do
   #   config.failure_app = self
   # end
 
+  use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    [username, password] == [ENV['USERNAME'], ENV['PASSWORD']]
+  end
+
   # Hook up the apps
-  map ('/')             { run Main }
-  # map ('/progress')     { run ProgressApp }
-  # map ('/session' )     { run AuthenticationManager }
-  # map ('/thesis' )      { run ThesisApp }
-  # map ('/assignments')  { run AssignmentsApp }
-  map ('/applications')  { run ApplicationApp }
+  map ('/')               { run Main }
+  map ('/progress')       { run ProgressApp }
+  map ('/session' )       { run AuthenticationManager }
+  map ('/thesis' )        { run ThesisApp }
+  map ('/assignments')    { run AssignmentsApp }
+  map ('/applications')   { run ApplicationApp }
 end
 
 run builder
