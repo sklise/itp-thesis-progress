@@ -1,10 +1,13 @@
 require 'bcrypt'
 
 class ApplicationApp < Sinatra::Base
+  # set :cache, Dalli::Client.new
+  # set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
   get '/' do
+    cache_control :public, max_age: 3600  # 30 mins.
     @users = User.all(year: 2013, order: :first_name)
     @applications = Application.all
     @no_application = @users.has_application(false)
