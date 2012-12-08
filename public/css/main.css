@@ -9,18 +9,21 @@ html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldse
   padding: 0;
   position: relative;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline;
 }
 
-html {
-  font-family: 'source sans pro', "Helvetica", sans-serif;
-  font-size: 18px;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, div figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+  position: relative;
 }
 
-body {
-  line-height: 1;
+html {
+  font-family: "Source Sans Pro", "Helvetica", sans-serif;
+  font-size: 100%; /* 16px */
+  line-height: 1.5em; /* 24px */
 }
 
 a {
@@ -32,17 +35,18 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'lato';
+  font-family: 'Lato', sans-serif;
   font-weight: 700;
-  line-height: 1.4em;
-  margin: 0.25em 0;
+  line-height: 1.5em;
+  margin: 1.5em 0;
   padding: 0;
   vertical-align: baseline;
 }
 
 h1 {
-  font-size: 20px;
-  margin: 0 0 0.5em;
+  font-size: 1.5em; /* 24px */
+  line-height: 1em;
+  margin: 0 0 1em;
 }
 
 h1 a {
@@ -55,13 +59,13 @@ h1 a:hover {
 }
 
 h2 {
-  font-size: 42px;
+  font-size: 2.625em; /* 40px */
   font-style: normal;
   font-weight: 600;
-  line-height: 48px;
+  line-height: 1.714285714em; /* (24*3) / 42 */
   letter-spacing: 1px;
-  margin: 25px 0;
-  padding: 0 0;
+  margin: 0 0 0.571428571em;
+  padding: 0;
   text-transform: capitalize;
 }
 
@@ -72,13 +76,15 @@ h2.page-title {
 }
 
 h3 {
-  font-size: 29.124px;
-  margin: 0.5em 0;
+  font-size: 1.75em; /* 28px */
+  line-height: 1.714285714em; /* 48 / 28 */
+  margin: 0.857142857em 0 0;
 }
 
 h4 {
-  font-size: 24px;
-  margin: 0.25em 0;
+  font-size: 1.5em; /* 24px */
+  line-height: 1em;
+  margin: 1.5em 0 0.5em;
 }
 
 h5 {
@@ -91,39 +97,17 @@ h6 {
   text-transform: uppercase;
 }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, div figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-  position: relative;
-}
-
 p {
   font-style: normal;
   font-weight: 400;
   font-family: 'source sans pro';
   line-height: 1.5em;
-  margin: 1em 0 1.6em;
+  margin: 1.5em 0;
 }
 
 ul {
   list-style: none;
 }
-
-/*button {
-  border: none;
-  color: #fff;
-  display: block;
-  font: inherit;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  outline: none;
-  min-width: 125px;
-  padding: 0.5em 1em 0.3em;
-  position: relative;
-  text-transform: uppercase;
-}*/
 
 blockquote {
   margin-bottom: 25px;
@@ -164,7 +148,7 @@ pre {
 
 #middle {
   min-height: 400px;
-  padding-top: 1em;
+  padding-top: 1.5em;
 }
 
 #left-sidebar, #main-content, #right-sidebar {
@@ -318,10 +302,12 @@ input[type="password"] {
   margin: 1.5em 0;
 }
 
-.button-labels {
+/* BUTTON LABELS_____________________________________________________________*/
+.button-labels { /* container div */
   margin-bottom: 1em;
 }
 
+/* hide radio or checkbox buttons, show only the labels. */
 .button-labels input {
   display: none;
 }
@@ -329,15 +315,17 @@ input[type="password"] {
 .button-labels label,
 .button-labels a {
   background-color: rgb(121,121,121);
-  padding: 0.35em 0.6em 0.29em;
-  margin: 0.2em;
-  display: inline-block;
+  display: block;
+  float: left;
+  font-size: 0.875em;
   letter-spacing: 0.1em;
+  line-height: 1.714285714em;
+  margin: 0 0.428571428em 0.428571428em 0;
+  padding: 0.214285714em 0.428571428em;
 }
 
 .button-labels a {
   text-decoration: none;
-  font-size: 85%;
 }
 
 .button-labels label:hover,
@@ -424,9 +412,14 @@ ul.printed-tags {
 ul.printed-tags li {
   display: inline;
   float: left;
+  font-size: 20px;
+  line-height: 1.2em; /* 24 / 20 */
   letter-spacing: 0.05em;
-  padding: .5em 1em;
-  text-align: center;
-  width: 30%;
-  font-family: "Georgia";
+  padding: 0 1.2em 1.2em 0;
+  /*text-align: center;*/
+  /*width: 30%;*/
+}
+
+#middle {
+  /*background-image: url('/images/grid.gif');*/
 }

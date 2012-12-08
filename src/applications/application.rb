@@ -15,6 +15,12 @@ class ApplicationApp < Sinatra::Base
     erb :list
   end
 
+  get '/printout' do
+    @users = User.all(year: 2013, order: :first_name)
+    @applications = Application.all
+    erb :print_all
+  end
+
   post '/submit' do
     @user = User.first(netid: params[:netid])
 

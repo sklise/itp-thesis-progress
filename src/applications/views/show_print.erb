@@ -1,7 +1,3 @@
-<div class="dont-print col-12">
-  <h1><a href="/applications">Applications</a></h1>
-</div>
-
 <div class="col-12">
   <h2><%= @user.first_name %> <%= @user.last_name %></h2>
 </div>
@@ -17,31 +13,20 @@
 
   <h3>Areas for Help</h3>
   <%= @user.application.help %>
-
-  <h3>Tags</h3>
-  <ul class="printed-tags">
-  <% @user.application.tags.each do |tag| %>
-    <li><%= tag.capitalize.split(" ").map{|x| x.capitalize}.join(" ") %></li>
-  <% end %>
-
-  <% if @user.application.write_in && @user.application.write_in.length > 0 %>
-    <li><strong><%= @user.application.write_in %></strong></li>
-  <% end %>
-  </ul>
 </div>
 
 <div class="col-4">
   <h3 class="dont-print">Requested Classmates</h3>
   <h4>Requited</h4>
   <ul>
-  <% (@mentioned & @mentioned_by).each do |user| %>
+  <% (@mentioned & @mentioned_by).all(:order => :first_name).each do |user| %>
     <li><a href="/applications/<%= user.netid %>"><%= user %></a></li>
   <% end %>
   </ul>
 
   <h4>Unrequited</h4>
   <ul>
-  <% (@mentioned - (@mentioned & @mentioned_by)).each do |user| %>
+  <% (@mentioned - (@mentioned & @mentioned_by)).all(:order => :first_name).each do |user| %>
     <li><a href="/applications/<%= user.netid %>"><%= user %></a></li>
   <% end %>
   </ul>
@@ -49,7 +34,24 @@
   <h4>Requested By</h4>
   <ul>
   <% (@mentioned_by - (@mentioned & @mentioned_by)).all(:order => :first_name).each do |user| %>
+    <% if (@mentioned_by - (@mentioned & @mentioned_by)).length > 10 %>
+    <a href="/applications/<%= user.netid %>"><%= user %></a>,
+    <% else %>
     <li><a href="/applications/<%= user.netid %>"><%= user %></a></li>
+    <% end %>
+  <% end %>
+  </ul>
+</div>
+
+<div class="col-12">
+    <h3>Tags</h3>
+  <ul class="printed-tags">
+  <% @user.application.tags.each do |tag| %>
+    <li><%= tag.capitalize.split(" ").map{|x| x.capitalize}.join(" ") %></li>
+  <% end %>
+
+  <% if @user.application.write_in && @user.application.write_in.length > 0 %>
+    <li><strong><%= @user.application.write_in %></strong></li>
   <% end %>
   </ul>
 </div>

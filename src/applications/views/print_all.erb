@@ -1,0 +1,9 @@
+<% @users.each do |user| %>
+  <% @user = user %>
+  <% @mentioned_by = @applications.all(:preferred_classmates.like => "%"+@user.netid+"%").user %>
+  <% @mentioned = @users.all(netid: @user.application.requested) %>
+
+  <div class="one-page">
+  <%= erb :show_print, layout: false %>
+  </div>
+<% end %>

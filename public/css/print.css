@@ -1,0 +1,16 @@
+@media print {
+
+  #top, #bottom, #flash, .dont-print {
+    display: none;
+  }
+
+  a, a:hover {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .one-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}
