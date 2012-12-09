@@ -1,8 +1,6 @@
-require 'bcrypt'
-
 class ApplicationApp < Sinatra::Base
-  # set :cache, Dalli::Client.new
-  # set :enable_cache, true
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
