@@ -9,4 +9,6 @@ jQuery(function() {
 
     $(this).toggleClass('checked')
   });
+
+  $('.chzn-select').chosen();
 });
