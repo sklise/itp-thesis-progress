@@ -16,8 +16,12 @@ class User
     all role: "advisor"
   end
 
-  def self.students
-    all role: "student"
+  def self.students(year=nil)
+    if year.nil?
+      all(role: "student")
+    else
+      all(role: "student", year: year)
+    end
   end
 
   def self.authenticate(netid, password)

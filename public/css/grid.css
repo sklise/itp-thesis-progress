@@ -83,7 +83,7 @@ Change widths as necessary
   .col-12  { width: 97%; }
 
   /* Hack for 7 thesis sections */
-  .col-one-seventh { width: 12.285714286%; }
+  .col-one-seventh { width: 11.285714286%; }
 /*}*/
 
 @media only screen and (min-width: 1280px) {

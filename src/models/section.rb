@@ -1,21 +1,13 @@
 class Section
   include DataMapper::Resource
 
-  before :save, :ensure_slug
-
   property :id, Serial
   property :created_at, DateTime
   property :updated_at, DateTime
 
   property :name, String
-  property :year, Integer, default: Date.today.year
+  property :year, Integer, default: Date.today.year+1
   property :slug, Slug
-
-  def ensure_slug
-    if self.slug.nil?
-      self.slug = name.lowercase
-    end
-  end
 
   def path
     "/#{year}/#{slug}"
@@ -31,4 +23,16 @@ class Section
 
   has n, :assignments, through: Resource
   has n, :users, through: Resource
+
+  before :save do |section|
+    if section.slug.nil? || section.slug.length == 0
+      section.slug = section.name.downcase
+    end
+  end
+
+  def remove_users
+    self.users = []
+    puts self.users
+    self.save
+  end
 end
