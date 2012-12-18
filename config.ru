@@ -50,7 +50,7 @@ builder = Rack::Builder.new do
   # map ('/thesis' )        { run ThesisApp }
   # map ('/assignments')    { run AssignmentsApp }
   map ('/applications')   { run ApplicationApp }
-  map ('/application/submit') { run ApplicationSubmit }
+  map ('/applications/submit') { run ApplicationSubmit }
   # map ('/sections')       { run SectionsApp }
 end
 
