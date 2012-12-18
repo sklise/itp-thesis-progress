@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 require 'redcarpet'
+require 'bcrypt'
 
 Dir["./src/*.rb"].each {|file| require file }
 Dir["./src/*/*.rb"].each {|file| require file }
@@ -37,17 +38,20 @@ builder = Rack::Builder.new do
   #   config.failure_app = self
   # end
 
-  use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    [username, password] == [ENV['USERNAME'], ENV['PASSWORD']]
-  end
+  # Basic Authentication
+  # use Rack::Auth::Basic, "Restricted Area" do |username, password|
+  #   [username, password] == [ENV['USERNAME'], ENV['PASSWORD']]
+  # end
 
   # Hook up the apps
   map ('/')               { run Main }
-  map ('/progress')       { run ProgressApp }
-  map ('/session' )       { run AuthenticationManager }
-  map ('/thesis' )        { run ThesisApp }
-  map ('/assignments')    { run AssignmentsApp }
+  # map ('/progress')       { run ProgressApp }
+  # map ('/session' )       { run AuthenticationManager }
+  # map ('/thesis' )        { run ThesisApp }
+  # map ('/assignments')    { run AssignmentsApp }
   map ('/applications')   { run ApplicationApp }
+  map ('/application/submit') { run ApplicationSubmit }
+  # map ('/sections')       { run SectionsApp }
 end
 
 run builder
