@@ -3,6 +3,8 @@ source :rubygems
 gem 'thin', '1.4.1'
 gem 'sinatra', '1.3.3'
 
+gem 'shotgun'
+
 gem 'dalli', '1.0.5'
 gem 'json', '1.7.5'
 
