@@ -87,10 +87,18 @@ h4 {
   margin: 1.5em 0 0.5em;
 }
 
+.section-assign h4 {
+  border-bottom: .125em solid #aaa; /* 2 / 24 */
+  font-size: 100%;
+  line-height: 1.375em;
+  margin: 0;
+}
+
 h5 {
   font-size: 20px;
   font-weight: normal;
 }
+
 
 h6 {
   font-size: 18px;
@@ -166,6 +174,15 @@ pre {
 }
 
 /* END STRUCTURE_____________________________________________________________*/
+
+/* FORMATTING CLASSES________________________________________________________*/
+.float-right {
+  float: right;
+}
+
+.gray {
+  color: #999;
+}
 
 /* HEADER____________________________________________________________________*/
 
@@ -395,6 +412,20 @@ input[type="submit"].submit {
 }
 /* END EXPANDING AREA________________________________________________________*/
 
+/* SECTION_ASSIGN____________________________________________________________*/
+.section-assign {
+  margin-bottom: 1.5em;
+}
+
+.section-assign input[type="text"] {
+  font-size: 87.5%;
+  line-height: 1.714285714em; /* 24 / 14 */
+  padding: 0;
+  border: 0;
+  /*outline: 1px solid #ccc;*/
+  -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,0.4) inset;
+}
+
 .other-assignment {
   border-bottom: 1px solid #ddd;
   margin-bottom: 2em;
@@ -422,4 +453,8 @@ ul.printed-tags li {
 
 #middle {
   /*background-image: url('/images/grid.gif');*/
+}
+[class*=col] {
+  /*border-left: 1px solid #025fea;*/
+  /*border-right: 1px solid #025fea;*/
 }
