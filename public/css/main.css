@@ -1,54 +1,3 @@
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldset, form, label, article, aside, canvas, footer, header, hgroup, nav, section, audio, video {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, div figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-  position: relative;
-}
-
-html {
-  font-family: "Source Sans Pro", "Helvetica", sans-serif;
-  font-size: 100%; /* 16px */
-  line-height: 1.5em; /* 24px */
-}
-
-a {
-  color: rgb(29, 80, 241);
-}
-
-a:hover {
-  color: rgb(0, 110, 250);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  line-height: 1.5em;
-  margin: 1.5em 0;
-  padding: 0;
-  vertical-align: baseline;
-}
-
-h1 {
-  font-size: 1.5em; /* 24px */
-  line-height: 1em;
-  margin: 0 0 1em;
-}
-
 h1 a {
   color: #000000;
   text-decoration: none;
@@ -58,33 +7,10 @@ h1 a:hover {
 
 }
 
-h2 {
-  font-size: 2.625em; /* 40px */
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1.714285714em; /* (24*3) / 42 */
-  letter-spacing: 1px;
-  margin: 0 0 0.571428571em;
-  padding: 0;
-  text-transform: capitalize;
-}
-
 h2.page-title {
   margin: 0 0 25px;
   font-size: 30px;
   line-height: 1.4em;
-}
-
-h3 {
-  font-size: 1.75em; /* 28px */
-  line-height: 1.714285714em; /* 48 / 28 */
-  margin: 0.857142857em 0 0;
-}
-
-h4 {
-  font-size: 1.5em; /* 24px */
-  line-height: 1em;
-  margin: 1.5em 0 0.5em;
 }
 
 .section-assign h4 {
@@ -94,86 +20,6 @@ h4 {
   margin: 0;
 }
 
-h5 {
-  font-size: 20px;
-  font-weight: normal;
-}
-
-
-h6 {
-  font-size: 18px;
-  text-transform: uppercase;
-}
-
-p {
-  font-style: normal;
-  font-weight: 400;
-  font-family: 'source sans pro';
-  line-height: 1.5em;
-  margin: 1.5em 0;
-}
-
-ul {
-  list-style: none;
-}
-
-blockquote {
-  margin-bottom: 25px;
-  margin-top: 25px;
-  font-size: 26px;
-  line-height: 50px;
-  font-style: italic;
-  font-weight: 400;
-  text-align: left;
-  text-indent: 16px;
-  font-family: Lato;
-}
-
-code {
-  color: #555;
-  font-family: 'source code pro';
-  font-size: 70%;
-}
-
-pre {
-  overflow-x: scroll;
-}
-
-/* STRUCTURE_________________________________________________________________*/
-#top, #middle, #bottom {
-}
-
-#top {
-  background-color: #efefef;
-}
-
-#header, #middle, #footer {
-  clear: both;
-  max-width: 63.75rem;
-  margin: 0 auto;
-  overflow: auto;
-}
-
-#middle {
-  min-height: 400px;
-  padding-top: 1.5em;
-}
-
-#left-sidebar, #main-content, #right-sidebar {
-  float: left;
-}
-
-#left-sidebar {
-  margin-right: 2%;
-  width: 14%;
-}
-
-#main-content {
-  overflow-y: hidden;
-  width: 100%;
-}
-
-/* END STRUCTURE_____________________________________________________________*/
 
 /* FORMATTING CLASSES________________________________________________________*/
 .float-right {
@@ -221,10 +67,6 @@ pre {
   text-decoration: none;
 }
 
-#flash {
-  margin: 0 auto;
-  width: 40em;
-}
 /* END HEADER________________________________________________________________*/
 
 /* FOOTER____________________________________________________________________*/
@@ -265,15 +107,7 @@ pre {
 
 /* FORMS_____________________________________________________________________*/
 
-input, textarea, button {
-  border: 1px solid #aaa;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font: inherit;
-  margin: 0 0 1em 0;
-  padding: 0.3em 0.28em 0.2em;
-}
+
 
 input[type=text],
 input[type=password] {
@@ -287,7 +121,6 @@ input[type=password] {
 }
 
 input[type="submit"],
-.action-buttons button,
 .button-labels label,
 .button-labels a {
   background-color: #bbb;
@@ -372,10 +205,9 @@ input[type="submit"].submit {
 .expanding-area {
   position: relative;
   min-height: 300px;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
 }
 
-.expanding-area textarea,
 .expanding-area pre {
   font: inherit;
   padding: 10px;
@@ -383,11 +215,6 @@ input[type="submit"].submit {
   line-height: 1.6em;
   white-space: pre-wrap;
   word-wrap: break-word;
-}
-
-.expanding-area textarea {
-  width: 100%;
-  height: 100%;
 }
 
 .expanding-area.active > textarea {
@@ -410,6 +237,7 @@ input[type="submit"].submit {
   /* Hide the text; just using it for sizing */
   visibility: hidden;
 }
+
 /* END EXPANDING AREA________________________________________________________*/
 
 /* SECTION_ASSIGN____________________________________________________________*/
@@ -452,9 +280,11 @@ ul.printed-tags li {
 }
 
 #middle {
-  /*background-image: url('/images/grid.gif');*/
+  background-image: url('/images/grid.gif');
 }
-[class*=col] {
-  /*border-left: 1px solid #025fea;*/
-  /*border-right: 1px solid #025fea;*/
+
+/* QUICK POST */
+.quick-post .expanding-area {
+  min-height: 6em;
+  margin-bottom: 0;
 }
