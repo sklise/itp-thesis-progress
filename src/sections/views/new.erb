@@ -1,0 +1,12 @@
+<form action="/sections/new" method="POST">
+  <input type="text" name="section[name]" placeholder="Name of Section" value="<%= @section.name %>" />
+  <input type="text" name="section[slug]" placeholder="(Optional) enter a slug for the url, like the name only without spaces." value="<%= @section.slug %>"/>
+  <input type="text" year="section[year]" placeholder="year" value="<%= @section.year %>"/>
+
+  <select class="chzn-select" name="advisor_id" data-placeholder="Choose an advisor">
+  <% @advisors.each do |advisor| %>
+  <option value="<%= advisor.id %>"><%= advisor %></option>
+  <% end %>
+  </select>
+  <input type="submit">
+</form>

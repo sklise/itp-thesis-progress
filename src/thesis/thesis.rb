@@ -13,7 +13,23 @@ class ThesisApp < Sinatra::Base
     erb :thesis
   end
 
-  post '/update' do
+  get '/edit' do
+    @thesis = Thesis.first(:user => env['warden'].user)
+    erb :edit
+  end
 
+  post '/update' do
+    content_type :json
+    @thesis = Thesis.first(:user => env['warden'].user)
+
+    # Notify advisor!
+
+    if @thesis.update(params[:thesis])
+      flash.success = "Thesis updated, please tell your advisor."
+      redirect '/thesis'
+    else
+      flash.error = "There was an error updating your thesis."
+      redirect '/thesis/edit'
+    end
   end
 end

@@ -1,0 +1,17 @@
+<h1><input type="text" name="thesis[title]" val="<%= @thesis.title %>"></h1>
+
+<img src="<%= @thesis.image %>" />
+
+<textarea name="thesis[elevator_pitch]" class="elevator-pitch skinny">
+  <%= @thesis.elevator_pitch %>
+</textarea>
+
+<textarea name="thesis[description]" class="description skinny">
+  <%= @thesis.description %>
+</textarea>
+
+<ul class="skinny">
+  <% @thesis.links.each do |link| %>
+  <li><input type="text" name="thesis[links][]" val="<%= link.anchor_tag %>"></li>
+  <% end %>
+</ul>

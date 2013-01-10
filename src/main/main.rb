@@ -6,7 +6,7 @@ class Main < Sinatra::Base
   set :erb, layout: :'../../views/layout'
 
   before do
-    redirect '/applications'
+    # redirect '/applications'
   end
 
   get '/' do
