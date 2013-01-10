@@ -1,0 +1,32 @@
+<div class="quick-post col-8">
+  <h3>
+    New Post
+  </h3>
+  <form action="/progress/new" method="post">
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea placeholder="Write a post here. The first line will become the title." name="quickpost"></textarea>
+    </div>
+
+    <div class="grid-row">
+      <ul class="category-buttons col-8 nested">
+        &nbsp;
+      </ul>
+      <div class="col-4 nested tright">
+          <button id="private" name="post[private]" value="true">Draft</button>
+          <button id="public" name="post[private]" value="false">Public</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div class="announcements-feed col-4 float-right">
+  <h3>Announcements</h3>
+</div>
+
+<div class="assignments-and-progress col-8">
+  <h3>Open Assignments</h3>
+
+  <h3>Student Progress</h3>
+</div>

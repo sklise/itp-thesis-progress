@@ -16,7 +16,7 @@ class Main < Sinatra::Base
   # If you're a teacher, links to your sections and a "blog feed" of recent
   # posts by your students.
   get '/dashboard' do
-
+    erb :dashboard
   end
 
   get '/students/:name' do
