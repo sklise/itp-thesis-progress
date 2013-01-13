@@ -8,7 +8,7 @@ class ThesisApp < Sinatra::Base
     env['warden'].authenticate!
   end
 
-  get '/' do
+  get '/?' do
     @thesis = Thesis.first(:user => env['warden'].user)
     erb :thesis
   end

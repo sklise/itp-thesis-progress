@@ -1,17 +1,66 @@
-<h1><input type="text" name="thesis[title]" val="<%= @thesis.title %>"></h1>
+<h1>Your Thesis</h1>
 
-<img src="<%= @thesis.image %>" />
+<form action="/thesis/update" method="post" enctype="multipart/form-data">
 
-<textarea name="thesis[elevator_pitch]" class="elevator-pitch skinny">
-  <%= @thesis.elevator_pitch %>
-</textarea>
+  <div class="row">
+  <fieldset class="col-8">
+    <div class="spaced-row">
+      <h6>Title</h6>
+      <input type="text" name="thesis[title]" val="<%= @thesis.title %>" placeholder="Thesis Title">
+    </div>
 
-<textarea name="thesis[description]" class="description skinny">
-  <%= @thesis.description %>
-</textarea>
+    <div class="spaced-row">
+      <h6>Elevator Pitch</h6>
+      <textarea placeholder="Elevator Pitch" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
+    </div>
 
-<ul class="skinny">
-  <% @thesis.links.each do |link| %>
-  <li><input type="text" name="thesis[links][]" val="<%= link.anchor_tag %>"></li>
-  <% end %>
-</ul>
+    <div class="spaced-row">
+      <h6>Description</h6>
+      <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[description]" class="description skinny" placeholder="Description"><%= @thesis.description %></textarea>
+      </div>
+    </div>
+
+    <div class="spaced-row">
+      <h6>Why You Want to Make This</h6>
+      <div class="expanding-area">
+        <pre><span></span><br></pre>
+        <textarea name="thesis[reason]" placeholder="Why You Want to Make This"><%= @thesis.reason %></textarea>
+      </div>
+    </div>
+
+    <div class="spaced-row">
+      <h6>Research Plan</h6>
+      <div class="expanding-area">
+        <pre><span></span><br></pre>
+        <textarea name="thesis[research_plan]" placeholder="Enter a research plan"><%= @thesis.research_plan %></textarea>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <fieldset class="col-4">
+    <div class="spaced-row">
+    <h6>Image</h6>
+    <% if @thesis.image.nil? || @thesis.image == "" %>
+      <p>no image</p>
+    <% else %>
+      <img src="<%= @thesis.image %>" />
+    <% end %>
+
+    <p>Replace your image: <input type="file" name="thesis[image]"></p>
+    </div>
+
+    <div class="spaced-row">
+      <h6>URL</h6>
+      <input name="thesis[link]" value="<%= @thesis.link %>" placeholder="http://">
+    </div>
+
+  </fieldset>
+  </div>
+
+  <fieldset class="col-12 row">
+  <input type="submit" value="Save">
+  </fieldset>
+</form>
