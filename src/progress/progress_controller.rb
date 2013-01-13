@@ -25,7 +25,11 @@ class ProgressApp < Sinatra::Base
   end
 
   post '/new' do
-    @post = Post.new(params[:post])
+    if params[:quickpost]
+      @post = Post.quick_new(params)
+    else
+      @post = Post.new(params[:post])
+    end
 
     @post.user = env['warden'].user
 

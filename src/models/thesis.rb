@@ -6,12 +6,17 @@ class Thesis
   property :updated_at, DateTime
 
   property :title, String
-  property :elevator_pitch, Text
-  property :description, Text
+  property :elevator_pitch, Text # Limit to 75 words
+  property :description, Text # limit to 200 words
+  property :reason, Text # limit to 150 words
+  property :research_plan, Text # limit to 150 words
+  property :link, String
+
   property :image, String
 
   property :user_id, Integer
 
+  # 5 tags
+
   belongs_to :user
-  has n, :links
 end

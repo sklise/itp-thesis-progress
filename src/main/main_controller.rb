@@ -6,7 +6,7 @@ class Main < Sinatra::Base
   set :erb, layout: :'../../views/layout'
 
   before do
-    # redirect '/applications'
+    env['warden'].authenticate!
   end
 
   get '/' do
@@ -16,26 +16,12 @@ class Main < Sinatra::Base
   # If you're a teacher, links to your sections and a "blog feed" of recent
   # posts by your students.
   get '/dashboard' do
+    @announcements = Announcement.all(limit: 10)
+    @recent_posts = Post.all(limit: 10)
+
+    # Student's section...schedule or such.
+
     erb :dashboard
-  end
-
-  get '/students/:name' do
-
-  end
-
-  # Big 'ol list of everyone from that year and links to the sections
-  get '/years/:year' do
-
-  end
-
-  # Year listed by section
-  get '/years/:year/sections' do
-
-  end
-
-  # An individual section
-  get '/years/:year/sections/:section' do
-
   end
 
   post "/inspect" do

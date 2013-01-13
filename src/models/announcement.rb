@@ -20,7 +20,6 @@ class Announcement
 
   property :user_id, Integer, required: true
 
-  belongs_to :user
   has n, :sections, through: Resource
 
   self.per_page = 15
