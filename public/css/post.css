@@ -56,11 +56,6 @@ p.intro {
 }
 
 /* POSTS_____________________________________________________________________*/
-.post {
-  margin-bottom: 2em;
-  padding-bottom: 2em;
-}
-
 .post-content>h2 {
   font-size: 30px;
 }

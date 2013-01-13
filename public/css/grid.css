@@ -26,11 +26,18 @@
   font-size: 1rem;
 }
 
-.nested:first-child {
+.nested:first-child,
+[class*=col]:first-child {
   padding-left: 0;
 }
 
-.nested:last-child {
+.nested:last-child,
+[class*=col]:last-child {
+  padding-right: 0;
+}
+
+.col-12 {
+  padding-left: 0;
   padding-right: 0;
 }
 

@@ -279,10 +279,6 @@ ul.printed-tags li {
   /*width: 30%;*/
 }
 
-#middle {
-  background-image: url('/images/grid.gif');
-}
-
 /* QUICK POST */
 .quick-post .expanding-area {
   min-height: 6em;

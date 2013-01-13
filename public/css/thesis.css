@@ -127,9 +127,10 @@ h5 {
 }
 
 h6 {
-  font-size: 1.125em; /* 18px */
+  font-size: 1em; /* 16px */
   text-transform: uppercase;
-  line-height: 2.666666667em; /* 48 / 18 */
+  letter-spacing: 0.1em;
+  line-height: 3em; /* 48 / 16 */
 }
 
 p {
@@ -199,15 +200,11 @@ textarea:focus {
   overflow: auto;
 }
 
-#flash {
+#flash > div {
   line-height: 1.5em;
   text-align: center;
-  margin: -.5em auto .75em;
-  width: 75%;
-}
-
-#flash > div {
   padding: 0.5em 0.35em;
+  margin: -.5em auto .75em;
 }
 
 .message-success {
@@ -233,3 +230,38 @@ textarea:focus {
   overflow-y: hidden;
   width: 100%;
 }
+
+/*****************************************************************************
+ *
+ * FORMAT CLASSES
+ *
+ *****************************************************************************/
+
+
+/*  */
+.spaced-row {
+  margin-bottom: 1.5em;
+}
+
+.post {
+  margin-bottom: 3em;
+  padding-bottom: 3em;
+}
+
+.excerpt {
+  border-bottom: .0625em solid #ddd; /* 1 / 24 */
+  padding-bottom: .75em;
+  margin-bottom: .6875em;
+}
+
+/* DETAILS: author, post date and category */
+.details {
+  color: #555;
+  margin: 0 0 1.5em 0;
+}
+
+.details p {
+  margin: 0;
+}
+
+/*#middle { background-image: url('/images/grid.gif'); }*/
