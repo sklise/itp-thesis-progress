@@ -22,6 +22,7 @@ class Section
   end
 
   has n, :assignments, through: Resource
+  has n, :announcements, through: Resource
   has n, :users, through: Resource
 
   before :save do |section|

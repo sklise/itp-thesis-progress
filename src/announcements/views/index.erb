@@ -1,0 +1,30 @@
+<h1>Announcements</h1>
+
+<% Section.all.each do |section| %>
+  <%= section.name %>
+<% end %>
+
+<% if @announcements.length == 0 %>
+  <% if request.path.match(/announcements\/?$/) %>
+  <p>There are no announcements :(</p>
+  <% else %>
+  <p>There aren't this many pages of announcements. <a href="/announcements">Go to the first page</a>.</p>
+  <% end %>
+<% else %>
+  <% @announcements.each do |announcement| %>
+  <div class='post'>
+    <h3><a href="/announcements/<%= announcement.year %>/<%= announcement.issue %>"><%= announcement.title %></a></h3>
+    <div class="details">
+      <p><%= announcement.user %></p>
+      <p><%= announcement.published_at.strftime("%m/%d/%y") %></p>
+      <% announcement.sections.each do |section| %>
+        <%= section.name %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= announcement.content %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
