@@ -38,16 +38,19 @@ class AnnouncementsApp < Sinatra::Base
 
   # FACULTY ONLY ROUTES
   get '/new' do
+    @sections = Section.all
     @announcement = Announcement.new
     erb :new
   end
 
   post '/new' do
     @announcement = Announcement.create(params[:announcement])
+
     redirect "/announcements/#{@announcement.year}/#{@announcement.issue}"
   end
 
   get '/:year/:issue/edit' do
+    @sections = Section.all
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
     halt 404 if @announcement.nil?
@@ -55,12 +58,12 @@ class AnnouncementsApp < Sinatra::Base
     erb :edit
   end
 
-  post '/:year/:issue/edit' do
+  post '/:year/:issue' do
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
     halt 404 if @announcement.nil?
 
-    @announcement.update params
+    @announcement.update(params[:announcement])
     flash.success = "Announcement Updated Successfully."
     redirect "/announcements/#{params[:year]}/#{params[:issue]}"
   end

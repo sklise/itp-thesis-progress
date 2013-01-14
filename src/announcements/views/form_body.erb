@@ -1,0 +1,23 @@
+<h6>Title</h6>
+  <input class="full-width" name="announcement[title]" placeholder="Title for Announcement" value="<%= @announcement.title %>">
+
+  <h6>Sections</h6>
+  <p class="description">Choose which sections to address this announcement.</p>
+  <fieldset class="button-labels">
+    <input id="all-sections" type="radio"  name="announcement[everyone]" value="true" <%= @announcement.everyone ? "checked" : "" %>/><label for="all-sections" checked>All Students</label>
+    <% @sections.each do |section| %>
+    <input id="section-<%= section.id %>" type="checkbox" value="<%= section.id %>" name="announcement[section_ids][]" <%= @announcement.sections.include?(section) ? "checked" : "" %>/><label for="section-<%= section.id %>"><%= section.name %></label>
+    <% end %>
+  </fieldset>
+
+  <h6>Content</h6>
+  <div class="expanding-area">
+  <pre><span></span><br></pre>
+  <textarea placeholder="Write your announcement here..." name="announcement[content]"><%= @announcement.content %></textarea>
+  </div>
+
+
+  <input type="hidden" value="<%= env['warden'].user.id %>" name="announcement[user_id]">
+
+  <button name="announcement[draft]" value="true">Save as Draft</button>
+  <button name="announcement[draft]" value="false">Publish Announcemnt</button>
