@@ -15,19 +15,34 @@ class Announcement
   property :content, Text
   property :draft, Boolean, default: true
   property :published_at, DateTime
-  property :issue, Integer
+  property :issue, Integer, writer: :private
   property :year, Integer, default: DateTime.now.year, writer: :private
+  property :everyone, Boolean, default: false
 
   property :user_id, Integer, required: true
 
+  belongs_to :user
   has n, :sections, through: Resource
 
   self.per_page = 15
 
+  attr_accessor :section_ids
+
   before :save, :publish
+  before :save, :add_sections
 
   def self.last_announcement
     self.max(:issue)
+  end
+
+  def add_sections
+    if self.section_ids
+      self.section_ids.each do |section_id|
+        self.sections.push Section.first(id: section_id)
+      end
+    end
+
+    self.everyone = true if self.new? && self.section_ids.nil?
   end
 
   def publish
