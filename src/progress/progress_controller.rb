@@ -9,7 +9,7 @@ class ProgressApp < Sinatra::Base
   end
 
   get '/' do
-    @posts = Post.paginate(page: 1, order: :created_at.desc)
+    @posts = Post.paginate(page: 1, order: :created_at.desc, user: env['warden'].user)
     erb :index
   end
 

@@ -24,12 +24,13 @@
 </fieldset>
 </div>
 
+<h6>Content <span class="markdown-mark">&nbsp;</span></h6>
 <div class="expanding-area">
   <pre><span></span><br></pre>
   <textarea placeholder="Write your post here..." name="post[content]"><%= @post.content %></textarea>
 </div>
 
 <div class="action-buttons">
-  <button id="private" name="post[private]" value="true">Draft</button>
-  <button id="public" name="post[private]" value="false">Public</button>
+  <button id="private" name="post[draft]" value="true">Draft</button>
+  <button id="public" name="post[draft]" value="false">Public</button>
 </div>

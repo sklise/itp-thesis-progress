@@ -6,6 +6,7 @@ class Post
   property :updated_at, DateTime
   property :published_at, DateTime
 
+  property :slug, Slug
   property :title, String
   property :content, Text
   property :draft, Boolean
@@ -23,6 +24,17 @@ class Post
   self.per_page = 10
 
   before :save, :publish
+  before :save, :ensure_slug
+
+  def ensure_slug
+    if slug.nil? || slug.length == ""
+      slug = (title == "") ? "untitled" : ""
+    end
+  end
+
+  def date
+    self.draft ? self.updated_at : self.published_at
+  end
 
   def publish
     if !draft && published_at.nil?
@@ -55,6 +67,6 @@ class Post
 
   def url
     time = created_at.strftime("%Y/%m/%d")
-    "/progress/#{time}/#{title}"
+    "/progress/#{time}/#{slug}"
   end
 end

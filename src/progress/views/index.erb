@@ -5,17 +5,14 @@
       <a href="<%= post.url %>"><%= post.title %></a>
     </h2>
 
-    <div class="meta">
-      <% if post.draft %>
-      <span class="private">PRIVATE</span>
-      <% end %>
-      <span class="published"><%= post.published %></span>
+    <hgroup class="details">
+      <h6><%= post.date.strftime("%m/%d") %> <span class="publish-state"><%= post.draft %></span></h6>
       <span class="category"><%= post.category %></span>
       <a href="<%= post.url %>/edit">EDIT</a>
-    </div>
+    </hgroup>
 
     <div class="post-content">
-      <%= markdown(post.content || "") %>
+      <%= mdown(post.content || "") %>
     </div>
 
   </div>
