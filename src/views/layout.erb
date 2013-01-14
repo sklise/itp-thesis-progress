@@ -34,7 +34,7 @@
       </div>
 
       <div id="account-nav">
-      <% if false #env['warden'].authenticated? %>
+      <% if env['warden'].authenticated? %>
         <ul>
           <li><a href="/thesis">Thesis</a></li>
           <li><a href="/progress">Progress</a></li>
