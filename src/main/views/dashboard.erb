@@ -13,8 +13,8 @@
         &nbsp;
       </ul>
       <div class="col-4 nested tright">
-          <button id="private" name="draft" value="true">Draft</button>
-          <button id="public" name="draft" value="false">Public</button>
+          <button class="small" id="private" name="draft" value="true">Draft</button>
+          <button class="small" id="public" name="draft" value="false">Public</button>
       </div>
     </div>
 
@@ -46,7 +46,8 @@
       <h4><%= post.title %></h4>
       <h5><%= post.user %></h5>
       <div>
-        <%= post.content %>
+        <%= excerpt post.content %>
+        <br><a href="#">Read</a>
       </div>
 
     </div>

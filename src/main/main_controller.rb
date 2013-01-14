@@ -16,8 +16,8 @@ class Main < Sinatra::Base
   # If you're a teacher, links to your sections and a "blog feed" of recent
   # posts by your students.
   get '/dashboard' do
-    @announcements = Announcement.all(limit: 10)
-    @recent_posts = Post.all(limit: 10)
+    @announcements = Announcement.all(limit: 10, order: :published_at.desc)
+    @recent_posts = Post.paginate(page:1, order: :published_at.desc)
 
     # Student's section...schedule or such.
 
