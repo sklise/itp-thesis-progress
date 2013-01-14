@@ -17,5 +17,15 @@ jQuery(function() {
     $(this).toggleClass('checked')
   });
 
+  $('span.markdown-mark').click(function() {
+    $('#markdown-wrapper').toggle();
+  });
+
+  $('#markdown-wrapper').click(function(e) {
+    if(e.target === $(this)[0]) {
+      $(this).hide();
+    }
+  })
+
   $('.chzn-select').chosen();
 });

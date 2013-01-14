@@ -82,7 +82,7 @@ code {
   font-size: 70%;
 }
 
-em {
+em, i {
   font-style: italic;
 }
 
@@ -147,7 +147,11 @@ pre {
 }
 
 ul {
-  list-style: none;
+  list-style: disc;
+}
+
+ul, ol {
+  margin-left: 1.5em;
 }
 
 input, textarea {
@@ -159,6 +163,10 @@ input, textarea {
   line-height: 1.5em;
   margin: 0 0 1.5em 0;
   padding: 0.6875em 0.28em 0.6875em;
+}
+
+strong, b {
+  font-weight: bold;
 }
 
 textarea {
@@ -270,6 +278,100 @@ input:focus, textarea:focus {
   line-height: 1.5em;
 }
 
+/*****************************************************************************
+ *
+ * MARKDOWN GUIDE
+ *
+ *****************************************************************************/
+
+.markdown-mark {
+  background: url('/images/markdown-mark.svg') no-repeat;
+  background-position-y: center;
+  background-size: 100%;
+  width: 48px;
+  min-height: 30px;
+}
+
+span.markdown-mark {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 1em;
+}
+
+div.markdown-mark {
+  float: left;
+  margin: 0 0.5em 0.5em 0;
+  height: 48px;
+  width: 76.8px;
+}
+
+#markdown-wrapper {
+  background: rgba(255,255,255,0.9);
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#markdown-guide {
+  background: #fff;
+  border: .3em solid #ddd;
+  position: relative;
+  margin: 1em auto 0;
+  padding: 1.2em;
+  width: 40em;
+}
+
+#markdown-guide p {
+  margin-top: 0;
+}
+
+#markdown-guide table {
+  font-size: .875em; /* 14 / 16 */
+  margin: 0 auto;
+  width: 100%;
+}
+
+#markdown-guide thead {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#markdown-guide table h1,
+#markdown-guide table h6 {
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
+}
+
+#markdown-guide td {
+  border-collapse: collapse;
+  border-bottom: .071428571em solid #ddd;
+  line-height: 1.25em;
+  padding: 0.25em 1em;
+}
+
+#markdown-guide thead td {
+  border-bottom: .142857143em solid #ddd;
+  line-height: 1.357142857em;
+}
+
+/*****************************************************************************
+ *
+ * PROGRESS POST
+ *
+ *****************************************************************************/
+.post {
+  margin: 3em auto;
+  padding-bottom: 3em;
+  font-size: 16px;
+  width: 40em;
+}
+
+  width: 50em;
+}
 
 /*****************************************************************************
  *
@@ -287,11 +389,6 @@ button.small {
 /*  */
 .spaced-row {
   margin-bottom: 1.5em;
-}
-
-.post {
-  margin-bottom: 3em;
-  padding-bottom: 3em;
 }
 
 .excerpt {

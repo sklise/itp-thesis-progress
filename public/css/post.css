@@ -32,13 +32,6 @@ input[type="radio"][checked=true] + label{
   /*line-height: 1.8488095147269112em;*/
 }
 
-.meta {
-  margin-bottom: 25px;
-  letter-spacing: 0.07142857142857142em;
-  font-family: 'source code pro';
-
-}
-
 .meta .private {
   color: #fd6969;
   font-weight: 600;
