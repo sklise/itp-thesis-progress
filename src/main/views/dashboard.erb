@@ -29,7 +29,7 @@
     <h6><%= announcement.title %></h6>
     <div class="details">
       <p><%= announcement.published_at.strftime("%m/%d") %> — <%= announcement.user %></p>
-      <p><%= list(announcement.sections, :name) %></p>
+      <p><%= list(announcement.sections, {attribute: :name}) %></p>
     </div>
     <div><%= excerpt(announcement.content) %>
       <br><a href="/announcements/<%= announcement.year %>/<%= announcement.issue %>">Read</a></div>
