@@ -1,4 +1,7 @@
+<h1>Progress Posts</h1>
+
 <% @posts.each do |post| %>
+
   <div class="post">
 
     <h2>
@@ -6,7 +9,9 @@
     </h2>
 
     <hgroup class="details">
-      <h6><%= post.date.strftime("%m/%d") %> <span class="publish-state"><%= post.draft %></span></h6>
+      <h6><%= post.date.strftime("%m/%d") %>
+        <span class="publish-state"><%= post.draft ? "Draft" : "Published" %></span>
+      </h6>
       <span class="category"><%= post.category %></span>
       <a href="<%= post.url %>/edit">EDIT</a>
     </hgroup>

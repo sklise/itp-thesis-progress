@@ -1,26 +1,3 @@
-h1 a {
-  color: #000000;
-  text-decoration: none;
-}
-
-h1 a:hover {
-
-}
-
-h2.page-title {
-  margin: 0 0 25px;
-  font-size: 30px;
-  line-height: 1.4em;
-}
-
-.section-assign h4 {
-  border-bottom: .125em solid #aaa; /* 2 / 24 */
-  font-size: 100%;
-  line-height: 1.375em;
-  margin: 0;
-}
-
-
 /* FORMATTING CLASSES________________________________________________________*/
 .float-right {
   float: right;
@@ -69,23 +46,6 @@ h2.page-title {
 
 /* END HEADER________________________________________________________________*/
 
-/* FOOTER____________________________________________________________________*/
-#footer {
-  font-size: 80%;
-  margin-bottom: 2em;
-  margin-top: 2em;
-}
-/* END FOOTER________________________________________________________________*/
-
-/* FORMATTING________________________________________________________________*/
-.smaller {
-  font-size: 16.526px;
-}
-
-.smallest {
-  font-size: 11.125px;
-}
-
 /* THESIS____________________________________________________________________*/
 .elevator-pitch {
   font-size: 130%;
@@ -106,8 +66,6 @@ h2.page-title {
 }
 
 /* FORMS_____________________________________________________________________*/
-
-
 
 input[type=text],
 input[type=password] {
@@ -201,45 +159,6 @@ input[type="submit"].submit {
 }
 /* END FORMS_________________________________________________________________*/
 
-/* EXPANDING AREA____________________________________________________________*/
-.expanding-area {
-  position: relative;
-  min-height: 300px;
-  margin-bottom: 1.5em;
-}
-
-.expanding-area pre {
-  font: inherit;
-  padding: 10px;
-  outline: 0;
-  line-height: 1.6em;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-.expanding-area.active > textarea {
-  /* Hide any scrollbars */
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  /* Remove WebKit user-resize widget */
-  resize: none;
-}
-
-.expanding-area > pre {
-  display: none;
-}
-
-.expanding-area.active > pre {
-  display: block;
-  /* Hide the text; just using it for sizing */
-  visibility: hidden;
-}
-
-/* END EXPANDING AREA________________________________________________________*/
-
 /* SECTION_ASSIGN____________________________________________________________*/
 .section-assign {
   margin-bottom: 1.5em;
@@ -279,8 +198,53 @@ ul.printed-tags li {
   /*width: 30%;*/
 }
 
-/* QUICK POST */
-.quick-post .expanding-area {
-  min-height: 6em;
-  margin-bottom: 0;
+
+/* POST FORM_________________________________________________________________*/
+#progress-form input[type="text"]:focus,
+#progress-form textarea:focus,
+.form textarea:focus,
+.form input[type="text"]:focus,
+#ui-datepicker-div {
+  border: 1px solid #1f45f7;
+  outline: 1px solid #1f45f7;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="radio"][checked=true] + label{
+  color: red;
+}
+
+.meta-form-elements {
+  /*border: 1px solid #ddd;*/
+  margin-bottom: 1.5em;
+  width: 600px;
+}
+
+/* END POST FORM_____________________________________________________________*/
+
+.meta-link,
+.meta {
+  font-size: 0.875em;
+  color: #666464;
+  font-style: normal;
+  font-weight: 100;
+  /*line-height: 1.8488095147269112em;*/
+}
+
+.meta .private {
+  color: #fd6969;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+p.intro {
+  margin-bottom: 1.0416666666666667em;
+  line-height: 2.0833333333333335em;
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0px;
+  font-family: source-sans-pro;
 }

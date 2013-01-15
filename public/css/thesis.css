@@ -214,6 +214,22 @@ input:focus, textarea:focus {
   overflow-y: auto;
 }
 
+#main-content {
+  width: 100%;
+}
+
+#footer {
+  font-size: 80%;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+/*****************************************************************************
+ *
+ * FLASH MESSAGES
+ *
+ *****************************************************************************/
+
 #flash > div {
   line-height: 1.5em;
   text-align: center;
@@ -238,44 +254,6 @@ input:focus, textarea:focus {
 #left-sidebar {
   margin-right: 2%;
   width: 14%;
-}
-
-#main-content {
-  width: 100%;
-}
-
-/*****************************************************************************
- *
- * ANNOUNCEMENT
- *
- *****************************************************************************/
-
-.announcement {
-
-}
-
-.announcement hgroup {
-  margin: 1.5em 0;
-}
-
-.announcement h2 {
-  margin: 0;
-}
-
-.announcement h3 {
-  margin: 0;
-  font-size: 1em;
-  text-transform: uppercase;
-}
-
-.announcement h3 em {
-  color: #777;
-  text-transform: lowercase;
-}
-
-.announcement h6 {
-  color: #777;
-  line-height: 1.5em;
 }
 
 /*****************************************************************************
@@ -360,17 +338,104 @@ div.markdown-mark {
 
 /*****************************************************************************
  *
+ * ANNOUNCEMENT
+ *
+ *****************************************************************************/
+
+.announcement hgroup {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.announcement h2 {
+  margin: 0;
+}
+
+.announcement h3 {
+  margin: 0;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.announcement h6 {
+  line-height: 1em;
+}
+
+/*****************************************************************************
+ *
  * PROGRESS POST
  *
  *****************************************************************************/
-.post {
+.post, .announcement {
   margin: 3em auto;
   padding-bottom: 3em;
   font-size: 16px;
   width: 40em;
 }
 
-  width: 50em;
+.post h2 a,
+.announcement h2 a {
+  color: #000;
+  text-decoration: none;
+}
+
+.post h2 a:hover,
+.announcement h2 a:hover {
+  color: rgb(53, 130, 245);
+  text-decoration: underline;
+}
+
+.announcement h3 em,
+.post h3 em {
+  color: #777;
+  text-transform: lowercase;
+}
+
+/*****************************************************************************
+ *
+ * EXPANDING AREA
+ *
+ *****************************************************************************/
+
+.expanding-area {
+  position: relative;
+  min-height: 300px;
+  margin-bottom: 1.5em;
+}
+
+.expanding-area pre {
+  font: inherit;
+  padding: 10px;
+  outline: 0;
+  line-height: 1.6em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.expanding-area.active > textarea {
+  /* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+}
+
+.expanding-area > pre {
+  display: none;
+}
+
+.expanding-area.active > pre {
+  display: block;
+  /* Hide the text; just using it for sizing */
+  visibility: hidden;
+}
+
+.quick-post .expanding-area {
+  min-height: 6em;
+  margin-bottom: 0;
 }
 
 /*****************************************************************************
@@ -420,6 +485,11 @@ button.small {
   width: 100%;
 }
 
-
+.hr {
+  border-bottom: 1px solid #aaa;
+  width: 20em;
+  margin: 0 auto;
+  height: 0.125em;
+}
 
 /*#middle { background-image: url('/images/grid.gif'); }*/
