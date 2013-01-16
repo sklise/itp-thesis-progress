@@ -1,0 +1,10 @@
+<h4>View By Section</h4>
+<ul>
+  <li><a href="/announcements/everyone">Everyone</a></li>
+  <% Section.all.each do |section| %>
+  <li>
+    <a href="/announcements/section/<%= section.year %>/<%= section.slug %>"><%= section.name %></a>
+  </li>
+  <% end %>
+  <li><a href="/announcements">All Announcements</a></li>
+</ul>

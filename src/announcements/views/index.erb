@@ -1,9 +1,8 @@
-<h1>Announcements</h1>
+<div class="col-12">
+  <h1>Announcements</h1>
+</div>
 
-<% Section.all.each do |section| %>
-  <%= section.name %>
-<% end %>
-
+<div class="col-9">
 <% if @announcements.length == 0 %>
   <% if request.path.match(/announcements\/?$/) %>
   <p>There are no announcements :(</p>
@@ -31,3 +30,10 @@
   <div class="hr"></div>
   <% end %>
 <% end %>
+
+<%= will_paginate @announcements %>
+</div>
+
+<div class="col-3">
+  <%= erb :section_list, layout: false %>
+</div>

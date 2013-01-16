@@ -13,13 +13,24 @@ class AnnouncementsApp < Sinatra::Base
     erb :index
   end
 
-  get '/section/:section_name/' do
-    @announcements = Announcement.paginate(page: 1, order: :published_at.desc)
+  get '/everyone' do
+    @announcements = Announcement.paginate(page: 1, order: :published_at.desc, everyone: true)
     erb :index
   end
 
-  get '/section/:section_name/page/:page_number' do
-    @announcements = Announcement.paginate(page: params[:page_number], order: :published_at.desc)
+  get '/section/:year/:section_name' do
+    @announcements = Section.first({
+      slug: params[:section_name],
+      year: params[:year]
+    }).announcements.paginate(page: 1, order: :published_at.desc)
+    erb :index
+  end
+
+  get '/section/:year/:section_name/page/:page_number' do
+    @announcements = Section.first({
+      slug: params[:section_name],
+      year: params[:year]
+    }).announcements.paginate(page: params[:page_number], order: :published_at.desc)
     erb :index
   end
 
@@ -45,7 +56,6 @@ class AnnouncementsApp < Sinatra::Base
 
   post '/new' do
     @announcement = Announcement.create(params[:announcement])
-
     redirect "/announcements/#{@announcement.year}/#{@announcement.issue}"
   end
 

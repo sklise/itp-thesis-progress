@@ -1,5 +1,8 @@
-<h1>Announcements</h1>
+<div class="col-12">
+  <h1>Announcements</h1>
+</div>
 
+<div class='col-9'>
 <div class="announcement">
   <h2><%= @announcement.title %></h2>
   <hgroup>
@@ -8,4 +11,9 @@
   </hgroup>
 
   <div><%= mdown(@announcement.content) %></div>
+</div>
+</div>
+
+<div class="col-3">
+  <%= erb :section_list, layout: false %>
 </div>

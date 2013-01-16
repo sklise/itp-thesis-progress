@@ -1,6 +1,10 @@
-<h1>Edit Announcement</h1>
+<div class="col-12">
+  <h1>Edit Announcement</h1>
+</div>
 
+<div class="col-8">
 <form action="/announcements/<%= @announcement.year %>/<%= @announcement.issue %>" method="post">
 
   <%= erb :form_body, layout: false %>
 </form>
+</div>
