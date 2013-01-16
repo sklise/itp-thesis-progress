@@ -207,10 +207,17 @@ input:focus, textarea:focus {
   padding-top: 1.5em;
 }
 
+#header {
+  padding: 0.5em 0;
+}
+
 #header, #middle, #footer {
   clear: both;
   max-width: 63.75rem;
   margin: 0 auto;
+}
+
+#middle, #footer {
   overflow-y: auto;
 }
 
@@ -255,6 +262,51 @@ input:focus, textarea:focus {
   margin-right: 2%;
   width: 14%;
 }
+
+/*****************************************************************************
+ *
+ * TOP
+ *
+ *****************************************************************************/
+
+#header a {
+  color: black;
+  display: block;
+  text-decoration: none;
+}
+
+#header a:hover {
+color: rgb(53, 130, 245);
+}
+
+#header img {
+  width: 100%;
+}
+
+#main-nav {
+}
+
+#header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#header ul li {
+  display: inline-block;
+  line-height: 0em;
+  margin-right: 0.25em;
+  vertical-align: baseline;
+}
+
+#main-nav ul {
+}
+
+#account-nav {
+  font-size: .9em;
+  text-align: right;
+}
+
 
 /*****************************************************************************
  *
@@ -342,6 +394,10 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
+.announcement {
+  margin: 3em auto;
+}
+
 .announcement hgroup {
   margin: 1.5em 0;
   text-align: center;
@@ -367,7 +423,6 @@ div.markdown-mark {
  *
  *****************************************************************************/
 .post, .announcement {
-  margin: 3em auto;
   padding-bottom: 3em;
   font-size: 16px;
   width: 40em;

@@ -7,45 +7,6 @@
   color: #999;
 }
 
-/* HEADER____________________________________________________________________*/
-
-#header img {
-  width: 150px;
-}
-
-#header img, #main-nav {
-  float: left;
-}
-
-#header ul {
-  list-style-type: none;
-}
-
-#header ul li {
-  display: block;
-  float: left;
-  height: 2.65em;
-  line-height: 1.5em;
-  padding: 0.65em 0.25em 0.5em;
-}
-
-#main-nav ul {
-  float: left;
-  margin: 0 1em;
-}
-
-#account-nav {
-  float: right;
-  font-size: 90%;
-}
-
-#header a {
-  color: black;
-  text-decoration: none;
-}
-
-/* END HEADER________________________________________________________________*/
-
 /* THESIS____________________________________________________________________*/
 .elevator-pitch {
   font-size: 130%;
