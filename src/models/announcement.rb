@@ -36,13 +36,17 @@ class Announcement
   end
 
   def add_sections
+    if self.section_ids.nil?
+      self.everyone = true
+    else
+      self.everyone = false
+    end
+
     if self.section_ids
       self.section_ids.each do |section_id|
         self.sections.push Section.first(id: section_id)
       end
     end
-
-    self.everyone = true if self.new? && self.section_ids.nil?
   end
 
   def publish
