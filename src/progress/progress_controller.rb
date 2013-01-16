@@ -42,22 +42,22 @@ class ProgressApp < Sinatra::Base
     end
   end
 
-  get '/:year/:month/:date/:title/?' do
+  get '/:year/:month/:date/:slug/?' do
     date = Date.parse("#{params[:year]}/#{params[:month]}/#{params[:date]}")
-    @post = Post.first(title: params[:title], created_at: (date..(date+1)))
+    @post = Post.first(slug: params[:slug], created_at: (date..(date+1)))
     erb :show
   end
 
-  get '/:year/:month/:date/:title/:edit/?' do
+  get '/:year/:month/:date/:slug/:edit/?' do
     @categories = Category.all
     date = Date.parse("#{params[:year]}/#{params[:month]}/#{params[:date]}")
-    @post = Post.first(title: params[:title], created_at: (date..(date+1)))
+    @post = Post.first(slug: params[:slug], created_at: (date..(date+1)))
     erb :edit
   end
 
-  post '/:year/:month/:date/:title/update' do
+  post '/:year/:month/:date/:slug/update' do
     date = Date.parse("#{params[:year]}/#{params[:month]}/#{params[:date]}")
-    @post = Post.first(title: params[:title], created_at: (date..(date+1)))
+    @post = Post.first(slug: params[:slug], created_at: (date..(date+1)))
 
     @post.update(params[:post])
 

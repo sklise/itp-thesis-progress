@@ -23,12 +23,14 @@ class Post
 
   self.per_page = 10
 
-  before :save, :publish
-  before :save, :ensure_slug
+  before :save do
+    publish
+    ensure_slug
+  end
 
   def ensure_slug
-    if slug.nil? || slug.length == ""
-      slug = (title == "") ? "untitled" : ""
+    if self.slug.nil? || self.slug == ""
+      self.slug = ((self.title == "") ? "untitled" : self.title)
     end
   end
 
@@ -37,8 +39,9 @@ class Post
   end
 
   def publish
-    if !draft && published_at.nil?
-      published_at = DateTime.now
+    puts "yezzz"
+    if !self.draft && self.published_at.nil?
+      self.published_at = DateTime.now
     end
   end
 
