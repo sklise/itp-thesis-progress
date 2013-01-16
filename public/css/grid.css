@@ -22,23 +22,28 @@
   /*border-left: 1px solid #5ca2d8;*/
 }
 
+.grid-wrapper {
+  margin-left: -1.5%;
+  margin-right: -1.5%;
+}
+
 .nested {
   font-size: 1rem;
 }
 
 .nested:first-child,
 [class*=col]:first-child {
-  padding-left: 0;
+  /*padding-left: 0;*/
 }
 
 .nested:last-child,
 [class*=col]:last-child {
-  padding-right: 0;
+  /*padding-right: 0;*/
 }
 
 .col-12 {
-  padding-left: 0;
-  padding-right: 0;
+  /*padding-left: 0;*/
+  /*padding-right: 0;*/
 }
 
 .col-page {

@@ -21,7 +21,7 @@
 </head>
 <body>
   <div id="top">
-    <div id="header">
+    <div id="header" class="grid-wrapper">
       <div class="col-2">
       <a href="/"><img src="/images/logo_maybe_oneline.png" alt="ITP THESIS" /></a>
       </div>
@@ -36,6 +36,7 @@
       <div id="account-nav" class="col-4">
       <% if env['warden'].authenticated? %>
         <ul>
+          <li><a href="/progress/new">New Post</a></li>
           <li><a href="/thesis">Thesis</a></li>
           <li><a href="/progress">Progress</a></li>
           <li><a href="/class">My Class</a></li>
@@ -50,7 +51,7 @@
     </div>
   </div>
 
-  <div id="middle">
+  <div id="middle" class="grid-wrapper">
     <div id="flash"><% [:error, :success].each do |name| %><% if flash.has?(name) %>
     <div class="message-<%= name %>"><%= flash[name] %></div>
   <% end %><% end %>
