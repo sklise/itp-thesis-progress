@@ -1,0 +1,9 @@
+<div class="excerpt">
+  <h6><a href="/announcements/<%= announcement.year %>/<%= announcement.issue %>"><%= announcement.title %></a></h6>
+  <div class="details">
+    <p><%= announcement.published_at.strftime("%m/%d") %> — <%= announcement.user %></p>
+    <% if @show_sections %>
+    <p><%= list(announcement.sections, {attribute: :name}) %></p>
+    <% end %>
+  </div>
+</div>

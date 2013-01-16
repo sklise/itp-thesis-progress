@@ -1,4 +1,5 @@
 class Main < Sinatra::Base
+  register WillPaginate::Sinatra
 
   set :views, Proc.new { File.join(root, "views") }
   set :static, true

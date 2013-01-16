@@ -13,19 +13,18 @@
   </ul>
 
   <h3>Announcements</h3>
-
-  <% @section.announcements.paginate(:page => 1, order: :published_at.desc).each do |announcement| %>
-    <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement} %>
+  <% @section.announcements.paginate(:page => 1).each do |announcement| %>
+    <div><%= announcement.title %></div>
   <% end %>
-
 </div>
 
 <div class="col-9">
 
-  <h3>Recent Posts</h3>
+  <h1><%= @student %>'s Recent Posts</h1>
 
-  <% @section.students.posts.paginate(:page => 1, order: :published_at.desc).each do |post| %>
-  <%= erb :'../../progress/views/list', layout: false, locals: {post:post, :@show_author => true} %>
-  <% end %>
-  <%= will_paginate @section.students.posts %>
+<% @posts.each do |post| %>
+  <%= erb :'../../progress/views/list', layout: false, locals: {post: post} %>
+<% end %>
+
+<%= will_paginate @posts %>
 </div>

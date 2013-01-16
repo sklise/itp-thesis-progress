@@ -1,0 +1,8 @@
+<div class="excerpt">
+  <h4><%= post.title %></h4>
+  <h5 class="details"><em>by</em> <%= post.user %> on <span class="date"><%= post.published_at.strftime("%m/%d") %></span> <span class="category"><%= post.category %></span></h5>
+  <div class="content">
+    <%= excerpt post.content %>
+    <a href="#">Read</a>
+  </div>
+</div>

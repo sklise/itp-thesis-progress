@@ -25,15 +25,7 @@
 
   <% @announcements.each do |announcement| %>
   <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
-  <div class="excerpt">
-    <h6><%= announcement.title %></h6>
-    <div class="details">
-      <p><%= announcement.published_at.strftime("%m/%d") %> — <%= announcement.user %></p>
-      <p><%= list(announcement.sections, {attribute: :name}) %></p>
-    </div>
-    <div><%= excerpt(announcement.content) %>
-      <br><a href="/announcements/<%= announcement.year %>/<%= announcement.issue %>">Read</a></div>
-  </div>
+  <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
   <% end %>
 </div>
 
@@ -42,14 +34,6 @@
 
   <h3>Student Progress</h3>
   <% @recent_posts.each do |post| %>
-    <div>
-      <h4><%= post.title %></h4>
-      <h5><%= post.user %></h5>
-      <div>
-        <%= excerpt post.content %>
-        <br><a href="#">Read</a>
-      </div>
-
-    </div>
+    <%= erb :'../../progress/views/excerpt', layout: false, locals: {post:post} %>
   <% end %>
 </div>
