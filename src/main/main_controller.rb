@@ -10,7 +10,13 @@ class Main < Sinatra::Base
   end
 
   get '/' do
-    erb :front_page
+    if env['warden'].authenticated?
+      @announcements = Announcement.all(limit: 10, order: :published_at.desc)
+      @recent_posts = Post.paginate(page:1, order: :published_at.desc)
+      erb :dashboard
+    else
+      erb :front_page
+    end
   end
 
   # If you're a teacher, links to your sections and a "blog feed" of recent

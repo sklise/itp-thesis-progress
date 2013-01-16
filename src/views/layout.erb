@@ -22,29 +22,31 @@
 <body>
   <div id="top">
     <div id="header">
-      <a href="/"><img src="/images/logo_maybe.png" alt="ITP THESIS" /></a>
-
-      <div id="main-nav">
+      <div class="col-2">
+      <a href="/"><img src="/images/logo_maybe_oneline.png" alt="ITP THESIS" /></a>
+      </div>
+      <div id="main-nav" class="col-6">
         <ul>
           <li><a href="/announcements">Announcements</a></li>
           <li><a href="/classes/schedule">Schedule</a></li>
-          <li><a href="/assignments/requirements">Requirements</a></li>
+          <li><a href="/requirements">Requirements</a></li>
         </ul>
       </div>
 
-      <div id="account-nav">
+      <div id="account-nav" class="col-4">
       <% if env['warden'].authenticated? %>
         <ul>
           <li><a href="/thesis">Thesis</a></li>
           <li><a href="/progress">Progress</a></li>
           <li><a href="/class">My Class</a></li>
-          <li><a href="/profile"><%= env['warden'].user.netid %></a></li>
+          <li><%= env['warden'].user.netid %></li>
           <li><a href="/session/logout">Log Out</a></li>
         </ul>
       <% else %>
         <a href="/session/login">Log In</a>
       <% end %>
       </div>
+      <div style="clear:both;height:0;">&nbsp;</div>
     </div>
   </div>
 
