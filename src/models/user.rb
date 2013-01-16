@@ -24,9 +24,12 @@ class User
     end
   end
 
-  def self.authenticate(netid, password)
-    user = self.first(netid: netid)
-    user if user && user.password == password
+  def authenticate(attempted_password)
+    if self.password == attempted_password
+      true
+    else
+      false
+    end
   end
 
   # Return whether or not user is an advisor.
