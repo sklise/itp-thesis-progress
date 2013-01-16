@@ -10,7 +10,7 @@ class Section
   property :slug, Slug
 
   def path
-    "/#{year}/#{slug}"
+    "/sections/#{year}/#{slug}"
   end
 
   def students
