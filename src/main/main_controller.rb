@@ -24,6 +24,35 @@ class Main < Sinatra::Base
     erb :dashboard
   end
 
+  get '/page/new' do
+    @page = Page.new
+    erb :'pages/new'
+  end
+
+  post '/page/new' do
+    @page = Page.create(params[:page])
+    redirect "/#{@page.slug}"
+  end
+
+  get '/:page' do
+    @pages = Page.all
+    pass if !@pages.slugs.include?(params[:page])
+    @page = @pages.first(slug: params[:page])
+    erb :'pages/show'
+  end
+
+  get '/:page/edit' do
+    @pages = Page.all
+    pass if !@pages.slugs.include?(params[:page])
+    @page = @pages.first(slug: params[:page])
+    erb :'pages/edit'
+  end
+
+  post '/:page' do
+    @page = Page.update(params[:page])
+    redirect "/#{@page.slug}"
+  end
+
   post "/inspect" do
     raise params.inspect
   end

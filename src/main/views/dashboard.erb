@@ -24,6 +24,7 @@
   <h3>Announcements</h3>
 
   <% @announcements.each do |announcement| %>
+  <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
   <div class="excerpt">
     <h6><%= announcement.title %></h6>
     <div class="details">

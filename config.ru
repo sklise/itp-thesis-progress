@@ -39,7 +39,7 @@ builder = Rack::Builder.new do
   end
 
   # Hook up the apps
-  map ('/')                     { run PagesApp }
+
   map ('/')                     { run Main }
   map ('/progress')             { run ProgressApp }
   map ('/session' )             { run AuthenticationManager }
