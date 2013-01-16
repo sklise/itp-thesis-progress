@@ -30,6 +30,23 @@ class Main < Sinatra::Base
     erb :dashboard
   end
 
+  get '/class' do
+    if env['warden'].user.advisor?
+      @sections = env['warden'].user.sections
+      erb :'section/advisor'
+    else
+      @section = env['warden'].user.sections[0]
+      erb :'section/student'
+    end
+  end
+
+
+  #############################################################################
+  #
+  # PAGES
+  #
+  #############################################################################
+
   get '/page/new' do
     @page = Page.new
     erb :'pages/new'

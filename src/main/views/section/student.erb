@@ -1,0 +1,27 @@
+<div class="col-3">
+  <h3><%= @section.name %></h3>
+
+  <% @section.assignments.each do |assignment| %>
+  <p><a href="/assignments/<%= assignment.year %>/<%= assignment.id %>"><%= assignment.title %></a></p>
+  <% end %>
+
+  <h3>Students</h3>
+  <ul>
+  <% @section.students.each do |student| %>
+    <li><a href="/sections/<%= @section.year %>/<%= @section.slug %>/<%= student.netid %>"><%= student %></a></li>
+  <% end %>
+  </ul>
+</div>
+
+<div class="col-9">
+  <h3>Announcements</h3>
+  <% @section.announcements.paginate(:page => 1).each do |announcement| %>
+    <div><%= announcement.title %></div>
+  <% end %>
+  <h3>Recent Posts</h3>
+<% @section.students.posts.paginate(:page => 1).each do |post| %>
+  <div>
+    <%= post.title %>
+  </div>
+<% end %>
+</div>
