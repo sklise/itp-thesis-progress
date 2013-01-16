@@ -27,7 +27,7 @@
 
   <h3>Recent Posts</h3>
 
-  <% @sections.students.posts.paginate(:page => 1, order: :published_at.desc).each do |post| %>
-  <%= erb :'../../posts/views/list', layout: false, locals: {post: post} %>
+  <% @students.posts.all(order: :published_at.desc).each do |post| %>
+  <%= erb :'../../progress/views/list', layout: false, locals: {post: post, :@show_user =>true} %>
   <% end %>
 </div>
