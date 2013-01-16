@@ -34,7 +34,7 @@
       <div id="account-nav" class="col-4">
       <% if env['warden'].authenticated? %>
         <ul>
-          <% if env['warden'].advisor? %>
+          <% if env['warden'].user.advisor? %>
           <li><a href="/class">My Classes</a></li>
           <li><a href="/announcements/new" class="new-post-link">&nbsp;</a></li>
           <% else %>
