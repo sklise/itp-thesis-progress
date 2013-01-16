@@ -1,7 +1,10 @@
-<h1>Progress Posts</h1>
+<div class="col-12">
+  <h1>Your Posts</h1>
+  <p><a href="/progress/new">Write a New Post</a></p>
+</div>
 
+<div class="col-9">
 <% @posts.each do |post| %>
-
   <div class="post">
 
     <h2>
@@ -24,3 +27,4 @@
 <% end %>
 
 <%= will_paginate @posts %>
+</div>
