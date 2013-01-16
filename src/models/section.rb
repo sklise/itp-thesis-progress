@@ -6,7 +6,7 @@ class Section
   property :updated_at, DateTime
 
   property :name, String
-  property :year, Integer, default: Date.today.year+1
+  property :year, Integer, default: Date.today.year
   property :slug, Slug
 
   def path
