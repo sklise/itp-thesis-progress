@@ -100,5 +100,6 @@ class User
   has 1, :application
   has n, :posts
   has n, :announcements
+  has n, :comments
   has n, :sections, through: Resource
 end
