@@ -57,7 +57,7 @@
   </div>
 
   <div id="middle" class="grid-wrapper">
-    <div id="flash"><% [:error, :success].each do |name| %><% if flash.has?(name) %>
+    <div id="flash" class="col-12"><% [:error, :success].each do |name| %><% if flash.has?(name) %>
     <div class="message-<%= name %>"><%= flash[name] %></div>
   <% end %><% end %>
   </div>
