@@ -3,6 +3,9 @@
 class ThesisApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
+  set :logging, true
 
   before do
     env['warden'].authenticate!

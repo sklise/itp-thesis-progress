@@ -1,6 +1,9 @@
 class ProgressApp < Sinatra::Base
   register WillPaginate::Sinatra
 
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
+  set :logging, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 

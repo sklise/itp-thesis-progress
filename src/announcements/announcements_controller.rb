@@ -1,6 +1,9 @@
 class AnnouncementsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
+  set :logging, true
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
@@ -47,19 +50,27 @@ class AnnouncementsApp < Sinatra::Base
     erb :show
   end
 
-  # FACULTY ONLY ROUTES
+  #############################################################################
+  #
+  # ADVISOR ROUTES
+  #
+  #############################################################################
+
   get '/new' do
+    halt 401 unless env['warden'].user.advisor?
     @sections = Section.all
     @announcement = Announcement.new
     erb :new
   end
 
   post '/new' do
+    halt 401 unless env['warden'].user.advisor?
     @announcement = Announcement.create(params[:announcement])
     redirect "/announcements/#{@announcement.year}/#{@announcement.issue}"
   end
 
   get '/:year/:issue/edit' do
+    halt 401 unless env['warden'].user.advisor?
     @sections = Section.all
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
@@ -69,6 +80,7 @@ class AnnouncementsApp < Sinatra::Base
   end
 
   post '/:year/:issue' do
+    halt 401 unless env['warden'].user.advisor?
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
     halt 404 if @announcement.nil?

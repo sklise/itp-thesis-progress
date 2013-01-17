@@ -1,10 +1,15 @@
 class SectionsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
-  # set :cache, Dalli::Client.new
-  # set :enable_cache, true
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
+  set :logging, true
+
+  before do
+    env['warden'].authenticate!
+  end
 
   get '/' do
     @sections = Section.all(year: 2013)
@@ -28,15 +33,21 @@ class SectionsApp < Sinatra::Base
     erb :student
   end
 
+  #############################################################################
+  #
   # ADVISOR ROUTES
+  #
+  #############################################################################
 
   get '/new/?' do
+    halt 401 unless env['warden'].user.advisor?
     @advisors = User.advisors
     @section = Section.new
     erb :new
   end
 
   post '/new/?' do
+    halt 401 unless env['warden'].user.advisor?
     @section = Section.create(params[:section])
     section_user = SectionUser.create(section_id: @section.id, user_id: params[:advisor_id])
     # redirect "/sections/#{@section.year}/#{@section.slug}"
@@ -45,6 +56,7 @@ class SectionsApp < Sinatra::Base
 
   # edit
   get '/:year/:slug/edit/?' do
+    halt 401 unless env['warden'].user.advisor?
     @section = Section.first(
       year: params[:year],
       slug: params[:slug],
@@ -54,6 +66,7 @@ class SectionsApp < Sinatra::Base
 
   # update
   post '/:year/:slug/update/?' do
+    halt 401 unless env['warden'].user.advisor?
     @section = Section.first(
       year: params[:year],
       name: params[:slug]

@@ -1,8 +1,12 @@
 class Main < Sinatra::Base
   register WillPaginate::Sinatra
 
+  enable :logging
+
   set :views, Proc.new { File.join(root, "views") }
   set :static, true
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
   set :public_folder, Proc.new { File.join(root, "../../public") }
   set :erb, layout: :'../../views/layout'
 
@@ -18,17 +22,6 @@ class Main < Sinatra::Base
     else
       erb :front_page
     end
-  end
-
-  # If you're a teacher, links to your sections and a "blog feed" of recent
-  # posts by your students.
-  get '/dashboard' do
-    @announcements = Announcement.all(limit: 10, order: :published_at.desc)
-    @recent_posts = Post.paginate(page:1, order: :published_at.desc)
-
-    # Student's section...schedule or such.
-
-    erb :dashboard
   end
 
   get '/class' do
@@ -50,22 +43,11 @@ class Main < Sinatra::Base
     end
   end
 
-
   #############################################################################
   #
   # PAGES
   #
   #############################################################################
-
-  get '/page/new' do
-    @page = Page.new
-    erb :'pages/new'
-  end
-
-  post '/page/new' do
-    @page = Page.create(params[:page])
-    redirect "/#{@page.slug}"
-  end
 
   get '/:page' do
     @pages = Page.all
@@ -74,7 +56,29 @@ class Main < Sinatra::Base
     erb :'pages/show'
   end
 
+  get '/page/new' do
+    unless env['warden'].user.advisor?
+      flash.error = "You are not authorized to access that page."
+      redirect '/'
+    end
+    @page = Page.new
+    erb :'pages/new'
+  end
+
+  post '/page/new' do
+    unless env['warden'].user.advisor?
+      flash.error = "You are not authorized to access that page."
+      redirect '/'
+    end
+    @page = Page.create(params[:page])
+    redirect "/#{@page.slug}"
+  end
+
   get '/:page/edit' do
+    unless env['warden'].user.advisor?
+      flash.error = "You are not authorized to access that page."
+      redirect '/'
+    end
     @pages = Page.all
     pass if !@pages.slugs.include?(params[:page])
     @page = @pages.first(slug: params[:page])
@@ -82,12 +86,12 @@ class Main < Sinatra::Base
   end
 
   post '/:page' do
+    unless env['warden'].user.advisor?
+      flash.error = "You are not authorized to access that page."
+      redirect '/'
+    end
     @page = Page.update(params[:page])
     redirect "/#{@page.slug}"
-  end
-
-  post "/inspect" do
-    raise params.inspect
   end
 
   not_found do

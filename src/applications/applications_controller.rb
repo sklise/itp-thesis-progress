@@ -1,4 +1,5 @@
 class ApplicationApp < Sinatra::Base
+  set :logging, true
   set :cache, Dalli::Client.new
   set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }

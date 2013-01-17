@@ -1,6 +1,15 @@
 class AssignmentsApp < Sinatra::Base
+  register WillPaginate::Sinatra
+
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
+  set :logging, true
+
+  before do
+    env['warden'].authenticate!
+  end
 
   # index
   get '/?' do
@@ -8,8 +17,28 @@ class AssignmentsApp < Sinatra::Base
     erb :index
   end
 
+  # show
+  get '/:year/:id/?' do
+    @assignment = Assignment.first(params[:id])
+    erb :show
+  end
+
+  #############################################################################
+  #
+  # ADVISOR ROUTES
+  #
+  #############################################################################
+
+  # edit
+  get '/:year/:id/edit/?' do
+    halt 401 unless env['warden'].user.advisor?
+    @assignment = Assignment.first(params[:id])
+    erb :edit
+  end
+
   # new
   get '/new/?' do
+    halt 401 unless env['warden'].user.advisor?
     @assignment = Assignment.new
     @sections = Section.all
 
@@ -18,6 +47,7 @@ class AssignmentsApp < Sinatra::Base
 
   # create
   post '/new' do
+    halt 401 unless env['warden'].user.advisor?
     @assignment = Assignment.new(params[:assignment])
 
     # Link @assignment to the specified Sections.
@@ -34,20 +64,10 @@ class AssignmentsApp < Sinatra::Base
     end
   end
 
-  # show
-  get '/:year/:id/?' do
-    @assignment = Assignment.first(params[:id])
-    erb :show
-  end
-
-  # edit
-  get '/:year/:id/edit/?' do
-    @assignment = Assignment.first(params[:id])
-    erb :edit
-  end
 
   # update
   post '/:year/:id/update' do
+    halt 401 unless env['warden'].user.advisor?
     @assignment = Assignment.first(params[:id])
 
     if @assignment.update(params[:assignment])
@@ -61,6 +81,7 @@ class AssignmentsApp < Sinatra::Base
 
   # delete
   post '/:year/:id/destroy' do
+    halt 401 unless env['warden'].user.advisor?
     @assignment = Assignment.first(params[:id])
 
     if @assignment.destroy
