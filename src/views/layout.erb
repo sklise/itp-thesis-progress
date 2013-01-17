@@ -27,7 +27,7 @@
       <div id="main-nav" class="col-6">
         <ul>
           <% Page.all.each do |page| %>
-          <li><a href="<%= page.slug %>"><%= page.title %></a></li>
+          <li><a href="/<%= page.slug %>"><%= page.title %></a></li>
           <% end %>
         </ul>
       </div>
