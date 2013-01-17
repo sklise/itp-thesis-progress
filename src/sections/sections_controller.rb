@@ -78,4 +78,9 @@ class SectionsApp < Sinatra::Base
 
     redirect "/sections/#{@section.year}/#{@section.name}"
   end
+
+  not_found do
+    flash.error = "Could not find #{request.fullpath}"
+    redirect '/' # catch redirects to GET '/session'
+  end
 end

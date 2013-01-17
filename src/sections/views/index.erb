@@ -1,10 +1,16 @@
-<h1>Sections</h1>
+<div class="col-12">
+  <h1 class="page-title">Sections</h1>
+</div>
 
 <% @sections.each do |section| %>
-  <div>
-    <h2>
+  <div class="col-3">
+    <h3>
       <a href="<%= section.path %>"><%= section.name %></a>
-    </h2>
-    <p><%= section.slug %></p>
+    </h3>
+    <ul>
+      <% section.students.each do |student| %>
+      <li><%= student %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
