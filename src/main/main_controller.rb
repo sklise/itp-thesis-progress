@@ -89,7 +89,8 @@ class Main < Sinatra::Base
       flash.error = "You are not authorized to access that page."
       redirect '/'
     end
-    @page = Page.update(params[:page])
+    @page = Page.first(slug: params[:page])
+    @page.update(params[:page_form])
     redirect "/#{@page.slug}"
   end
 

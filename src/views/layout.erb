@@ -26,8 +26,9 @@
       </div>
       <div id="main-nav" class="col-6">
         <ul>
-          <li><a href="/announcements">Announcements</a></li>
-          <li><a href="/requirements">Requirements</a></li>
+          <% Page.all.each do |page| %>
+          <li><a href="<%= page.slug %>"><%= page.title %></a></li>
+          <% end %>
         </ul>
       </div>
 
@@ -36,6 +37,7 @@
         <ul>
           <% if env['warden'].user.advisor? %>
           <li><a href="/class">My Classes</a></li>
+          <li><a href="/page/new">New Page</a></li>
           <li><a href="/announcements/new" class="new-post-link">&nbsp;</a></li>
           <% else %>
           <li><a href="/thesis">Thesis</a></li>

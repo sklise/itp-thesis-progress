@@ -204,7 +204,7 @@ input:focus, textarea:focus {
 
 #middle {
   min-height: 400px;
-  padding-top: 1.5em;
+  padding-top: 0.75em;
 }
 
 #header {
@@ -315,6 +315,20 @@ color: rgb(53, 130, 245);
   height: 16px;
 }
 
+h1.page-title {
+  margin-top: 0;
+  line-height: 1.5em;
+  font-size: 1em;
+}
+
+h1.page-title a {
+  color: #000;
+  text-decoration: none;
+}
+
+h1.page-title a:hover {
+  text-decoration: underline;
+}
 
 /*****************************************************************************
  *

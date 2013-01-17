@@ -21,7 +21,7 @@
 </div>
 
 <div class="announcements-feed col-4 float-right">
-  <h3>Announcements</h3>
+  <h3><a href="/announcements">Announcements</a></h3>
 
   <% @announcements.each do |announcement| %>
   <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
