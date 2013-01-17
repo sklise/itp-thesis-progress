@@ -1,5 +1,8 @@
+require 'bcrypt'
+
 class User
   include DataMapper::Resource
+  include BCrypt
 
   property :id, Serial
   property :created_at, DateTime
@@ -7,9 +10,19 @@ class User
   property :netid, String
   property :first_name, String
   property :last_name, String
-  property :password, String
+  property :password_hash, BCryptHash
   property :year, Integer
   property :role, String, default: "student"
+
+  def password
+    @password ||= Password.new(password_hash)
+  end
+
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
+  end
+
 
   # Scopes
   def self.advisors
