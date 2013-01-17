@@ -1,16 +1,5 @@
 <h1>Create a new Page</h1>
 
-<h6>Title</h6>
-<input type="text" name="page[title]" value="<%= @page.title %>">
-
-<h6>Slug</h6>
-<p class="description">What the page will show up as in the url: "http://thesis.itp.io/SLUG". If you leave this field empty, the title will be used.</p>
-<input type="text" name="page[slug]" value="<%= @page.slug %>">
-
-<h6>Content</h6>
-<div class="expanding-area">
-<pre><span></span><br></pre>
-<textarea placeholder="Write the content of the page here..." name="announcement[content]"><%= @page.content %></textarea>
-</div>
-
-<input type="submit" value="Publish">
+<form action="/page/new" method="post">
+  <%= erb :'pages/form_body', layout: false %>
+</form>
