@@ -69,7 +69,6 @@ class Post
   end
 
   def url
-    time = created_at.strftime("%Y/%m/%d")
-    "/progress/#{time}/#{slug}"
+    "/progress/#{self.id}/#{self.slug}"
   end
 end
