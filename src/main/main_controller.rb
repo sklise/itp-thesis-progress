@@ -1,10 +1,9 @@
 class Main < Sinatra::Base
   register WillPaginate::Sinatra
 
-  enable :logging
-
   set :views, Proc.new { File.join(root, "views") }
   set :static, true
+  set :logging, true
   set :cache, Dalli::Client.new
   set :enable_cache, true
   set :public_folder, Proc.new { File.join(root, "../../public") }

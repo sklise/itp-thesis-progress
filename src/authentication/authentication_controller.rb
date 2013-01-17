@@ -3,7 +3,8 @@ class AuthenticationManager < Sinatra::Base
 
   post '/unauthenticated' do
     session[:return_to] = env['warden.options'][:attempted_path]
-    flash.error = env['warden'].message
+    puts env['warden.options'][:attempted_path]
+    flash.error = env['warden'].message || nil
     redirect '/session/login'
   end
 
