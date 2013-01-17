@@ -27,7 +27,10 @@ builder = Rack::Builder.new do
 
     def authenticate!
       user = User.first(netid: params['user']['netid'])
-      if user && user.authenticate(params['user']['password'])
+
+      if user.nil?
+        fail!("The username you entered does not exist.")
+      elsif user.authenticate(params['user']['password'])
         success!(user)
       else
         fail!("Could not log in")
