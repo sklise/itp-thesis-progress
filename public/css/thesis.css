@@ -494,7 +494,7 @@ div.markdown-mark {
 
 .expanding-area {
   position: relative;
-  min-height: 300px;
+  min-height: 120px;
   margin-bottom: 1.5em;
 }
 
