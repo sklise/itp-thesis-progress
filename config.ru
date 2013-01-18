@@ -55,6 +55,7 @@ builder = Rack::Builder.new do
   map ('/applications/submit')  { run ApplicationSubmit }
   map ('/sections')             { run SectionsApp }
   map ('/comments')             { run CommentsApp }
+  map ('/attachments')          { run AttachmentsApp }
 end
 
 run builder
