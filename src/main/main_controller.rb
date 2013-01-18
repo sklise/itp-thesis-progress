@@ -15,7 +15,9 @@ class Main < Sinatra::Base
 
   get '/' do
     if env['warden'].authenticated?
-      if env['warden'].user.advisor?
+      @user = env['warden'].user
+
+      if @user.advisor?
         @announcements = Announcement.all(limit: 10, order: :published_at.desc)
         @recent_posts = Post.paginate(page:1, order: :published_at.desc)
         erb :'dashboards/advisor'
@@ -23,9 +25,9 @@ class Main < Sinatra::Base
 
         # comments
         # assignments
-
+        @comments = @user.posts.comments.all(order: :created_at.desc)
         @announcements = Announcement.all(limit: 10, order: :published_at.desc)
-        @recent_posts = env['warden'].user.sections.first.students.posts.paginate(page:1, order: :published_at.desc)
+        @recent_posts = @user.sections.first.students.posts.paginate(page:1, order: :published_at.desc)
         erb :'dashboards/student'
       end
     else
