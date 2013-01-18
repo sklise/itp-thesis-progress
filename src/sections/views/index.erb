@@ -2,8 +2,8 @@
   <h1 class="page-title">Sections</h1>
 </div>
 
-<% @sections.each do |section| %>
-  <div class="col-3">
+<% @sections.each_with_index do |section,i| %>
+  <div class="col-3" <% if i % 4 = 0 %>style="clear:left;"<%end%>>
     <h3>
       <a href="<%= section.path %>"><%= section.name %></a>
     </h3>

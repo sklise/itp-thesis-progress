@@ -1,0 +1,39 @@
+<div class="quick-post col-8">
+  <h3>
+    New Post <span class="markdown-mark">&nbsp;</span>
+  </h3>
+  <form action="/progress/new" method="post">
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea placeholder="Write a post here. The first line will become the title." name="quickpost"></textarea>
+    </div>
+
+    <div class="grid-row">
+      <ul class="category-buttons col-8 nested">
+      </ul>
+      <div class="col-4 nested tright">
+          <button class="small" id="private" name="draft" value="true">Draft</button>
+          <button class="small" id="public" name="draft" value="false">Public</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div class="announcements-feed col-4 float-right">
+  <h3><a href="/announcements">Announcements</a></h3>
+
+  <% @announcements.each do |announcement| %>
+  <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
+  <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+  <% end %>
+</div>
+
+<div class="assignments-and-progress col-8">
+  <h3>Open Assignments</h3>
+
+  <h3>Student Progress</h3>
+  <% @recent_posts.each do |post| %>
+    <%= erb :'../../progress/views/excerpt', layout: false, locals: {post:post} %>
+  <% end %>
+</div>

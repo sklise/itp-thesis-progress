@@ -84,8 +84,10 @@ var createAttachment = function(file) {
     contentType: false,
     processData: false,
     type: 'POST',
-  }).error(function(){
+  }).fail(function () {
     // ...
+  }).done(function () {
+    $('button').removeAttr('disabled');
   });
 
   var absText = '![' + file.name + '](http://itp-thesis.s3.amazonaws.com/' + uid + '/' + slugifiedName + ')';
@@ -99,6 +101,8 @@ $(function () {
   $('body').bind('drop', function(e){
     e.preventDefault();
     e = e.originalEvent;
+
+    $('button').attr('disabled',true)
 
     var files = e.dataTransfer.files;
 

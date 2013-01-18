@@ -77,6 +77,10 @@ button {
   padding: 0.5em 0.75em;
 }
 
+button[disabled] {
+  background: #efefef;
+}
+
 code {
   color: #555;
   font-size: 70%;
@@ -464,6 +468,10 @@ div.markdown-mark {
   text-decoration: underline;
 }
 
+.post img {
+  max-width: 100%;
+}
+
 .announcement h3 em,
 .post h3 em {
   color: #777;
@@ -609,3 +617,7 @@ button.small {
 }
 
 /*#middle { background-image: url('/images/grid.gif'); }*/
+
+button[disabled] {
+  background: #efefef;
+}

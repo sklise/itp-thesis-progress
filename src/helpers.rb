@@ -5,6 +5,14 @@ module Sinatra
       include Rack::Utils
       alias_method :h, :escape_html
 
+      def require_admin
+        unless env['warden'].user.advisor?
+          flash.error = "You are not authorized to access that page."
+          redirect '/'
+        end
+      end
+
+
       def list(collection, options)
         return options[:default] if collection.length == 0
 
