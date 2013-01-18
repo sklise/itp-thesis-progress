@@ -11,6 +11,8 @@ class Post
   property :content, Text
   property :draft, Boolean
 
+  property :read_by_advisor, Boolean, default: false
+
   property :announcement, Boolean, default: false
 
   property :user_id, Integer, required: true
@@ -67,6 +69,10 @@ class Post
     else
       false
     end
+  end
+
+  def public_url
+    "/students/#{self.user.netid}/#{self.id}/#{self.slug}"
   end
 
   def url

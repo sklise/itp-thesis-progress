@@ -46,6 +46,7 @@ builder = Rack::Builder.new do
 
   map ('/')                     { run Main }
   map ('/progress')             { run ProgressApp }
+  map ('/students')             { run StudentsApp }
   map ('/session' )             { run AuthenticationManager }
   map ('/thesis' )              { run ThesisApp }
   map ('/assignments')          { run AssignmentsApp }
@@ -53,7 +54,7 @@ builder = Rack::Builder.new do
   map ('/applications')         { run ApplicationApp }
   map ('/applications/submit')  { run ApplicationSubmit }
   map ('/sections')             { run SectionsApp }
-  map ('/comments')             { run ComentsApp }
+  map ('/comments')             { run CommentsApp }
 end
 
 run builder

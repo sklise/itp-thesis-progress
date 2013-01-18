@@ -1,3 +1,5 @@
+require 'json'
+
 class CommentsApp < Sinatra::Base
   before do
     env['warden'].authenticate!
@@ -5,15 +7,21 @@ class CommentsApp < Sinatra::Base
 
   post '/new' do
     content_type :json
-    @comment = Comment.new(
-      content: params[:comment][:content],
-      user_id: params[:comment][:user_id],
-      post_id: params[:comment][:post_id])
+
+    @comment = Comment.new({
+      content: params[:content],
+      user_id: params[:userId],
+      post_id: params[:postId]
+    })
 
     if @comment.save
-      {success: 'comment created', comment: @comment}
+      {success: 'comment created', comment: {
+        username: @comment.user.to_s,
+        date: @comment.created_at.strftime("%m/%d"),
+        content: mdown(@comment.content)
+      }}.to_json
     else
-      {error: 'could not create comment', comment: @comment}
+      {error: 'could not create comment', comment: @comment}.to_json
     end
   end
 
