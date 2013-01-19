@@ -27,7 +27,7 @@ footer, header, hgroup, menu, nav, section {
  *****************************************************************************/
 
 html {
-  font-family: "Helvetica", sans-serif;
+  font-family: "Source Sans Pro","Helvetica", sans-serif;
 }
 
 blockquote,
@@ -487,6 +487,15 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
+.dashboard-post {
+  padding: 0.75em 0;
+}
+
+.dashboard-post h3 {
+  font-size: 1.25em; /* 20px */
+  line-height: 1.8em; /* 36 / 20 */
+}
+
 .dashboard-post p {
 }
 
@@ -510,6 +519,16 @@ div.markdown-mark {
 }
 
 .title a {
+  text-decoration: none;
+}
+
+.feed-item {
+  border-bottom: .071428571em solid #ddd; /* 1 / 14 */
+  font-size: 0.875em; /* 14 / 16 */
+  line-height: 2.5em; /* 35 / 14 */
+}
+
+.feed-item a {
   text-decoration: none;
 }
 
@@ -592,6 +611,20 @@ div.markdown-mark {
  * FORMAT CLASSES
  *
  *****************************************************************************/
+
+
+.normal-size {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+.date {
+  color: #888;
+}
+
+span.date {
+  margin-left: 0.5em;
+}
 
 .section {
   margin: 1.5em 0;

@@ -1,6 +1,7 @@
 <div class="quick-post col-8">
   <h2>
     <a href="progress/new">New Post</a> <span class="markdown-mark">&nbsp;</span>
+    <a class='normal-size float-right' href="/progress">Your Posts</a>
   </h2>
   <form action="/progress/new" method="post">
     <div class="expanding-area">
@@ -31,27 +32,36 @@
 
 <div class="col-8">
   <div class="section">
-    <h2>Assignments</h2>
+
+    <h2>Open Assignments</h2>
+
+    <p><a href="/assignments">View all assignments</a></p>
     <% @assignments.each do |assignment| %>
-    <div class="excerpt">
+    <div class="dashboard-post">
       <div class="date"><%= assignment.created_at.strftime("%B %d") %></div>
-      <div class="title"><strong><%= assignment.title %></strong></div>
+      <h3 class="title"><strong><%= assignment.title %></strong></h3>
       <div><%= mdown assignment.brief %></div>
+      <div><a href="/progress/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a></div>
     </div>
     <% end %>
+
   </div>
 
   <div class="section">
+
     <h2>Comments on Your Posts</h2>
+
     <% @comments.each do |comment| %>
-    <div class="excerpt">
-      <%= comment.user %> on <%= comment.post.title %> <span class="float-right"><%= comment.created_at.strftime("%m/%d") %>
+    <div class="feed-item">
+      <a href="<%= comment.user.url %>"><%= comment.user %></a> commented on <a href="<%= comment.post.url %>"><%= comment.post.title %></a> <span class="date"><%= comment.created_at.strftime("%m/%d") %>
     </div>
     <% end %>
+
   </div>
 
   <div class="section">
-    <h2>Student Progress</h2>
+    <h2><%= env['warden'].user.sections.first.name %>, Recent Posts</h2>
+
     <% @recent_posts.each do |post| %>
       <%= erb :'../../progress/views/excerpt', layout: false, locals: {post:post} %>
     <% end %>

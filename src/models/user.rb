@@ -23,6 +23,10 @@ class User
     self.password_hash = @password
   end
 
+  def url
+    "#"
+  end
+
 
   # Scopes
   def self.advisors
@@ -52,32 +56,39 @@ class User
 
   # Return User's posts that are assignments
   def completed_assignments
+    return [] if self.role != "student"
+
     if self.posts.length == 0
       []
     else
       assignment_posts = self.posts.all(:assignment_id.not => nil)
-
-      assignment_ids = []
-
-      assignment_posts.each do |post|
-        assignment_ids << post.assignment_id
-      end
-
-      assignment_ids
     end
+  end
+
+  # Just the ids of assignments completed by student
+  def assignment_ids
+    return [] if self.role != "student"
+
+    assignment_posts = completed_assignments
+
+    assignment_ids = []
+
+    assignment_posts.each do |post|
+      assignment_ids << post.assignment_id
+    end
+
+    assignment_ids
   end
 
   #
   def open_assignments
-    if advisor?
-      return []
-    end
+    return [] if self.role != "student"
 
     assignments = []
 
     sections.each do |section|
       section.assignments.each do |assignment|
-        assignments << assignment if !completed_assignments.include? assignment.id
+        assignments << assignment if !assignment_ids.include? assignment.id
       end
     end
 
