@@ -28,6 +28,6 @@
   <h3>Recent Posts</h3>
 
   <% @students.posts.all(order: :published_at.desc).each do |post| %>
-  <%= erb :'../../progress/views/list', layout: false, locals: {post: post, :@show_user =>true} %>
+  <%= erb :'../../students/views/list', layout: false, locals: {post: post, :@show_user =>true} %>
   <% end %>
 </div>

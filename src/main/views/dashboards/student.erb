@@ -1,9 +1,9 @@
 <div class="quick-post col-8">
   <h2>
-    <a href="progress/new">New Post</a> <span class="markdown-mark">&nbsp;</span>
+    <a href="students/new">New Post</a> <span class="markdown-mark">&nbsp;</span>
     <a class='normal-size float-right' href="/progress">Your Posts</a>
   </h2>
-  <form action="/progress/new" method="post">
+  <form action="/students/new" method="post">
     <div class="expanding-area">
       <pre><span></span><br></pre>
       <textarea placeholder="Write a post here. The first line will become the title." name="quickpost"></textarea>
@@ -41,7 +41,7 @@
       <div class="date"><%= assignment.created_at.strftime("%B %d") %></div>
       <h3 class="title"><strong><%= assignment.title %></strong></h3>
       <div><%= mdown assignment.brief %></div>
-      <div><a href="/progress/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a></div>
+      <div><a href="/students/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a></div>
     </div>
     <% end %>
 
@@ -63,7 +63,7 @@
     <h2><%= env['warden'].user.sections.first.name %>, Recent Posts</h2>
 
     <% @recent_posts.each do |post| %>
-      <%= erb :'../../progress/views/excerpt', layout: false, locals: {post:post} %>
+      <%= erb :'../../students/views/excerpt', layout: false, locals: {post:post} %>
     <% end %>
   </div>
 </div>

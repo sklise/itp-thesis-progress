@@ -44,23 +44,40 @@ var bindExpandingAreas = function () {
   }
 }
 
+var buttonToggles = function ($label) {
+  var input = $label.prev();
+
+  var radios = $(input).siblings('[type=radio]');
+
+  _.each(radios, function (radioInput) {
+    $(radioInput).next().removeClass('checked');
+    $(radioInput).removeAttr('checked');
+  });
+
+
+  $label.siblings().removeAttr('checked');
+  $label.siblings().removeClass('checked');
+
+  if ($(input).attr('type') === "radio") {
+    console.log($(input).prop('checked'))
+
+    if ($label.hasClass('checked')) {
+      $('.null-radio').attr('checked',true)
+      $('.assignment-brief').html('');
+      return false;
+    } else {
+      if ($(input).hasClass('assignment-input')) {
+        $('.assignment-brief').html("<h6>Brief</h6>"+$(input).data().brief)
+      }
+    }
+  }
+
+  $label.toggleClass('checked');
+}
+
 jQuery(function() {
   $('.button-labels label').click(function() {
-    var input = $(this).prev()
-
-    var radios = $(input).siblings('[type=radio]');
-
-    _.each(radios, function (radioInput) {
-      $(radioInput).next().removeClass('checked');
-      $(radioInput).removeAttr('checked');
-    });
-
-    if ($(input).attr('type') === "radio") {
-      $(this).siblings().removeAttr('checked');
-      $(this).siblings().removeClass('checked');
-    }
-
-    $(this).toggleClass('checked')
+    buttonToggles($(this));
   });
 
   $('span.markdown-mark').click(function() {

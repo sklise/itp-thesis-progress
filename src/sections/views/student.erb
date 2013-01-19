@@ -23,7 +23,7 @@
   <h1><%= @student %>'s Recent Posts</h1>
 
 <% @posts.each do |post| %>
-  <%= erb :'../../progress/views/list', layout: false, locals: {post: post} %>
+  <%= erb :'../../students/views/list', layout: false, locals: {post: post} %>
 <% end %>
 
 <%= will_paginate @posts %>

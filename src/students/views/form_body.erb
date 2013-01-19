@@ -13,15 +13,25 @@
 
 <h6>Assignments</h6>
 <fieldset class="button-labels">
+
   <% if @post.assignment %>
-  <input type="radio" checked value="<%= @post.assignment_id %>" name="post[assignment_id]" id="assignment-<%= @post.assignment_id %>">
-  <label for="assignment-<%= @post.assignment_id %>"><%= @post.assignment.title %></label>
+
+  <input class="assignment-input"  type="radio" checked value="<%= @post.assignment_id %>" name="post[assignment_id]" id="assignment-<%= @post.assignment_id %>" data-brief="<%= post.assignment.brief %>">
+  <label for="assignment-<%= @post.assignment_id %>">
+    <%= @post.assignment.title %>
+  </label>
+
   <% end %>
+  <input class="null-radio" value="" name="post[assignment_id]" type="radio">
   <% env['warden'].user.open_assignments.each do |assignment| %>
-  <input type="radio" value="<%= assignment.id %>" name="post[assignment_id]" id="assignment-<%= assignment.id %>" >
-  <label for="assignment-<%= assignment.id %>"><%= assignment.title %></label>
+
+    <input class="assignment-input" type="radio" value="<%= assignment.id %>" name="post[assignment_id]" id="assignment-<%= assignment.id %>" <%= "checked" if @assignment &&  assignment.id.to_i == (@assignment.id || "").to_i %> data-brief="<%= assignment.brief %>">
+
+    <label <%= "class=checked" if @assignment && assignment.id.to_i == (@assignment.id || "").to_i %> for="assignment-<%= assignment.id %>"><%= assignment.title %></label>
   <% end %>
+
 </fieldset>
+<div class="assignment-brief" ><%= "<h6>Brief</h6>"+@assignment.brief if @assignment %></div>
 </div>
 
 <h6>Content <span class="markdown-mark">&nbsp;</span></h6>

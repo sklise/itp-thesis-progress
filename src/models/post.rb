@@ -80,6 +80,6 @@ class Post
   end
 
   def url
-    "/progress/#{self.id}/#{self.slug}"
+    public_url
   end
 end

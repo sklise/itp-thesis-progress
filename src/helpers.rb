@@ -12,6 +12,12 @@ module Sinatra
         end
       end
 
+      def check_user(netid)
+        unless env['warden'].user.netid == netid
+          flash.error = "That page belongs to #{netid}"
+          redirect request.referrer
+        end
+      end
 
       def list(collection, options)
         return options[:default] if collection.length == 0
