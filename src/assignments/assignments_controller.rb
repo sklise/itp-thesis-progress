@@ -31,14 +31,14 @@ class AssignmentsApp < Sinatra::Base
 
   # edit
   get '/:year/:id/edit/?' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
     @assignment = Assignment.first(params[:id])
     erb :edit
   end
 
   # new
   get '/new/?' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
     @assignment = Assignment.new
     @sections = Section.all
 
@@ -47,7 +47,7 @@ class AssignmentsApp < Sinatra::Base
 
   # create
   post '/new' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
     @assignment = Assignment.new(params[:assignment])
 
     # Link @assignment to the specified Sections.
@@ -67,7 +67,7 @@ class AssignmentsApp < Sinatra::Base
 
   # update
   post '/:year/:id/update' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
     @assignment = Assignment.first(params[:id])
 
     if @assignment.update(params[:assignment])
@@ -81,7 +81,7 @@ class AssignmentsApp < Sinatra::Base
 
   # delete
   post '/:year/:id/destroy' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
     @assignment = Assignment.first(params[:id])
 
     if @assignment.destroy

@@ -27,7 +27,7 @@ footer, header, hgroup, menu, nav, section {
  *****************************************************************************/
 
 html {
-  font-family: "Source Sans Pro", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 
 blockquote,
@@ -109,10 +109,10 @@ h1 {
 }
 
 h2 {
-  font-size: 2.625em; /* 40px */
-  line-height: 1.714285714em; /* (24*3) / 42 */
+  font-size: 2.25em; /* 36px */
+  line-height: 1.333333333em; /* (24*3) / 36 */
   letter-spacing: 1px;
-  margin: 0 0 0.571428571em;
+  margin: 0;
   text-transform: capitalize;
 }
 
@@ -141,9 +141,19 @@ h6 {
   line-height: 3em; /* 48 / 16 */
 }
 
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: #000;
+  text-decoration: none;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+  color: rgb(53, 130, 245);
+  text-decoration: underline;
+}
+
 p {
   line-height: 1.5em;
-  margin: 1.5em 0;
+  margin: 0;
 }
 
 pre {
@@ -456,18 +466,6 @@ div.markdown-mark {
   min-width: 40em;
 }
 
-.post h2 a,
-.announcement h2 a {
-  color: #000;
-  text-decoration: none;
-}
-
-.post h2 a:hover,
-.announcement h2 a:hover {
-  color: rgb(53, 130, 245);
-  text-decoration: underline;
-}
-
 .post img {
   max-width: 100%;
 }
@@ -478,10 +476,23 @@ div.markdown-mark {
   text-transform: lowercase;
 }
 
+.post a,
+.announcement a {
+  margin: 1.5em 0;
+}
+
+/*****************************************************************************
+ *
+ * EXCERPTS and DASHBOARD VIEWS
+ *
+ *****************************************************************************/
+
+.dashboard-post p {
+}
+
 .excerpt {
   border-bottom: .0625em solid #ddd; /* 1 / 24 */
   padding: 0.75em 0;
-  margin: 0.75em 0;
 }
 
 .excerpt .content * {
@@ -492,6 +503,14 @@ div.markdown-mark {
 .excerpt p {
   margin: 0.75em 0;
   line-height: 1.5em;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.title a {
+  text-decoration: none;
 }
 
 /*****************************************************************************
@@ -574,6 +593,10 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
+.section {
+  margin: 1.5em 0;
+}
+
 /* BUTTONS */
 button.small {
   padding-top: 0em;
@@ -616,7 +639,7 @@ button.small {
   height: 0.125em;
 }
 
-/*#middle { background-image: url('/images/grid.gif'); }*/
+/*#middle { background-image: url('/images/grid.gif'); background-position-y: 0.75em;}*/
 
 button[disabled] {
   background: #efefef;

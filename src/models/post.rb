@@ -63,6 +63,10 @@ class Post
     all(:announcement => false, :order => :published_at.desc)
   end
 
+  def self.drafts
+    all(draft:true)
+  end
+
   def published
     if self.published_at
       published_at.strftime("%B %e, %Y")

@@ -1,7 +1,7 @@
 <div class="quick-post col-8">
-  <h3>
-    New Post <span class="markdown-mark">&nbsp;</span>
-  </h3>
+  <h2>
+    <a href="progress/new">New Post</a> <span class="markdown-mark">&nbsp;</span>
+  </h2>
   <form action="/progress/new" method="post">
     <div class="expanding-area">
       <pre><span></span><br></pre>
@@ -19,7 +19,9 @@
 </div>
 
 <div class="announcements-feed col-4 float-right">
-  <h3><a href="/announcements">Announcements</a></h3>
+  <h2><a href="/announcements">Announcements</a></h2>
+
+  <p>Recent announcements to your class or to the entire year.</p>
 
   <% @announcements.each do |announcement| %>
   <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
@@ -27,11 +29,31 @@
   <% end %>
 </div>
 
-<div class="assignments-and-progress col-8">
-  <h3>Open Assignments</h3>
+<div class="col-8">
+  <div class="section">
+    <h2>Assignments</h2>
+    <% @assignments.each do |assignment| %>
+    <div class="excerpt">
+      <div class="date"><%= assignment.created_at.strftime("%B %d") %></div>
+      <div class="title"><strong><%= assignment.title %></strong></div>
+      <div><%= mdown assignment.brief %></div>
+    </div>
+    <% end %>
+  </div>
 
-  <h3>Student Progress</h3>
-  <% @recent_posts.each do |post| %>
-    <%= erb :'../../progress/views/excerpt', layout: false, locals: {post:post} %>
-  <% end %>
+  <div class="section">
+    <h2>Comments on Your Posts</h2>
+    <% @comments.each do |comment| %>
+    <div class="excerpt">
+      <%= comment.user %> on <%= comment.post.title %> <span class="float-right"><%= comment.created_at.strftime("%m/%d") %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Student Progress</h2>
+    <% @recent_posts.each do |post| %>
+      <%= erb :'../../progress/views/excerpt', layout: false, locals: {post:post} %>
+    <% end %>
+  </div>
 </div>
