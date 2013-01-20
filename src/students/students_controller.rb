@@ -21,6 +21,56 @@ class StudentsApp < Sinatra::Base
     erb :index
   end
 
+  #############################################################################
+  #
+  # PROFILE PAGE
+  #
+  #############################################################################
+
+  get '/:netid/?' do
+    @user = User.first(netid: params[:netid])
+    erb :profile
+  end
+
+  #############################################################################
+  #
+  # THESIS PAGE
+  #
+  #############################################################################
+
+  get '/:netid/thesis/?' do
+    @thesis = Thesis.first(:user => env['warden'].user)
+    erb :thesis
+  end
+
+  get '/:netid/thesis/edit' do
+    check_user(params[:netid])
+    @thesis = Thesis.first(:user => env['warden'].user)
+    erb :thesis_edit
+  end
+
+  post '/:netid/thesis/update' do
+    check_user(params[:netid])
+    content_type :json
+    @thesis = Thesis.first(:user => env['warden'].user)
+
+    # Notify advisor!
+
+    if @thesis.update(params[:thesis])
+      flash.success = "Thesis updated, please tell your advisor."
+      redirect '/thesis'
+    else
+      flash.error = "There was an error updating your thesis."
+      redirect '/thesis/edit'
+    end
+  end
+
+  #############################################################################
+  #
+  # PROGRESS BLOGS
+  #
+  #############################################################################
+
   get '/:netid/progress/?' do
     @user = User.first(netid:params[:netid])
     @posts = Post.paginate(page: 1, order: :created_at.desc, user: @user)
@@ -65,7 +115,7 @@ class StudentsApp < Sinatra::Base
     end
   end
 
-    get '/new' do
+  get '/new' do
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.new
