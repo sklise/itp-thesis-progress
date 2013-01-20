@@ -22,6 +22,7 @@ class SectionsApp < Sinatra::Base
       year: params[:year],
       slug: params[:slug]
     )
+
     erb :show
   end
 

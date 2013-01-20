@@ -4,18 +4,21 @@
 <div class="col-3">
   <h3><%= @section.name %></h3>
 
+  <h4>Assignments</h4>
   <% @section.assignments.each do |assignment| %>
-  <p><a href="/assignments/<%= assignment.year %>/<%= assignment.id %>"><%= assignment.title %></a></p>
+  <div class="feed-item">
+    <a href="/assignments/<%= assignment.year %>/<%= assignment.id %>"><%= assignment.title %></a>
+  </div>
   <% end %>
 
-  <h3>Students</h3>
+  <h4>Students</h4>
   <ul>
   <% @section.students.each do |student| %>
-    <li><a href="/sections/<%= @section.year %>/<%= @section.slug %>/<%= student.netid %>"><%= student %></a></li>
+    <li><a href="<%= student.url %>"><%= student %></a></li>
   <% end %>
   </ul>
 
-  <h3>Announcements</h3>
+  <h4>Announcements</h4>
 
   <% @section.announcements.paginate(:page => 1, order: :published_at.desc).each do |announcement| %>
     <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement} %>
@@ -24,11 +27,15 @@
 </div>
 
 <div class="col-9">
-
-  <h3>Recent Posts</h3>
-
-  <% @section.students.posts.paginate(:page => 1, order: :published_at.desc).each do |post| %>
-  <%= erb :'../../students/views/list', layout: false, locals: {post:post, :@show_author => true} %>
+  <% @section.students.all(order: :first_name.asc).each do |student| %>
+  <h4><%= student %></h4>
+    <% student.posts(order: :published_at.desc, limit: 5).each do |post| %>
+    <div class="feed-item">
+    <a href="<%= post.url %>"><%= post.title %></a> <span class="category"><%= post.category %></span> <span class="date"><%= post.published_at.strftime("%B %d") %></span>
+    </div>
+    <% end %>
+    <div class="feed-item">
+      <a href="<%= student.url %>/progress">All <%= student.first_name %>'s Posts</a>
+    </div>
   <% end %>
-  <%= will_paginate @section.students.posts %>
 </div>

@@ -21,13 +21,13 @@ class StudentsApp < Sinatra::Base
     erb :index
   end
 
-  get '/:netid/?' do
+  get '/:netid/progress/?' do
     @user = User.first(netid:params[:netid])
     @posts = Post.paginate(page: 1, order: :created_at.desc, user: @user)
     erb :index
   end
 
-  get '/:netid/page/:page_number/?' do
+  get '/:netid/progress/page/:page_number/?' do
     @user = User.first(netid:params[:netid])
     @posts = Post.paginate(page: params[:page_number], order: :created_at.desc, user: @user)
     erb :index

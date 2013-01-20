@@ -24,7 +24,7 @@ class User
   end
 
   def url
-    "#"
+    "/students/#{self.netid}"
   end
 
 

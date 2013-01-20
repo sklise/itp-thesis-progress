@@ -46,8 +46,12 @@
           <li><a href="/announcements/new" class="new-post-link">&nbsp;</a></li>
           <% else %>
           <li><a href="/thesis">Thesis</a></li>
-          <li><a href="/students/<%= env['warden'].user.netid %>">Progress</a></li>
-          <li><a href="/class">My Class</a></li>
+          <li>
+            <a href="/students/<%= env['warden'].user.netid %>">Progress</a>
+          </li>
+          <li>
+            <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>
+          </li>
           <li><a href="/students/new" class="new-post-link">&nbsp;</a></li>
           <% end %>
           <li><%= env['warden'].user.netid %></li>

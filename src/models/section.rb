@@ -31,6 +31,10 @@ class Section
     end
   end
 
+  def url
+    "/sections/#{self.year}/#{self.slug}"
+  end
+
   def remove_users
     self.users = []
     puts self.users

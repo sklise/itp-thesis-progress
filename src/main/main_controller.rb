@@ -34,25 +34,6 @@ class Main < Sinatra::Base
     end
   end
 
-  get '/class' do
-    if env['warden'].user.advisor?
-      @sections = env['warden'].user.sections
-
-      student_ids = []
-      @sections.each do |section|
-        section.students.each do |student|
-          student_ids.push student.id
-        end
-      end
-      @students = User.all(:id => student_ids)
-      puts @students.length
-      erb :'section/advisor'
-    else
-      @section = env['warden'].user.sections[0]
-      erb :'section/student'
-    end
-  end
-
   #############################################################################
   #
   # PAGES
