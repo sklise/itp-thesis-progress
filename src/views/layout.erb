@@ -41,13 +41,14 @@
       <% if env['warden'].authenticated? %>
         <ul>
           <% if env['warden'].user.advisor? %>
-          <li><a href="/class">My Classes</a></li>
+          <li><a href="/assignments">Assignments</a></li>
+          <li><a href="/announcements">Announcements</a></li>
           <li><a href="/page/new">New Page</a></li>
           <li><a href="/announcements/new" class="new-post-link">&nbsp;</a></li>
           <% else %>
-          <li><a href="/thesis">Thesis</a></li>
+          <li><a href="/students/<%= env['warden'].user.netid %>/thesis">Thesis</a></li>
           <li>
-            <a href="/students/<%= env['warden'].user.netid %>">Progress</a>
+            <a href="/students/<%= env['warden'].user.netid %>/progress">Progress</a>
           </li>
           <li>
             <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>

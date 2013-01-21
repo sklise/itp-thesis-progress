@@ -1,0 +1,15 @@
+<%= erb :thesis, layout: false, locals: {:'@thesis' => @user.thesis} %>
+
+<div class="col-8">
+
+<h4><a href="/students/<%= @user.netid %>/progress">Progress</a></h4>
+
+<% @categories.each do |category| %>
+
+  <h6><%= category.name %></h6>
+
+  <% @user.posts.all(:category_id => category.id).each do |post| %>
+  <%= erb :list, layout: false, locals: {post: post} %>
+  <% end %>
+<% end %>
+</div>

@@ -1,3 +1,5 @@
+require 'pp'
+
 class AssignmentsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
@@ -13,7 +15,8 @@ class AssignmentsApp < Sinatra::Base
 
   # index
   get '/?' do
-    @assignments = Assignment.all
+    @sections = env['warden'].user.sections
+    @assignments = @sections.assignments.all(order: :created_at.desc)
     erb :index
   end
 
@@ -59,6 +62,7 @@ class AssignmentsApp < Sinatra::Base
       flash.success = "Assignment saved successfully."
       redirect "/assignments/#{@assignment.year}/#{@assignment.id}"
     else
+      pp @assignment
       flash.error = "We've encountered a problem."
       redirect "/assignments/new"
     end

@@ -1,4 +1,19 @@
+
+<div class="col-3">
+<% if @user %>
+  <h2><a href="<%= @user.url %>"><%= @user %></a></h2>
+  <a href="<%= @user.sections.first.url %>"><%= @user.sections.first.name %></a>
+<% end %>
+</div>
+
 <div class="col-9">
+  <% if @user %>
+  <h1>Progress</h1>
+  <% end %>
+<% if @posts.length == 0 && @user %>
+  <p><%= @user %> has no posts yet.</p>
+<% end %>
+
 <% @posts.each do |post| %>
   <div class="post">
 
@@ -22,11 +37,4 @@
 <% end %>
 
 <%= will_paginate @posts %>
-</div>
-
-
-<div class="col-3">
-  <% if @user %>
-    <h2><%= @user %></h2>
-  <% end %>
 </div>

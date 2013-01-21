@@ -29,6 +29,7 @@ class StudentsApp < Sinatra::Base
 
   get '/:netid/?' do
     @user = User.first(netid: params[:netid])
+    @categories = Category.all
     erb :profile
   end
 
@@ -39,7 +40,8 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/thesis/?' do
-    @thesis = Thesis.first(:user => env['warden'].user)
+    @user = User.first(netid: params[:netid])
+    @thesis = Thesis.first(user: @user)
     erb :thesis
   end
 

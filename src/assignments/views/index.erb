@@ -1,10 +1,12 @@
+<div class="col-12">
 <h2>Your Assignments</h2>
+</div>
 
 <% if env['warden'].user.role == 'advisor' %>
 <a href="/assignments/new">Create A New Assignment</a>
 <% end %>
 
-<% @assignments.own(env['warden'].user).each do |assignment| %>
+<% @assignments.each do |assignment| %>
 <div>
   <h4><%= assignment.title %></h4>
 

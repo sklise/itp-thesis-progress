@@ -54,7 +54,6 @@ builder = Rack::Builder.new do
   map ('/session' )             { run AuthenticationManager }
   map ('/students')             { run StudentsApp }
 
-  map ('/thesis' )              { run ThesisApp }
   map ('/applications')         { run ApplicationApp }
   map ('/applications/submit')  { run ApplicationSubmit }
 

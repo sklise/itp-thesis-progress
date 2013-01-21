@@ -19,7 +19,7 @@ class Main < Sinatra::Base
 
       if @user.advisor?
         @announcements = Announcement.all(limit: 10, order: :published_at.desc)
-        @recent_posts = Post.paginate(page:1, order: :published_at.desc)
+        @sections = env['warden'].user.sections
         erb :'dashboards/advisor'
       else
         @drafts = @user.posts.drafts
