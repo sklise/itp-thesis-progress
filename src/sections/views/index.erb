@@ -3,10 +3,13 @@
 </div>
 
 <% @sections.each_with_index do |section,i| %>
-  <div class="col-3" <% if i % 4 = 0 %>style="clear:left;"<%end%>>
+  <div class="section-list col-3" <% if i % 4 == 0 %>style="clear:left;"<% end %> >
     <h3>
       <a href="<%= section.path %>"><%= section.name %></a>
     </h3>
+    <p>
+      <%= section.advisor %>
+    </p>
     <ul>
       <% section.students.each do |student| %>
       <li><%= student %></li>

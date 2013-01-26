@@ -1,6 +1,8 @@
 <div class='col-12'>
   <h1 class="page-title"><a href="/sections">Sections</a></h1>
+  <% if env['warden'].user.advisor? %><a href="<%= @section.url %>/edit">Edit</a><% end %>
 </div>
+
 <div class="col-3">
   <h3><%= @section.name %></h3>
 

@@ -1,0 +1,15 @@
+<form action="<%= @section.url %>/update" method="POST">
+
+  <h6>Section Name</h6>
+  <p>This is how the section will appear throughout the site.</p>
+  <input type="text" name="section[name]" placeholder="Name of Section" value="<%= @section.name %>" />
+
+  <h6>Section Slug</h6>
+  <p>No spaces, no capitals, this will determine the url for the section</p>
+  <input type="text" name="section[slug]" placeholder="(Optional) enter a slug for the url, like the name only without spaces." value="<%= @section.slug %>"/>
+
+  <h6>Students</h6>
+  <p>If you need to change the students in your section, please get in touch with Steve Klise sk3453@nyu.edu.</p>
+
+  <input type="submit">
+</form>

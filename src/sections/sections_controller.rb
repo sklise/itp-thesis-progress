@@ -11,27 +11,21 @@ class SectionsApp < Sinatra::Base
     env['warden'].authenticate!
   end
 
-  get '/' do
+  get '/?' do
     @sections = Section.all(year: 2013)
     erb :index
   end
 
   # show
   get '/:year/:slug/?' do
-    @section = Section.first(
-      year: params[:year],
-      slug: params[:slug]
-    )
+    @section = Section.first( year: params[:year], slug: params[:slug])
+
+    if @section.nil?
+      flash.error = "We couldn't find the section you were looking for."
+      redirect "/sections"
+    end
 
     erb :show
-  end
-
-  # INDIVIDUAL STUDENT
-  get '/:year/:slug/:netid' do
-    @section = Section.first(year: params[:year], slug: params[:slug])
-    @student = User.first(netid: params[:netid])
-    @posts = @student.posts.paginate(page: 1, order: :published_at.desc)
-    erb :student
   end
 
   #############################################################################
@@ -41,47 +35,43 @@ class SectionsApp < Sinatra::Base
   #############################################################################
 
   get '/new/?' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
+
     @advisors = User.advisors
     @section = Section.new
+
     erb :new
   end
 
   post '/new/?' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
+
     @section = Section.create(params[:section])
-    section_user = SectionUser.create(section_id: @section.id, user_id: params[:advisor_id])
-    # redirect "/sections/#{@section.year}/#{@section.slug}"
-    "hi"
+    redirect @section.url
   end
 
   # edit
   get '/:year/:slug/edit/?' do
-    halt 401 unless env['warden'].user.advisor?
+    require_admin
+
     @section = Section.first(
       year: params[:year],
       slug: params[:slug],
     )
-    erb :editd
+
+    erb :edit
   end
 
   # update
   post '/:year/:slug/update/?' do
-    halt 401 unless env['warden'].user.advisor?
-    @section = Section.first(
-      year: params[:year],
-      name: params[:slug]
-    )
+    require_admin
+    @section = Section.first(year: params[:year], slug: params[:slug])
+    @section.update(name: params[:section][:name], slug: params[:section][:slug] )
 
-    @section.update(
-      name: params[:name]
-    )
-
-    redirect "/sections/#{@section.year}/#{@section.name}"
+    redirect @section.url
   end
 
   not_found do
     flash.error = "Could not find #{request.fullpath}"
-    redirect '/' # catch redirects to GET '/session'
   end
 end
