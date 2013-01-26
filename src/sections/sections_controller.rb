@@ -73,5 +73,6 @@ class SectionsApp < Sinatra::Base
 
   not_found do
     flash.error = "Could not find #{request.fullpath}"
+    redirect "/sections"
   end
 end
