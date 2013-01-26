@@ -75,7 +75,17 @@ var buttonToggles = function ($label) {
   $label.toggleClass('checked');
 }
 
+var confirmDelete = function () {
+  if (confirm("Are you sure you want to delete this? This action cannot be undone")) {
+
+  } else {
+    return false;
+  }
+}
+
 jQuery(function() {
+  $('.delete-link').click(confirmDelete);
+
   $('.button-labels label').click(function() {
     buttonToggles($(this));
   });

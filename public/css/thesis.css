@@ -650,6 +650,10 @@ button.small {
   margin: 0;
 }
 
+.delete-link {
+  color: #c63523;
+}
+
 /* DESCRIPTION: typically a P tag with enough spacing but not that much */
 .description {
   color: #555;

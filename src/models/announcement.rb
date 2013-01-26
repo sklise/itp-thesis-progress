@@ -56,4 +56,8 @@ class Announcement
     end
     true
   end
+
+  def url
+    "/announcements/#{self.year}/#{self.issue}"
+  end
 end

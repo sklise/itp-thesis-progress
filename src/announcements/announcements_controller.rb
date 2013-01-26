@@ -16,12 +16,12 @@ class AnnouncementsApp < Sinatra::Base
     erb :index
   end
 
-  get '/everyone' do
+  get '/everyone/?' do
     @announcements = Announcement.paginate(page: 1, order: :published_at.desc, everyone: true)
     erb :index
   end
 
-  get '/section/:year/:section_name' do
+  get '/section/:year/:section_name/?' do
     @announcements = Section.first({
       slug: params[:section_name],
       year: params[:year]
@@ -29,7 +29,7 @@ class AnnouncementsApp < Sinatra::Base
     erb :index
   end
 
-  get '/section/:year/:section_name/page/:page_number' do
+  get '/section/:year/:section_name/page/:page_number/?' do
     @announcements = Section.first({
       slug: params[:section_name],
       year: params[:year]
@@ -37,12 +37,12 @@ class AnnouncementsApp < Sinatra::Base
     erb :index
   end
 
-  get '/page/:page_number' do
+  get '/page/:page_number/?' do
     @announcements = Announcement.paginate(page: params[:page_number], order: :published_at.desc)
     erb :index
   end
 
-  get '/:year/:issue' do
+  get '/:year/:issue/?' do
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
     halt 404 if @announcement.nil?
@@ -56,21 +56,32 @@ class AnnouncementsApp < Sinatra::Base
   #
   #############################################################################
 
-  get '/new' do
-    halt 401 unless env['warden'].user.advisor?
+  get '/new/?' do
+    require_admin
+
     @sections = Section.all
     @announcement = Announcement.new
     erb :new
   end
 
-  post '/new' do
-    halt 401 unless env['warden'].user.advisor?
+  post '/new/?' do
+    require_admin
+
     @announcement = Announcement.create(params[:announcement])
     redirect "/announcements/#{@announcement.year}/#{@announcement.issue}"
   end
 
-  get '/:year/:issue/edit' do
-    halt 401 unless env['warden'].user.advisor?
+  get '/:year/:issue/delete' do
+    require_admin
+
+    Announcement.first(year: params[:year], issue: params[:issue]).destroy
+
+    redirect "/announcements"
+  end
+
+  get '/:year/:issue/edit/?' do
+    require_admin
+
     @sections = Section.all
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
@@ -79,8 +90,9 @@ class AnnouncementsApp < Sinatra::Base
     erb :edit
   end
 
-  post '/:year/:issue' do
-    halt 401 unless env['warden'].user.advisor?
+  post '/:year/:issue/?' do
+    require_admin
+
     @announcement = Announcement.first(year: params[:year], issue: params[:issue])
 
     halt 404 if @announcement.nil?
@@ -88,5 +100,10 @@ class AnnouncementsApp < Sinatra::Base
     @announcement.update(params[:announcement])
     flash.success = "Announcement Updated Successfully."
     redirect "/announcements/#{params[:year]}/#{params[:issue]}"
+  end
+
+  not_found do
+    flash.error = "Could not find #{request.fullpath}"
+    redirect "/announcements"
   end
 end
