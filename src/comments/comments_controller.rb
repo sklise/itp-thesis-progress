@@ -12,7 +12,7 @@ class CommentsApp < Sinatra::Base
       user_id: env['warden'].user.id, post_id: params[:postId]
     });
 
-    if params[:read]
+    if params[:read] == "true"
       @comment.read = true
     else
       @comment.content = params[:content]
