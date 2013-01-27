@@ -7,7 +7,7 @@ class Post
   property :published_at, DateTime
 
   property :slug, Slug
-  property :title, String
+  property :title, Text
   property :content, Text
   property :draft, Boolean
 
@@ -48,7 +48,10 @@ class Post
 
   def self.quick_new(params)
     content = params[:quickpost].split(/\r\n/)
-    title = content.slice!(0)
+
+    first_line = content.slice(0)
+
+    title = first_line.split(" ").length < 10 ? content.slice!(0) : (content[0].split(" "))[0..9].join(" ") + "..."
 
     new(title: title, content: content.join("\r\n"), draft: params[:draft])
   end
