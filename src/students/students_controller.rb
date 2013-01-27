@@ -23,52 +23,6 @@ class StudentsApp < Sinatra::Base
 
   #############################################################################
   #
-  # PROFILE PAGE
-  #
-  #############################################################################
-
-  get '/:netid/?' do
-    @user = User.first(netid: params[:netid])
-    @categories = Category.all
-    erb :profile
-  end
-
-  #############################################################################
-  #
-  # THESIS PAGE
-  #
-  #############################################################################
-
-  get '/:netid/thesis/?' do
-    @user = User.first(netid: params[:netid])
-    @thesis = Thesis.first(user: @user)
-    erb :thesis
-  end
-
-  get '/:netid/thesis/edit' do
-    check_user(params[:netid])
-    @thesis = Thesis.first(:user => env['warden'].user)
-    erb :thesis_edit
-  end
-
-  post '/:netid/thesis/update' do
-    check_user(params[:netid])
-    content_type :json
-    @thesis = Thesis.first(:user => env['warden'].user)
-
-    # Notify advisor!
-
-    if @thesis.update(params[:thesis])
-      flash.success = "Thesis updated, please tell your advisor."
-      redirect '/thesis'
-    else
-      flash.error = "There was an error updating your thesis."
-      redirect '/thesis/edit'
-    end
-  end
-
-  #############################################################################
-  #
   # PROGRESS BLOGS
   #
   #############################################################################
@@ -143,10 +97,58 @@ class StudentsApp < Sinatra::Base
 
     if @post.save
       flash.success = "Post Saved"
-      redirect "/students/#{env['warden'].user.netid}"
+      redirect "/students"
     else
+      raise @post.inspect
       flash.error = "There was an issue creating that post"
       redirect "/students/new"
+    end
+  end
+
+
+  #############################################################################
+  #
+  # PROFILE PAGE
+  #
+  #############################################################################
+
+  get '/:netid/?' do
+    @user = User.first(netid: params[:netid])
+    @categories = Category.all
+    erb :profile
+  end
+
+  #############################################################################
+  #
+  # THESIS PAGE
+  #
+  #############################################################################
+
+  get '/:netid/thesis/?' do
+    @user = User.first(netid: params[:netid])
+    @thesis = Thesis.first(user: @user)
+    erb :thesis
+  end
+
+  get '/:netid/thesis/edit' do
+    check_user(params[:netid])
+    @thesis = Thesis.first(:user => env['warden'].user)
+    erb :thesis_edit
+  end
+
+  post '/:netid/thesis/update' do
+    check_user(params[:netid])
+    content_type :json
+    @thesis = Thesis.first(:user => env['warden'].user)
+
+    # Notify advisor!
+
+    if @thesis.update(params[:thesis])
+      flash.success = "Thesis updated, please tell your advisor."
+      redirect '/thesis'
+    else
+      flash.error = "There was an error updating your thesis."
+      redirect '/thesis/edit'
     end
   end
 
