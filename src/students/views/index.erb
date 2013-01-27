@@ -10,6 +10,16 @@
   <% if @user %>
   <h1>Progress</h1>
   <% end %>
+
+  <% if @drafts %>
+  <h6>Drafts</h6>
+    <% @drafts.each do |draft| %>
+    <div class="feed-item">
+      <a href="<%= draft.url %>/edit"><div class="draft-icon draft">&nbsp;</div><%= draft.updated_at.strftime("%m/%d") %> <%= draft.title %></a>
+    </div>
+    <% end %>
+  <% end %>
+
 <% if @posts.length == 0 && @user %>
   <p><%= @user %> has no posts yet.</p>
 <% end %>

@@ -487,6 +487,18 @@ div.markdown-mark {
   line-height: 1.5em;
 }
 
+.draft-icon {
+  background-image: url('/images/draft-edit.svg');
+  background-size: 1em 1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: block;
+  float: left;
+  width: 1em;
+  height: 2.5em;
+  margin: 0 0.75em;
+}
+
 /*****************************************************************************
  *
  * EXCERPTS and DASHBOARD VIEWS

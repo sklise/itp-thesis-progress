@@ -27,7 +27,7 @@
 
   <h3>Recent Posts</h3>
 
-  <% @students.posts.all(order: :published_at.desc).each do |post| %>
+  <% @students.posts.all(order: :published_at.desc, draft: false).each do |post| %>
   <%= erb :'../../students/views/list', layout: false, locals: {post: post, :@show_user =>true} %>
   <% end %>
 </div>

@@ -8,7 +8,7 @@
 
   <h6><%= category.name %></h6>
 
-  <% @user.posts.all(:category_id => category.id).each do |post| %>
+  <% @user.posts.all(:category_id => category.id, draft: false).each do |post| %>
   <%= erb :list, layout: false, locals: {post: post} %>
   <% end %>
 <% end %>

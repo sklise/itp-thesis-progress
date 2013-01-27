@@ -31,7 +31,7 @@
 <div class="col-9">
   <% @section.students.all(order: :first_name.asc).each do |student| %>
   <h4><%= student %></h4>
-    <% student.posts(order: :published_at.desc, limit: 5).each do |post| %>
+    <% student.posts(order: :published_at.desc, draft: false, limit: 5).each do |post| %>
     <div class="feed-item">
     <a href="<%= post.url %>"><%= post.title %></a> <span class="category"><%= post.category %></span> <span class="date"><%= post.published_at.strftime("%B %d") %></span>
     </div>
