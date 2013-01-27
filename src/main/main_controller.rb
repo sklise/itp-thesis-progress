@@ -55,7 +55,9 @@ class Main < Sinatra::Base
 
   post '/page/new' do
     require_admin
-    @page = Page.create(params[:page])
+
+    @page = Page.create(params[:page_form])
+
     redirect "/#{@page.slug}"
   end
 

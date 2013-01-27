@@ -12,7 +12,7 @@ class Page
   before :save, :ensure_slug
 
   def ensure_slug
-    self.slug = self.title if slug.nil? || slug == ""
+    self.slug = self.title if (self.slug.nil? || self.slug == "")
   end
 
   def self.slugs
