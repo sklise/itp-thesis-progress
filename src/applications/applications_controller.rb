@@ -5,8 +5,9 @@ class ApplicationApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
-  use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    [username, password] == [ENV['USERNAME'], ENV['PASSWORD']]
+  before do
+    env['warden'].authenticate!
+    require_admin
   end
 
   get '/' do
@@ -64,9 +65,9 @@ end
 
 class ApplicationSubmit < Sinatra::Base
   get '/' do
-
     'hi'
   end
+
   post '/' do
     @user = User.first(netid: params[:netid])
 
