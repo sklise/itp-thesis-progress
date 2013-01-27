@@ -15,27 +15,7 @@
 <% end %>
 
 <% @posts.each do |post| %>
-  <%= erb :list, layout: false, locals: {post: post} %>
-
-  <div class="post">
-
-    <h2>
-      <a href="<%= post.url %>"><%= post.title %></a>
-    </h2>
-
-    <hgroup class="details">
-      <h6><%= post.date.strftime("%m/%d") %>
-        <span class="publish-state"><%= post.draft ? "Draft" : "Published" %></span>
-      </h6>
-      <span class="category"><%= post.category %></span>
-      <a href="<%= post.url %>/edit">EDIT</a>
-    </hgroup>
-
-    <div class="post-content">
-      <%= mdown(post.content || "") %>
-    </div>
-
-  </div>
+  <%= erb :list, layout: false, locals: {post: post, :@show_user => true} %>
 <% end %>
 
 <%= will_paginate @posts %>

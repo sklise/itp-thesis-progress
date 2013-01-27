@@ -1,15 +1,16 @@
 <div class="col-9">
 
 <div class="post single">
+  <% if @post.user == env['warden'].user %>
+    <p class="published"><%= @post.draft ? "Draft" : "Published" %></p>
+    <p><a href="<%= @post.url %>/edit">Edit</a> <a class='delete-link' href="<%= @post.url %>/delete">Delete</a></p>
+  <% end %>
   <h2><%= @post.title %></h2>
 
   <hgroup class='details'>
     <h3><em>by</em> <a href="<%= @post.user.url %>"><%= @post.user %></a></h3>
-    <p><%= @post.published_at.strftime("%B %d, %Y") %></p>
-    <% if @post.user == env['warden'].user %>
-    <span class="published"><%= @post.draft ? "Draft" : "Published" %></span>
-    <% end %>
-    <p class="category"><%= @post.category %></p>
+    <h5><%= @post.published_at.strftime("%B %d, %Y") %></h5>
+    <h6 class="category"><%= @post.category %></h6>
   </hgroup>
 
   <div class="post-content">

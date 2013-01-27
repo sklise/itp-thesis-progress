@@ -118,6 +118,13 @@ class StudentsApp < Sinatra::Base
     end
   end
 
+  get '/:netid/:id/:slug/delete' do
+    check_user(params[:netid])
+    Post.first(id: params[:id]).destroy
+
+    redirect "/students/#{params[:netid]}/progress"
+  end
+
   get '/new' do
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
