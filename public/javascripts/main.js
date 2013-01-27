@@ -1,13 +1,19 @@
 function postComment(comment) {
-  if (S(comment['content']).isEmpty()) {
+  console.log(comment)
+
+  if (S(comment['content']).isEmpty() && comment.read === false ) {
     return alert("The comment field was blank")
   }
 
-  $.post('/comments/new', comment, function (data) {
-    if (data.error) { return alert('There was a problem posting your comment. Please try again.')}
+  $.post('/comments/new', comment)
+  .fail(function (data) {
+    alert('There was a problem posting your comment. Please try again.');
+  })
+  .done(function (data) {
+    console.log(typeof data.read)
+    if (data.read === "true") {
 
-      console.log(data)
-
+    }
     var templateSource = $('#comment-template').html();
     var template = Handlebars.compile(templateSource);
     $('.comment-list').prepend(template(data.comment));
@@ -106,8 +112,8 @@ jQuery(function() {
 
   $('.new-comment button').click(function () {
     postComment({
-      userId: $(this).closest('.new-comment').data().userId,
       postId: $(this).closest('.new-comment').data().postId,
+      read: $(this).val(),
       content: S($(this).closest('.new-comment').find('textarea').val()).escapeHTML().s
     });
   });

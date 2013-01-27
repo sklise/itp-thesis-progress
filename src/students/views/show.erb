@@ -4,8 +4,12 @@
   <h2><%= @post.title %></h2>
 
   <hgroup class='details'>
+    <h3><em>by</em> <a href="<%= @post.user.url %>"><%= @post.user %></a></h3>
+    <p><%= @post.published_at.strftime("%B %d, %Y") %></p>
+    <% if @post.user == env['warden'].user %>
     <span class="published"><%= @post.draft ? "Draft" : "Published" %></span>
-    <span class="category"><%= @post.category %></span>
+    <% end %>
+    <p class="category"><%= @post.category %></p>
   </hgroup>
 
   <div class="post-content">
@@ -14,36 +18,59 @@
 </div>
 
 <div class="comments">
-  <div class="new-comment" data-user-id="<%= env['warden'].user.id %>" data-post-id="<%= @post.id %>">
-    <h6>Add a Comment</h6>
+  <div class="new-comment" data-post-id="<%= @post.id %>">
+    <div style="clear:both;overflow-y:auto;">
+
+    <h6 class="float-left">Add a Comment</h6>
+    <% if @post.comments.read_by.include? env['warden'].user.id %>
+    <h6 class='float-right'>You've read this post</h6>
+    <% else %>
+    <button id="mark-as-read" class="float-right" name="comment[read]" value="true">Mark as Read</button>
+    <% end %>
+
+    </div>
     <div class="expanding-area">
       <pre><span></span><br></pre>
       <textarea id="new-comment-textarea" placeholder="Write your comment here..." name="comment[content]"></textarea>
     </div>
-    <button class="small">Add Comment</button>
+    <button name="comment[read]" value="false">Add Comment</button>
   </div>
 
   <div class="comment-list">
   <% @post.comments(order: :created_at.desc).each do |comment| %>
+
+    <% if comment.read %>
+    <div class="read">
+      <span class="date"><%= comment.created_at.strftime("%B/%d") %></span> read by <%= comment.user %>
+    </div>
+    <% else %>
     <div class="comment">
       <div class="comment-head">
-        <span class="date"><%= comment.created_at.strftime("%m/%d") %></span> <%= comment.user %>
+        <span class="date"><%= comment.created_at.strftime("%B/%d") %></span> <%= comment.user %>
       </div>
       <div class="comment-body">
         <%= mdown comment.content %>
       </div>
     </div>
+    <% end %>
+
   <% end %>
   </div>
 </div>
 
 <script type="text/template" id="comment-template">
+{{#if read }}
+<div class="read-comment">
+  <span class="date">{{ date }}</span> read by {{ username }}
+</div>
+{{ else }}
 <div class="comment">
   <div class="comment-head">
     <span class="date">{{ date }}</span> {{ username}}
   </div>
   <div class="comment-body">{{{ content }}}</div>
 </div>
+{{/if}}
 </script>
 
 </div>

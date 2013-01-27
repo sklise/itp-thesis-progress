@@ -29,7 +29,7 @@
       <div class="col-2">
       <a href="/"><img src="/images/logo_maybe_oneline.png" alt="ITP THESIS" /></a>
       </div>
-      <div id="main-nav" class="col-6">
+      <div id="main-nav" class="col-4">
         <ul>
           <% Page.all.each do |page| %>
           <li><a href="/<%= page.slug %>"><%= page.title %></a></li>
@@ -37,7 +37,7 @@
         </ul>
       </div>
 
-      <div id="account-nav" class="col-4">
+      <div id="account-nav" class="col-6">
       <% if env['warden'].authenticated? %>
         <ul>
           <% if env['warden'].user.advisor? %>

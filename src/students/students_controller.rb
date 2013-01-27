@@ -87,6 +87,7 @@ class StudentsApp < Sinatra::Base
 
   get '/:netid/:id/:slug/?' do
     @post = Post.get(params[:id])
+
     if @post.draft || @post.nil?
       flash.error = "Sorry, that post is not viewable."
       redirect "/"

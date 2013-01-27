@@ -481,6 +481,12 @@ div.markdown-mark {
   margin: 1.5em 0;
 }
 
+.post-read-status {
+  background: #fefde0;
+  padding: .75em 0.75em;
+  line-height: 1.5em;
+}
+
 /*****************************************************************************
  *
  * EXCERPTS and DASHBOARD VIEWS
@@ -612,6 +618,13 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
 
 .normal-size {
   font-size: 16px;

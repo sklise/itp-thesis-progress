@@ -11,8 +11,6 @@ class Post
   property :content, Text
   property :draft, Boolean
 
-  property :read_by_advisor, Boolean, default: false
-
   property :announcement, Boolean, default: false
 
   property :user_id, Integer, required: true

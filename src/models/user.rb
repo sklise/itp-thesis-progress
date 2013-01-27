@@ -54,6 +54,13 @@ class User
     role == "advisor"
   end
 
+  # Return a student's advisor. If the user is an advisor, return nil
+  def students_advisor
+    return nil if self.advisor?
+
+    self.sections.first.advisor
+  end
+
   # Return User's posts that are assignments
   def completed_assignments
     return [] if self.role != "student"

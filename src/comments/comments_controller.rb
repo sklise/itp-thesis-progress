@@ -9,16 +9,21 @@ class CommentsApp < Sinatra::Base
     content_type :json
 
     @comment = Comment.new({
-      content: params[:content],
-      user_id: params[:userId],
-      post_id: params[:postId]
-    })
+      user_id: env['warden'].user.id, post_id: params[:postId]
+    });
+
+    if params[:read]
+      @comment.read = true
+    else
+      @comment.content = params[:content]
+    end
 
     if @comment.save
       {success: 'comment created', comment: {
         username: @comment.user.to_s,
         date: @comment.created_at.strftime("%m/%d"),
-        content: mdown(@comment.content)
+        read: @comment.read,
+        content: mdown(@comment.content || "")
       }}.to_json
     else
       {error: 'could not create comment', comment: @comment}.to_json
