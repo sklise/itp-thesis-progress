@@ -53,6 +53,7 @@
 
     <% @comments.each do |comment| %>
     <div class="feed-item">
+      <div class="comment-icon <%= comment.read ? "cread" : "ctext" %>">&nbsp;</div>
       <a href="<%= comment.user.url %>"><%= comment.user %></a>
       <% if comment.read %>
       read

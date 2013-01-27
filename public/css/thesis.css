@@ -538,6 +538,10 @@ div.markdown-mark {
   text-decoration: none;
 }
 
+.feed-item .date {
+  padding: 0 0.5em;
+}
+
 /*****************************************************************************
  *
  * EXPANDING AREA
@@ -612,6 +616,24 @@ div.markdown-mark {
   padding: 0 0 0.75em;
 }
 
+.comment-icon {
+  display: block;
+  float: left;
+  width: 1em;
+  height: 2.5em;
+  background-size: 1em 1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0 0.75em;
+}
+
+.comment-icon.ctext {
+  background-image: url('/images/comment-text.svg');
+}
+
+.comment-icon.cread {
+  background-image: url('/images/comment-read.svg');
+}
 /*****************************************************************************
  *
  * FORMAT CLASSES
@@ -632,7 +654,7 @@ div.markdown-mark {
 }
 
 .date {
-  color: #888;
+  color: #bbbbbb;
 }
 
 .section {
