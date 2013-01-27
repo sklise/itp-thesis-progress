@@ -41,8 +41,10 @@
       <% if env['warden'].authenticated? %>
         <ul>
           <% if env['warden'].user.advisor? %>
+          <% env['warden'].user.sections.each do |section| %>
+          <li><a href="<%= section.url %>"><%= section.name %></a></li>
+          <% end %>
           <li><a href="/assignments">Assignments</a></li>
-          <li><a href="/announcements">Announcements</a></li>
           <li><a href="/page/new">New Page</a></li>
           <li><a href="/announcements/new">New Announcement</a></li>
           <% else %>

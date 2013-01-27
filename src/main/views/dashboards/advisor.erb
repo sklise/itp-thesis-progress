@@ -1,3 +1,12 @@
+<div class="announcements-feed col-4 float-right">
+  <h3><a href="/announcements">Announcements</a></h3>
+  <p><a href="/announcement/new">New Announcement</a></p>
+  <% @announcements.each do |announcement| %>
+  <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
+  <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+  <% end %>
+</div>
+
 <% @sections.each do |section| %>
 <div class="col-4">
   <h3><a href="<%= section.url %>"><%= section.name %></a></h3>
@@ -9,22 +18,21 @@
 </div>
 <% end %>
 
-<div class="announcements-feed col-4 float-right">
-  <h3><a href="/announcements">Announcements</a></h3>
-  <p><a href="/announcement/new">New Announcement</a></p>
-  <% @announcements.each do |announcement| %>
-  <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
-  <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
-  <% end %>
-</div>
-
-
-<div class="col-8">
+<div class="col-8" style="clear:left;">
   <h3>Assignments</h3>
   <p><a href="/assignments/new">New Assignment</a></p>
   <% @sections.assignments.all(order: :created_at.desc).each do |assignment| %>
   <div class="excerpt">
     <%= assignment.title %>
+  </div>
+  <% end %>
+</div>
+
+<div class="col-8">
+  <h3>Recent Posts</h3>
+  <% @sections.users.students.posts.all(draft: false, order: :published_at.desc, limit: 10).each do |post| %>
+  <div class="feed-item">
+    <%= post.published_at.strftime("%m/%d") %> <%= post.user %> <a href="<%= post.url %>"><%= post.title %></a>
   </div>
   <% end %>
 </div>

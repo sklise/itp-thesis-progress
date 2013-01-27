@@ -1,6 +1,16 @@
 <div class="col-3">
   <h2><a href="<%= @user.url %>"><%= @user %></a></h2>
+
+  <% if env['warden'].user.advisor? %>
+    <h6><a href="<%= @user.sections.first.url %>"><%= @user.sections.first.name %></a></h6>
+    <ul>
+    <% @user.sections.first.students.each do |student| %>
+    <li><a href="<%= student.url %>"><%= student %></a></li>
+    <% end %>
+    </ul>
+  <% else %>
   <a href="<%= @user.sections.first.url %>"><%= @user.sections.first.name %></a>
+  <% end %>
 </div>
 
 <div class="col-9">
