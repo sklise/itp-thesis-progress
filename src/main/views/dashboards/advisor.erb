@@ -23,7 +23,7 @@
   <p><a href="/assignments/new">New Assignment</a></p>
   <% @sections.assignments.all(order: :created_at.desc).each do |assignment| %>
   <div class="excerpt">
-    <%= assignment.title %>
+    <h4><a href="<%= assignment.url %>"><%= assignment.title %></a></h4>
   </div>
   <% end %>
 </div>

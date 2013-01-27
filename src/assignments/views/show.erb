@@ -2,8 +2,13 @@
   <h1 class="page-title"><a href="/assignments">Assignments</a></h1>
 </div>
 
-<div class="col-12">
-<h2><%= @assignment.title %></h2>
+<div class="col-12 announcement">
+  <h2><%= @assignment.title %></h2>
+  <hgroup>
+  <h6>Posted on <%= @assignment.created_at.strftime("%B %d, %Y") %> to <%= list @assignment.sections, {:attribute => :name, :default => "all sections"} %></h6>
+  <h3 class="author"><em>by</em> <%= @assignment.user %></h3>
+  <p><% if env['warden'].user.advisor? %><a href="<%= @assignment.url %>/edit">Edit</a> <a class="delete-link" href="<%= @assignment.url %>/delete">Delete</a><% end %></p>
+  </hgroup>
 
 <div>
   <%= mdown @assignment.brief %>
@@ -14,7 +19,7 @@
 <% @assignment.posts.all(draft: false).each do |post| %>
   <div class="post">
     <h3><%= post.user %></h3>
-    <h4><a href="<%= post.url %>"><%= post.title %></a> on <span class="date"><%= post.published_at.strftime("%m/%d") %></span> <span class="category"><%= post.category %></span></h4>
+    <h4><a href="<%= post.url %>"><%= post.title %></a> on <span class="date"><%= post.created_at.strftime("%m/%d") %></span> <span class="category"><%= post.category %></span></h4>
     <div class="content">
       <%= mdown post.content %>
     </div>

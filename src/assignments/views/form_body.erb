@@ -1,0 +1,15 @@
+<input name="assignment[title]" id="assignment-title" type="text" value="<%= @assignment.title %>" placeholder="Title of Assignment"/>
+
+<div class="expanding-area">
+  <pre><span></span><br></pre>
+  <textarea placeholder="Write the assignment brief here..." name="assignment[brief]" id="assignment-brief"><%= @assignment.brief %></textarea>
+</div>
+
+<h4>Sections</h4>
+<p class="description">Choose which sections to address this assignment.</p>
+<fieldset class="button-labels">
+  <input id="all-sections" type="radio"  name="assignment[everyone]" value="true" <%= @assignment.everyone ? "checked" : "" %>/><label for="all-sections" checked>All Students</label>
+  <% @sections.each do |section| %>
+  <input id="section-<%= section.id %>" type="checkbox" value="<%= section.id %>" name="assignment[section_ids][]" <%= @assignment.sections.include?(section) ? "checked" : "" %>/><label for="section-<%= section.id %>"><%= section.name %></label>
+  <% end %>
+</fieldset>

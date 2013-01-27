@@ -35,6 +35,7 @@ class AssignmentsApp < Sinatra::Base
   # edit
   get '/:year/:id/edit/?' do
     require_admin
+    @sections = Section.all
     @assignment = Assignment.first(params[:id])
     erb :edit
   end
@@ -51,12 +52,9 @@ class AssignmentsApp < Sinatra::Base
   # create
   post '/new' do
     require_admin
-    @assignment = Assignment.new(params[:assignment])
 
-    # Link @assignment to the specified Sections.
-    params[:sections].each do |section_id|
-      @assignment.assignment_sections << AssignmentSection.new(section_id: section_id)
-    end
+    @assignment = Assignment.new(params[:assignment])
+    @assignment.user_id = env['warden'].user.id
 
     if @assignment.save
       flash.success = "Assignment saved successfully."

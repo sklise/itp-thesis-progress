@@ -1,12 +1,12 @@
 <div class="col-12">
 
   <h2 class="page-title">Create a new Assignment</h2>
-  <form action="/assignments/new" method="post" class="form">
+  <form action="<%= @assignment.url %>/update" method="post" class="form">
 
     <%= erb :form_body, layout: false, locals: {:@assignment => @assignment} %>
 
     <div class="action-buttons">
-      <input class="submit" type="submit" value="Create New Assignment" />
+      <input class="submit" type="submit" value="Update Assignment" />
     </div>
   </form>
 
