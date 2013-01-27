@@ -35,7 +35,7 @@ class StudentsApp < Sinatra::Base
     end
 
     @posts = Post.paginate(page: 1, order: :published_at.desc, user: @user, draft: false)
-    erb :index
+    erb :'progress_index'
   end
 
   get '/:netid/progress/page/:page_number/?' do
@@ -46,7 +46,7 @@ class StudentsApp < Sinatra::Base
     end
 
     @posts = Post.paginate(page: params[:page_number], order: :published_at.desc, user: @user, draft: false)
-    erb :index
+    erb :'progress_index'
   end
 
   #############################################################################
@@ -92,7 +92,7 @@ class StudentsApp < Sinatra::Base
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
     else
-      erb :'show'
+      erb :'progress_show'
     end
   end
 
@@ -101,14 +101,17 @@ class StudentsApp < Sinatra::Base
 
     @categories = Category.all
     @post = Post.first(id: params[:id])
-    erb :edit
+    erb :'progress_edit'
   end
 
   post '/:netid/:id/:slug/update' do
     check_user(params[:netid])
     @post = Post.first(id: params[:id])
 
-    @post.update(params[:post])
+    @post.title = params[:post][:title]
+    @post.content = params[:post][:content]
+    @post.category_id = params[:post][:category_id]
+    @post.draft = params[:post][:draft]
 
     if @post.save
       flash.success = "Post updated successfully"
@@ -130,7 +133,7 @@ class StudentsApp < Sinatra::Base
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.new
-    erb :new_post
+    erb :'progress_new'
   end
 
   post '/new' do
