@@ -65,7 +65,7 @@ class Post
   end
 
   def self.drafts
-    all(draft:true)
+    all(draft: true)
   end
 
   def published
