@@ -16,13 +16,6 @@
   </div>
   <% end %>
 
-  <h3>Students</h3>
-  <ul>
-  <% @section.students.each do |student| %>
-    <li><a href="<%= student.url %>"><%= student %></a></li>
-  <% end %>
-  </ul>
-
   <h3>Announcements</h3>
 
   <% if env['warden'].user.advisor? %>
