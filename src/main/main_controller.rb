@@ -26,7 +26,7 @@ class Main < Sinatra::Base
         @assignments = @user.sections.assignments.all(order: :created_at.desc)
         @comments = @user.posts.comments.all(order: :created_at.desc)
         @announcements = Announcement.all(limit: 10, order: :published_at.desc)
-        @recent_posts = @user.sections.first.students.posts.paginate(page:1, order: :published_at.desc)
+        @recent_posts = @user.sections.first.students.posts.paginate(page:1, order: :published_at.desc, draft: false)
         erb :'dashboards/student'
       end
     else
