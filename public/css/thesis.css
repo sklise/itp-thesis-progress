@@ -1,3 +1,10 @@
+/*
+
+777 - alt link color
+bbb - official gray text color
+
+*/
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -311,12 +318,12 @@ color: rgb(53, 130, 245);
 
 #header ul li {
   display: inline-block;
-  line-height: 1.5em;
+  font-size: .875em;
+  line-height: 1.714285714em;
   margin-right: 0.25em;
 }
 
 #account-nav {
-  font-size: .9em;
   text-align: right;
 }
 
@@ -333,11 +340,11 @@ color: rgb(53, 130, 245);
 #logout-link {
   display: inline-block;
   background-image: url('/images/logout.svg');
-  background-size: 14px 14px;
+  background-size: 0.875em 0.875em;
   background-repeat: no-repeat;
   background-position: center center;
-  width: 16px;
-  height: 1.2em;
+  width: 0.875em;
+  height: 1.6em;
 }
 
 h1.page-title {
