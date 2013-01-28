@@ -1,26 +1,33 @@
 <div class='col-12'>
-  <h1 class="page-title"><a href="/sections">Sections</a></h1>
+  <h1 class="page-title"><a href="/sections">Sections</a>: <%= @section.name %></h1>
   <% if env['warden'].user.advisor? %><a href="<%= @section.url %>/edit">Edit</a><% end %>
 </div>
 
 <div class="col-3">
-  <h3><%= @section.name %></h3>
 
-  <h4>Assignments</h4>
+  <h3>Assignments</h3>
+  <% if env['warden'].user.advisor? %>
+  <p><a href="/assignments/new">New Assignment</a></p>
+  <% end %>
+
   <% @section.assignments.each do |assignment| %>
   <div class="feed-item">
     <a href="/assignments/<%= assignment.year %>/<%= assignment.id %>"><%= assignment.title %></a>
   </div>
   <% end %>
 
-  <h4>Students</h4>
+  <h3>Students</h3>
   <ul>
   <% @section.students.each do |student| %>
     <li><a href="<%= student.url %>"><%= student %></a></li>
   <% end %>
   </ul>
 
-  <h4>Announcements</h4>
+  <h3>Announcements</h3>
+
+  <% if env['warden'].user.advisor? %>
+  <p><a href="/announcements/new">New Announcement</a></p>
+  <% end %>
 
   <% @section.announcements.paginate(:page => 1, order: :published_at.desc).each do |announcement| %>
     <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement} %>
@@ -29,15 +36,21 @@
 </div>
 
 <div class="col-9">
+  <h3>Students</h3>
   <% @section.students.all(order: :first_name.asc).each do |student| %>
-  <h4><%= student %></h4>
+  <div class="student-summary">
+  <h4><a href="<%= student.url %>"><%= student %></a></h4>
+    <ul class="inline quick-links">
+      <% if env['warden'].user.advisor? %><li><a href="/applications/<%= student.netid %>">Application</a></li><% end %>
+      <li><a href="<%= student.url %>/progress">All <%= student.first_name %>'s Posts</a></li>
+    </ul>
+
+    <h6>Recent Posts</h6>
     <% student.posts(order: :published_at.desc, draft: false, limit: 5).each do |post| %>
     <div class="feed-item">
     <a href="<%= post.url %>"><%= post.title %></a> <span class="category"><%= post.category %></span> <span class="date"><%= post.published_at.strftime("%B %d") %></span>
     </div>
     <% end %>
-    <div class="feed-item">
-      <a href="<%= student.url %>/progress">All <%= student.first_name %>'s Posts</a>
-    </div>
+  </div>
   <% end %>
 </div>

@@ -321,12 +321,29 @@ color: rgb(53, 130, 245);
   text-align: right;
 }
 
+#account-nav ul li {
+  display: inline-block;
+  line-height: 1.5em;
+}
+
 .new-post-link {
   display: inline-block;
   background: url('/images/compose.svg');
   background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center center;
   width: 16px;
   height: 16px;
+}
+
+#logout-link {
+  display: inline-block;
+  background-image: url('/images/logout.svg');
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 16px;
+  height: 1.2em;
 }
 
 h1.page-title {
@@ -522,6 +539,10 @@ div.markdown-mark {
   padding: 0.75em 0;
 }
 
+.excerpt .content {
+  font-size: .9em;
+}
+
 .excerpt .content * {
   font-size: 1em;
 }
@@ -646,11 +667,67 @@ div.markdown-mark {
 .comment-icon.cread {
   background-image: url('/images/comment-read.svg');
 }
+
+/*****************************************************************************
+ *
+ * STUDENT SUMMARY
+ *
+ *****************************************************************************/
+
+.student-summary {
+  margin-bottom: 3em;
+}
+
+.student-summary h4 {
+  margin: 0;
+  line-height: 2em;
+}
+
+.student-summary h6 {
+  margin-top: 1.714285714em;
+}
+
+.student-summary .quick-links,
+.student-summary h6 {
+  font-size: 0.875em; /* 14 / 16 */
+  line-height: 1.714285714em; /* 24 / 14 */
+}
+
+.student-summary .quick-links a {
+  text-decoration: none;
+  color: #777;
+}
+
+.student-summary .quick-links a:hover {
+  color: rgb(0, 0, 245);
+}
+
 /*****************************************************************************
  *
  * FORMAT CLASSES
  *
  *****************************************************************************/
+
+.inline {
+  /*line-height: 3em;*/
+  list-style-type: none;
+  margin: 0 0;
+}
+
+.inline li {
+  display: inline-block;
+  margin: 0 0.5em 0 0;
+}
+
+.username {
+  color: #7a46bf;
+}
+
+
+
+.username {
+  font-weight: bold;
+}
 
 .float-right {
   float: right;
@@ -719,8 +796,8 @@ button.small {
   height: 0.125em;
 }
 
-/*#middle { background-image: url('/images/grid.gif'); background-position-y: 0.75em;}*/
-
 button[disabled] {
   background: #efefef;
 }
+
+/*#middle { background-image: url('/images/grid.gif'); background-position-y: 0.75em;}*/

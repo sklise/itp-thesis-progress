@@ -44,7 +44,6 @@
           <% env['warden'].user.sections.each do |section| %>
           <li><a href="<%= section.url %>"><%= section.name %></a></li>
           <% end %>
-          <li><a href="/assignments">Assignments</a></li>
           <li><a href="/page/new">New Page</a></li>
           <li><a href="/announcements/new">New Announcement</a></li>
           <% else %>
@@ -57,8 +56,8 @@
           </li>
           <li><a href="/students/new" class="new-post-link">&nbsp;</a></li>
           <% end %>
-          <li><%= env['warden'].user.netid %></li>
-          <li><a href="/session/logout">Log Out</a></li>
+          <li class="username"><%= env['warden'].user.first_name %></li>
+          <li><a href="/session/logout" title="log out" id="logout-link">&nbsp;</a></li>
         </ul>
       <% else %>
         <a href="/session/login">Log In</a>
