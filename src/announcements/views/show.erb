@@ -6,7 +6,14 @@
 <div class="announcement">
   <h2><%= @announcement.title %></h2>
   <hgroup>
-  <h6>Posted on <%= @announcement.published_at.strftime("%B %d, %Y") %> to <%= list @announcement.sections, {:attribute => :name, :default => "all sections"} %></h6>
+  <h6>
+    Posted on <%= @announcement.published_at.strftime("%B %d, %Y") %> to
+    <% if @announcement.everyone %>
+    'Everyone'
+    <% else %>
+    <%= list( @announcement.sections, {:attribute => :name, :default => "all sections"}) %>
+    <% end %>
+  </h6>
   <h3 class="author"><em>by</em> <%= @announcement.user %></h3>
   <p><% if env['warden'].user.advisor? %><a href="<%= @announcement.url %>/edit">Edit</a> <a class="delete-link" href="<%= @announcement.url %>/delete">Delete</a><% end %></p>
   </hgroup>

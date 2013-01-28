@@ -27,9 +27,8 @@ class Assignment
   # Look at sections_id attr_accessor and everyone, as well as sections to
   # either add or remove sections.
   def add_sections
-    # If no section_ids were given and there are currently no associations.
-    # Set `everyone` to true.
-    if self.section_ids.nil? || self.sections.length == 0
+    # If no section_ids were given a set `everyone` to true.
+    if self.section_ids.nil?
       self.everyone = true
     else
       self.everyone = false

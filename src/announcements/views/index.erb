@@ -16,11 +16,11 @@
       <h6><%= announcement.published_at.strftime("%m/%d/%y") %></h6>
       <h2><a href="/announcements/<%= announcement.year %>/<%= announcement.issue %>"><%= announcement.title %></a></h2>
       <h3 class="author"><em>by</em> <%= announcement.user %></h3>
-      <ul>
-      <% announcement.sections.each do |section| %>
-        <li><%= section.name %></li>
+      <% if announcement.everyone %>
+      Everyone
+      <% else %>
+      <%= list(announcement.sections, {:attribute => :name, :default => "all sections"}) %>
       <% end %>
-      </ul>
     </hgroup>
 
     <div>

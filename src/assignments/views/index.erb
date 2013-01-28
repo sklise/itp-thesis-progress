@@ -20,11 +20,11 @@
       <h6><%= assignment.created_at.strftime("%m/%d/%y") %></h6>
       <h2><a href="<%= assignment.url %>"><%= assignment.title %></a></h2>
       <h3 class="author"><em>by</em> <%= assignment.user %></h3>
-      <ul>
-      <% assignment.sections.each do |section| %>
-        <li><%= section.name %></li>
+      <% if assignment.everyone %>
+      Everyone
+      <% else %>
+      <%= list( assignment.sections, {:attribute => :name, :default => "all sections"}) %>
       <% end %>
-      </ul>
     </hgroup>
 
     <div>

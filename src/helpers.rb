@@ -24,7 +24,7 @@ module Sinatra
 
         set = []
         collection.each do |c|
-          set.push c[options[:attribute]]
+          set.push "<a href='#{c.url}'>#{c[options[:attribute]]}</a>"
         end
 
         set.join(", ")
