@@ -2,28 +2,38 @@
 <h2>Your Assignments</h2>
 </div>
 
+<div class="col-9">
 <% if env['warden'].user.role == 'advisor' %>
 <a href="/assignments/new">Create A New Assignment</a>
 <% end %>
 
-<% @assignments.each do |assignment| %>
-<div>
-  <h4><%= assignment.title %></h4>
-
-  <div class="meta">
-    <span class="due"><%= "Due: " + assignment.due_at.strftime("%m/%d/%y") if assignment.due_at %></span>
-    <% if env['warden'].user.advisor? %>
-    <a href="/assignments/<%= assignment.year %>/<%= assignment.id %>/edit">Edit</a>
-    <% end %>
-    <ul>
+  <% if @assignments.length == 0 %>
+  <% if request.path.match(/assignments\/?$/) %>
+  <p>There are no assignments :(</p>
+  <% else %>
+  <p>There aren't this many pages of assignments. <a href="/assignments">Go to the first page</a>.</p>
+  <% end %>
+<% else %>
+  <% @assignments.each do |assignment| %>
+  <div class='announcement'>
+    <hgroup>
+      <h6><%= assignment.created_at.strftime("%m/%d/%y") %></h6>
+      <h2><a href="<%= assignment.url %>"><%= assignment.title %></a></h2>
+      <h3 class="author"><em>by</em> <%= assignment.user %></h3>
+      <ul>
       <% assignment.sections.each do |section| %>
-      <li><%= section.name %></li>
+        <li><%= section.name %></li>
       <% end %>
-    </ul>
-  </div>
+      </ul>
+    </hgroup>
 
-  <div>
-    <%= assignment.brief %>
+    <div>
+      <%= mdown assignment.brief %>
+    </div>
   </div>
-</div>
+  <div class="hr"></div>
+  <% end %>
 <% end %>
+
+<%= will_paginate @assignments %>
+</div>

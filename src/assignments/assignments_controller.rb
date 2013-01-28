@@ -22,7 +22,7 @@ class AssignmentsApp < Sinatra::Base
 
   # show
   get '/:year/:id/?' do
-    @assignment = Assignment.first(params[:id])
+    @assignment = Assignment.get(params[:id])
     erb :show
   end
 
@@ -53,17 +53,12 @@ class AssignmentsApp < Sinatra::Base
   post '/new' do
     require_admin
 
-    @assignment = Assignment.new(params[:assignment])
-    @assignment.user_id = env['warden'].user.id
+    params[:assignment][:user_id] = env['warden'].user.id
 
-    if @assignment.save
-      flash.success = "Assignment saved successfully."
-      redirect "/assignments/#{@assignment.year}/#{@assignment.id}"
-    else
-      pp @assignment
-      flash.error = "We've encountered a problem."
-      redirect "/assignments/new"
-    end
+    @assignment = Assignment.create(params[:assignment])
+
+    flash.success = "Assignment saved successfully."
+    redirect "/assignments/#{@assignment.year}/#{@assignment.id}"
   end
 
 
@@ -82,7 +77,7 @@ class AssignmentsApp < Sinatra::Base
   end
 
   # delete
-  post '/:year/:id/destroy' do
+  get '/:year/:id/delete' do
     require_admin
     @assignment = Assignment.first(params[:id])
 

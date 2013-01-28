@@ -60,12 +60,9 @@ var buttonToggles = function ($label) {
     $(radioInput).removeAttr('checked');
   });
 
-
-  $label.siblings().removeAttr('checked');
-  $label.siblings().removeClass('checked');
-
   if ($(input).attr('type') === "radio") {
-    console.log($(input).prop('checked'))
+    $label.siblings().removeAttr('checked');
+    $label.siblings().removeClass('checked');
 
     if ($label.hasClass('checked')) {
       $('.null-radio').attr('checked',true)
