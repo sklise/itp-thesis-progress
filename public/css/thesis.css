@@ -293,11 +293,14 @@ input:focus, textarea:focus {
 color: rgb(53, 130, 245);
 }
 
-#header img {
-  width: 100%;
+#logo {
+  height: 1.5em;
+  float: left;
+  margin-right: 0.75em;
 }
 
 #main-nav {
+  float: left;
 }
 
 #header ul {
@@ -308,22 +311,13 @@ color: rgb(53, 130, 245);
 
 #header ul li {
   display: inline-block;
-  line-height: 0em;
+  line-height: 1.5em;
   margin-right: 0.25em;
-  vertical-align: baseline;
-}
-
-#main-nav ul {
 }
 
 #account-nav {
   font-size: .9em;
   text-align: right;
-}
-
-#account-nav ul li {
-  display: inline-block;
-  line-height: 1.5em;
 }
 
 .new-post-link {

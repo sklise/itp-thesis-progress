@@ -26,15 +26,16 @@
 
   <div id="top">
     <div id="header" class="grid-wrapper">
-      <div class="col-2">
-      <a href="/"><img src="/images/thesis.png" alt="ITP THESIS" /></a>
-      </div>
-      <div id="main-nav" class="col-4">
-        <ul>
+      <div class="col-6">
+
+        <a href="/"><img id="logo" src="/images/thesis.png" alt="ITP THESIS" /></a>
+
+        <ul id="main-nav">
           <% Page.all.each do |page| %>
           <li><a href="/<%= page.slug %>"><%= page.title %></a></li>
           <% end %>
         </ul>
+
       </div>
 
       <div id="account-nav" class="col-6">
