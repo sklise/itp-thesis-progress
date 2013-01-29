@@ -3,8 +3,8 @@ require 'pp'
 class AssignmentsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
-  set :cache, Dalli::Client.new
-  set :enable_cache, true
+  # set :cache, Dalli::Client.new
+  # set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
   set :logging, true
@@ -23,6 +23,9 @@ class AssignmentsApp < Sinatra::Base
   # show
   get '/:year/:id/?' do
     @assignment = Assignment.get(params[:id])
+
+    halt 404 if @assignment.nil?
+
     erb :show
   end
 
@@ -37,6 +40,9 @@ class AssignmentsApp < Sinatra::Base
     require_admin
     @sections = Section.all
     @assignment = Assignment.get(params[:id])
+
+    halt 404 if @assignment.nil?
+
     erb :edit
   end
 
@@ -45,6 +51,8 @@ class AssignmentsApp < Sinatra::Base
     require_admin
     @assignment = Assignment.new
     @sections = Section.all
+
+    halt 404 if @assignment.nil?
 
     erb :new
   end
