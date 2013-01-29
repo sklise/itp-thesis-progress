@@ -9,7 +9,8 @@ class AuthenticationManager < Sinatra::Base
   end
 
   get '/login' do
-    erb :login
+    # erb :login
+    redirect "/auth/saml"
   end
 
   post '/login' do
@@ -33,4 +34,16 @@ class AuthenticationManager < Sinatra::Base
     flash.success = 'Successfully logged out'
     redirect '/'
   end
+end
+
+class Ommmm < Sinatra::Base
+
+  get '/saml/callback' do
+    raise request.env['omniauth.auth'].inspect
+  end
+
+  post '/saml/callback' do
+    raise request.env['omniauth.auth'].inspect
+  end
+
 end

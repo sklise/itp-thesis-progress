@@ -7,6 +7,16 @@ Dir["./src/*.rb"].each {|file| require file }
 Dir["./src/*/*.rb"].each {|file| require file }
 
 builder = Rack::Builder.new do
+  use Rack::Session::Cookie, key: "ooooooohyeaaaaa"
+
+  use OmniAuth::Builder do
+    provider :saml,
+      :assertion_consumer_service_url => "http://localhost:9393/auth/saml/callback",
+      :issuer                         => "ITP Thesis Site Local",
+      :idp_sso_target_url             => "http://itp.nyu.edu/simplesaml/saml2/idp/SSOService.php",
+      :idp_cert                       => ENV['IDP_CERT']
+  end
+
   use Warden::Manager do |config|
     config.serialize_into_session{|user| user.id }
     config.serialize_from_session{|id| User.get(id) }
@@ -26,6 +36,7 @@ builder = Rack::Builder.new do
     end
 
     def authenticate!
+      raise params.inspect
       user = User.first(netid: params['user']['netid'])
 
       if user.nil?
@@ -39,7 +50,6 @@ builder = Rack::Builder.new do
   end
 
   use Rack::MethodOverride
-  use Rack::Session::Cookie
   use Rack::Flash, accessorize: [:error, :success]
 
   # Hook up the apps

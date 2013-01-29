@@ -18,6 +18,10 @@ gem 'will_paginate', '3.0.3', require: ['will_paginate', 'will_paginate/data_map
 gem 'aws-s3', require: "aws/s3"
 
 gem 'warden', '1.2.1'
+gem 'warden_omniauth'
+gem 'omniauth'
+gem 'omniauth-saml'
+
 gem 'rack-flash3', '1.0.1', require: 'rack/flash'
 
 gem 'stathat'
