@@ -335,7 +335,11 @@ input:focus, textarea:focus {
   display: inline-block;
   font-size: .875em;
   line-height: 1.714285714em;
-  margin: 0 0.25em;
+  margin: 0 0.5em;
+}
+
+#header ul li:last-child {
+  margin-right: 0;
 }
 
 #account-nav {
@@ -752,13 +756,24 @@ div.markdown-mark {
 }
 
 .student-summary h6 {
-  margin-top: 1.714285714em;
+  font-size: 0.875em; /* 14 / 16 */
+  margin-top: 0;
+  line-height: 2.571428571em;
 }
 
-.student-summary .quick-links,
-.student-summary h6 {
+.student-summary .quick-links {
   font-size: 0.875em; /* 14 / 16 */
   line-height: 1.714285714em; /* 24 / 14 */
+}
+
+.student-summary .quick-links {
+  list-style-type: none;
+  margin: 0;
+}
+
+.student-summary .quick-links li {
+  display: inline-block;
+  margin: 0 1em 0 0;
 }
 
 .student-summary .quick-links a {

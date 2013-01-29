@@ -10,9 +10,9 @@
     <p>
       <%= section.advisor %>
     </p>
-    <ul>
+    <ul style="list-style-type: none;margin:0 0 1.5em;">
       <% section.students.each do |student| %>
-      <li><%= student %></li>
+      <li><a href="<%= student.url %>"><%= student %></a></li>
       <% end %>
     </ul>
   </div>
