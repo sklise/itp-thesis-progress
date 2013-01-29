@@ -1,12 +1,12 @@
 <h1>Your Thesis</h1>
 
-<form action="/thesis/update" method="post" enctype="multipart/form-data">
+<form action="<%= @thesis.user.url %>/thesis/update" method="post" enctype="multipart/form-data">
 
   <div class="row">
   <fieldset class="col-8">
     <div class="spaced-row">
       <h6>Title</h6>
-      <input type="text" name="thesis[title]" val="<%= @thesis.title %>" placeholder="Thesis Title">
+      <input type="text" name="thesis[title]" value="<%= @thesis.title %>" placeholder="Thesis Title">
     </div>
 
     <div class="spaced-row">
@@ -49,7 +49,7 @@
       <img src="<%= @thesis.image %>" />
     <% end %>
 
-    <p>Replace your image: <input type="file" name="thesis[image]"></p>
+    <p>Replace your image: <input type="file" name="image"></p>
     </div>
 
     <div class="spaced-row">

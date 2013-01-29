@@ -12,7 +12,7 @@ class Thesis
   property :research_plan, Text # limit to 150 words
   property :link, String
 
-  property :image, String
+  property :image, Text
 
   property :user_id, Integer
 

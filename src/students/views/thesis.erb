@@ -1,72 +1,50 @@
-<div class="col-12">
-  <h1><a href="<%= @user.url %>"><%= @user %></a> thesis</h1>
+<div class="col-3">
+  <%= erb :sidebar, layout: false, locals: {user: @user} %>
 </div>
 
-<div class="col-8">
+<div class="col-9">
+  <h2>Thesis</h2>
+  <% if @user == env['warden'].user %>
+  <a href="<%= @user.url %>/thesis/edit">Edit</a>
+  <% end %>
+</div>
 
+<div class="col-6">
   <div class="spaced-row">
     <h6>Title</h6>
-    <% if @thesis.title.nil? || @thesis.title == "" %>
-    <p>Your thesis has no title, <a href="/thesis/edit">add one</a>.</p>
-    <% else %>
     <h3><%= @thesis.title %></h3>
-    <% end %>
   </div>
 
   <div class="spaced-row">
     <h6>Elevator Pitch</h6>
-    <% if @thesis.elevator_pitch.nil? || @thesis.elevator_pitch == "" %>
-    <p>Your thesis has no elevator pitch, <a href="/thesis/edit">add one</a>.</p>
-    <% else %>
     <%= @thesis.elevator_pitch %>
-    <% end %>
   </div>
 
   <div class="spaced-row">
     <h6>Description</h6>
-    <% if @thesis.description.nil? || @thesis.description == "" %>
-    <p>Your thesis has no description, <a href="/thesis/edit">add one</a>.</p>
-    <% else %>
     <%= @thesis.description %>
-    <% end %>
   </div>
 
   <div class="spaced-row">
     <h6>Why You Want to Make This</h6>
-    <% if @thesis.reason.nil? || @thesis.reason == "" %>
-    <p>You haven't explained why you want to do this, <a href="/thesis/edit">explain now</a>.</p>
-    <% else %>
     <%= @thesis.reason %>
-    <% end %>
   </div>
 
   <div class="spaced-row">
     <h6>Research Plan</h6>
-    <% if @thesis.research_plan.nil? || @thesis.research_plan == "" %>
-    <p>Your thesis has no research plan, <a href="/thesis/edit">add one</a>.</p>
-    <% else %>
     <%= @thesis.research_plan %>
-    <% end %>
   </div>
 
 </div>
 
-<div class="col-4">
+<div class="col-3">
   <div class="spaced-row">
   <h6>Image</h6>
-  <% if @thesis.image.nil? || @thesis.image == "" %>
-    <p>There is no image for your thesis, <a href="/thesis/edit">add one</a>.</p>
-  <% else %>
-    <img src="<%= @thesis.image %>" />
-  <% end %>
+  <img style="width: 100%;"src="<%= @thesis.image %>" />
   </div>
 
   <div class="spaced-row">
     <h6>URL</h6>
-    <% if @thesis.link.nil? || @thesis.link == "" %>
-    <p>You have not provided a link for your thesis, <a href="/thesis/edit">add one</a>.</p>
-    <% else %>
-    <a href="<%= @thesis.link %>">@thesis.link</a>
-    <% end %>
+    <a href="<%= @thesis.link %>"><%= @thesis.link %></a>
   </div>
 </div>

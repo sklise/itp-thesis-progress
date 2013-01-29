@@ -1,3 +1,5 @@
+require 'uri'
+
 class StudentsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
@@ -63,6 +65,7 @@ class StudentsApp < Sinatra::Base
 
   get '/:netid/thesis/edit' do
     check_user(params[:netid])
+
     @thesis = Thesis.first(:user => env['warden'].user)
     erb :thesis_edit
   end
@@ -70,19 +73,32 @@ class StudentsApp < Sinatra::Base
   post '/:netid/thesis/update' do
     check_user(params[:netid])
     content_type :json
-    @thesis = Thesis.first(:user => env['warden'].user)
 
-    # Notify advisor!
+    @thesis = Thesis.first(:user => env['warden'].user)
+    @user = @thesis.user
+
+    if params[:image]
+      image_path = "#{@user.netid}-#{Time.now.to_i}/#{URI.escape(params[:image][:filename].gsub(" ","_"))}"
+
+      AWS::S3::Base.establish_connection!(:access_key_id => ENV['S3_ACCESS_KEY'], :secret_access_key => ENV['S3_SECRET_KEY'])
+      AWS::S3::S3Object.store(image_path, open(params[:image][:tempfile]), "itp-thesis", access: :public_read)
+      params[:thesis][:image] = "http://itp-thesis.s3.amazonaws.com/" + image_path
+    end
 
     if @thesis.update(params[:thesis])
-      flash.success = "Thesis updated, please tell your advisor."
-      redirect '/thesis'
+      flash.success = "Thesis summary."
+      redirect "#{@thesis.user.url}/thesis"
     else
       flash.error = "There was an error updating your thesis."
-      redirect '/thesis/edit'
+      redirect "#{@thesis.user.url}/thesis/edit"
     end
   end
 
+  #############################################################################
+  #
+  # POSTS
+  #
+  #############################################################################
 
 
   get '/:netid/:id/:slug/?' do
@@ -165,7 +181,8 @@ class StudentsApp < Sinatra::Base
   get '/:netid/?' do
     @user = User.first(netid: params[:netid])
     @categories = Category.all
-    erb :profile
+    # erb :profile
+    redirect "/students/#{params[:netid]}/progress"
   end
 
 end

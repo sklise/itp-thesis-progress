@@ -9,7 +9,11 @@
   <h6>Drafts</h6>
     <% @drafts.each do |draft| %>
     <div class="feed-item">
-      <a href="<%= draft.url %>/edit"><div class="draft-icon draft">&nbsp;</div><%= draft.updated_at.strftime("%m/%d") %> <%= draft.title %></a>
+      <span class="date"><%= longdate draft.updated_at %></span>
+       &mdash; <%= draft.title %> &mdash;
+      <span class="caption"><%= draft.content[0..160] %>...</span>
+
+      <a href="<%= draft.url %>/edit">Edit</a>
     </div>
     <% end %>
   <% end %>
