@@ -147,7 +147,7 @@ class StudentsApp < Sinatra::Base
 
     if @post.save
       flash.success = "Post Saved"
-      redirect "/students"
+      redirect "#{@post.url}"
     else
       raise @post.inspect
       flash.error = "There was an issue creating that post"
