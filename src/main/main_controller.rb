@@ -17,17 +17,17 @@ class Main < Sinatra::Base
     if env['warden'].authenticated?
       @user = env['warden'].user
 
-      if @user.advisor?
-        @announcements = Announcement.all(limit: 10, order: :published_at.desc)
-        @sections = env['warden'].user.sections
-        erb :'dashboards/advisor'
-      else
+      if @user.student?
         @drafts = @user.posts.drafts
         @assignments = @user.sections.assignments.all(order: :created_at.desc)
         @comments = @user.posts.comments.all(order: :created_at.desc, limit: 10)
         @announcements = Announcement.all(limit: 10, order: :published_at.desc, draft: false)
         @recent_posts = @user.sections.first.students.posts.paginate(page:1, order: :published_at.desc, draft: false)
         erb :'dashboards/student'
+      else
+        @announcements = Announcement.all(limit: 10, order: :published_at.desc)
+        @sections = env['warden'].user.sections
+        erb :'dashboards/advisor'
       end
     else
       erb :front_page
