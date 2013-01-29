@@ -22,9 +22,11 @@
   <p><%= @user %> has no posts yet.</p>
 <% end %>
 
-<% @posts.each do |post| %>
-  <%= erb :list, layout: false, locals: {post: post, :@show_user => true} %>
-<% end %>
+  <div class="posts">
+  <% @posts.each do |post| %>
+    <%= erb :single_list, layout: false, locals: {post: post} %>
+  <% end %>
+  </div>
 
 <%= will_paginate @posts %>
 </div>

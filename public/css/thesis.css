@@ -512,8 +512,58 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
-.post, .announcement {
-  border-bottom: .0625em solid #ddd; /* 1 / 24 */
+.post {
+  border-bottom: 0.0625em solid #ddd;
+  padding: 0 0 1.4375em;
+  margin: 3em 0 3em;
+}
+
+.post.single,
+.post:first-child {
+  margin-top: 0;
+}
+
+.post hgroup h1 {
+  font-size: 1.5em;
+  line-height: 1em;
+  margin: 1em 0 0;
+}
+
+.post.single hgroup h1 {
+  margin-top: 0em;
+  line-height: 1.5em;
+}
+
+.post hgroup h2 {
+  margin: 0;
+  line-height: 3em;
+}
+
+.post hgroup h2 a {
+  color: rgb(53, 130, 245);
+}
+
+.post hgroup h3 {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
+}
+
+.post hgroup h4 {
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+.post-content p {
+  margin: 1.5em 0;
+}
+
+.announcement {
+  border-bottom: .0625em solid #ddd; /* 1 / 16 */
   padding-bottom: 1.4375em;
   margin-bottom: 1.5em;
   font-size: 16px;
@@ -524,8 +574,7 @@ div.markdown-mark {
   max-width: 100%;
 }
 
-.announcement h3 em,
-.post h3 em {
+.announcement h3 em {
   color: #777;
   text-transform: lowercase;
 }
