@@ -85,22 +85,20 @@
 
   <div id="bottom">
     <div id="footer" class="grid-wrapper">
-      <div class="col-6">
+      <div class="col-4">
         <h2>Information</h2>
         <% Page.all.each do |page| %>
           <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
         <% end %>
       </div>
 
-      <!-- <div class="col-4">
+      <div class="col-4">
         <h2>Browse</h2>
-        <p>Posts</p>
-        <p>Sections</p>
-        <p>Announcements</p>
-        <p>Assignments</p>
-      </div> -->
+        <p><a href="/sections">All Sections</a></p>
+        <p><a href="/students">All Student Posts</a></p>
+      </div>
 
-      <div class="col-6">
+      <div class="col-4">
         <h2>Feedback/Issues</h2>
         <p>Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
         <p>You can also write a bug report <a href="https://github.com/stevenklise/itp-thesis-progress/issues">here</a>.</p>
