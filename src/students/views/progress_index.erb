@@ -1,22 +1,9 @@
 <div class="col-3">
-  <h2><a href="<%= @user.url %>"><%= @user %></a></h2>
-
-  <% if env['warden'].user.advisor? %>
-    <p><a href="/applications/<%= @user.netid %>">View Application</a></p>
-
-    <h6><a href="<%= @user.sections.first.url %>"><%= @user.sections.first.name %></a></h6>
-    <ul>
-    <% @user.sections.first.students.each do |student| %>
-    <li><a href="<%= student.url %>"><%= student %></a></li>
-    <% end %>
-    </ul>
-  <% else %>
-  <a href="<%= @user.sections.first.url %>"><%= @user.sections.first.name %></a>
-  <% end %>
+  <%= erb :sidebar, layout: false, locals: {user: @user} %>
 </div>
 
 <div class="col-9">
-  <h1>Progress</h1>
+  <h2>Progress</h2>
 
   <% if @drafts && @drafts.length > 0 %>
   <h6>Drafts</h6>

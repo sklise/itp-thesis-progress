@@ -1,17 +1,23 @@
-<p><a href="/applications/<%= @user.netid %>">View Application</a></p>
+<div class="col-3">
+  <%= erb :sidebar, layout: false, locals: {user: @user} %>
+</div>
 
-<%= erb :thesis, layout: false, locals: {:'@thesis' => @user.thesis} %>
+<div class="col-9">
 
-<div class="col-8">
+  <%= erb :thesis, layout: false, locals: {:'@thesis' => @user.thesis} %>
 
-<h4><a href="/students/<%= @user.netid %>/progress">Progress</a></h4>
+  <div class="col-8">
 
-<% @categories.each do |category| %>
+  <h4><a href="/students/<%= @user.netid %>/progress">Progress</a></h4>
 
-  <h6><%= category.name %></h6>
+  <% @categories.each do |category| %>
 
-  <% @user.posts.all(:category_id => category.id, draft: false).each do |post| %>
-  <%= erb :list, layout: false, locals: {post: post} %>
+    <h6><%= category.name %></h6>
+
+    <% @user.posts.all(:category_id => category.id, draft: false).each do |post| %>
+    <%= erb :list, layout: false, locals: {post: post} %>
+    <% end %>
   <% end %>
-<% end %>
+  </div>
+
 </div>

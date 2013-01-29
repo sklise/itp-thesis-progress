@@ -1,10 +1,3 @@
-<div class="col-3">
-<% if @user %>
-  <h2><a href="<%= @user.url %>"><%= @user %></a></h2>
-  <a href="<%= @user.sections.first.url %>"><%= @user.sections.first.name %></a>
-<% end %>
-</div>
-
 <div class="col-9">
   <% if @user %>
   <h1>Progress</h1>

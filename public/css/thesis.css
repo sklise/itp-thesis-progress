@@ -113,8 +113,7 @@ html {
 
 h1 {
   font-size: 1.5em; /* 24px */
-  line-height: 2em; /* 48 / 24 */
-  margin: 0;
+  line-height: 1.5em; /* 48 / 24 */
 }
 
 h2 {
@@ -144,10 +143,11 @@ h5 {
 }
 
 h6 {
-  font-size: 1em; /* 16px */
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  line-height: 3em; /* 48 / 16 */
+  font-size: 0.875em; /* 14 / 16 */
+  margin-top: 0;
+  line-height: 2.571428571em;
 }
 
 /*
@@ -264,12 +264,11 @@ input:focus, textarea:focus {
 }
 
 #bottom {
-  background: #efefef;
-  border-top: 1px solid #ddd;
   margin-top: 3em;
 }
 
 #footer {
+  border-top: 1px solid #ddd;
   font-size: 80%;
   padding: 1em 0 2em;
 }
@@ -295,15 +294,6 @@ input:focus, textarea:focus {
 .message-error {
   background-color: rgba(202, 68, 71, 0.54);
   border: 1.5px solid rgba(202, 68, 71, 1);
-}
-
-#left-sidebar, #main-content, #right-sidebar {
-  float: left;
-}
-
-#left-sidebar {
-  margin-right: 2%;
-  width: 14%;
 }
 
 /*****************************************************************************
@@ -503,9 +493,25 @@ div.markdown-mark {
 
 /*****************************************************************************
  *
+ * STUDENT SIDEBAR
+ *
+ *****************************************************************************/
+
+.student-sidebar h1 {
+
+}
+
+.student-sidebar ul {
+  margin: 0 0 1.5em;
+  list-style-type: none;
+}
+
+/*****************************************************************************
+ *
  * PROGRESS POST
  *
  *****************************************************************************/
+
 .post, .announcement {
   border-bottom: .0625em solid #ddd; /* 1 / 24 */
   padding-bottom: 1.4375em;
@@ -764,12 +770,6 @@ div.markdown-mark {
 .student-summary h4 {
   margin: 0;
   line-height: 2em;
-}
-
-.student-summary h6 {
-  font-size: 0.875em; /* 14 / 16 */
-  margin-top: 0;
-  line-height: 2.571428571em;
 }
 
 .student-summary .quick-links {
