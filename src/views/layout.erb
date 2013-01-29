@@ -30,12 +30,6 @@
 
         <a href="/"><img id="logo" src="/images/thesis.png" alt="ITP THESIS" /></a>
 
-        <ul id="main-nav">
-          <% Page.all.each do |page| %>
-          <li><a href="/<%= page.slug %>"><%= page.title %></a></li>
-          <% end %>
-        </ul>
-
       </div>
 
       <div id="account-nav" class="col-6">
@@ -55,9 +49,13 @@
           <li>
             <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>
           </li>
-          <li><a href="/students/new" class="new-post-link">&nbsp;</a></li>
           <% end %>
           <li class="username"><%= env['warden'].user.first_name %></li>
+
+          <% if env['warden'].user.student? %>
+          <li><a href="/students/new" title="Write a New Post" id="new-post-link">&nbsp;</a></li>
+          <% end %>
+
           <li><a href="/session/logout" title="log out" id="logout-link">&nbsp;</a></li>
         </ul>
       <% else %>
@@ -83,10 +81,27 @@
 
   <div id="bottom">
     <div id="footer">
-      <div class="col-12">
+      <div class="col-4">
+        <h2>Information</h2>
+        <% Page.all.each do |page| %>
+          <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
+        <% end %>
+      </div>
+
+      <div class="col-4">
+        <h2>Browse</h2>
+        <p>Posts</p>
+        <p>Sections</p>
+        <p>Announcements</p>
+        <p>Assignments</p>
+      </div>
+
+      <div class="col-4">
+        <h2>Feedback/Issues</h2>
         <p>Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
         <p>You can also write a bug report <a href="https://github.com/stevenklise/itp-thesis-progress/issues">here</a>.</p>
       </div>
+      <div style="clear:both;height:0;">&nbsp;</div>
     </div>
   </div>
 </body>

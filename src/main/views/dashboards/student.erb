@@ -1,58 +1,24 @@
-<div class="quick-post col-8">
-  <h2>
-    <a href="students/new">New Post</a> <span class="markdown-mark">&nbsp;</span>
-    <a class='normal-size float-right' href="/progress">Your Posts</a>
-  </h2>
-  <form action="/students/new" method="post">
-    <div class="expanding-area">
-      <pre><span></span><br></pre>
-      <textarea placeholder="Write a post here. The first line will become the title." name="quickpost"></textarea>
-    </div>
-
-    <ul class="category-buttons col-8 nested">
-    </ul>
-    <div class="col-4 nested tright">
-        <button class="small" id="private" name="draft" value="true">Draft</button>
-        <button class="small" id="public" name="draft" value="false">Public</button>
-    </div>
-
-  </form>
-</div>
-
-<div class="announcements-feed col-4 float-right">
-  <h2><a href="/announcements">Announcements</a></h2>
-
-  <p>Recent announcements to your class or everyone.</p>
-
-  <% @announcements.each do |announcement| %>
-  <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
-  <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
-  <% end %>
-</div>
-
 <div class="col-8">
+  <% if @drafts %>
   <div class="section">
+    <h2>Drafts</h2>
+    <% @drafts.each do |draft| %>
+    <div class="feed-item">
+      <span class="date"><%= longdate draft.updated_at %></span>
+       &mdash; <%= draft.title %> &mdash;
+      <span class="caption"><%= draft.content[0..160] %>...</span>
 
-    <h2>Open Assignments</h2>
-
-    <p><a href="/assignments">View all assignments</a></p>
-    <% @assignments.each do |assignment| %>
-    <div class="dashboard-post">
-      <div class="date"><%= assignment.created_at.strftime("%B %d") %></div>
-      <h3 class="title"><strong><%= assignment.title %></strong></h3>
-      <div><%= mdown assignment.brief %></div>
-      <div><a href="/students/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a></div>
+      <a href="<%= draft.url %>/edit">Edit</a>
     </div>
     <% end %>
-
   </div>
+  <% end %>
 
   <div class="section">
-
     <h2>Activity on Your Posts</h2>
 
     <% @comments.each do |comment| %>
-    <div class="feed-item">
+    <div class="feed-item with-icon">
       <div class="comment-icon <%= comment.read ? "cread" : "ctext" %>">&nbsp;</div>
       <a href="<%= comment.user.url %>"><%= comment.user %></a>
       <% if comment.read %>
@@ -60,17 +26,55 @@
       <% else %>
       commented on
       <% end %>
-      <a href="<%= comment.post.url %>"><%= comment.post.title %></a> <span class="date"><%= comment.created_at.strftime("%m/%d") %>
+      <a href="<%= comment.post.url %>"><%= comment.post.title %></a> on <span class="date"><%= longdate comment.created_at %>
     </div>
     <% end %>
 
   </div>
 
   <div class="section">
-    <h2><%= env['warden'].user.sections.first.name %>, Recent Posts</h2>
+
+    <h2>Assignments</h2>
+
+    <% @assignments.each do |assignment| %>
+
+    <div class="assignment-list">
+      <h3 class="title"><span class="date"><%= longdate assignment.created_at %></span> &mdash; <strong><%= assignment.title %></strong></h3>
+      <div><%= mdown assignment.brief %></div>
+
+      <a class="reply-link" href="/students/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a>
+    </div>
+
+    <% end %>
+
+  </div>
+
+  <div class="section">
+
+    <h2><a href="<%= env['warden'].user.sections.first.url %>"><%= env['warden'].user.sections.first.name %></a>, Recent Posts</h2>
 
     <% @recent_posts.each do |post| %>
       <%= erb :'../../students/views/excerpt', layout: false, locals: {post:post} %>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="col-4">
+
+  <div class="section">
+    <h2><a href="/announcements">Announcements</a></h2>
+
+    <% @announcements.each do |announcement| %>
+    <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
+    <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Information</h2>
+    <% Page.all.each do |page| %>
+      <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
     <% end %>
   </div>
 </div>

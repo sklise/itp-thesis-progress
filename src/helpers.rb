@@ -5,6 +5,10 @@ module Sinatra
       include Rack::Utils
       alias_method :h, :escape_html
 
+      def longdate(d)
+        d.strftime("%b %d")
+      end
+
       def require_admin
         unless env['warden'].user.advisor?
           flash.error = "You are not authorized to access that page."

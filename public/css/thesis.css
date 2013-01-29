@@ -54,10 +54,12 @@ code {
 
 a {
   color: rgb(53, 130, 245);
+  text-decoration: none;
 }
 
 a:hover {
   color: rgb(0, 0, 245);
+  text-decoration: underline;
 }
 
 blockquote {
@@ -148,14 +150,28 @@ h6 {
   line-height: 3em; /* 48 / 16 */
 }
 
+/*
+  NEW HEADERS
+*/
+
+h2 {
+  font-size: 1em;
+  line-height: 3em;
+}
+
+h3 {
+  font-size: 1.125em; /* 18 / 16 */
+  line-height: 2em; /* 36 / 18 */
+  padding-top: 0.666666667em; /* 12 / 18 */
+}
+
+
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: #000;
-  text-decoration: none;
 }
 
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
   color: rgb(53, 130, 245);
-  text-decoration: underline;
 }
 
 p {
@@ -238,7 +254,7 @@ input:focus, textarea:focus {
   margin: 0 auto;
 }
 
-#middle, #footer {
+#middle {
   overflow-y: auto;
 }
 
@@ -292,12 +308,10 @@ input:focus, textarea:focus {
 
 #header a {
   color: black;
-  display: block;
-  text-decoration: none;
 }
 
 #header a:hover {
-color: rgb(53, 130, 245);
+  color: rgb(53, 130, 245);
 }
 
 #logo {
@@ -320,21 +334,21 @@ color: rgb(53, 130, 245);
   display: inline-block;
   font-size: .875em;
   line-height: 1.714285714em;
-  margin-right: 0.25em;
+  margin: 0 0.25em;
 }
 
 #account-nav {
   text-align: right;
 }
 
-.new-post-link {
+#new-post-link {
   display: inline-block;
   background: url('/images/compose.svg');
-  background-size: 16px 16px;
+  background-size: 0.875em 0.875em;
   background-repeat: no-repeat;
   background-position: center center;
-  width: 16px;
-  height: 16px;
+  width: 1.3em;
+  height: 1.6em;
 }
 
 #logout-link {
@@ -343,8 +357,13 @@ color: rgb(53, 130, 245);
   background-size: 0.875em 0.875em;
   background-repeat: no-repeat;
   background-position: center center;
-  width: 0.875em;
+  width: 1.3em;
   height: 1.6em;
+}
+
+#new-post-link:hover,
+#logout-link:hover {
+  text-decoration: none;
 }
 
 h1.page-title {
@@ -355,11 +374,6 @@ h1.page-title {
 
 h1.page-title a {
   color: #000;
-  text-decoration: none;
-}
-
-h1.page-title a:hover {
-  text-decoration: underline;
 }
 
 /*****************************************************************************
@@ -523,21 +537,12 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
-.dashboard-post {
-  padding: 0.75em 0;
-}
-
-.dashboard-post h3 {
-  font-size: 1.25em; /* 20px */
-  line-height: 1.8em; /* 36 / 20 */
-}
-
-.dashboard-post p {
-}
-
 .excerpt {
   border-bottom: .0625em solid #ddd; /* 1 / 24 */
-  padding: 0.75em 0;
+  padding: 0.75em 0 0.6875em 0;
+  /*margin: 0 0 0.75em 0;*/
+  /*font-size: 0.875em;*/
+  /*line-height: 1.714285714em;*/
 }
 
 .excerpt .content {
@@ -558,22 +563,70 @@ div.markdown-mark {
   font-weight: bold;
 }
 
-.title a {
-  text-decoration: none;
-}
-
 .feed-item {
   border-bottom: .071428571em solid #ddd; /* 1 / 14 */
   font-size: 0.875em; /* 14 / 16 */
-  line-height: 2.5em; /* 35 / 14 */
+  line-height: 1.142857143em; /* 16 / 14 */
+  padding: 1.107142857em 0 1.107142857em;
 }
 
-.feed-item a {
-  text-decoration: none;
+.feed-item.with-icon {
+  padding-left: 2.8em;
 }
 
-.feed-item .date {
-  padding: 0 0.5em;
+
+.assignment-list {
+  border-bottom: .071428571em solid #ddd; /* 1 / 14 */
+  font-size: 0.875em; /* 14 / 16 */
+  line-height: 1.142857143em; /* 16 / 14 */
+  padding: 0 0 1.107142857em;
+  margin-bottom: 1.107142857em;
+}
+
+.assignment-list h3,
+.post-excerpt h3.title {
+  font-size: 1.142857143em; /* 16 / 14 */
+  font-weight: normal;
+  line-height: 3em;
+}
+
+.assignment-list .reply-link {
+  display: block;
+  line-height: 3.428571428em;
+}
+
+.post-excerpt {
+  border-bottom: .0625em solid #ddd; /* 1 / 16 */
+  margin: 1.5em 0 0.75em;
+  padding-bottom: .6875em;
+}
+
+.post-excerpt h3.title {
+  line-height: 1.5em;
+}
+
+.post-excerpt h4.author {
+  font-size: 1em;
+  line-height: 1.5em;
+  margin: 0;
+}
+
+.post-excerpt h4.author a {
+  color: rgb(53, 130, 245);
+}
+
+.post-excerpt h5.category {
+  color: #bbb;
+  font-size: 0.875em;
+}
+
+.post-excerpt .content {
+  margin: 0.75em 0;
+}
+
+.permalink {
+  font-size: 0.875em;
+  line-height: 1.714285714em;
 }
 
 /*****************************************************************************
@@ -652,13 +705,15 @@ div.markdown-mark {
 
 .comment-icon {
   display: block;
-  float: left;
-  width: 1em;
-  height: 2.5em;
-  background-size: 1em 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.2em;
+  height: 3.357142857em;
+  background-size: 1.2em 1.2em;
   background-repeat: no-repeat;
   background-position: center center;
-  margin: 0 0.75em;
+  margin: 0 0.8em;
 }
 
 .comment-icon.ctext {
@@ -695,7 +750,6 @@ div.markdown-mark {
 }
 
 .student-summary .quick-links a {
-  text-decoration: none;
   color: #777;
 }
 
@@ -743,12 +797,18 @@ div.markdown-mark {
   font-size: 1rem;
 }
 
-.date {
+.date,
+.caption {
   color: #bbbbbb;
 }
 
-.section {
-  margin: 1.5em 0;
+.caption {
+  font-style: italic;
+}
+
+.section,
+.section-list {
+  margin: 0 0 1.5em 0;
 }
 
 /* BUTTONS */

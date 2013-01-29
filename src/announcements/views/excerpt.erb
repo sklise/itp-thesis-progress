@@ -1,5 +1,4 @@
 <div class="excerpt">
-  <div class="date"><%= announcement.published_at.strftime("%B %d") %></div>
   <div class="title"><a href="/announcements/<%= announcement.year %>/<%= announcement.issue %>"><%= announcement.title %></a></div>
-  <div class="details">— <%= announcement.user %></div>
+  <div class="date"><%= longdate announcement.published_at %> — <%= announcement.user %></div>
 </div>

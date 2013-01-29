@@ -54,6 +54,10 @@ class User
     role == "advisor"
   end
 
+  def student?
+    role == "student"
+  end
+
   # Return a student's advisor. If the user is an advisor, return nil
   def students_advisor
     return nil if self.advisor?

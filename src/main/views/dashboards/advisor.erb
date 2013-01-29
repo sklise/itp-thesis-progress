@@ -1,14 +1,32 @@
-<div class="announcements-feed col-4 float-right">
-  <h3><a href="/announcements">Announcements</a></h3>
-  <p><a href="/announcement/new">New Announcement</a></p>
-  <% @announcements.each do |announcement| %>
-  <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
-  <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
-  <% end %>
+<div class="col-4 float-right">
+
+  <div class="section">
+    <h2><a href="/announcements">Announcements</a></h2>
+
+    <p><a href="/announcement/new">New Announcement</a></p>
+
+    <% @announcements.each do |announcement| %>
+    <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
+    <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+    <% end %>
+  </div>
+
+
+  <div class="section">
+    <h2>Information</h2>
+    <% Page.all.each do |page| %>
+      <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-8">
+  <h2>Your Sections</h2>
 </div>
 
 <% @sections.each do |section| %>
-<div class="col-4">
+
+<div class="col-4 section-list">
   <h3><a href="<%= section.url %>"><%= section.name %></a></h3>
   <ul>
   <% section.users.students.each do |student| %>
@@ -19,20 +37,25 @@
 <% end %>
 
 <div class="col-8" style="clear:left;">
-  <h3>Assignments</h3>
+  <h2>Assignments</h2>
   <p><a href="/assignments/new">New Assignment</a></p>
   <% @sections.assignments.all(order: :created_at.desc).each do |assignment| %>
-  <div class="excerpt">
-    <h4><a href="<%= assignment.url %>"><%= assignment.title %></a></h4>
+
+  <div class="assignment-list">
+    <h3 class="title"><span class="date"><%= longdate assignment.created_at %></span> &mdash; <strong><%= assignment.title %></strong></h3>
+    <div><%= mdown assignment.brief %></div>
+
+    <a class="reply-link" href="/students/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a>
   </div>
+
   <% end %>
 </div>
 
 <div class="col-8">
-  <h3>Recent Posts</h3>
+  <h2>Recent Posts</h2>
   <% @sections.users.students.posts.all(draft: false, order: :published_at.desc, limit: 10).each do |post| %>
   <div class="feed-item">
-    <%= post.published_at.strftime("%m/%d") %> <%= post.user %> <a href="<%= post.url %>"><%= post.title %></a>
+    <span class="date"><%= longdate post.published_at %></span> &mdash; <%= post.user %> <a href="<%= post.url %>"><%= post.title %></a>
   </div>
   <% end %>
 </div>
