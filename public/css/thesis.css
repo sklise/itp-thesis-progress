@@ -563,6 +563,24 @@ div.markdown-mark {
   margin: 0;
 }
 
+.category-list {
+  list-style-type: none;
+  margin: 0;
+}
+
+.category-list li {
+  display: inline-block;
+  margin: 0 1em 0 0;
+}
+
+.category-list li a {
+  color: #bbb;
+}
+
+.category-list li a.current {
+  color: #000;
+}
+
 .post-content p {
   margin: 1.5em 0;
 }

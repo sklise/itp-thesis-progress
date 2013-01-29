@@ -32,6 +32,8 @@ class StudentsApp < Sinatra::Base
   get '/:netid/progress/?' do
     @user = User.first(netid:params[:netid])
 
+    halt 404 if @user.nil?
+
     if @user == env['warden'].user
       @drafts = @user.posts.all(draft: true, order: :updated_at.desc)
     end
@@ -43,11 +45,33 @@ class StudentsApp < Sinatra::Base
   get '/:netid/progress/page/:page_number/?' do
     @user = User.first(netid:params[:netid])
 
-    if @user == env['warden'].user
-      @drafts = @user.posts.all(draft: true, order: :updated_at.desc)
-    end
+    halt 404 if @user.nil?
 
     @posts = Post.paginate(page: params[:page_number], order: :published_at.desc, user: @user, draft: false)
+    erb :'progress_index'
+  end
+
+  get '/:netid/progress/:category?' do
+    @user = User.first(netid:params[:netid])
+
+    @category = Category.first slug: params[:category]
+
+    halt 404 if @user.nil?
+
+    @posts = Post.paginate(page: 1, order: :published_at.desc, user: @user, draft: false, category_id: @category.id)
+
+    erb :'progress_index'
+  end
+
+  get '/:netid/progress/:category/page/:page_number/?' do
+    @user = User.first(netid:params[:netid])
+
+    @category = Category.first slug: params[:category]
+
+    halt 404 if @user.nil?
+
+    @posts = Post.paginate(page: params[:page_number], order: :published_at.desc, user: @user, draft: false, category_id: @category.id)
+
     erb :'progress_index'
   end
 

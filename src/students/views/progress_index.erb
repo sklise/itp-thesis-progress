@@ -3,7 +3,13 @@
 </div>
 
 <div class="col-9">
-  <h2>Progress</h2>
+  <h2><a href="<%= @user.url %>/progress">Progress</a></h2>
+
+  <ul class="category-list">
+  <% Category.all.each do |c| %>
+  <li><a <%= 'class="current"' if c == @category %> href="<%= @user.url %>/progress/<%= c.slug %>"><%= c.name %></a></li>
+  <% end %>
+  </ul>
 
   <% if @drafts && @drafts.length > 0 %>
   <h6>Drafts</h6>
