@@ -2,34 +2,32 @@
   <h1 class="page-title"><a href="/assignments">Assignments</a></h1>
 </div>
 
-<div class="col-12 announcement">
-  <h2><%= @assignment.title %></h2>
+<div class="col-12">
+  <div class="assignment single">
   <hgroup>
-  <h6>
-    Posted on <%= @assignment.created_at.strftime("%B %d, %Y") %> to
-    <% if @assignment.everyone %>
-    Everyone
-    <% else %>
-    <%= list( @assignment.sections, {:attribute => :name, :default => "all sections"}) %>
-    <% end %>
-  </h6>
-  <h3 class="author"><em>by</em> <%= @assignment.user %></h3>
-  <p><% if env['warden'].user.advisor? %><a href="<%= @assignment.url %>/edit">Edit</a> <a class="delete-link" href="<%= @assignment.url %>/delete">Delete</a><% end %></p>
+    <h1><%= @assignment.title %></h1>
+    <h2 class="author"><em>by</em> <%= @assignment.user %></h2>
+    <h3 class="date"><%= longdate @assignment.created_at %></h3>
+    <h4><% if @assignment.everyone %>
+      Everyone
+      <% else %>
+      <%= list( @assignment.sections, {:attribute => :name, :default => "all sections"}) %>
+      <% end %>
+    </h4>
   </hgroup>
 
-<div>
-  <%= mdown @assignment.brief %>
+  <p><% if env['warden'].user.advisor? %><a href="<%= @assignment.url %>/edit">Edit</a> <a class="delete-link" href="<%= @assignment.url %>/delete">Delete</a><% end %></p>
+
+  <div class="assignment-content">
+    <%= mdown @assignment.brief %>
+  </div>
 </div>
 
-<h6>Responses</h6>
 
+<div class="section">
+  <h2>Responses</h2>
 <% @assignment.posts.all(draft: false).each do |post| %>
-  <div class="post">
-    <h3><%= post.user %></h3>
-    <h4><a href="<%= post.url %>"><%= post.title %></a> on <span class="date"><%= post.created_at.strftime("%m/%d") %></span> <span class="category"><%= post.category %></span></h4>
-    <div class="content">
-      <%= mdown post.content %>
-    </div>
-  </div>
+  <%= erb :'../../students/views/list', layout: false, locals: {post: post} %>
 <% end %>
+</div>
 </div>
