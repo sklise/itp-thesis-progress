@@ -2,15 +2,16 @@
 <html>
 <head>
   <title>Thesis</title>
+
   <link rel="stylesheet" href="/css/jquery-ui.css" type="text/css">
   <link rel="stylesheet" href="/css/main.css" type="text/css">
-
   <link rel="stylesheet" href="/css/thesis.css" type="text/css">
   <link rel="stylesheet" href="/css/grid.css" type="text/css">
   <link rel="stylesheet" href="/css/print.css" type="text/css">
   <link rel="stylesheet" href="/css/chosen.css" type="text/css">
 
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic|Lato:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
   <script src="/javascripts/jquery.js" type="text/javascript"></script>
   <script src="/javascripts/chosen.jquery.js" type="text/javascript"></script>
   <script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
@@ -39,12 +40,11 @@
           <% env['warden'].user.sections.each do |section| %>
           <li><a href="<%= section.url %>"><%= section.name %></a></li>
           <% end %>
-          <li><a href="/page/new">New Page</a></li>
-          <li><a href="/announcements/new">New Announcement</a></li>
+          <li><a href="/page/new">New Page</a></li><li><a href="/announcements/new">New Announcement</a></li>
           <% else %>
-          <li><a href="/students/<%= env['warden'].user.netid %>/thesis">Thesis</a></li>
+          <li><a href="/students/<%= env['warden'].user.netid %>/thesis">Thesis Summary</a></li>
           <li>
-            <a href="/students/<%= env['warden'].user.netid %>/progress">Progress</a>
+            <a href="/students/<%= env['warden'].user.netid %>/progress">My Progress</a>
           </li>
           <li>
             <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>
@@ -81,22 +81,22 @@
 
   <div id="bottom">
     <div id="footer" class="grid-wrapper">
-      <div class="col-4">
+      <div class="col-6">
         <h2>Information</h2>
         <% Page.all.each do |page| %>
           <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
         <% end %>
       </div>
 
-      <div class="col-4">
+      <!-- <div class="col-4">
         <h2>Browse</h2>
         <p>Posts</p>
         <p>Sections</p>
         <p>Announcements</p>
         <p>Assignments</p>
-      </div>
+      </div> -->
 
-      <div class="col-4">
+      <div class="col-6">
         <h2>Feedback/Issues</h2>
         <p>Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
         <p>You can also write a bug report <a href="https://github.com/stevenklise/itp-thesis-progress/issues">here</a>.</p>

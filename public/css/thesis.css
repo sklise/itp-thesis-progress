@@ -263,10 +263,15 @@ input:focus, textarea:focus {
   width: 100%;
 }
 
+#bottom {
+  background: #efefef;
+  border-top: 1px solid #ddd;
+  margin-top: 3em;
+}
+
 #footer {
   font-size: 80%;
-  margin-bottom: 2em;
-  margin-top: 2em;
+  padding: 1em 0 2em;
 }
 
 /*****************************************************************************
@@ -321,24 +326,30 @@ input:focus, textarea:focus {
   margin-right: 0.75em;
 }
 
-#main-nav {
-  float: left;
-}
-
 #header ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  float: right;
 }
 
 #header ul li {
-  display: inline-block;
+  display: inline;
+  float: left;
   font-size: .875em;
   line-height: 1.714285714em;
-  margin: 0 0.5em;
+  padding: 0 0.75em;
+  margin: 0;
+  border-right: 1px solid rgba(210, 210, 210,0.9);
+  border-left: 1px solid rgba(255,255,255,0.8);
+}
+
+#header ul li:first-child {
+  border-left: none;
 }
 
 #header ul li:last-child {
+  border-right: none;
   margin-right: 0;
 }
 

@@ -44,8 +44,6 @@
   <div class="assignment-list">
     <h3 class="title"><span class="date"><%= longdate assignment.created_at %></span> &mdash; <strong><%= assignment.title %></strong></h3>
     <div><%= mdown assignment.brief %></div>
-
-    <a class="reply-link" href="/students/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a>
   </div>
 
   <% end %>
