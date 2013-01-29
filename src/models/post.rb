@@ -20,7 +20,7 @@ class Post
   belongs_to :category
   belongs_to :assignment
   belongs_to :user
-  has n, :comments
+  has n, :comments, :constraint => :destroy
 
   self.per_page = 10
 
