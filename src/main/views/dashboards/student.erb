@@ -17,6 +17,10 @@
   <div class="section">
     <h2>Activity on Your Posts</h2>
 
+    <% if @comments.length == 0 %>
+    <p>No comments yet.</p>
+    <% end %>
+
     <% @comments.each do |comment| %>
     <div class="feed-item with-icon">
       <div class="comment-icon <%= comment.read ? "cread" : "ctext" %>">&nbsp;</div>

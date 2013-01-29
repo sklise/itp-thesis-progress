@@ -36,7 +36,7 @@ class AssignmentsApp < Sinatra::Base
   get '/:year/:id/edit/?' do
     require_admin
     @sections = Section.all
-    @assignment = Assignment.first(params[:id])
+    @assignment = Assignment.get(params[:id])
     erb :edit
   end
 
@@ -65,7 +65,7 @@ class AssignmentsApp < Sinatra::Base
   # update
   post '/:year/:id/update' do
     require_admin
-    @assignment = Assignment.first(params[:id])
+    @assignment = Assignment.get(params[:id])
 
     if @assignment.update(params[:assignment])
       flash.success = "Assignment updated successfully"
@@ -79,7 +79,7 @@ class AssignmentsApp < Sinatra::Base
   # delete
   get '/:year/:id/delete' do
     require_admin
-    @assignment = Assignment.first(params[:id])
+    @assignment = Assignment.get(params[:id])
 
     if @assignment.destroy
       flash.success = "Assignment destroyed"
