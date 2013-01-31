@@ -67,7 +67,7 @@ class Post
   end
 
   def publish
-    if self.title.nil? || self.title = ""
+    if self.title.nil? || self.title == ""
       self.title = "Untitled"
     end
 
