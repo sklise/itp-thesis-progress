@@ -136,7 +136,7 @@ class StudentsApp < Sinatra::Base
     end
   end
 
-  get '/:netid/:id/:slug/:edit/?' do
+  get '/:netid/:id/:slug/edit/?' do
     check_user(params[:netid])
 
     @categories = Category.all
