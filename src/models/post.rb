@@ -9,6 +9,7 @@ class Post
   property :slug, Slug
   property :title, Text
   property :content, Text
+  property :active, Boolean, default: true
   property :draft, Boolean
 
   property :announcement, Boolean, default: false
@@ -27,6 +28,28 @@ class Post
   before :save do
     publish
     ensure_slug
+  end
+
+  #
+  # CLASS METHODS
+  #
+  def self.announcements
+    all(:announcement => true, :order => :published_at.desc)
+  end
+
+  def self.by_students
+    all(:announcement => false, :order => :published_at.desc)
+  end
+
+  def self.drafts
+    all(draft: true)
+  end
+
+  #
+  # INSTANCE METHODS
+  #
+  def delete
+    self.update(active: false)
   end
 
   def ensure_slug
@@ -49,28 +72,6 @@ class Post
     end
   end
 
-  def self.quick_new(params)
-    content = params[:quickpost].split(/\r\n/)
-
-    first_line = content.slice(0)
-
-    title = first_line.split(" ").length < 10 ? content.slice!(0) : (content[0].split(" "))[0..9].join(" ") + "..."
-
-    new(title: title, content: content.join("\r\n"), draft: params[:draft])
-  end
-
-  def self.announcements
-    all(:announcement => true, :order => :published_at.desc)
-  end
-
-  def self.by_students
-    all(:announcement => false, :order => :published_at.desc)
-  end
-
-  def self.drafts
-    all(draft: true)
-  end
-
   def published
     if self.published_at
       published_at.strftime("%B %e, %Y")
@@ -79,11 +80,7 @@ class Post
     end
   end
 
-  def public_url
-    "/students/#{self.user.netid}/#{self.id}/#{self.slug}"
-  end
-
   def url
-    public_url
+    "/students/#{self.user.netid}/#{self.id}/#{self.slug}"
   end
 end

@@ -141,6 +141,7 @@ class StudentsApp < Sinatra::Base
 
     @categories = Category.all
     @post = Post.first(id: params[:id])
+
     erb :'progress_edit'
   end
 
@@ -164,7 +165,8 @@ class StudentsApp < Sinatra::Base
 
   get '/:netid/:id/:slug/delete' do
     check_user(params[:netid])
-    Post.first(id: params[:id]).destroy
+
+    Post.first(id: params[:id]).delete
 
     redirect "/students/#{params[:netid]}/progress"
   end
