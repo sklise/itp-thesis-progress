@@ -40,7 +40,10 @@ class Post
   end
 
   def publish
-    puts "yezzz"
+    if self.title.nil? || self.title = ""
+      self.title = "Untitled"
+    end
+
     if !self.draft && self.published_at.nil?
       self.published_at = DateTime.now
     end
