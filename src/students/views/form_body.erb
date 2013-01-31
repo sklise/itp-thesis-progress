@@ -16,12 +16,13 @@
 
   <% if @post.assignment %>
 
-  <input class="assignment-input"  type="radio" checked value="<%= @post.assignment_id %>" name="post[assignment_id]" id="assignment-<%= @post.assignment_id %>" data-brief="<%= post.assignment.brief %>">
+  <input class="assignment-input"  type="radio" checked value="<%= @post.assignment_id %>" name="post[assignment_id]" id="assignment-<%= @post.assignment_id %>" data-brief="<%= @post.assignment.brief %>">
   <label for="assignment-<%= @post.assignment_id %>">
     <%= @post.assignment.title %>
   </label>
 
   <% end %>
+
   <input class="null-radio" value="" name="post[assignment_id]" type="radio">
   <% env['warden'].user.open_assignments.each do |assignment| %>
 
