@@ -14,6 +14,26 @@ class User
   property :year, Integer
   property :role, String, default: "student"
 
+
+  #
+  # CLASS METHODS
+  #
+  def self.advisors
+    all role: "advisor"
+  end
+
+  def self.students(year=nil)
+    if year.nil?
+      all(role: "student")
+    else
+      all(role: "student", year: year)
+    end
+  end
+
+  #
+  # INSTANCE METHODS
+  #
+
   def password
     @password ||= Password.new(password_hash)
   end
@@ -25,20 +45,6 @@ class User
 
   def url
     "/students/#{self.netid}"
-  end
-
-
-  # Scopes
-  def self.advisors
-    all role: "advisor"
-  end
-
-  def self.students(year=nil)
-    if year.nil?
-      all(role: "student")
-    else
-      all(role: "student", year: year)
-    end
   end
 
   def authenticate(attempted_password)
@@ -60,6 +66,10 @@ class User
 
   def resident?
     role == "resident"
+  end
+
+  def non_student?
+    role != "student"
   end
 
   # Return a student's advisor. If the user is an advisor, return nil

@@ -16,6 +16,13 @@ module Sinatra
         end
       end
 
+      def require_non_student
+        unless env['warden'].user.non_student?
+          flash.error = "You are not authorized to access that page."
+          redirect '/'
+        end
+      end
+
       def check_user(netid)
         unless env['warden'].user.netid == netid
           flash.error = "That page belongs to #{netid}"

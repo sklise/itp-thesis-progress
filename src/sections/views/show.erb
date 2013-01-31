@@ -43,7 +43,7 @@
     <h3><a href="<%= student.url %>"><%= student %></a></h3>
 
     <ul class="quick-links">
-      <% if env['warden'].user.advisor? %><li><a href="/applications/<%= student.netid %>">Application</a></li><% end %>
+      <% if env['warden'].user.non_student? %><li><a href="/applications/<%= student.netid %>">Application</a></li><% end %>
       <li><a href="<%= student.url %>/progress">All <%= student.first_name %>'s Posts</a></li>
     </ul>
 
