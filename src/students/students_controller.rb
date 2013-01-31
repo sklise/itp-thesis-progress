@@ -14,12 +14,12 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/' do
-    @posts = Post.paginate(page: 1, order: :published_at.desc, draft: false)
+    @posts = Post.published.paginate(page: 1)
     erb :index
   end
 
   get '/page/:page_number/?' do
-    @posts = Post.paginate(page: params[:page_number], order: :published_at.desc, draft: false)
+    @posts = Post.published.paginate(page: params[:page_number])
     erb :index
   end
 
