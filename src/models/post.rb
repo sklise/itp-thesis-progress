@@ -42,7 +42,11 @@ class Post
   end
 
   def self.drafts
-    all(draft: true)
+    all(draft: true, active: true, order: :updated_at.desc)
+  end
+
+  def self.published
+    all(draft: false, active: true, order: :published_at.desc)
   end
 
   #

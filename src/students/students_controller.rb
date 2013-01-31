@@ -35,10 +35,10 @@ class StudentsApp < Sinatra::Base
     halt 404 if @user.nil?
 
     if @user == env['warden'].user
-      @drafts = @user.posts.all(draft: true, order: :updated_at.desc)
+      @drafts = @user.posts.drafts
     end
 
-    @posts = Post.paginate(page: 1, order: :published_at.desc, user: @user, draft: false)
+    @posts = Post.published.paginate(page: 1, user: @user)
     erb :'progress_index'
   end
 
@@ -47,7 +47,7 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    @posts = Post.paginate(page: params[:page_number], order: :published_at.desc, user: @user, draft: false)
+    @posts = Post.published.paginate(page: params[:page_number], user: @user)
     erb :'progress_index'
   end
 
@@ -58,7 +58,7 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    @posts = Post.paginate(page: 1, order: :published_at.desc, user: @user, draft: false, category_id: @category.id)
+    @posts = Post.published.paginate(page: 1, user: @user, category_id: @category.id)
 
     erb :'progress_index'
   end
@@ -70,7 +70,7 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    @posts = Post.paginate(page: params[:page_number], order: :published_at.desc, user: @user, draft: false, category_id: @category.id)
+    @posts = Post.published.paginate(page: params[:page_number], user: @user, category_id: @category.id)
 
     erb :'progress_index'
   end
@@ -128,7 +128,7 @@ class StudentsApp < Sinatra::Base
   get '/:netid/:id/:slug/?' do
     @post = Post.get(params[:id])
 
-    if @post.draft || @post.nil?
+    if @post.draft || @post.nil? || !@post.active
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
     else
