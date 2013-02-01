@@ -58,7 +58,7 @@ class Post
 
   def ensure_slug
     if self.slug.nil? || self.slug == ""
-      self.slug = ((self.title == "") ? "untitled" : self.title)
+      self.slug = ((self.title == "") ? "untitled" : self.title[0..15])
     end
   end
 
