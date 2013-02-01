@@ -7,11 +7,10 @@ class ApplicationApp < Sinatra::Base
 
   before do
     env['warden'].authenticate!
-    require_admin
+    require_non_student
   end
 
   get '/' do
-    require_non_student
     cache_control :public, max_age: 3600  # 30 mins.
     @users = User.all(year: 2013, order: :first_name)
     @applications = Application.all
@@ -21,7 +20,6 @@ class ApplicationApp < Sinatra::Base
   end
 
   get '/printout' do
-    require_non_student
     @users = User.all(year: 2013, order: :first_name)
     @applications = Application.all
     erb :print_all
@@ -51,7 +49,6 @@ class ApplicationApp < Sinatra::Base
   # end
 
   get '/:netid' do
-    require_non_student
     @user = User.first netid: params[:netid]
 
     if @user.nil?

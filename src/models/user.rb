@@ -57,19 +57,19 @@ class User
 
   # Return whether or not user is an advisor.
   def advisor?
-    role == "advisor"
+    self.role == "advisor"
   end
 
   def student?
-    role == "student"
+    self.role == "student"
   end
 
   def resident?
-    role == "resident"
+    self.role == "resident"
   end
 
   def non_student?
-    role != "student"
+    self.role != "student"
   end
 
   # Return a student's advisor. If the user is an advisor, return nil
