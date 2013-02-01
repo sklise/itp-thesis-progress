@@ -18,4 +18,3 @@ class Tag
 end
 
 DataMapper.finalize
-DataMapper.auto_upgrade!
