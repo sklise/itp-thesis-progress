@@ -12,12 +12,12 @@ class AnnouncementsApp < Sinatra::Base
   end
 
   get '/' do
-    @announcements = Announcement.paginate(page: 1, order: :published_at.desc)
+    @announcements = Announcement.published.paginate(page: 1)
     erb :index
   end
 
   get '/everyone/?' do
-    @announcements = Announcement.paginate(page: 1, order: :published_at.desc, everyone: true)
+    @announcements = Announcement.published.paginate(page: 1, everyone: true)
     erb :index
   end
 
@@ -25,7 +25,7 @@ class AnnouncementsApp < Sinatra::Base
     @announcements = Section.first({
       slug: params[:section_name],
       year: params[:year]
-    }).announcements.paginate(page: 1, order: :published_at.desc)
+    }).announcements.published.paginate(page: 1)
     erb :index
   end
 
@@ -33,17 +33,17 @@ class AnnouncementsApp < Sinatra::Base
     @announcements = Section.first({
       slug: params[:section_name],
       year: params[:year]
-    }).announcements.paginate(page: params[:page_number], order: :published_at.desc)
+    }).announcements.published.paginate(page: params[:page_number])
     erb :index
   end
 
   get '/page/:page_number/?' do
-    @announcements = Announcement.paginate(page: params[:page_number], order: :published_at.desc)
+    @announcements = Announcement.published.paginate(page: params[:page_number])
     erb :index
   end
 
-  get '/:year/:issue/?' do
-    @announcement = Announcement.first(year: params[:year], issue: params[:issue])
+  get '/:year/:id/?' do
+    @announcement = Announcement.published.first(id: params[:id])
 
     halt 404 if @announcement.nil?
 
@@ -68,38 +68,38 @@ class AnnouncementsApp < Sinatra::Base
     require_admin
 
     @announcement = Announcement.create(params[:announcement])
-    redirect "/announcements/#{@announcement.year}/#{@announcement.issue}"
+    redirect @announcement.url
   end
 
-  get '/:year/:issue/delete' do
+  get '/:year/:id/delete' do
     require_admin
 
-    Announcement.first(year: params[:year], issue: params[:issue]).destroy
+    Announcement.first(id: params[:id]).delete
 
     redirect "/announcements"
   end
 
-  get '/:year/:issue/edit/?' do
+  get '/:year/:id/edit/?' do
     require_admin
 
     @sections = Section.all
-    @announcement = Announcement.first(year: params[:year], issue: params[:issue])
+    @announcement = Announcement.published.first(id: params[:id])
 
     halt 404 if @announcement.nil?
 
     erb :edit
   end
 
-  post '/:year/:issue/?' do
+  post '/:year/:id/?' do
     require_admin
 
-    @announcement = Announcement.first(year: params[:year], issue: params[:issue])
+    @announcement = Announcement.published.first(id: params[:id])
 
     halt 404 if @announcement.nil?
 
     @announcement.update(params[:announcement])
     flash.success = "Announcement Updated Successfully."
-    redirect "/announcements/#{params[:year]}/#{params[:issue]}"
+    redirect @announcement.url
   end
 
   not_found do

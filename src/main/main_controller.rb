@@ -21,11 +21,13 @@ class Main < Sinatra::Base
         @drafts = @user.posts.drafts
         @assignments = @user.sections.assignments.all(order: :created_at.desc)
         @comments = @user.posts.comments.all(order: :created_at.desc, limit: 10)
-        @announcements = Announcement.all(limit: 10, order: :published_at.desc, draft: false)
+        @announcements = Announcement.published.all(limit: 10)
+
         @recent_posts = @user.sections.first.students.posts.published.paginate(page: 1)
         erb :'dashboards/student'
       else
-        @announcements = Announcement.all(limit: 10, order: :published_at.desc)
+        # @announcement_drafts = @user.announcements.drafts
+        @announcements = Announcement.published.all(limit: 10)
         @sections = env['warden'].user.sections
         erb :'dashboards/advisor'
       end

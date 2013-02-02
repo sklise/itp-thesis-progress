@@ -13,7 +13,7 @@
   </ul>
 
   <h3>Announcements</h3>
-  <% @section.announcements.paginate(:page => 1).each do |announcement| %>
+  <% @section.announcements.published.paginate(page: 1).each do |announcement| %>
     <div><%= announcement.title %></div>
   <% end %>
 </div>

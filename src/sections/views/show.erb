@@ -28,7 +28,7 @@
     <p><a href="/announcements/new">New Announcement</a></p>
     <% end %>
 
-    <% @section.announcements.paginate(:page => 1, order: :published_at.desc).each do |announcement| %>
+    <% @section.announcements.published.all(limit: 10).each do |announcement| %>
       <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement} %>
     <% end %>
   </div>

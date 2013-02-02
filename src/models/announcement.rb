@@ -11,11 +11,12 @@ class Announcement
   property :created_at, DateTime
   property :updated_at, DateTime
 
+  property :active, Boolean, default: true
+
   property :title, String, length: 255
   property :content, Text
   property :draft, Boolean, default: true
   property :published_at, DateTime
-  property :issue, Integer, writer: :private
   property :year, Integer, default: DateTime.now.year, writer: :private
   property :everyone, Boolean, default: false
 
@@ -31,8 +32,16 @@ class Announcement
   before :save, :publish
   before :save, :add_sections
 
-  def self.last_announcement
-    self.max(:issue)
+  def self.drafts
+    all(draft: true, active: true, order: :updated_at.desc)
+  end
+
+  def self.published
+    all(draft: false, active: true, order: :published_at.desc)
+  end
+
+  def delete
+    self.update(active: false)
   end
 
   # Look at sections_id attr_accessor and everyone, as well as sections to
@@ -66,12 +75,11 @@ class Announcement
   def publish
     if !draft && published_at.nil?
       self.published_at = DateTime.now
-      self.issue = (Announcement.max(:issue) || 0) + 1
     end
     true
   end
 
   def url
-    "/announcements/#{self.year}/#{self.issue}"
+    "/announcements/#{self.year}/#{self.id}"
   end
 end
