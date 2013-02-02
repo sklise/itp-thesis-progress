@@ -9,12 +9,6 @@ Dir["#{File.dirname(__FILE__)}/models/*.rb"].each {|file| require file }
 DataMapper.setup(:default,
   ENV['DATABASE_URL'] || "postgres://localhost/thesisprog")
 
-# TAGS_________________________________________________________________________
-class Tag
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :name, String
-end
+DataMapper::Property::String.length(255)
 
 DataMapper.finalize
