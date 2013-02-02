@@ -1,10 +1,8 @@
-require 'pp'
-
 class AssignmentsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
-  # set :cache, Dalli::Client.new
-  # set :enable_cache, true
+  set :cache, Dalli::Client.new
+  set :enable_cache, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
   set :logging, true
@@ -16,7 +14,8 @@ class AssignmentsApp < Sinatra::Base
   # index
   get '/?' do
     @sections = env['warden'].user.sections
-    @assignments = @sections.assignments.all(order: :created_at.desc)
+    @assignments = @sections.assignments.published.all
+
     erb :index
   end
 
@@ -24,7 +23,9 @@ class AssignmentsApp < Sinatra::Base
   get '/:year/:id/?' do
     @assignment = Assignment.get(params[:id])
 
-    halt 404 if @assignment.nil?
+    halt 404 if @assignment.nil? || @assignment.active == false
+
+    require_admin if @assignment.draft == true
 
     erb :show
   end
@@ -39,9 +40,10 @@ class AssignmentsApp < Sinatra::Base
   get '/:year/:id/edit/?' do
     require_admin
     @sections = Section.all
+
     @assignment = Assignment.get(params[:id])
 
-    halt 404 if @assignment.nil?
+    halt 404 if @assignment.nil? || @assignment.active == false
 
     erb :edit
   end
@@ -52,7 +54,7 @@ class AssignmentsApp < Sinatra::Base
     @assignment = Assignment.new
     @sections = Section.all
 
-    halt 404 if @assignment.nil?
+    halt 404 if @assignment.nil? || @assignment.active == false
 
     erb :new
   end
@@ -68,7 +70,6 @@ class AssignmentsApp < Sinatra::Base
     flash.success = "Assignment saved successfully."
     redirect "/assignments/#{@assignment.year}/#{@assignment.id}"
   end
-
 
   # update
   post '/:year/:id/update' do
@@ -89,11 +90,11 @@ class AssignmentsApp < Sinatra::Base
     require_admin
     @assignment = Assignment.get(params[:id])
 
-    if @assignment.destroy
-      flash.success = "Assignment destroyed"
+    if @assignment.delete
+      flash.success = "Assignment deleted"
       redirect "/assignments"
     else
-      flash.error = "Assignment could not be destroyed"
+      flash.error = "Assignment could not be deleted"
       redirect "/assignments/#{@assignment.year}/#{@assignment.id}"
     end
   end

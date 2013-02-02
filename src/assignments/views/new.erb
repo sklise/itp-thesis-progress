@@ -5,9 +5,8 @@
 
     <%= erb :form_body, layout: false, locals: {:@assignment => @assignment} %>
 
-    <div class="action-buttons">
-      <input class="submit" type="submit" value="Create New Assignment" />
-    </div>
+    <button name="assignment[draft]" value="true">Save as Draft</button>
+    <button name="assignment[draft]" value="false">Publish Assignment</button>
   </form>
 
 </div>

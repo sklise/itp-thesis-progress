@@ -19,7 +19,7 @@ class Main < Sinatra::Base
 
       if @user.student?
         @drafts = @user.posts.drafts
-        @assignments = @user.sections.assignments.all(order: :created_at.desc)
+        @assignments = @user.sections.assignments.published.all
         @comments = @user.posts.comments.all(order: :created_at.desc, limit: 10)
         @announcements = Announcement.published.all(limit: 10)
 

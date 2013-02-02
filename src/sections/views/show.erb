@@ -14,7 +14,7 @@
     <p><a href="/assignments/new">New Assignment</a></p>
     <% end %>
 
-    <% @section.assignments.each do |assignment| %>
+    <% @section.assignments.published.each do |assignment| %>
     <div class="feed-item">
       <span class="date"><%= longdate assignment.created_at %></span> &mdash; <a href="/assignments/<%= assignment.year %>/<%= assignment.id %>"><%= assignment.title %></a>
     </div>
