@@ -9,6 +9,7 @@ Dir["#{File.dirname(__FILE__)}/models/*.rb"].each {|file| require file }
 DataMapper.setup(:default,
   ENV['DATABASE_URL'] || "postgres://localhost/thesisprog")
 
+# Set String length, DataMapper's default is 50.
 DataMapper::Property::String.length(255)
 
 DataMapper.finalize
