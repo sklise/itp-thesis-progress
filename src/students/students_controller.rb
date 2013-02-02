@@ -179,11 +179,7 @@ class StudentsApp < Sinatra::Base
   end
 
   post '/new' do
-    if params[:quickpost]
-      @post = Post.quick_new(params)
-    else
-      @post = Post.new(params[:post])
-    end
+    @post = Post.new(params[:post])
 
     @post.user = env['warden'].user
 
