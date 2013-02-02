@@ -7,7 +7,7 @@ class Post
   property :published_at, DateTime
 
   property :slug, Slug
-  property :title, Text
+  property :title, String, length: 255
   property :content, Text
   property :active, Boolean, default: true
   property :draft, Boolean

@@ -11,7 +11,7 @@ class Announcement
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  property :title, String
+  property :title, String, length: 255
   property :content, Text
   property :draft, Boolean, default: true
   property :published_at, DateTime

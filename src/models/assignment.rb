@@ -5,7 +5,7 @@ class Assignment
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  property :title, String
+  property :title, String, length: 255
   property :brief, Text
   property :year, Integer, default: DateTime.now.year, writer: :private
 

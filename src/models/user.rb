@@ -7,9 +7,9 @@ class User
   property :id, Serial
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :netid, String
-  property :first_name, String
-  property :last_name, String
+  property :netid, String, length: 32
+  property :first_name, String, length: 128
+  property :last_name, String, length: 128
   property :password_hash, BCryptHash
   property :year, Integer
   property :role, String, default: "student"
