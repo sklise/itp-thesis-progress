@@ -5,9 +5,11 @@ module Sinatra
       include Rack::Utils
       alias_method :h, :escape_html
 
-      def longdate(d)
-        d.strftime("%b %d")
-      end
+      #########################################################################
+      #
+      # AUTHENTICATION CHECKS
+      #
+      #########################################################################
 
       def require_admin
         unless env['warden'].user.advisor?
@@ -28,6 +30,17 @@ module Sinatra
           flash.error = "That page belongs to #{netid}"
           redirect request.referrer
         end
+      end
+
+      #########################################################################
+      #
+      # VIEW HELPERS
+      #
+      #########################################################################
+
+      # Public: Basic date formatting for the entire site.
+      def longdate(d)
+        d.strftime("%b %d")
       end
 
       def list(collection, options)
