@@ -83,14 +83,16 @@ class StudentsApp < Sinatra::Base
 
   get '/:netid/thesis/?' do
     @user = User.first(netid: params[:netid])
-    @thesis = Thesis.first(user: @user)
+    @thesis = @user.theses.last
     erb :thesis
   end
 
   get '/:netid/thesis/edit' do
     check_user(params[:netid])
 
-    @thesis = Thesis.first(:user => env['warden'].user)
+    @user = User.first(netid: params[:netid])
+
+    @thesis = @user.theses.last
     erb :thesis_edit
   end
 
@@ -98,23 +100,29 @@ class StudentsApp < Sinatra::Base
     check_user(params[:netid])
     content_type :json
 
-    @thesis = Thesis.first(:user => env['warden'].user)
-    @user = @thesis.user
+    @user = User.first netid: params[:netid]
+
+    old_thesis = @user.theses.last
+    params[:thesis][:id] = nil
+    params[:thesis][:created_at] = nil
+    new_thesis = Thesis.new(old_thesis.attributes.merge(params[:thesis]))
 
     if params[:image]
       image_path = "#{@user.netid}-#{Time.now.to_i}/#{URI.escape(params[:image][:filename].gsub(" ","_"))}"
 
       AWS::S3::Base.establish_connection!(:access_key_id => ENV['S3_ACCESS_KEY'], :secret_access_key => ENV['S3_SECRET_KEY'])
       AWS::S3::S3Object.store(image_path, open(params[:image][:tempfile]), "itp-thesis", access: :public_read)
-      params[:thesis][:image] = "http://itp-thesis.s3.amazonaws.com/" + image_path
+       new_thesis.image = "http://itp-thesis.s3.amazonaws.com/" + image_path
     end
 
-    if @thesis.update(params[:thesis])
+    @user.theses << new_thesis
+
+    if @user.save
       flash.success = "Thesis summary."
-      redirect "#{@thesis.user.url}/thesis"
+      redirect "#{@user.url}/thesis"
     else
       flash.error = "There was an error updating your thesis."
-      redirect "#{@thesis.user.url}/thesis/edit"
+      redirect "#{@user.url}/thesis/edit"
     end
   end
 

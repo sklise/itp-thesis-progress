@@ -16,7 +16,5 @@ class Thesis
 
   property :user_id, Integer
 
-  # 5 tags
-
   belongs_to :user
 end

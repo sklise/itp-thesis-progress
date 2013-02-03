@@ -14,6 +14,13 @@ class User
   property :year, Integer
   property :role, String, default: "student"
 
+  has n, :theses
+  has 1, :application
+  has n, :posts
+  has n, :announcements
+  has n, :assignments
+  has n, :comments
+  has n, :sections, through: Resource
 
   #
   # CLASS METHODS
@@ -131,12 +138,4 @@ class User
   def to_s
     "#{first_name} #{last_name}"
   end
-
-  has 1, :thesis
-  has 1, :application
-  has n, :posts
-  has n, :announcements
-  has n, :assignments
-  has n, :comments
-  has n, :sections, through: Resource
 end

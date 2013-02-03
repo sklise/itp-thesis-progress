@@ -4,7 +4,7 @@
 
 <div class="col-9">
 
-  <%= erb :thesis, layout: false, locals: {:'@thesis' => @user.thesis} %>
+  <%= erb :thesis, layout: false, locals: {:'@thesis' => @user.theses.last} %>
 
   <div class="col-8">
 
