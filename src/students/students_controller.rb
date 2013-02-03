@@ -128,7 +128,7 @@ class StudentsApp < Sinatra::Base
   get '/:netid/:id/:slug/?' do
     @post = Post.get(params[:id])
 
-    if @post.draft || @post.nil? || !@post.active
+    if (@post.draft && @post.user.id != env['warden'].user.id ) || @post.nil? || !@post.active
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
     else
@@ -147,6 +147,7 @@ class StudentsApp < Sinatra::Base
 
   post '/:netid/:id/:slug/update' do
     check_user(params[:netid])
+
     @post = Post.first(id: params[:id])
 
     @post.title = params[:post][:title]

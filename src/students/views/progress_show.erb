@@ -12,7 +12,7 @@
 
   <hgroup>
   <h1><%= @post.title %></h1>
-  <h3 class='date'><%= @post.published_at.strftime("%B %d, %Y") %></h3>
+  <h3 class='date'><%= longdate(@post.published_at || @post.updated_at) %></h3>
   <% if @post.category %>
   <h4 class="category"><a href="<%= @post.user.url %>/progress/<%= @post.category.slug %>"><%= @post.category %></a></h4>
   <% end %>
