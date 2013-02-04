@@ -7,7 +7,7 @@
   <h2><%= @announcement.title %></h2>
   <hgroup>
   <h6>
-    Posted on <%= @announcement.published_at.strftime("%B %d, %Y") %> to
+    Posted on <%= longdate @announcement.published_at %> to
     <% if @announcement.everyone %>
     'Everyone'
     <% else %>
