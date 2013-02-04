@@ -1,5 +1,5 @@
 <h3>
-  <input type="text" name="post[title]" placeholder="Title of Post..." value="<%= @post.title %>"/>
+  <input type="text" name="post[title]" placeholder="Title of Post..." value="<%= @post.title == "Untitled" ? "" : @post.title %>"/>
 </h3>
 
 <div class="meta-form-elements">
