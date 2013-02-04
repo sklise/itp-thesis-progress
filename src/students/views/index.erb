@@ -20,5 +20,5 @@
   <%= erb :list, layout: false, locals: {post: post, :@show_user => true} %>
 <% end %>
 
-<%= will_paginate @posts %>
+<%= erb :'../../views/pagination', layout: false, locals: {collection: @posts} %>
 </div>

@@ -26,5 +26,5 @@
   <%= erb :'../../students/views/list', layout: false, locals: {post: post} %>
 <% end %>
 
-<%= will_paginate @posts %>
+<%= erb :'../../views/pagination', layout: false, locals: {collection: @posts} %>
 </div>

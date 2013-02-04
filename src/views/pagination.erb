@@ -1,0 +1,11 @@
+<div>
+  <% match = request.path.match(/(.*)\/page\/([0-9]*)/) %>
+  <% path = match ? match[1] : request.path.gsub(/\/$/,'') %>
+  <% if collection.previous_page %>
+  <a href="<%= path %>/page/<%= collection.previous_page %>">Previous Page</a>
+  <% end %>
+  Page <%= collection.current_page %> of <%= collection.total_pages %>
+  <% if collection.next_page %>
+  <a href="<%= path %>/page/<%= collection.next_page %>">Next Page</a>
+  <% end %>
+</div>

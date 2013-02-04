@@ -34,5 +34,5 @@
   <% end %>
   </div>
 
-<%= will_paginate @posts %>
+<%= erb :'../../views/pagination', layout: false, locals: {collection: @posts} %>
 </div>
