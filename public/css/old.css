@@ -1,27 +1,3 @@
-/* FORMATTING CLASSES________________________________________________________*/
-.gray {
-  color: #999;
-}
-
-/* THESIS____________________________________________________________________*/
-.elevator-pitch {
-  font-size: 130%;
-  font-style: italic;
-  line-height: 1.7em;
-  margin: 1em 0;
-}
-
-/* LOGIN_____________________________________________________________________*/
-#login-form {
-  background-color: #ffe87a;
-  padding: 1.4em;
-}
-
-#login-form input {
-  display: inline-block;
-  margin-right: 0.5em;
-}
-
 /* FORMS_____________________________________________________________________*/
 
 input[type=text],
@@ -155,7 +131,6 @@ ul.printed-tags li {
   /*width: 30%;*/
 }
 
-
 /* POST FORM_________________________________________________________________*/
 #progress-form input[type="text"]:focus,
 #progress-form textarea:focus,
@@ -181,27 +156,8 @@ input[type="radio"][checked=true] + label{
 
 /* END POST FORM_____________________________________________________________*/
 
-.meta-link,
-.meta {
+.meta-link {
   font-size: 0.875em;
   color: #666464;
   font-style: normal;
-  font-weight: 100;
-  /*line-height: 1.8488095147269112em;*/
-}
-
-.meta .private {
-  color: #fd6969;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-p.intro {
-  margin-bottom: 1.0416666666666667em;
-  line-height: 2.0833333333333335em;
-  font-size: 1.5em;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0px;
-  font-family: source-sans-pro;
 }
