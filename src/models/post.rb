@@ -86,6 +86,8 @@ class Post
   # only set the publish date on the first save unless resource is unpublished.
   # If a resource is a draft, unset published_at.
   def publish
+    self.title = "Untitled" if self.title == ""
+
     if self.draft
       self.published_at = nil
     else
