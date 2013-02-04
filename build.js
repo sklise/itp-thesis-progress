@@ -14,4 +14,17 @@ buildify().concat([
   'image_upload.js'
 ]).save('app.js')
 .uglify()
-.save('app.min.js')
+.save('app.min.js');
+
+process.chdir('../css');
+
+buildify().concat([
+  'jquery-ui.css',
+  'grid.css',
+  'old.css',
+  'thesis.css',
+  'chosen.css',
+  'print.css'
+]).save('app.css')
+.cssmin()
+.save('app.min.css');
