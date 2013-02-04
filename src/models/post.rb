@@ -88,8 +88,6 @@ class Post
   def publish
     if self.draft == false && self.published_at.nil?
       self.published_at = DateTime.now
-    else
-      self.published_at = nil
     end
   end
 end
