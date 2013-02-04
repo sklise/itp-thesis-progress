@@ -42,7 +42,7 @@
   </div>
 
   <div class="comment-list">
-  <% @post.comments(order: :created_at.desc).each do |comment| %>
+  <% @post.comments(order: :created_at.asc).each do |comment| %>
 
     <% if comment.read %>
     <div class="read">
