@@ -5,7 +5,7 @@
     <li><a href="<%= user.url %>/progress">Progress</a></li>
     <li><a href="<%= user.url %>/thesis">Thesis Summary</a></li>
     <li><a href="<%= user.sections.first.url %>"><%= user.sections.first.name %></a></li>
-    <% if env['warden'].user.non_student? %>
+    <% if @current_user.non_student? %>
     <li><a href="/applications/<%= user.netid %>">Application</a></li>
     <% end %>
   </ul>

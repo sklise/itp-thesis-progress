@@ -24,7 +24,7 @@
   <% end %>
 
   <input class="null-radio" value="" name="post[assignment_id]" type="radio">
-  <% env['warden'].user.open_assignments.each do |assignment| %>
+  <% @current_user.open_assignments.each do |assignment| %>
 
     <input class="assignment-input" type="radio" value="<%= assignment.id %>" name="post[assignment_id]" id="assignment-<%= assignment.id %>" <%= "checked" if @assignment &&  assignment.id.to_i == (@assignment.id || "").to_i %> data-brief="<%= assignment.brief %>">
 

@@ -16,7 +16,7 @@
     </h4>
   </hgroup>
 
-  <p><% if env['warden'].user.advisor? %><a href="<%= @assignment.url %>/edit">Edit</a> <a class="delete-link" href="<%= @assignment.url %>/delete">Delete</a><% end %></p>
+  <p><% if @current_user.advisor? %><a href="<%= @assignment.url %>/edit">Edit</a> <a class="delete-link" href="<%= @assignment.url %>/delete">Delete</a><% end %></p>
 
   <div class="assignment-content">
     <%= mdown @assignment.brief %>

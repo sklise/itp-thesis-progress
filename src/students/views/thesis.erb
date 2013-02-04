@@ -4,7 +4,7 @@
 
 <div class="col-9">
   <h2>Thesis</h2>
-  <% if @user == env['warden'].user %>
+  <% if @user == @current_user %>
   <a href="<%= @user.url %>/thesis/edit">Edit</a>
   <% end %>
 </div>

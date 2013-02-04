@@ -11,6 +11,7 @@ class StudentsApp < Sinatra::Base
 
   before do
     env['warden'].authenticate!
+    @current_user = env['warden'].user
   end
 
   get '/' do
@@ -34,7 +35,7 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    if @user == env['warden'].user
+    if @user == @current_user
       @drafts = @user.posts.drafts
     end
 
@@ -136,7 +137,7 @@ class StudentsApp < Sinatra::Base
   get '/:netid/:id/:slug/?' do
     @post = Post.get(params[:id])
 
-    if (@post.draft && @post.user.id != env['warden'].user.id ) || @post.nil? || !@post.active
+    if (@post.draft && @post.user.id != @current_user.id ) || @post.nil? || !@post.active
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
     else
@@ -190,7 +191,7 @@ class StudentsApp < Sinatra::Base
   post '/new' do
     @post = Post.new(params[:post])
 
-    @post.user = env['warden'].user
+    @post.user = @current_user
 
     if @post.save
       flash.success = "Post Saved"

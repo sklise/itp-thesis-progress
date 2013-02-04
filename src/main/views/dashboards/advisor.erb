@@ -6,7 +6,7 @@
     <p><a href="/announcement/new">New Announcement</a></p>
 
     <% @announcements.each do |announcement| %>
-    <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
+    <% next if (announcement.sections & @current_user.sections).length == 0 && announcement.sections.length != 0 %>
     <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
     <% end %>
   </div>

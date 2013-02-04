@@ -55,7 +55,7 @@
 
   <div class="section">
 
-    <h2><a href="<%= env['warden'].user.sections.first.url %>"><%= env['warden'].user.sections.first.name %></a>, Recent Posts</h2>
+    <h2><a href="<%= @current_user.sections.first.url %>"><%= @current_user.sections.first.name %></a>, Recent Posts</h2>
 
     <% @recent_posts.each do |post| %>
       <%= erb :'../../students/views/excerpt', layout: false, locals: {post:post} %>
@@ -70,7 +70,7 @@
     <h2><a href="/announcements">Announcements</a></h2>
 
     <% @announcements.each do |announcement| %>
-    <% next if (announcement.sections & env['warden'].user.sections).length == 0 && announcement.sections.length != 0 %>
+    <% next if (announcement.sections & @current_user.sections).length == 0 && announcement.sections.length != 0 %>
     <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
     <% end %>
   </div>

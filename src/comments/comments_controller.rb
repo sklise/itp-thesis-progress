@@ -3,13 +3,14 @@ require 'json'
 class CommentsApp < Sinatra::Base
   before do
     env['warden'].authenticate!
+    @current_user = env['warden'].user
   end
 
   post '/new' do
     content_type :json
 
     @comment = Comment.new({
-      user_id: env['warden'].user.id, post_id: params[:postId]
+      user_id: @current_user.id, post_id: params[:postId]
     });
 
     if params[:read] == "true"

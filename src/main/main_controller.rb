@@ -11,24 +11,24 @@ class Main < Sinatra::Base
 
   before do
     env['warden'].authenticate!
+    @current_user = env['warden'].user
   end
 
   get '/' do
     if env['warden'].authenticated?
-      @user = env['warden'].user
 
-      if @user.student?
-        @drafts = @user.posts.drafts
-        @assignments = @user.sections.assignments.published.all
-        @comments = @user.posts.comments.all(order: :created_at.desc, limit: 10)
+      if @current_user.student?
+        @drafts = @current_user.posts.drafts
+        @assignments = @current_user.sections.assignments.published.all
+        @comments = @current_user.posts.comments.all(order: :created_at.desc, limit: 10)
         @announcements = Announcement.published.all(limit: 10)
 
-        @recent_posts = @user.sections.first.students.posts.published.paginate(page: 1)
+        @recent_posts = @current_user.sections.first.students.posts.published.paginate(page: 1)
         erb :'dashboards/student'
       else
-        # @announcement_drafts = @user.announcements.drafts
+        # @announcement_drafts = @current_user.announcements.drafts
         @announcements = Announcement.published.all(limit: 10)
-        @sections = env['warden'].user.sections
+        @sections = @current_user.sections
         erb :'dashboards/advisor'
       end
     else

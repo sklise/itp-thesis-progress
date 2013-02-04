@@ -9,11 +9,12 @@ class AssignmentsApp < Sinatra::Base
 
   before do
     env['warden'].authenticate!
+    @current_user = env['warden'].user
   end
 
   # index
   get '/?' do
-    @sections = env['warden'].user.sections
+    @sections = @current_user.sections
     @assignments = @sections.assignments.published.all
 
     erb :index
@@ -63,7 +64,7 @@ class AssignmentsApp < Sinatra::Base
   post '/new' do
     require_admin
 
-    params[:assignment][:user_id] = env['warden'].user.id
+    params[:assignment][:user_id] = @current_user.id
 
     @assignment = Assignment.create(params[:assignment])
 

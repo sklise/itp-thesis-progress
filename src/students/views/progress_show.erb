@@ -5,7 +5,7 @@
 <div class="col-9">
 
 <div class="post single">
-  <% if @post.user == env['warden'].user %>
+  <% if @post.user == @current_user %>
     <p class="published"><%= @post.draft ? "Draft" : "Published" %></p>
     <p><a href="<%= @post.url %>/edit">Edit</a> <a class='delete-link' href="<%= @post.url %>/delete">Delete</a></p>
   <% end %>
@@ -27,7 +27,7 @@
     <div style="clear:both;overflow-y:auto;">
 
     <h6 class="float-left">Add a Comment</h6>
-    <% if @post.comments.read_by.include? env['warden'].user.id %>
+    <% if @post.comments.read_by.include? @current_user.id %>
     <h6 class='float-right'>You've read this post</h6>
     <% else %>
     <button id="mark-as-read" class="float-right" name="comment[read]" value="true">Mark as Read</button>

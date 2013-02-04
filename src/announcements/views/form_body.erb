@@ -17,7 +17,7 @@
   </div>
 
 
-  <input type="hidden" value="<%= env['warden'].user.id %>" name="announcement[user_id]">
+  <input type="hidden" value="<%= @current_user.id %>" name="announcement[user_id]">
 
   <button name="announcement[draft]" value="true">Save as Draft</button>
   <button name="announcement[draft]" value="false">Publish Announcemnt</button>

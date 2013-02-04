@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-9">
-<% if env['warden'].user.role == 'advisor' %>
+<% if @current_user.advisor? %>
 <a href="/assignments/new">Create A New Assignment</a>
 <% end %>
 

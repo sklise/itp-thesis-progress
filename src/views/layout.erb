@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Thesis</title>
+  <title>ITP Thesis</title>
 
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic|Lato:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
 
@@ -30,82 +30,85 @@
 
 <body <% if env['warden'].authenticated? %>data-netid="<%= env['warden'].user.netid %>"<% end %>>
 
-  <div id="top">
-    <div id="header" class="grid-wrapper">
-      <div class="col-3">
-
-        <a href="/"><img id="logo" src="/images/thesis.png" alt="ITP THESIS" /></a>
-
-      </div>
-
-      <div id="account-nav" class="col-9">
-      <% if env['warden'].authenticated? %>
-        <ul>
-          <% if env['warden'].user.student? %>
-            <li><a href="/students/<%= env['warden'].user.netid %>/thesis">Thesis Summary</a></li>
-            <li>
-              <a href="/students/<%= env['warden'].user.netid %>/progress">My Progress</a>
-            </li>
-            <li>
-              <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>
-            </li>
-          <% else %>
-            <% env['warden'].user.sections.each do |section| %>
-            <li><a href="<%= section.url %>"><%= section.name %></a></li>
-            <% end %>
-            <li><a href="/page/new">New Page</a></li><li><a href="/announcements/new">New Announcement</a></li>
-          <% end %>
-          <li class="username"><%= env['warden'].user.first_name %></li>
-
-          <% if env['warden'].user.student? %>
-            <li><a href="/students/new" title="Write a New Post" id="new-post-link">&nbsp;</a></li>
-          <% end %>
-
-          <li><a href="/session/logout" title="log out" id="logout-link">&nbsp;</a></li>
-        </ul>
-      <% else %>
-        <a href="/session/login">Log In</a>
-      <% end %>
-      </div>
-      <div style="clear:both;height:0;">&nbsp;</div>
+<div id="top">
+  <div id="header" class="grid-wrapper">
+    <div class="col-3">
+      <a href="/"><img id="logo" src="/images/thesis.png" alt="ITP THESIS" /></a>
     </div>
-  </div>
 
-  <div id="middle" class="grid-wrapper">
-    <div id="flash" class="col-12"><% [:error, :success].each do |name| %><% if flash.has?(name) %>
+    <div id="account-nav" class="col-9">
+    <% if env['warden'].authenticated? %>
+      <ul>
+        <% if env['warden'].user.student? %>
+          <li><a href="/students/<%= env['warden'].user.netid %>/thesis">Thesis Summary</a></li>
+          <li>
+            <a href="/students/<%= env['warden'].user.netid %>/progress">My Progress</a>
+          </li>
+          <li>
+            <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>
+          </li>
+        <% else %>
+          <% env['warden'].user.sections.each do |section| %>
+          <li><a href="<%= section.url %>"><%= section.name %></a></li>
+          <% end %>
+          <li><a href="/page/new">New Page</a></li><li><a href="/announcements/new">New Announcement</a></li>
+        <% end %>
+        <li class="username"><%= env['warden'].user.first_name %></li>
+        <% if env['warden'].user.student? %>
+        <li>
+          <a href="/students/new" title="Write a New Post" id="new-post-link">&nbsp;</a>
+        </li>
+        <% end %>
+        <li>
+          <a href="/session/logout" title="log out" id="logout-link">&nbsp;</a>
+        </li>
+      </ul>
+    <% else %>
+      <a href="/session/login">Log In</a>
+    <% end %>
+    </div>
+
+    <div style="clear:both;height:0;">&nbsp;</div>
+  </div>
+</div>
+
+<div id="middle" class="grid-wrapper">
+  <div id="flash" class="col-12">
+  <% [:error, :success].each do |name| %><% if flash.has?(name) %>
     <div class="message-<%= name %>"><%= flash[name] %></div>
   <% end %><% end %>
   </div>
 
-    <div id="main-content" class="col-page">
-    <%= yield %>
-    </div>
-
-<%= erb :'../../views/markdown', layout: false %>
+  <div id="main-content" class="col-page">
+  <%= yield %>
   </div>
 
-  <div id="bottom">
-    <div id="footer" class="grid-wrapper">
-      <div class="col-4">
-        <h2>Information</h2>
-        <% Page.all.each do |page| %>
-          <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
-        <% end %>
-      </div>
+  <%= erb :'../../views/markdown', layout: false %>
+</div>
 
-      <div class="col-4">
-        <h2>Browse</h2>
-        <p><a href="/sections">All Sections</a></p>
-        <p><a href="/students">All Student Posts</a></p>
-      </div>
-
-      <div class="col-4">
-        <h2>Feedback/Issues</h2>
-        <p>Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
-        <p>You can also write a bug report <a href="https://github.com/stevenklise/itp-thesis-progress/issues">here</a>.</p>
-      </div>
-      <div style="clear:both;height:0;">&nbsp;</div>
+<div id="bottom">
+  <div id="footer" class="grid-wrapper">
+    <div class="col-4">
+      <h2>Information</h2>
+      <% Page.all.each do |page| %>
+        <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
+      <% end %>
     </div>
+
+    <div class="col-4">
+      <h2>Browse</h2>
+      <p><a href="/sections">All Sections</a></p>
+      <p><a href="/students">All Student Posts</a></p>
+    </div>
+
+    <div class="col-4">
+      <h2>Feedback/Issues</h2>
+      <p>Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
+      <p>You can also write a bug report <a href="https://github.com/stevenklise/itp-thesis-progress/issues">here</a>.</p>
+    </div>
+    <div style="clear:both;height:0;">&nbsp;</div>
   </div>
+</div>
+
 </body>
 </html>
