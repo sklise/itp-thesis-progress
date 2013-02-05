@@ -4,7 +4,7 @@
 
 <div class='col-9'>
 <div class="announcement single">
-  <% if @current_user.advisor? %>
+  <% if @current_user.non_student? %>
     <p class="published"><%= @announcement.draft ? "Draft" : "Published" %></p>
     <p><a href="<%= @announcement.url %>/edit">Edit</a> <a class='delete-link' href="<%= @announcement.url %>/delete">Delete</a></p>
   <% end %>
