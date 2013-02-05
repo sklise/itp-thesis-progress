@@ -12,7 +12,7 @@
 
   <h6>Classmates</h6>
   <ul>
-  <% user.sections.first.students.each do |student| %>
+  <% user.sections.first.students.all(order: :first_name.asc).each do |student| %>
   <li><a href="<%= student.url %>"><%= student %></a></li>
   <% end %>
   </ul>

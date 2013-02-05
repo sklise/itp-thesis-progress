@@ -11,7 +11,7 @@
       <%= section.advisor %>
     </p>
     <ul style="list-style-type: none;margin:0 0 1.5em;">
-      <% section.students.each do |student| %>
+      <% section.students.all(order: :first_name.asc).each do |student| %>
       <li><a href="<%= student.url %>"><%= student %></a></li>
       <% end %>
     </ul>
