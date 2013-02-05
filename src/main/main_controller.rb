@@ -50,13 +50,13 @@ class Main < Sinatra::Base
   end
 
   get '/page/new' do
-    require_admin
+    require_non_student
     @page = Page.new
     erb :'pages/new'
   end
 
   post '/page/new' do
-    require_admin
+    require_non_student
 
     @page = Page.create(params[:page_form])
 
@@ -64,7 +64,7 @@ class Main < Sinatra::Base
   end
 
   get '/:page/edit' do
-    require_admin
+    require_non_student
     @pages = Page.all
     pass if !@pages.slugs.include?(params[:page])
     @page = @pages.first(slug: params[:page])
@@ -72,7 +72,7 @@ class Main < Sinatra::Base
   end
 
   post '/:page' do
-    require_admin
+    require_non_student
     @page = Page.first(slug: params[:page])
     @page.update(params[:page_form])
     redirect "/#{@page.slug}"
