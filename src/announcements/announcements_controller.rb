@@ -58,7 +58,7 @@ class AnnouncementsApp < Sinatra::Base
   #############################################################################
 
   get '/new/?' do
-    require_admin
+    require_non_student
 
     @sections = Section.all
     @announcement = Announcement.new
@@ -66,14 +66,14 @@ class AnnouncementsApp < Sinatra::Base
   end
 
   post '/new/?' do
-    require_admin
+    require_non_student
 
     @announcement = Announcement.create(params[:announcement])
     redirect @announcement.url
   end
 
   get '/:year/:id/delete' do
-    require_admin
+    require_non_student
 
     Announcement.first(id: params[:id]).delete
 
@@ -81,7 +81,7 @@ class AnnouncementsApp < Sinatra::Base
   end
 
   get '/:year/:id/edit/?' do
-    require_admin
+    require_non_student
 
     @sections = Section.all
     @announcement = Announcement.published.first(id: params[:id])
@@ -92,7 +92,7 @@ class AnnouncementsApp < Sinatra::Base
   end
 
   post '/:year/:id/?' do
-    require_admin
+    require_non_student
 
     @announcement = Announcement.published.first(id: params[:id])
 
