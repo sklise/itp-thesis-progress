@@ -581,7 +581,8 @@ div.markdown-mark {
   margin: 1.5em 0;
 }
 
-.post img {
+.post img,
+.post-content img {
   max-width: 100%;
 }
 
