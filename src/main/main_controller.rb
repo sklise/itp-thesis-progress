@@ -29,6 +29,7 @@ class Main < Sinatra::Base
         # @announcement_drafts = @current_user.announcements.drafts
         @announcements = Announcement.published.all(limit: 10)
         @sections = @current_user.sections
+        @comments = @current_user.sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
         erb :'dashboards/advisor'
       end
     else
