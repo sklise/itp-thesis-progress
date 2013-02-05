@@ -3,22 +3,27 @@
 </div>
 
 <div class='col-9'>
-<div class="announcement">
-  <h2><%= @announcement.title %></h2>
+<div class="announcement single">
+  <% if @current_user.advisor? %>
+    <p class="published"><%= @announcement.draft ? "Draft" : "Published" %></p>
+    <p><a href="<%= @announcement.url %>/edit">Edit</a> <a class='delete-link' href="<%= @announcement.url %>/delete">Delete</a></p>
+  <% end %>
+
   <hgroup>
-  <h6>
-    Posted on <%= longdate @announcement.published_at %> to
-    <% if @announcement.everyone %>
+  <h1><%= @announcement.title %></h1>
+  <h2 class="author"><em>by</em> <%= @announcement.user %></h2>
+  <h3 class="date"><%= longdate(@announcement.published_at || @announcement.updated_at) %></h3>
+  <h4><% if @announcement.everyone %>
     'Everyone'
     <% else %>
     <%= list( @announcement.sections, {:attribute => :name, :default => "all sections"}) %>
     <% end %>
-  </h6>
-  <h3 class="author"><em>by</em> <%= @announcement.user %></h3>
-  <p><% if @current_user.advisor? %><a href="<%= @announcement.url %>/edit">Edit</a> <a class="delete-link" href="<%= @announcement.url %>/delete">Delete</a><% end %></p>
+  </h4>
   </hgroup>
 
-  <div><%= mdown(@announcement.content) %></div>
+  <div class="announcement-content">
+    <%= mdown(@announcement.content) %>
+  </div>
 </div>
 </div>
 

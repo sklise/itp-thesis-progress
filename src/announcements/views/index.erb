@@ -13,21 +13,21 @@
   <% @announcements.each do |announcement| %>
   <div class='announcement'>
     <hgroup>
-      <h6><%= announcement.published_at.strftime("%m/%d/%y") %></h6>
-      <h2><a href="<%= announcement.url %>"><%= announcement.title %></a></h2>
-      <h3 class="author"><em>by</em> <%= announcement.user %></h3>
-      <% if announcement.everyone %>
-      Everyone
+    <h1><%= announcement.title %></h1>
+    <h2 class="author"><em>by</em> <%= announcement.user %></h2>
+    <h3 class="date"><%= longdate(announcement.published_at || announcement.updated_at) %></h3>
+    <h4><% if announcement.everyone %>
+      'Everyone'
       <% else %>
-      <%= list(announcement.sections, {:attribute => :name, :default => "all sections"}) %>
+      <%= list( announcement.sections, {:attribute => :name, :default => "all sections"}) %>
       <% end %>
+    </h4>
     </hgroup>
 
-    <div>
-      <%= mdown announcement.content %>
+    <div class="announcement-content">
+    <%= mdown(announcement.content) %>
     </div>
   </div>
-  <div class="hr"></div>
   <% end %>
 <% end %>
 
