@@ -13,7 +13,7 @@
   <% @announcements.each do |announcement| %>
   <div class='announcement'>
     <hgroup>
-    <h1><%= announcement.title %></h1>
+    <h1><a href="<%= announcement.url %>"><%= announcement.title %></a></h1>
     <h2 class="author"><em>by</em> <%= announcement.user %></h2>
     <h3 class="date"><%= longdate(announcement.published_at || announcement.updated_at) %></h3>
     <h4><% if announcement.everyone %>
