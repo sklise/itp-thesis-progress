@@ -43,6 +43,10 @@ module Sinatra
         d.strftime("%b %d")
       end
 
+      def shortdate(d)
+        d.strftime("%m/%d")
+      end
+
       def list(collection, options)
         return options[:default] if collection.length == 0
 

@@ -46,12 +46,12 @@
 
     <% if comment.read %>
     <div class="read">
-      <span class="date"><%= comment.created_at.strftime("%B/%d") %></span> read by <%= comment.user %>
+      <span class="date"><%= shortdate comment.created_at %></span> read by <%= comment.user %>
     </div>
     <% else %>
     <div class="comment">
       <div class="comment-head">
-        <span class="date"><%= comment.created_at.strftime("%B/%d") %></span> <%= comment.user %>
+        <span class="date"><%= shortdate comment.created_at %></span> <%= comment.user %>
       </div>
       <div class="comment-body">
         <%= mdown comment.content %>
