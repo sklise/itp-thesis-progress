@@ -5,8 +5,8 @@
     <% @drafts.each do |draft| %>
     <div class="feed-item">
       <span class="date"><%= longdate draft.updated_at %></span>
-       &mdash; <%= draft.title %> &mdash;
-      <span class="caption"><%= draft.content[0..160] %>...</span>
+       &mdash; <a href="<%= draft.url %>"><%= draft.title %></a> &mdash;
+      <span class="caption"><%= h draft.content[0..160] %>...</span>
 
       <a href="<%= draft.url %>/edit">Edit</a>
     </div>
