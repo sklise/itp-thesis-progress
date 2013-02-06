@@ -6,7 +6,8 @@
   <h5 class="category"><%= post.category %></h5>
 
   <div class="post-content">
-    <%= excerpt post.content %>
-    <a class="permalink" href="<%= post.url %>">Read &amp; Comment</a>
+    <%= mdown post.content %>
   </div>
+
+  <a class="permalink" href="<%= post.url %>">Read &amp; Comment</a>
 </div>

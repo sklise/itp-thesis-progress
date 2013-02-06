@@ -602,6 +602,12 @@ div.markdown-mark {
   line-height: 1.5em;
 }
 
+.permalink {
+  color: #bbb;
+  font-size: 0.875em;
+  line-height: 1.714285714em;
+}
+
 /*****************************************************************************
  *
  * ASSIGNMENT
@@ -721,11 +727,6 @@ div.markdown-mark {
 
 .post-excerpt .content {
   margin: 0.75em 0;
-}
-
-.permalink {
-  font-size: 0.875em;
-  line-height: 1.714285714em;
 }
 
 /*****************************************************************************
