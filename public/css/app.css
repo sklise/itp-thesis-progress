@@ -1012,7 +1012,8 @@ div.markdown-mark {
   margin: 1.5em 0;
 }
 
-.post img {
+.post img,
+.post-content img {
   max-width: 100%;
 }
 
@@ -1030,6 +1031,12 @@ div.markdown-mark {
   background: #fefde0;
   padding: .75em 0.75em;
   line-height: 1.5em;
+}
+
+.permalink {
+  color: #bbb;
+  font-size: 0.875em;
+  line-height: 1.714285714em;
 }
 
 /*****************************************************************************
@@ -1151,11 +1158,6 @@ div.markdown-mark {
 
 .post-excerpt .content {
   margin: 0.75em 0;
-}
-
-.permalink {
-  font-size: 0.875em;
-  line-height: 1.714285714em;
 }
 
 /*****************************************************************************
