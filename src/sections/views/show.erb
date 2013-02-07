@@ -32,6 +32,10 @@
       <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement} %>
     <% end %>
   </div>
+
+  <div class="section">
+    <a href="<%= @section.url %>/comments">Comments</a>
+  </div>
 </div>
 
 <div class="col-9">

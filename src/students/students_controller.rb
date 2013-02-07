@@ -132,7 +132,21 @@ class StudentsApp < Sinatra::Base
   # POSTS
   #
   #############################################################################
+  get '/:netid/comments/?' do
+    @user = User.first(netid:params[:netid])
 
+    halt 404 if @user.nil?
+
+    @comments_by = Comment.all(user: @user, order: :created_at.desc)
+    @comments_to = @user.posts.comments.all(order: :created_at.desc)
+    erb :'comments'
+  end
+
+  #############################################################################
+  #
+  # POSTS
+  #
+  #############################################################################
 
   get '/:netid/:id/:slug/?' do
     @post = Post.get(params[:id])

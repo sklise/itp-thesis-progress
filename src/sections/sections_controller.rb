@@ -29,6 +29,32 @@ class SectionsApp < Sinatra::Base
     erb :show
   end
 
+  get '/:year/:slug/comments/?' do
+    @section = Section.first( year: params[:year], slug: params[:slug])
+
+    if @section.nil?
+      flash.error = "We couldn't find the section you were looking for."
+      redirect "/sections"
+    end
+
+    @comments = @section.users.posts.comments.paginate(order: :created_at.desc, page: 1)
+
+    erb :comments
+  end
+
+  get '/:year/:slug/comments/page/:page_number/?' do
+    @section = Section.first( year: params[:year], slug: params[:slug])
+
+    if @section.nil?
+      flash.error = "We couldn't find the section you were looking for."
+      redirect "/sections"
+    end
+
+    @comments = @section.users.posts.comments.paginate(order: :created_at.desc, page: params[:page_number])
+
+    erb :comments
+  end
+
   #############################################################################
   #
   # ADVISOR ROUTES

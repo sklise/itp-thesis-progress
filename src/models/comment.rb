@@ -14,6 +14,8 @@ class Comment
   belongs_to :post
   belongs_to :user
 
+  self.per_page = 50
+
   def self.read
     all(read: true)
   end
