@@ -12,7 +12,7 @@ buildify().concat([
   'chosen.jquery.js',
   'main.js',
   'image_upload.js'
-]).save('app.js')
+])
 .uglify()
 .save('app.min.js');
 
@@ -25,6 +25,6 @@ buildify().concat([
   'thesis.css',
   'chosen.css',
   'print.css'
-]).save('app.css')
+])
 .cssmin()
 .save('app.min.css');
