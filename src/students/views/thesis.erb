@@ -48,3 +48,30 @@
     <a href="<%= @thesis.link %>"><%= @thesis.link %></a>
   </div>
 </div>
+
+<% if @current_user.non_student? %>
+<div class="col-9 float-right">
+  <div class="feedback">
+    <h5>Feedback</h5>
+    <p>Your comments will not be viewable to any students.</p>
+    <form action="/feedback/new" method="POST">
+      <input type="hidden" name="feedback[reviewee_id]" value="<%= @user.id %>" />
+      <div class="expanding-area">
+        <pre><span></span><br></pre>
+        <textarea id="new-feedback-textarea" placeholder="Write your comment here..." name="feedback[content]"></textarea>
+      </div>
+      <button name="feedback[thumbs_up]" value="false">Thumbs Down</button>
+      <button name="feedback[thumbs_up]" value="true">Thumbs Up</button>
+    </form>
+
+    <% @feedback.each do |feedback| %>
+    <div class="feedback-item <%= feedback.thumbs_up ? "thumbs-up" : "thumbs-down" %>">
+      <div class="author"><%= feedback.reviewer %></div>
+      <div>
+      <%= mdown feedback.content %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

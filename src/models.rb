@@ -13,3 +13,7 @@ DataMapper.setup(:default,
 DataMapper::Property::String.length(255)
 
 DataMapper.finalize
+
+if ENV['RACK_ENV'] != 'production'
+  DataMapper.auto_upgrade!
+end

@@ -22,6 +22,9 @@ class User
   has n, :comments
   has n, :sections, through: Resource
 
+  has n, :received_feedbacks, 'Feedback', :child_key => [:reviewee_id]
+  has n, :given_feedbacks, 'Feedback', :child_key => [:reviewer_id]
+
   #
   # CLASS METHODS
   #

@@ -837,6 +837,42 @@ div.markdown-mark {
 
 /*****************************************************************************
  *
+ * FEEDBACK
+ *
+ *****************************************************************************/
+
+.feedback {
+  background-color: #ddd;
+  padding: 0em 0.75em 1em;
+}
+
+.feedback form {
+  padding: 0 0 1.5em;
+  border-bottom: 1px solid #bbb;
+}
+
+.feedback-item {
+  background-color: #eee;
+  border: 1px solid #bbb;
+  margin: 1.5em 0;
+  padding: 0.75em 0.75em 0.75em 4em;
+}
+
+.feedback-item.thumbs-up {
+  background: #e0ffe0;
+}
+
+.feedback-item.thumbs-down {
+  background: #ffe0e0;
+}
+
+.feedback-item .author {
+  font-weight: bold;
+}
+
+
+/*****************************************************************************
+ *
  * STUDENT SUMMARY
  *
  *****************************************************************************/
@@ -892,11 +928,6 @@ div.markdown-mark {
 
 .username {
   color: #7a46bf;
-}
-
-
-
-.username {
   font-weight: bold;
 }
 

@@ -85,6 +85,11 @@ class StudentsApp < Sinatra::Base
   get '/:netid/thesis/?' do
     @user = User.first(netid: params[:netid])
     @thesis = @user.theses.last
+
+    if @current_user.non_student?
+      @feedback = @user.received_feedbacks
+    end
+
     erb :thesis
   end
 
