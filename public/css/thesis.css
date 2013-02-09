@@ -74,14 +74,14 @@ blockquote {
 }
 
 button {
-  background: rgb(53, 130, 245);
-  border: .125em solid rgb(53, 130, 245); /* 2 / 16 */
+  background-color: rgb(53, 130, 245);
+  border: .0625em solid rgb(53, 130, 245); /* 1 / 16 */
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   color: #fff;
   letter-spacing: 0.1em;
-  line-height: 1.25em;
+  line-height: 1.375em;
   margin: 0 0.25em;
   padding: 0.5em 0.75em;
 }
@@ -220,6 +220,12 @@ input:focus, textarea:focus {
   border-color: rgb(53, 130, 245);
   outline: none;
   box-shadow: 0 0 5px rgba(235,235,0,0.9);
+}
+
+input[type=submit]:hover,
+button:hover {
+  border-color: #eee;
+  cursor: pointer;
 }
 
 /*****************************************************************************
@@ -842,34 +848,66 @@ div.markdown-mark {
  *****************************************************************************/
 
 .feedback {
-  background-color: #ddd;
-  padding: 0em 0.75em 1em;
 }
 
-.feedback form {
-  padding: 0 0 1.5em;
-  border-bottom: 1px solid #bbb;
+.feedback-form {
+  background-color: #ddd;
+  padding: 1em 0.75em 1em;
+}
+
+.feedback-form button.thumb-up,
+.feedback-form button.thumb-down {
+  background-repeat: no-repeat;
+  background-size: 1.25em;
+  background-position-y: center;
+  background-position-x: .5em;
+  padding-left: 2.25em;
+}
+
+.feedback-form button.thumb-up {
+  background-image: url('/images/thumb_up_white.svg');
+}
+
+.feedback-form button.thumb-down {
+  background-image: url('/images/thumb_down_white.svg');
 }
 
 .feedback-item {
-  background-color: #eee;
-  border: 1px solid #bbb;
+  border: 1px solid #eee;
   margin: 1.5em 0;
-  padding: 0.75em 0.75em 0.75em 4em;
+  padding: 0.75em 0.75em 0.75em 3.75em;
 }
 
 .feedback-item.thumbs-up {
-  background: #e0ffe0;
+  background: url('/images/thumb_up.svg') no-repeat 0.75em center ;
+  background-color: #e0ffe0;
 }
 
 .feedback-item.thumbs-down {
-  background: #ffe0e0;
+  background: url('/images/thumb_down.svg') no-repeat 0.75em center ;
+  background-color: #ffe0e0;
 }
 
 .feedback-item .author {
   font-weight: bold;
 }
 
+.feedback-item .delete-button {
+  position: absolute;
+  right: 0.5em;
+  top: 0.75em;
+}
+
+.feedback-item .delete-button button {
+  border-color: #bbb;
+  border-width: 1px;
+  background-color: #fff;
+  color: rgb(213, 50, 50);
+}
+
+.feedback-item .delete-button button:hover {
+  border-color: rgb(213, 50, 50);
+}
 
 /*****************************************************************************
  *
