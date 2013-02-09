@@ -87,7 +87,7 @@ class StudentsApp < Sinatra::Base
     @thesis = @user.theses.last
 
     if @current_user.non_student?
-      @feedback = @user.received_feedbacks
+      @feedback = @user.received_feedbacks.all(active: true)
     end
 
     erb :thesis

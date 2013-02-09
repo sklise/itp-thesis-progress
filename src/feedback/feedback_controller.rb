@@ -29,7 +29,11 @@ class FeedbackApp < Sinatra::Base
     content_type :json
 
     @feedback = Feedback.get(params[:id])
-    if @feedback.destroy
+
+    @feedback.active = false
+
+
+    if @feedback.save
       {success: 'feedback deleted', id: params[:id]}
     else
       {error: 'Could not delete feedback', id: params[:id]}
