@@ -96,6 +96,12 @@ class StudentsApp < Sinatra::Base
   get '/:netid/thesis/edit' do
     check_user(params[:netid])
 
+    @site_config = SiteConfig.first
+    if @site_config.thesis_lock
+      flash.error = "Edits to thesis summaries are currently locked for review."
+      redirect "/students/#{params[:netid]}/thesis"
+    end
+
     @user = User.first(netid: params[:netid])
 
     @thesis = @user.theses.last
@@ -105,6 +111,12 @@ class StudentsApp < Sinatra::Base
   post '/:netid/thesis/update' do
     check_user(params[:netid])
     content_type :json
+
+    @site_config = SiteConfig.first
+    if @site_config.thesis_lock
+      flash.error = "Edits to thesis summaries are currently locked for review."
+      redirect "/students/#{params[:netid]}/thesis"
+    end
 
     @user = User.first netid: params[:netid]
 

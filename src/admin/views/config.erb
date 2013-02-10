@@ -1,0 +1,10 @@
+<div class="col-12">
+  <form action="/admin" method="POST">
+    <h2>Thesis Summary Lock</h2>
+    <p>
+      <input type="checkbox" value="true" name="thesis_lock" <%= "checked" if @site_config.thesis_lock %>/>
+      Check this box prevent students from editing their thesis summaries.
+    </p>
+    <input type="submit" value="Update" />
+  </form>
+</div>

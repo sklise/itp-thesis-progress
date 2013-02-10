@@ -46,6 +46,7 @@ builder = Rack::Builder.new do
 
   map ('/')                     { run Main }
 
+  map ('/admin')                { run AdminApp }
   map ('/announcements')        { run AnnouncementsApp }
   map ('/assignments')          { run AssignmentsApp }
   map ('/attachments')          { run AttachmentsApp }
