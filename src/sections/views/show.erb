@@ -40,25 +40,26 @@
 
 <div class="col-9">
   <div class="section">
+
     <h2>Students</h2>
 
-    <% @section.students.all(order: :first_name.asc).each do |student| %>
+  <% @section.students.all(order: :first_name.asc).each do |student| %>
     <div class="student-summary">
-    <h3><a href="<%= student.url %>"><%= student %></a></h3>
+      <h3><a href="<%= student.url %>"><%= student %></a></h3>
 
-    <ul class="quick-links">
-      <% if @current_user.non_student? %><li><a href="/applications/<%= student.netid %>">Application</a></li><% end %>
-      <li><a href="<%= student.url %>/progress">All <%= student.first_name %>'s Posts</a></li>
-    </ul>
+      <ul class="quick-links">
+        <% if @current_user.non_student? %><li><a href="/applications/<%= student.netid %>">Application</a></li><% end %>
+        <li><a href="<%= student.url %>/progress">All <%= student.first_name %>'s Posts</a></li>
+      </ul>
 
-    <h6>Recent Posts</h6>
+      <h6>Recent Posts</h6>
       <% student.posts.published.all(limit: 5).each do |post| %>
       <div class="feed-item">
       <a href="<%= post.url %>"><%= post.title %></a> <span class="category"><%= post.category %></span> <span class="date"><%= longdate post.published_at %></span>
       </div>
       <% end %>
     </div>
-    <% end %>
+  <% end %>
 
   </div>
 </div>

@@ -15,7 +15,12 @@ class AssignmentsApp < Sinatra::Base
   # index
   get '/?' do
     @sections = @current_user.sections
-    @assignments = @sections.assignments.published.all
+
+    if @sections
+      @assignments = @sections.assignments.published.all
+    else
+      @assignments = Assignment.published.all
+    end
 
     erb :index
   end
@@ -26,7 +31,7 @@ class AssignmentsApp < Sinatra::Base
 
     halt 404 if @assignment.nil? || @assignment.active == false
 
-    require_admin if @assignment.draft == true
+    require_advisor if @assignment.draft == true
 
     erb :show
   end
@@ -39,7 +44,7 @@ class AssignmentsApp < Sinatra::Base
 
   # edit
   get '/:year/:id/edit/?' do
-    require_admin
+    require_advisor
     @sections = Section.all
 
     @assignment = Assignment.get(params[:id])
@@ -51,7 +56,7 @@ class AssignmentsApp < Sinatra::Base
 
   # new
   get '/new/?' do
-    require_admin
+    require_advisor
     @assignment = Assignment.new
     @sections = Section.all
 
@@ -62,7 +67,7 @@ class AssignmentsApp < Sinatra::Base
 
   # create
   post '/new' do
-    require_admin
+    require_advisor
 
     params[:assignment][:user_id] = @current_user.id
 
@@ -74,7 +79,7 @@ class AssignmentsApp < Sinatra::Base
 
   # update
   post '/:year/:id/update' do
-    require_admin
+    require_advisor
     @assignment = Assignment.get(params[:id])
 
     if @assignment.update(params[:assignment])
@@ -88,7 +93,7 @@ class AssignmentsApp < Sinatra::Base
 
   # delete
   get '/:year/:id/delete' do
-    require_admin
+    require_advisor
     @assignment = Assignment.get(params[:id])
 
     if @assignment.delete

@@ -11,13 +11,23 @@ module Sinatra
       #
       #########################################################################
 
-      def require_admin
+      def require_advisor
         unless env['warden'].user.advisor?
           flash.error = "You are not authorized to access that page."
           redirect '/'
         end
       end
 
+      # Require either advisor or resident, a non-student that is directly
+      # involved in the class.
+      def require_admin
+        unless env['warden'].user.advisor? || env['warden'].user.resident?
+          flash.error = "You are not authorized to access that page."
+          redirect '/'
+        end
+      end
+
+      # Advisor, Faculty or Resident
       def require_non_student
         unless env['warden'].user.non_student?
           flash.error = "You are not authorized to access that page."

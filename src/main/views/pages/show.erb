@@ -1,7 +1,7 @@
 <div class="col-12">
 <h1><%= @page.title %></h1>
 
-<% if @current_user.non_student? %>
+<% if @current_user.admin? %>
 <a href="/<%= @page.slug %>/edit">Edit</a>
 <% end %>
 

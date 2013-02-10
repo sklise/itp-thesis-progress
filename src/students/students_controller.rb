@@ -233,7 +233,11 @@ class StudentsApp < Sinatra::Base
     @user = User.first(netid: params[:netid])
     @categories = Category.all
     # erb :profile
-    redirect "/students/#{params[:netid]}/progress"
+    if @current_user.faculty?
+      redirect "/students/#{params[:netid]}/thesis"
+    else
+      redirect "/students/#{params[:netid]}/progress"
+    end
   end
 
 end

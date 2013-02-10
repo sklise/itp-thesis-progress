@@ -8,6 +8,7 @@ class ApplicationApp < Sinatra::Base
   before do
     env['warden'].authenticate!
     require_non_student
+    @current_user = env['warden'].user
   end
 
   get '/' do

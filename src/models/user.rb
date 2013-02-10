@@ -74,8 +74,16 @@ class User
     self.role == "student"
   end
 
+  def admin?
+    self.role == "advisor" || self.role == "resident"
+  end
+
   def resident?
     self.role == "resident"
+  end
+
+  def faculty?
+    self.role == "faculty"
   end
 
   def non_student?

@@ -25,6 +25,9 @@ class Main < Sinatra::Base
 
         @recent_posts = @current_user.sections.first.students.posts.published.paginate(page: 1)
         erb :'dashboards/student'
+      elsif @current_user.faculty?
+        @sections = Section.all(year: 2013)
+        erb :'dashboards/faculty'
       else
         # @announcement_drafts = @current_user.announcements.drafts
         @announcements = Announcement.published.all(limit: 10)
@@ -51,13 +54,13 @@ class Main < Sinatra::Base
   end
 
   get '/page/new' do
-    require_non_student
+    require_admin
     @page = Page.new
     erb :'pages/new'
   end
 
   post '/page/new' do
-    require_non_student
+    require_admin
 
     @page = Page.create(params[:page_form])
 
@@ -65,7 +68,7 @@ class Main < Sinatra::Base
   end
 
   get '/:page/edit' do
-    require_non_student
+    require_admin
     @pages = Page.all
     pass if !@pages.slugs.include?(params[:page])
     @page = @pages.first(slug: params[:page])
@@ -73,7 +76,7 @@ class Main < Sinatra::Base
   end
 
   post '/:page' do
-    require_non_student
+    require_admin
     @page = Page.first(slug: params[:page])
     @page.update(params[:page_form])
     redirect "/#{@page.slug}"

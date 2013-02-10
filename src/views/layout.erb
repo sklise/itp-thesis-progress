@@ -39,29 +39,24 @@
     <div id="account-nav" class="col-9">
     <% if env['warden'].authenticated? %>
       <ul>
-        <% if env['warden'].user.student? %>
-          <li><a href="/students/<%= env['warden'].user.netid %>/thesis">Thesis Summary</a></li>
-          <li>
-            <a href="/students/<%= env['warden'].user.netid %>/progress">My Progress</a>
-          </li>
-          <li>
-            <a href="<%= env['warden'].user.sections.first.url %>">My Class</a>
-          </li>
-        <% else %>
-          <% env['warden'].user.sections.each do |section| %>
-          <li><a href="<%= section.url %>"><%= section.name %></a></li>
-          <% end %>
-          <li><a href="/page/new">New Page</a></li><li><a href="/announcements/new">New Announcement</a></li>
+      <% if @current_user.student? %>
+        <li><a href="<%= @current_user.url %>/thesis">Thesis Summary</a></li>
+        <li><a href="<%= @current_user.url %>/progress">My Progress</a></li>
+        <li><a href="<%= @current_user.sections.first.url %>">My Class</a></li>
+      <% elsif @current_user.admin? %>
+        <% env['warden'].user.sections.each do |section| %>
+        <li><a href="<%= section.url %>"><%= section.name %></a></li>
         <% end %>
-        <li class="username"><%= env['warden'].user.first_name %></li>
-        <% if env['warden'].user.student? %>
-        <li>
-          <a href="/students/new" title="Write a New Post" id="new-post-link">&nbsp;</a>
-        </li>
+        <li><a href="/page/new">New Page</a></li><li><a href="/announcements/new">New Announcement</a></li>
+      <% end %>
+
+        <li class="username"><%= @current_user.first_name %></li>
+
+        <% if @current_user.student? %>
+        <li><a href="/students/new" title="Write a New Post" id="new-post-link">&nbsp;</a></li>
         <% end %>
-        <li>
-          <a href="/session/logout" title="log out" id="logout-link">&nbsp;</a>
-        </li>
+
+        <li><a href="/session/logout" title="log out" id="logout-link">&nbsp;</a></li>
       </ul>
     <% else %>
       <a href="/session/login">Log In</a>
