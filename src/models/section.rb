@@ -14,11 +14,15 @@ class Section
   end
 
   def students
-    users.all(:role => "student")
+    users.all role: "student"
   end
 
   def advisor
-    users.first(:role => "advisor")
+    users.first role: "advisor"
+  end
+
+  def resident
+    users.first role: "resident"
   end
 
   has n, :assignments, through: Resource
