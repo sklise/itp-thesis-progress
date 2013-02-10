@@ -9,10 +9,6 @@
 
 <div class="col-3">
   <div class="section">
-    <a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu'>Email Students</a>
-  </div>
-
-  <div class="section">
     <h2>Assignments</h2>
     <% if @current_user.advisor? %>
     <p><a href="/assignments/new">New Assignment</a></p>
@@ -46,6 +42,7 @@
   <div class="section">
 
     <h2>Students</h2>
+    <a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu'>Email Students</a>
 
   <% @section.students.all(order: :first_name.asc).each do |student| %>
     <div class="student-summary">
