@@ -564,6 +564,10 @@ div.markdown-mark {
   margin: 0;
 }
 
+.post h4.category a {
+  color: rgb(53, 130, 245);
+}
+
 .category-list {
   list-style-type: none;
   margin: 0;
@@ -580,6 +584,38 @@ div.markdown-mark {
 
 .category-list li a.current {
   color: #000;
+}
+
+.post-content h1 {
+
+}
+
+.post-content h2 {
+  font-size: 1.125em; /* 18 / 16 */
+  line-height: 1.333333333em; /* 24/18 */
+  margin: 1.333333333em 0;
+}
+
+.post-content h3 {
+
+}
+
+.post-content h4 {
+
+}
+
+.post-content h5 {
+
+}
+
+.post-content h6 {
+  margin: 3em 0 0;
+  padding: 0;
+  line-height: 1.5em;
+}
+
+.post-content ul {
+  margin: 1.5em 0 1.5em 1.25em;
 }
 
 .post-content p,
@@ -613,6 +649,7 @@ div.markdown-mark {
   font-size: 0.875em;
   line-height: 1.714285714em;
 }
+
 
 /*****************************************************************************
  *
