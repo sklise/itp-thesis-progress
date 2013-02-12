@@ -16,8 +16,12 @@
   <textarea placeholder="Write your announcement here..." name="announcement[content]"><%= @announcement.content %></textarea>
   </div>
 
-
   <input type="hidden" value="<%= @current_user.id %>" name="announcement[user_id]">
+
+  <fieldset class="button-labels">
+    <input type="checkbox" name="send_email" value="true" id="send-email">
+    <label for="send-email">Send Email to Sections</label>
+  </fieldset>
 
   <button name="announcement[draft]" value="true">Save as Draft</button>
   <button name="announcement[draft]" value="false">Publish Announcemnt</button>

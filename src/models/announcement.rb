@@ -74,6 +74,39 @@ class Announcement
     "/announcements/#{self.year}/#{self.id}"
   end
 
+  def send_email
+    emails = []
+
+    self.sections.users.students.each do |student|
+      emails << "#{student.netid}@nyu.edu"
+    end
+
+    self.sections.users.residents.each do |resident|
+      emails << "#{resident.netid}@nyu.edu"
+    end
+
+    raise emails.inspect
+
+    Pony.mail({
+      to: emails.join(","),
+      via: :smtp,
+      via_options: {
+        :address => 'smtp.sendgrid.net',
+        :port => '587',
+        :domain => 'heroku.com',
+        :user_name => ENV['SENDGRID_USERNAME'],
+        :password => ENV['SENDGRID_PASSWORD'],
+        :authentication => :plain,
+        :enable_starttls_auto => true
+      },
+      from: "#{self.user.netid}@nyu.edu",
+      reply_to: "#{self.user.netid}@nyu.edu",
+      subject: "#{self.title}",
+      html_body: mdown(self.content),
+      body: "#{self.content}"
+    });
+  end
+
   private
 
   # Private: Look at sections_id attr_accessor and everyone, as well as

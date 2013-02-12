@@ -69,6 +69,11 @@ class AnnouncementsApp < Sinatra::Base
     require_non_student
 
     @announcement = Announcement.create(params[:announcement])
+
+    if params[:send_email] && !@announcement.draft
+      @announcement.send_email
+    end
+
     redirect @announcement.url
   end
 

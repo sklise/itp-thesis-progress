@@ -40,6 +40,14 @@ class User
     end
   end
 
+  def self.residents(year=nil)
+    if year.nil?
+      all(role: "resident")
+    else
+      all(role: "resident", year: year)
+    end
+  end
+
   #
   # INSTANCE METHODS
   #
