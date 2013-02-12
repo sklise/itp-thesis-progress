@@ -586,41 +586,59 @@ div.markdown-mark {
   color: #000;
 }
 
-.post-content h1 {
+.post-content {
+  margin-top: 1.5em;
+}
 
+.post-content h1 {
+  font-size: 1.25em; /* 20 / 16 */
+  text-transform: uppercase;
+  line-height: 2.4em;
+  margin: 1.2em 0;
 }
 
 .post-content h2 {
-  font-size: 1.125em; /* 18 / 16 */
-  line-height: 1.333333333em; /* 24/18 */
-  margin: 1.333333333em 0;
+  font-size: 1.5em; /* 24 / 16 */
+  line-height: 2em;
+  margin: 1em 0 0;
 }
 
 .post-content h3 {
-
+  font-size: 1.375em; /* 22 / 16 */
+  line-height: 2.181818182em; /* 24 / 22 * 2 */
+  margin: 1.090909091em 0 0;
+  padding: 0;
 }
 
 .post-content h4 {
-
+  color: #7a46bf;
+  font-size: 1.25em; /* 20 / 16 */
+  font-weight: bold;
+  line-height: 2.4em;
+  margin: 1.2em 0 0;
 }
 
 .post-content h5 {
-
+  font-size: 1.125em; /* 18 / 16 */
+  font-weight: bold;
+  line-height: 2.666666666em;
+  margin-top: 1.333333333em;
 }
 
 .post-content h6 {
-  margin: 3em 0 0;
+  font-weight: bold;
+  margin: 1.5em 0 0;
   padding: 0;
-  line-height: 1.5em;
+  line-height: 3em;
 }
 
 .post-content ul {
-  margin: 1.5em 0 1.5em 1.25em;
+  margin: 0 0 1.5em 1.25em;
 }
 
 .post-content p,
 .announcement-content p {
-  margin: 1.5em 0;
+  margin: 0 0 1.5em 0;
 }
 
 .post img,
