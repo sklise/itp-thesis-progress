@@ -85,8 +85,6 @@ class Announcement
       emails << "#{resident.netid}@nyu.edu"
     end
 
-    raise emails.inspect
-
     Pony.mail({
       to: emails.join(","),
       via: :smtp,
