@@ -42,7 +42,7 @@
 
   <fieldset class="col-4">
     <div class="spaced-row">
-    <h6>Image</h6>
+    <h6>Image (optional)</h6>
     <% if @thesis.image.nil? || @thesis.image == "" %>
       <p>no image</p>
     <% else %>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="spaced-row">
-      <h6>URL</h6>
+      <h6>URL (optional)</h6>
       <input name="thesis[link]" value="<%= @thesis.link %>" placeholder="http://">
     </div>
 
