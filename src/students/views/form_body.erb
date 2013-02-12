@@ -43,7 +43,14 @@
 
 <p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
 
+<fieldset class="button-labels">
+  <input type="checkbox" value="true" name="post[public]" id="post-public">
+  <label for="post-public">
+    Make this post viewable to the entire internet.
+  </label>
+</fieldset>
+
 <div class="action-buttons">
   <button id="private" name="post[draft]" value="true">Draft</button>
-  <button id="public" name="post[draft]" value="false">Public</button>
+  <button id="public" name="post[draft]" value="false">Publish</button>
 </div>

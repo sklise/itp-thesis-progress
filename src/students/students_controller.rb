@@ -9,17 +9,19 @@ class StudentsApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
-  before do
+  def authenticate
     env['warden'].authenticate!
     @current_user = env['warden'].user
   end
 
   get '/' do
+    authenticate
     @posts = Post.published.paginate(page: 1)
     erb :index
   end
 
   get '/page/:page_number/?' do
+    authenticate
     @posts = Post.published.paginate(page: params[:page_number])
     erb :index
   end
@@ -31,7 +33,8 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/progress/?' do
-    @user = User.first(netid:params[:netid])
+    authenticate
+    @user = User.first netid: params[:netid]
 
     halt 404 if @user.nil?
 
@@ -44,7 +47,8 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/progress/page/:page_number/?' do
-    @user = User.first(netid:params[:netid])
+    authenticate
+    @user = User.first netid: params[:netid]
 
     halt 404 if @user.nil?
 
@@ -53,10 +57,11 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/progress/:category?' do
-    @user = User.first(netid:params[:netid])
-
+    authenticate
+    @user = User.first netid: params[:netid]
     @category = Category.first slug: params[:category]
 
+    # Stop here if no user was found with a matching netid.
     halt 404 if @user.nil?
 
     @posts = Post.published.paginate(page: 1, user: @user, category_id: @category.id)
@@ -65,10 +70,11 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/progress/:category/page/:page_number/?' do
-    @user = User.first(netid:params[:netid])
-
+    authenticate
+    @user = User.first netid: params[:netid]
     @category = Category.first slug: params[:category]
 
+    # Stop here if no user was found with a matching netid.
     halt 404 if @user.nil?
 
     @posts = Post.published.paginate(page: params[:page_number], user: @user, category_id: @category.id)
@@ -83,6 +89,7 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/thesis/?' do
+    authenticate
     @user = User.first(netid: params[:netid])
     @thesis = @user.theses.last
 
@@ -94,6 +101,7 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/thesis/edit' do
+    authenticate
     check_user(params[:netid])
 
     @site_config = SiteConfig.first
@@ -109,6 +117,7 @@ class StudentsApp < Sinatra::Base
   end
 
   post '/:netid/thesis/update' do
+    authenticate
     check_user(params[:netid])
     content_type :json
 
@@ -150,6 +159,7 @@ class StudentsApp < Sinatra::Base
   #
   #############################################################################
   get '/:netid/comments/?' do
+    authenticate
     @user = User.first(netid:params[:netid])
 
     halt 404 if @user.nil?
@@ -159,24 +169,24 @@ class StudentsApp < Sinatra::Base
     erb :'comments'
   end
 
-  #############################################################################
-  #
-  # POSTS
-  #
-  #############################################################################
-
   get '/:netid/:id/:slug/?' do
-    @post = Post.get(params[:id])
+    # Get the post with only the necessary fields.
+    @post = Post.first(id: params[:id], active: true)
 
-    if (@post.draft && @post.user.id != @current_user.id ) || @post.nil? || !@post.active
+    # Redirect if the post is a draft
+    if (@post.draft && @post.user.id != @current_user.id ) || @post.nil?
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
+    elsif !@post.public && !env['warden'].authenticated?
+      env['warden'].authenticate!
     else
+      @current_user = env['warden'].user
       erb :'progress_show'
     end
   end
 
   get '/:netid/:id/:slug/edit/?' do
+    authenticate
     check_user(params[:netid])
 
     @categories = Category.all
@@ -186,6 +196,7 @@ class StudentsApp < Sinatra::Base
   end
 
   post '/:netid/:id/:slug/update' do
+    authenticate
     check_user(params[:netid])
 
     @post = Post.first(id: params[:id])
@@ -205,6 +216,7 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/:id/:slug/delete' do
+    authenticate
     check_user(params[:netid])
 
     Post.first(id: params[:id]).delete
@@ -213,6 +225,7 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/new' do
+    authenticate
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.new
@@ -220,6 +233,7 @@ class StudentsApp < Sinatra::Base
   end
 
   post '/new' do
+    authenticate
     @post = Post.new(params[:post])
 
     @post.user = @current_user
@@ -234,7 +248,6 @@ class StudentsApp < Sinatra::Base
     end
   end
 
-
   #############################################################################
   #
   # PROFILE PAGE
@@ -242,6 +255,7 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/?' do
+    authenticate
     @user = User.first(netid: params[:netid])
     @categories = Category.all
     # erb :profile
