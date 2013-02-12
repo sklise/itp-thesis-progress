@@ -42,7 +42,7 @@
   <div class="section">
 
     <h2>Students</h2>
-    <a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu'>Email Students</a>
+    <a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu,<%= @section.users.residents.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>'>Email Students</a>
 
   <% @section.students.all(order: :first_name.asc).each do |student| %>
     <div class="student-summary">
