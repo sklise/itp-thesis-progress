@@ -43,8 +43,8 @@
       <ul>
       <% if @current_user.student? %>
         <li><a href="<%= @current_user.url %>/thesis">Thesis Summary</a></li>
-        <li><a href="<%= @current_user.url %>/progress">My Progress</a></li>
-        <li><a href="<%= @current_user.sections.first.url %>">My Class</a></li>
+        <li><a href="<%= @current_user.url %>/progress">Your Progress</a></li>
+        <li><a href="<%= @current_user.sections.first.url %>">Your Class</a></li>
       <% elsif @current_user.admin? %>
         <% env['warden'].user.sections.each do |section| %>
         <li><a href="<%= section.url %>"><%= section.name %></a></li>
