@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
-require 'redcarpet'
 require 'bcrypt'
+
 
 Dir["./src/*.rb"].each {|file| require file }
 Dir["./src/*/*.rb"].each {|file| require file }

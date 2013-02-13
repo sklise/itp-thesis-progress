@@ -8,6 +8,7 @@ gem 'shotgun'
 gem 'dalli', '1.0.5'
 gem 'json', '1.7.5'
 
+gem 'RedCloth', '4.2.9'
 gem 'redcarpet', '2.1.1'
 
 gem 'pony', '1.4'
