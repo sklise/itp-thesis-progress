@@ -22,17 +22,19 @@
 
   <div class="spaced-row">
     <h6>Description</h6>
-    <%= @thesis.description %>
+    <div class="post-content">
+    <%= mdown @thesis.description %>
+    </div>
   </div>
 
   <div class="spaced-row">
     <h6>Why You Want to Make This</h6>
-    <%= @thesis.reason %>
+    <%= mdown @thesis.reason %>
   </div>
 
   <div class="spaced-row">
     <h6>Research Plan</h6>
-    <%= @thesis.research_plan %>
+    <%= mdown @thesis.research_plan %>
   </div>
 
 </div>
