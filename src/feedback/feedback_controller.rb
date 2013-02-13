@@ -28,7 +28,7 @@ class FeedbackApp < Sinatra::Base
   post '/delete' do
     content_type :json
 
-    @feedback = Feedback.get(params[:id])
+    @feedback = Feedback.first(id: params[:id])
 
     @feedback.active = false
 
