@@ -14,12 +14,16 @@ class AuthenticationManager < Sinatra::Base
 
   post '/login' do
     env['warden'].authenticate!
+
+    @current_user = env['warden'].user
     flash.success = env['warden'].message
+
     if session[:return_to].nil?
       redirect '/'
     else
       redirect session[:return_to]
     end
+
   end
 
   # This should maybe be a delete request...
