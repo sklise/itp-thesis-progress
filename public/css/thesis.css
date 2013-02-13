@@ -964,6 +964,28 @@ div.markdown-mark {
   border-color: rgb(213, 50, 50);
 }
 
+span.thumbs-up,
+span.thumbs-down {
+  font-size: 0.95em;
+  background-repeat: no-repeat;
+  background-position: .1em center;
+  background-size: 0.75em;
+  display: none;
+  padding: 0 0.2em 0 1em;
+}
+
+span.thumbs-up {
+  /*border: 1px solid rgba(16, 190, 16,.7);*/
+  color: rgb(16, 190, 16);
+  background-image: url('/images/thumb_up.svg');
+}
+
+span.thumbs-down {
+  /*border: 1px solid rgba(214, 19, 19,.7);*/
+  color: rgb(214, 19, 19);
+  background-image: url('/images/thumb_down.svg');
+}
+
 /*****************************************************************************
  *
  * STUDENT SUMMARY

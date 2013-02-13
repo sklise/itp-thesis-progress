@@ -12,4 +12,8 @@ class Feedback
 
   belongs_to :reviewer, 'User', key: true
   belongs_to :reviewee, 'User', key: true
+
+  def self.active
+    all(active: true)
+  end
 end

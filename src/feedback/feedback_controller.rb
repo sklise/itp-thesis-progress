@@ -35,7 +35,8 @@ class FeedbackApp < Sinatra::Base
 
 
     if @feedback.save
-      {success: 'feedback deleted', id: params[:id]}
+      {success: 'feedback deleted', id: params[:id]}.to_json
+      redirect request.referrer
     else
       {error: 'Could not delete feedback', id: params[:id]}
     end
