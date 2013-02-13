@@ -14,7 +14,8 @@ class FeedbackApp < Sinatra::Base
       reviewer_id: @current_user.id,
       reviewee_id: params[:feedback][:reviewee_id],
       content: params[:feedback][:content],
-      thumbs_up: params[:feedback][:thumbs_up]
+      thumbs_up: params[:feedback][:thumbs_up],
+      thesis_id: params[:feedback][:thesis_id]
     });
 
     if @feedback.save

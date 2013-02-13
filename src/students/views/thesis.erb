@@ -62,6 +62,7 @@
         <pre><span></span><br></pre>
         <textarea id="new-feedback-textarea" placeholder="Provide constructive feedback (optional) ..." name="feedback[content]"></textarea>
       </div>
+      <input type="hidden" name="feedback[thesis_id]" value="<%= @thesis.id %>"/>
       <button class="thumb-down" name="feedback[thumbs_up]" value="false">Thumbs Down</button>
       <button class="thumb-up" name="feedback[thumbs_up]" value="true">Thumbs Up</button>
     </form>
