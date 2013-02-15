@@ -200,7 +200,7 @@ class StudentsApp < Sinatra::Base
     @post = Post.first(id: params[:id], active: true)
 
     # Redirect if the post is a draft
-    if (@post.draft && @post.user.id != @current_user.id ) || @post.nil?
+    if @post.nil? || (@post.draft && @post.user.id != @current_user.id )
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
     elsif !@post.is_public && !env['warden'].authenticated?
