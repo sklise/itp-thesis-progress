@@ -9,6 +9,26 @@ class StudentsApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
+  if ENV['RACK_ENV'] == 'production'
+    set :raise_errors, Proc.new { false }
+    set :show_exceptions, false
+
+    error do
+      StatHat::API.ez_post_value("ERROR : #{request.fullpath}", ENV['STATHAT_EMAIL'], 1)
+
+      email_body = ""
+
+      if @current_user
+        email_body += "CURRENT_USER: #{@current_user}\n\n"
+      end
+
+      email_body += env['sinatra.error'].backtrace.join("\n")
+      send_email("ERROR: #{request.fullpath}", email_body)
+
+      erb :'../../views/error'
+    end
+  end
+
   def authenticate
     env['warden'].authenticate!
     @current_user = env['warden'].user
@@ -16,13 +36,19 @@ class StudentsApp < Sinatra::Base
 
   get '/' do
     authenticate
+
+    raise request.inspect
+
     @posts = Post.published.paginate(page: 1)
+
+    StatHat::API.ez_post_value("Students : All : 1", ENV['STATHAT_EMAIL'], 1)
     erb :index
   end
 
   get '/page/:page_number/?' do
     authenticate
     @posts = Post.published.paginate(page: params[:page_number])
+    StatHat::API.ez_post_value("Students : All : #{params[:page_number]}", ENV['STATHAT_EMAIL'], 1)
     erb :index
   end
 
@@ -259,6 +285,7 @@ class StudentsApp < Sinatra::Base
     authenticate
     @user = User.first(netid: params[:netid])
     @categories = Category.all
+
     # erb :profile
     if @current_user.faculty?
       redirect "/students/#{params[:netid]}/thesis"
@@ -266,5 +293,4 @@ class StudentsApp < Sinatra::Base
       redirect "/students/#{params[:netid]}/progress"
     end
   end
-
 end

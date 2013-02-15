@@ -2,6 +2,26 @@ module Sinatra
   class Base
 
     helpers do
+
+      def send_email(email_subject, email_body)
+        Pony.mail({
+          to: 'sk3453@nyu.edu',
+          from: ENV['GMAIL_ADDRESS'],
+          via: :smtp,
+          via_options: {
+            address: 'smtp.gmail.com',
+            port: 587,
+            enable_starttls_auto: true,
+            user_name: ENV['GMAIL_ADDRESS'],
+            :password             => ENV['GMAIL_PASSWORD'],
+            :authentication       => :plain,
+            domain: 'shep.info'
+          },
+          subject: email_subject,
+          body: email_body
+        })
+      end
+
       include Rack::Utils
       alias_method :h, :escape_html
 
