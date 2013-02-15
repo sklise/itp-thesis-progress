@@ -177,7 +177,7 @@ class StudentsApp < Sinatra::Base
     if (@post.draft && @post.user.id != @current_user.id ) || @post.nil?
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
-    elsif !@post.public && !env['warden'].authenticated?
+    elsif !@post.is_public && !env['warden'].authenticated?
       env['warden'].authenticate!
     else
       @current_user = env['warden'].user
@@ -205,6 +205,7 @@ class StudentsApp < Sinatra::Base
     @post.content = params[:post][:content]
     @post.category_id = params[:post][:category_id]
     @post.draft = params[:post][:draft]
+    @post.is_public = params[:post][:is_public]
 
     if @post.save
       flash.success = "Post updated successfully"

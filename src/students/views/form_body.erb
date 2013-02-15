@@ -43,11 +43,20 @@
 
 <p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
 
+<h6>Public/Private</h6>
+<p>Your posts require visitors to be logged in to view by default. Use this option to allow individual posts to be accessible by anyone on the internet. Public posts will not be indexed on search engines. Comments on posts are only viewable to logged in users.</p>
 <fieldset class="button-labels">
-  <input type="checkbox" value="true" name="post[public]" id="post-public">
+  <% if @post.public == true %>
+  <input type="checkbox" value="false" name="post[is_public]" id="post-public">
+  <label for="post-public">
+    Hide this post from the internet.
+  </label>
+  <% else %>
+  <input type="checkbox" value="true" name="post[is_public]" id="post-public">
   <label for="post-public">
     Make this post viewable to the entire internet.
   </label>
+  <% end %>
 </fieldset>
 
 <div class="action-buttons">
