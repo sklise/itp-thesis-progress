@@ -9,27 +9,27 @@ class StudentsApp < Sinatra::Base
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
 
-  if ENV['RACK_ENV'] != 'production'
-          set :raise_errors, Proc.new { false }
-          set :show_exceptions, false
+  if ENV['RACK_ENV'] == 'production'
+    set :raise_errors, Proc.new { false }
+    set :show_exceptions, false
 
-          error do
-            StatHat::API.ez_post_value("ERROR", ENV['STATHAT_EMAIL'], 1)
+    error do
+      StatHat::API.ez_post_value("ERROR", ENV['STATHAT_EMAIL'], 1)
 
-            email_body = "#{request.request_method} : #{request.fullpath}\n\n\n"
+      email_body = "#{request.request_method} : #{request.fullpath}\n\n\n"
 
-            if @current_user
-              email_body += "CURRENT_USER: #{@current_user}\n\n"
-            end
+      if @current_user
+        email_body += "CURRENT_USER: #{@current_user}\n\n"
+      end
 
-            email_body += env['sinatra.error'].inspect + "\n\n"
+      email_body += env['sinatra.error'].inspect + "\n\n"
 
-            email_body += env['sinatra.error'].backtrace.join("\n")
-            send_email("ERROR: #{request.fullpath}", email_body)
+      email_body += env['sinatra.error'].backtrace.join("\n")
+      send_email("ERROR: #{request.fullpath}", email_body)
 
-            erb :'../../views/error'
-          end
-        end
+      erb :'../../views/error'
+    end
+  end
 
   def authenticate
     env['warden'].authenticate!
@@ -199,11 +199,14 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/:id/:slug/?' do
+    @current_user = env['warden'].user
+
     # Get the post with only the necessary fields.
     @post = Post.first(id: params[:id], active: true)
 
     # Redirect if the post is a draft
-    if @post.nil? || (@post.draft && @post.user.id != @current_user.id )
+
+    if @post.nil? || (@current_user.nil? && !@post.is_public) || (@post.draft && @post.user_id != @current_user.id )
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
     elsif !@post.is_public && !env['warden'].authenticated?
