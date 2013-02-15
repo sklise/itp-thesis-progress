@@ -64,6 +64,8 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
+    StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
+
     if @user == @current_user
       @drafts = @user.posts.drafts
     end
@@ -78,6 +80,8 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
+    StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
+
     @posts = Post.published.paginate(page: params[:page_number], user: @user)
     erb :'progress_index'
   end
@@ -89,6 +93,8 @@ class StudentsApp < Sinatra::Base
 
     # Stop here if no user was found with a matching netid.
     halt 404 if @user.nil?
+
+    StatHat::API.ez_post_value("Students : Progress : Category", ENV['STATHAT_EMAIL'], 1)
 
     @posts = Post.published.paginate(page: 1, user: @user, category_id: @category.id)
 
@@ -102,6 +108,8 @@ class StudentsApp < Sinatra::Base
 
     # Stop here if no user was found with a matching netid.
     halt 404 if @user.nil?
+
+    StatHat::API.ez_post_value("Students : Progress : Category", ENV['STATHAT_EMAIL'], 1)
 
     @posts = Post.published.paginate(page: params[:page_number], user: @user, category_id: @category.id)
 
@@ -119,6 +127,8 @@ class StudentsApp < Sinatra::Base
     @user = User.first(netid: params[:netid])
 
     halt 404 if @user.nil?
+
+    StatHat::API.ez_post_value("Students : Thesis", ENV['STATHAT_EMAIL'], 1)
 
     @thesis = @user.theses.last
 
@@ -212,6 +222,7 @@ class StudentsApp < Sinatra::Base
     elsif !@post.is_public && !env['warden'].authenticated?
       env['warden'].authenticate!
     else
+      StatHat::API.ez_post_value("Students : Progress : Post", ENV['STATHAT_EMAIL'], 1)
       @current_user = env['warden'].user
       erb :'progress_show'
     end
