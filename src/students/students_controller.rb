@@ -117,6 +117,9 @@ class StudentsApp < Sinatra::Base
   get '/:netid/thesis/?' do
     authenticate
     @user = User.first(netid: params[:netid])
+
+    halt 404 if @user.nil?
+
     @thesis = @user.theses.last
 
     if @current_user.non_student?
