@@ -1030,6 +1030,11 @@ span.thumbs-down {
  *
  *****************************************************************************/
 
+.thesis-link {
+  overflow-x: none;
+  word-break: break-word;
+}
+
 .inline {
   /*line-height: 3em;*/
   list-style-type: none;
