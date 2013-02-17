@@ -29,8 +29,8 @@
           <% if (tu = student.received_feedbacks.active.all(thumbs_up: true).count) >= 1 %>
           <span class="thumb-indicator thumbs-up"><%= tu %></span>
           <% end %>
-          <% if (tu = student.received_feedbacks.all(thumbs_up: false).count) >= 1 %>
-          <span class="thumb-indicator thumbs-down"><%= student.received_feedbacks.active.all(thumbs_up: true).count %></span>
+          <% if (tu = student.received_feedbacks.active.all(thumbs_up: false).count) >= 1 %>
+          <span class="thumb-indicator thumbs-down"><%= tu %></span>
           <% end %>
         <% end %>
       </li>
