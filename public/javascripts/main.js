@@ -1,6 +1,4 @@
-function postComment(comment) {
-  console.log(comment)
-
+var postComment = function (comment) {
   if (S(comment['content']).isEmpty() && comment.read === false ) {
     return alert("The comment field was blank")
   }
@@ -10,44 +8,11 @@ function postComment(comment) {
     alert('There was a problem posting your comment. Please try again.');
   })
   .done(function (data) {
-    console.log(typeof data.read)
-    if (data.read === "true") {
-
-    }
     var templateSource = $('#comment-template').html();
     var template = Handlebars.compile(templateSource);
     $('.comment-list').prepend(template(data.comment));
     $('#new-comment-textarea').val('')
   });
-}
-
-// http://www.alistapart.com/articles/expanding-text-areas-made-elegant/
-function makeExpandingArea(container) {
- var area = container.querySelector('textarea');
- var span = container.querySelector('span');
- if (area.addEventListener) {
-   area.addEventListener('input', function() {
-     span.textContent = area.value;
-   }, false);
-   span.textContent = area.value;
- } else if (area.attachEvent) {
-   // IE8 compatibility
-   area.attachEvent('onpropertychange', function() {
-     span.innerText = area.value;
-   });
-   span.innerText = area.value;
- }
- // Enable extra CSS
- container.className += ' active';
-}
-
-var bindExpandingAreas = function () {
-  var areas = document.getElementsByClassName('expanding-area');
-  var l = areas.length;
-
-  while (l--) {
-   makeExpandingArea(areas[l]);
-  }
 }
 
 var buttonToggles = function ($label) {
@@ -86,7 +51,26 @@ var confirmDelete = function () {
   }
 }
 
+var submitPost = function (form) {
+
+}
+
 jQuery(function() {
+
+  $('#post-submit button').click(function () {
+    var form = $(this).closest('form');
+
+    var formData = {
+      "draft":        $(this).val(),
+      "title":        S(form.find('#post-title').val()).escapeHTML().s,
+      "content":      HTMLtoXML(form.find('#post-content-form').val())
+    }
+
+    console.dir(formData);
+
+    return false;
+  });
+
   $('.delete-link').click(confirmDelete);
 
   $('.button-labels label').click(function() {
@@ -104,8 +88,6 @@ jQuery(function() {
   })
 
   $('.chzn-select').chosen();
-
-  bindExpandingAreas();
 
   $('.new-comment button').click(function () {
     postComment({

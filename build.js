@@ -10,7 +10,9 @@ buildify().concat([
   'string.min.js',
   'handlebars.js',
   'chosen.jquery.js',
+  'htmlparser.js',
   'main.js',
+  'expandingareas.js',
   'image_upload.js'
 ])
 .uglify()
