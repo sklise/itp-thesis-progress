@@ -278,6 +278,9 @@ class StudentsApp < Sinatra::Base
 
   post '/new' do
     authenticate
+
+    params[:post][:assignment_id] = nil if params[:post][:assignment_id] == ""
+
     @post = Post.new(params[:post])
 
     @post.user = @current_user
