@@ -9,6 +9,7 @@
       <span class="caption"><%= h draft.content[0..160] %>...</span>
 
       <a href="<%= draft.url %>/edit">Edit</a>
+      <a class='delete-link' href="<%= draft.url %>/delete">Delete</a>
     </div>
     <% end %>
   </div>

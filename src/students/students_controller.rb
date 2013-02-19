@@ -104,10 +104,11 @@ class StudentsApp < Sinatra::Base
   get '/:netid/progress/:category/page/:page_number/?' do
     authenticate
     @user = User.first netid: params[:netid]
-    @category = Category.first slug: params[:category]
 
     # Stop here if no user was found with a matching netid.
     halt 404 if @user.nil?
+
+    @category = Category.first slug: params[:category]
 
     StatHat::API.ez_post_value("Students : Progress : Category", ENV['STATHAT_EMAIL'], 1)
 
