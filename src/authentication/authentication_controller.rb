@@ -9,7 +9,7 @@ class AuthenticationManager < Sinatra::Base
   end
 
   get '/login' do
-    redirect "/auth/saml"
+    erb :login
   end
 
   # This should maybe be a delete request...

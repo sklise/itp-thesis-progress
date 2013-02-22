@@ -1,8 +1,8 @@
 <div class="col-12">
-  <form id="login-form" action="/auth/login" method="post">
-    <h6>Please Log In To Continue</h6>
-    <input type="text" name="user[netid]" placeholder="NetID" />
-    <input type="password" name="user[password]" placeholder="Password" />
-    <input type="submit" value="Log In" />
-  </form>
+  <div id="login-form">
+    <h6>You must log in to continue</h6>
+    <p>Click the link below to authenticate with NYU using your NETID and associated password.</p>
+
+    <p><a onclick="window.open('/auth/saml','Login','menubar=no,location=no,width=600,height=600')" href="#">Log In</a></p>
+  </div>
 </div>
