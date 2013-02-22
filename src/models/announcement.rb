@@ -85,6 +85,10 @@ class Announcement
       emails << "#{resident.netid}@nyu.edu"
     end
 
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+    :autolink => true, :space_after_headers => true)
+    marked = markdown.render(self.content || "")
+
     Pony.mail({
       to: emails.join(","),
       via: :smtp,
@@ -100,7 +104,7 @@ class Announcement
       from: "#{self.user.netid}@nyu.edu",
       reply_to: "#{self.user.netid}@nyu.edu",
       subject: "#{self.title}",
-      html_body: mdown(self.content),
+      html_body: marked.to_html,
       body: "#{self.content}"
     });
   end
