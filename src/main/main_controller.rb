@@ -30,7 +30,8 @@ class Main < Sinatra::Base
   end
 
   before do
-    # env['warden'].authenticate!
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
   end
 
   get '/' do

@@ -2,12 +2,15 @@ require 'bundler'
 Bundler.require
 require 'bcrypt'
 
-
 Dir["./src/*.rb"].each {|file| require file }
 Dir["./src/*/*.rb"].each {|file| require file }
 
 builder = Rack::Builder.new do
-  use Rack::Session::Cookie, key: "ooooooohyeaaaaa"
+  use Rack::CommonLogger
+  use Rack::ShowExceptions
+  use Rack::Session::Cookie, key: 'thesis-site', secret: (ENV['SESSION_SECRET'] || "super secret")
+  use Rack::MethodOverride
+  use Rack::Flash, accessorize: [:error, :success]
 
   use OmniAuth::Builder do
     provider :saml,
@@ -22,7 +25,7 @@ builder = Rack::Builder.new do
     config.serialize_from_session{|id| User.get(id) }
     config.scope_defaults :default,
       strategies: [:password],
-      action: 'session/unauthenticated'
+      action: 'auth/unauthenticated'
     config.failure_app = self
   end
 
@@ -32,11 +35,10 @@ builder = Rack::Builder.new do
 
   Warden::Strategies.add(:password) do
     def valid?
-      params['user'] && params['user']['netid'] && params['user']['password']
+      params['user']
     end
 
     def authenticate!
-      raise params.inspect
       user = User.first(netid: params['user']['netid'])
 
       if user.nil?
@@ -49,21 +51,15 @@ builder = Rack::Builder.new do
     end
   end
 
-  use Rack::MethodOverride
-  use Rack::Flash, accessorize: [:error, :success]
-
-  # Hook up the apps
-
   map ('/')                     { run Main }
-
   map ('/admin')                { run AdminApp }
   map ('/announcements')        { run AnnouncementsApp }
   map ('/assignments')          { run AssignmentsApp }
   map ('/attachments')          { run AttachmentsApp }
+  map ('/auth' )                { run AuthenticationManager }
   map ('/comments')             { run CommentsApp }
   map ('/feedback')             { run FeedbackApp }
   map ('/sections')             { run SectionsApp }
-  map ('/session' )             { run AuthenticationManager }
   map ('/students')             { run StudentsApp }
 
   map ('/applications')         { run ApplicationApp }
