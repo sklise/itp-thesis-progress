@@ -214,12 +214,12 @@ textarea {
   word-wrap: break-word;
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 input:focus, textarea:focus {
   border-color: rgb(53, 130, 245);
   outline: none;
-  box-shadow: 0 0 5px rgba(235,235,0,0.9);
 }
 
 input[type=submit]:hover,
@@ -795,8 +795,7 @@ div.markdown-mark {
 
 .expanding-area {
   position: relative;
-  min-height: 120px;
-  margin-bottom: 1.5em;
+  min-height: 6em;
 }
 
 .expanding-area pre {
@@ -829,9 +828,15 @@ div.markdown-mark {
   visibility: hidden;
 }
 
-.quick-post .expanding-area {
-  min-height: 6em;
+#post-form textarea {
+  min-height: 12em;
   margin-bottom: 0;
+}
+
+#post-form .info {
+  background-color: #eee;
+  font-size: 0.75em; /* 12 / 16 */
+  padding: 1em 1em;
 }
 
 /*****************************************************************************

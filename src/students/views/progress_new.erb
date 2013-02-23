@@ -1,9 +1,80 @@
-<div class="col-12">
-  <h1>New Post</h1>
+<div id="post-form">
 </div>
 
+<script type="text/template" id="post-form-template">
+  <div class="col-12">
+  <h1 class="page-title">
+  {{#if id }}
+    Edit Post
+  {{else}}
+    New Post
+  {{/if}}
+  </h1>
+  </div>
+
 <div class='col-9'>
-<form id="progress-form" action="/students/new" method="POST">
-  <%= erb :form_body, layout: false %>
-</form>
+  <h3>
+    <input type="text" id="post-title" name="post[title]" placeholder="Title of Post..." value="{{ title }}"/>
+  </h3>
+
+  {{#each categories.models}}
+  {{this.name}}
+  {{/each}}
+
+  <h6>Content <span class="markdown-mark">&nbsp;</span></h6>
+  <div class="expanding-area" style="background:#eee;">
+    <pre><span></span><br></pre>
+    <textarea id="post-content-form" placeholder="Write your post here..." name="post[content]" style="border-color: #eee;border-bottom: none;">{{content}}</textarea>
+  </div>
+  <div class="info">
+    <h6>Formatting</h6>
+    <p>Posts are formatted using Markdown. Click the icon to the right of "Content" up above to view a Markdown cheatsheet.</p>
+
+    <h6>Adding Images</h6>
+    <p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
+    </div>
+
+  <div id="post-submit" class="action-buttons">
+    <button id="private" name="post[draft]" value="true">Draft</button>
+    <button id="public" name="post[draft]" value="false">{{#if id }}Update{{else}}Publish{{/if}}</button>
+  </div>
 </div>
+</script>
+
+<script>
+var Post = Backbone.Model.extend({});
+var Category = Backbone.Model.extend();
+
+var Categories = Backbone.Collection.extend({
+  model: Category
+});
+
+jQuery(function () {
+  var PostView = Backbone.View.extend({
+    initialize: function(){
+      this.render();
+    },
+
+    el: '#post-form',
+
+    templateSource: $('#post-form-template').html(),
+
+    render: function(){
+      var template = Handlebars.compile( this.templateSource );
+      this.$el.html( template(this.model.toJSON()) );
+      bindExpandingAreas();
+    }
+  });
+
+  var post = new Post(<%= @post.to_json %>);
+
+  post.set('categories', new Categories(<%= @categories.to_json %>));
+
+  console.log(post);
+
+  var postView = new PostView({model: post});
+
+  this.app = window.app != null ? window.app : {}
+  this.app.PostView = PostView;
+});
+</script>

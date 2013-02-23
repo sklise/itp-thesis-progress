@@ -6,6 +6,7 @@ buildify().concat([
   'jquery.js',
   'jquery-ui.js',
   'underscore.js',
+  'backbone.js',
   'moment.js',
   'string.min.js',
   'handlebars.js',

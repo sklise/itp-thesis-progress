@@ -249,7 +249,7 @@ class StudentsApp < Sinatra::Base
     @categories = Category.all
     @post = Post.first(id: params[:id])
 
-    erb :'progress_edit'
+    erb :'progress_new'
   end
 
   post '/:netid/:id/:slug/update' do
@@ -288,6 +288,11 @@ class StudentsApp < Sinatra::Base
     @categories = Category.all
     @post = Post.new
     erb :'progress_new'
+  end
+
+  # Route for post submission, new and create.
+  post '/submit' do
+
   end
 
   post '/new' do

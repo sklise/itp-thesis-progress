@@ -8,7 +8,7 @@ class Post
   property :active, Boolean, default: true
   property :is_public, Boolean, default: false
 
-  property :title, String, length: 255, default: "Untitled"
+  property :title, String, length: 255
   property :slug, Slug
   property :content, Text
   property :draft, Boolean, default: true
