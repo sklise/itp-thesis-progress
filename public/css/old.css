@@ -69,23 +69,6 @@ input[type="password"] {
   text-decoration: none;
 }
 
-.button-labels label:hover,
-.button-labels a:hover {
-  background-color: rgb(65, 159, 255);
-}
-
-input[checked] + label,
-label.checked,
-.button-labels a.checked {
-  background-color: rgb(40, 140, 240);
-}
-
-input[checked] + label:hover,
-label.checked:hover,
-.button-labels a.checked:hover {
-  background-color: rgb(40, 140, 255);
-}
-
 /* Colors for action-buttons */
 input[type="submit"].submit {
   background-color: rgb(130, 186, 208);

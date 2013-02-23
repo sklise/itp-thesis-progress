@@ -17,9 +17,9 @@
     <input type="text" id="post-title" name="post[title]" placeholder="Title of Post..." value="{{ title }}"/>
   </h3>
 
-  {{#each categories.models}}
-  {{this.name}}
-  {{/each}}
+  <div class="categories">
+  <h6>Category</h6>
+  </div>
 
   <h6>Content <span class="markdown-mark">&nbsp;</span></h6>
   <div class="expanding-area" style="background:#eee;">
@@ -33,6 +33,18 @@
     <h6>Adding Images</h6>
     <p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
     </div>
+
+  <h6>Privacy</h6>
+  <fieldset class="button-labels">
+    <input type="radio" value="false" name="post[is_public]" class="post-public" {{#unless is_public }}checked{{/unless}}>
+    <label for="post-public">
+      NYU
+    </label>
+    <input type="radio" value="true" name="post[is_public]" class="post-public" {{#if is_public }}checked{{/if}}>
+    <label for="post-public">
+      World
+    </label>
+  </fieldset>
 
   <div id="post-submit" class="action-buttons">
     <button id="private" name="post[draft]" value="true">Draft</button>
@@ -62,6 +74,10 @@ jQuery(function () {
     render: function(){
       var template = Handlebars.compile( this.templateSource );
       this.$el.html( template(this.model.toJSON()) );
+
+      this.model.get('categories').forEach(function (model) {
+        this.$el.find('.categories').append(model.get('name'))
+      }, this);
       bindExpandingAreas();
     }
   });

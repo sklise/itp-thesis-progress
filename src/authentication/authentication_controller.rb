@@ -9,6 +9,7 @@ class AuthenticationManager < Sinatra::Base
   end
 
   get '/login' do
+    redirect '/' if env['warden'].authenticated?
     erb :login
   end
 

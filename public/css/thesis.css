@@ -839,6 +839,24 @@ div.markdown-mark {
   padding: 1em 1em;
 }
 
+.button-labels label:hover,
+.button-labels a:hover {
+  background-color: rgb(65, 159, 255);
+}
+
+input[checked] + label,
+label.checked,
+.button-labels a.checked {
+  background-color: rgb(40, 140, 240);
+}
+
+input[checked] + label:hover,
+label.checked:hover,
+.button-labels a.checked:hover {
+  background-color: rgb(40, 140, 255);
+}
+
+
 /*****************************************************************************
  *
  * PAGE CONTENT

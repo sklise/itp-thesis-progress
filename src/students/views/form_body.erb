@@ -1,7 +1,3 @@
-<h3>
-  <input type="text" id="post-title" name="post[title]" placeholder="Title of Post..." value="<%= @post.title == "Untitled" ? "" : @post.title %>"/>
-</h3>
-
 <div class="meta-form-elements">
 <h6>Category</h6>
 <fieldset class="button-labels">
@@ -34,14 +30,6 @@
 </fieldset>
 <div class="assignment-brief" ><%= "<h6>Brief</h6>"+@assignment.brief if @assignment %></div>
 </div>
-
-<h6>Content <span class="markdown-mark">&nbsp;</span></h6>
-<div class="expanding-area">
-  <pre><span></span><br></pre>
-  <textarea id="post-content-form" placeholder="Write your post here..." name="post[content]"><%= @post.content %></textarea>
-</div>
-
-<p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
 
 <h6>Public/Private</h6>
 <p>Your posts require visitors to be logged in to view by default. Use this option to allow individual posts to be accessible by anyone on the internet. Public posts will not be indexed on search engines. Comments on posts are only viewable to logged in users.</p>
