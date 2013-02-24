@@ -34,7 +34,7 @@ class AuthenticationManager < Sinatra::Base
     env['warden'].set_user user
 
     @current_user = user
-    flash.success = env['warden'].message
+    flash.success = env['warden'].message || "You've logged in as #{@current_user}"
 
     @return_to = session[:return_to]
     redirect '/auth/success'
