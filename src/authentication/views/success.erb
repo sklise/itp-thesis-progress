@@ -1,0 +1,8 @@
+<script>
+  <% if @return_to %>
+  window.opener.location = "<%= @return_to %>";
+  <% else %>
+  window.opener.location = "/";
+  <% end %>
+  window.close()
+</script>

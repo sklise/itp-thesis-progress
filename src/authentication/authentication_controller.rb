@@ -19,6 +19,10 @@ class AuthenticationManager < Sinatra::Base
     redirect '/'
   end
 
+  get '/success' do
+    erb :success, layout: false
+  end
+
   post '/saml/callback' do
     saml_hash = request.env['omniauth.auth']['extra']['raw_info'].to_hash
 
@@ -32,10 +36,7 @@ class AuthenticationManager < Sinatra::Base
     @current_user = user
     flash.success = env['warden'].message
 
-    if session[:return_to].nil?
-      redirect '/'
-    else
-      redirect session[:return_to]
-    end
+    @return_to = session[:return_to]
+    redirect '/auth/success'
   end
 end
