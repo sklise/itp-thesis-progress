@@ -4,7 +4,7 @@ class AuthenticationManager < Sinatra::Base
   post '/unauthenticated' do
     session[:return_to] = env['warden.options'][:attempted_path]
     puts env['warden.options'][:attempted_path]
-    flash.error = env['warden'].message || "You've gotta log in"
+    flash.error = env['warden'].message if env['warden'].message
     redirect '/auth/login'
   end
 
