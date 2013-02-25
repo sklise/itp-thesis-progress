@@ -224,7 +224,7 @@ input:focus, textarea:focus {
 
 input[type=submit]:hover,
 button:hover {
-  border-color: #eee;
+  border-color: #bbb;
   cursor: pointer;
 }
 
@@ -795,7 +795,7 @@ div.markdown-mark {
 
 .expanding-area {
   position: relative;
-  min-height: 6em;
+  min-height: 12em;
 }
 
 .expanding-area pre {
@@ -828,20 +828,10 @@ div.markdown-mark {
   visibility: hidden;
 }
 
-#post-form textarea {
-  min-height: 12em;
-  margin-bottom: 0;
-}
-
-#post-form .info {
-  background-color: #eee;
-  font-size: 0.75em; /* 12 / 16 */
-  padding: 1em 1em;
-}
-
 .button-labels label:hover,
 .button-labels a:hover {
   background-color: rgb(65, 159, 255);
+  cursor: pointer;
 }
 
 input[checked] + label,
@@ -854,6 +844,31 @@ input[checked] + label:hover,
 label.checked:hover,
 .button-labels a.checked:hover {
   background-color: rgb(40, 140, 255);
+}
+
+.button-labels { /* container div */
+  margin: 0.75em 0;
+}
+
+/* hide radio or checkbox buttons, show only the labels. */
+.button-labels input {
+  display: none;
+}
+
+.button-labels label,
+.button-labels a {
+  background-color: rgb(121,121,121);
+  display: block;
+  float: left;
+  font-size: 0.875em;
+  letter-spacing: 0.1em;
+  line-height: 1.714285714em;
+  margin: 0 0.428571428em 0.428571428em 0;
+  padding: 0.214285714em 0.428571428em;
+}
+
+.button-labels a {
+  text-decoration: none;
 }
 
 
@@ -1095,6 +1110,7 @@ span.thumbs-down {
 
 .section,
 .section-list {
+  clear: both;
   margin: 0 0 1.5em 0;
 }
 

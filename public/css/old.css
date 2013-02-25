@@ -25,11 +25,6 @@ input[type="submit"],
   vertical-align: baseline;
 }
 
-input[type="submit"]:hover,
-button:hover {
-  border-color: #777;
-}
-
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -41,32 +36,6 @@ input[type="password"] {
   clear: both;
   display: block;
   margin: 1.5em 0;
-}
-
-/* BUTTON LABELS_____________________________________________________________*/
-.button-labels { /* container div */
-  margin: 0.75em 0;
-}
-
-/* hide radio or checkbox buttons, show only the labels. */
-.button-labels input {
-  display: none;
-}
-
-.button-labels label,
-.button-labels a {
-  background-color: rgb(121,121,121);
-  display: block;
-  float: left;
-  font-size: 0.875em;
-  letter-spacing: 0.1em;
-  line-height: 1.714285714em;
-  margin: 0 0.428571428em 0.428571428em 0;
-  padding: 0.214285714em 0.428571428em;
-}
-
-.button-labels a {
-  text-decoration: none;
 }
 
 /* Colors for action-buttons */

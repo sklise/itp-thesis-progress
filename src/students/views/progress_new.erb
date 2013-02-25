@@ -1,6 +1,22 @@
 <div id="post-form">
 </div>
 
+<script type="text/template" id="assignments-choice-template">
+<h6>Assignment</h6>
+<select class="assignments-select">
+<option value="">Select an Assignment</option>
+</select>
+</script>
+
+<script type="text/template" id="categories-choice-template">
+<h6>Category</h6>
+<a href="#">Unset Category</a>
+</script>
+
+<script type="text/template" id="category-template">
+  <div class="toggle-button category-select {{#if selected}}selected{{/if}}">{{name}}</div>
+</script>
+
 <script type="text/template" id="post-form-template">
   <div class="col-12">
   <h1 class="page-title">
@@ -17,8 +33,10 @@
     <input type="text" id="post-title" name="post[title]" placeholder="Title of Post..." value="{{ title }}"/>
   </h3>
 
-  <div class="categories">
-  <h6>Category</h6>
+  <div class="categories-choice section">
+  </div>
+
+  <div class="assignments-choice section">
   </div>
 
   <h6>Content <span class="markdown-mark">&nbsp;</span></h6>
@@ -34,17 +52,16 @@
     <p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
     </div>
 
-  <h6>Privacy</h6>
-  <fieldset class="button-labels">
-    <input type="radio" value="false" name="post[is_public]" class="post-public" {{#unless is_public }}checked{{/unless}}>
-    <label for="post-public">
+  <div class="section privacy">
+    <h6>Privacy</h6>
+    <div class="toggle-button" data-value="false">
       NYU
-    </label>
-    <input type="radio" value="true" name="post[is_public]" class="post-public" {{#if is_public }}checked{{/if}}>
-    <label for="post-public">
+    </div>
+
+    <div class="toggle-button" data-value="true">
       World
-    </label>
-  </fieldset>
+    </div>
+  </div>
 
   <div id="post-submit" class="action-buttons">
     <button id="private" name="post[draft]" value="true">Draft</button>
@@ -54,20 +71,55 @@
 </script>
 
 <script>
+//
+// MODELS
+//
 var Post = Backbone.Model.extend({});
 var Category = Backbone.Model.extend();
+var Assignment = Backbone.Model.extend();
 
-var Categories = Backbone.Collection.extend({
-  model: Category
+//
+// COLLECTIONS
+//
+var Assignments = Backbone.Collection.extend({
+  model: Assignment
 });
 
+var Categories = Backbone.Collection.extend({
+  model: Category,
+
+  setCategory: function (categoryId) {
+    this.forEach(function (category) {
+      if (category.get('id') === categoryId) {
+        category.set('selected', true);
+      } else {
+        category.unset('selected');
+      }
+    });
+  },
+
+  unsetCategory: function () {
+    this.forEach(function (category) {
+      category.unset('selected');
+    });
+  }
+});
+
+//
+// VIEWS
+//
 jQuery(function () {
   var PostView = Backbone.View.extend({
     initialize: function(){
-      this.render();
+      this.render().el;
+      this.model.assignments.bind('change:assignment', this.setAssignment, this);
     },
 
     el: '#post-form',
+
+    events: {
+      'click .privacy .toggle-button' : 'changePrivacy'
+    },
 
     templateSource: $('#post-form-template').html(),
 
@@ -75,22 +127,105 @@ jQuery(function () {
       var template = Handlebars.compile( this.templateSource );
       this.$el.html( template(this.model.toJSON()) );
 
-      this.model.get('categories').forEach(function (model) {
-        this.$el.find('.categories').append(model.get('name'))
-      }, this);
+      this.assignmentsSelect = new AssignmentsView({collection: this.model.assignments});
+      this.categorySelect = new CategoriesView({collection: this.model.categories});
+
       bindExpandingAreas();
+      return this;
+    },
+
+    changePrivacy: function () {
+
+    },
+
+    setAssignment: function () {
+      this.model.set('assignment_id', this.$el.find('.assignments-select').val());
     }
   });
 
-  var post = new Post(<%= @post.to_json %>);
+  var CategoriesView = Backbone.View.extend({
+    initialize: function () {
+      this.render().el;
+      this.collection.bind('change', this.render, this);
+    },
 
-  post.set('categories', new Categories(<%= @categories.to_json %>));
+    el: '.categories-choice',
 
-  console.log(post);
+    events: {
+      'click a': 'unsetCategory'
+    },
+
+    unsetCategory: function () {
+      this.collection.unsetCategory();
+      return false;
+    },
+
+    templateSource: Handlebars.compile($('#categories-choice-template').html()),
+
+    render: function () {
+      this.$el.html(this.templateSource());
+      this.collection.forEach(function (category) {
+        var categoryV = new CategoryView({model: category});
+        this.$el.append(categoryV.render().el);
+      }, this);
+      return this;
+    }
+  });
+
+  var CategoryView = Backbone.View.extend({
+    initialize: function () {
+      this.render().el;
+    },
+
+    events: {
+      'click': 'setCategory'
+    },
+
+    setCategory: function () {
+      this.model.collection.setCategory(this.model.id);
+    },
+
+    render: function () {
+      var categoryTemplate = Handlebars.compile($('#category-template').html());
+      this.$el.html(categoryTemplate(this.model.toJSON()));
+      return this;
+    }
+  })
+
+  var AssignmentsView = Backbone.View.extend({
+    initialize: function () {
+      this.render().el;
+    },
+
+    events: {
+      'change .assignments-select' : 'chooseAssignment'
+    },
+
+    el: '.assignments-choice',
+
+    templateSource: $('#assignments-choice-template').html(),
+
+    chooseAssignment: function () {
+      this.trigger('change:assignment');
+    },
+
+    render: function () {
+      var template = Handlebars.compile(this.templateSource);
+      var c = this.collection.toJSON();
+      this.$el.html(template(this.collection.toJSON()));
+      this.collection.forEach(function (assignment) {
+        var assignmentTemplate = Handlebars.compile('<option value="{{ id }}">{{ title }}</option>')(assignment.toJSON());
+        this.$el.find('.assignments-select').append(assignmentTemplate);
+      }, this);
+      $('.assignments-select').chosen();
+      return this;
+    }
+  });
+
+  window.post = new Post(<%= @post.to_json %>);
+  post.assignments =  new Assignments(<%= @assignments.to_json %>);
+  post.categories = new Categories(<%= @categories.to_json %>);
 
   var postView = new PostView({model: post});
-
-  this.app = window.app != null ? window.app : {}
-  this.app.PostView = PostView;
 });
 </script>

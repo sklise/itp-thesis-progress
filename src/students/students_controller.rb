@@ -284,6 +284,8 @@ class StudentsApp < Sinatra::Base
 
   get '/new' do
     authenticate
+    @section = @current_user.sections.first
+    @assignments = @section.assignments
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.new

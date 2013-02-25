@@ -27,7 +27,8 @@ buildify().concat([
   'old.css',
   'thesis.css',
   'chosen.css',
-  'print.css'
+  'print.css',
+  'progress-form.css'
 ])
 .cssmin()
 .save('app.min.css');
