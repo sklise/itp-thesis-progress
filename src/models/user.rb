@@ -14,6 +14,7 @@ class User
   property :year, Integer
   property :role, String, default: "student"
   property :public_thesis, Boolean, default: false
+  property :role, String, default: "provisional"
 
   has n, :theses
   has 1, :application
@@ -96,7 +97,7 @@ class User
   end
 
   def non_student?
-    self.role != "student"
+    self.role != "student" && self.role != "provisional"
   end
 
   # Return a student's advisor. If the user is an advisor, return nil

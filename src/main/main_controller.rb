@@ -53,7 +53,7 @@ class Main < Sinatra::Base
         @sections = Section.all(year: 2013)
         StatHat::API.ez_post_value("Dashboard : Faculty", ENV['STATHAT_EMAIL'], 1)
         erb :'dashboards/faculty'
-      else
+      elsif @current_user.advisor?
         # @announcement_drafts = @current_user.announcements.drafts
         @announcements = Announcement.published.all(limit: 10)
         @sections = @current_user.sections
@@ -61,6 +61,10 @@ class Main < Sinatra::Base
 
         StatHat::API.ez_post_value("Dashboard : Admin", ENV['STATHAT_EMAIL'], 1)
         erb :'dashboards/advisor'
+      else
+        @sections = Section.all(year: 2013)
+        StatHat::API.ez_post_value("Dashboard : Provisional", ENV['STATHAT_EMAIL'], 1)
+        erb :'dashboards/provisional'
       end
     else
       erb :front_page

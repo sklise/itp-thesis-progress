@@ -1,0 +1,25 @@
+<div class="col-3">
+  <h1>Welcome to the Thesis Site</h1>
+
+  <p>
+    You've been logged in as a provisional user, you can look around but not do that much.
+  </p>
+</div>
+
+<div class="col-9">
+  <% @sections.each_with_index do |section,i| %>
+  <div class="section-list col-3" <% if i % 4 == 0 %>style="clear:left;"<% end %> >
+    <h3>
+      <a href="<%= section.path %>"><%= section.name %></a>
+    </h3>
+    <p>
+      <%= section.advisor %>
+    </p>
+    <ul style="list-style-type: none;margin:0 0 1.5em;">
+      <% section.students.all(order: :first_name.asc).each do |student| %>
+      <li><a href="<%= student.url %>"><%= student %></a></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>
