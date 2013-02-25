@@ -2,6 +2,8 @@ source :rubygems
 
 gem 'sinatra', '1.3.3'
 
+gem 'thin'
+
 gem 'shotgun', '0.9'
 
 gem 'dalli', '1.0.5'
