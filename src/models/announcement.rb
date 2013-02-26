@@ -90,7 +90,7 @@ class Announcement
     marked = markdown.render(self.content || "")
 
     Pony.mail({
-      to: emails.join(","),
+      bcc: emails.join(","),
       via: :smtp,
       via_options: {
         :address => 'smtp.sendgrid.net',
