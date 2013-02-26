@@ -15,7 +15,7 @@ class AuthenticationManager < Sinatra::Base
   # This should maybe be a delete request...
   get '/logout' do
     env['warden'].logout
-    flash.success = 'Successfully logged out'
+    flash.success = "<p>Successfully logged out</p> <p>If this is a public computer, it is recommended to quit the browser.</p>"
     redirect '/'
   end
 

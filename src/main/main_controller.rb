@@ -53,7 +53,7 @@ class Main < Sinatra::Base
         @sections = Section.all(year: 2013)
         StatHat::API.ez_post_value("Dashboard : Faculty", ENV['STATHAT_EMAIL'], 1)
         erb :'dashboards/faculty'
-      elsif @current_user.advisor?
+      elsif @current_user.admin?
         # @announcement_drafts = @current_user.announcements.drafts
         @announcements = Announcement.published.all(limit: 10)
         @sections = @current_user.sections
