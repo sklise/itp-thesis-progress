@@ -124,8 +124,9 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/thesis/?' do
-    authenticate
     @user = User.first(netid: params[:netid])
+    @current_user = env['warden'].user
+    authenticate unless @user.public_thesis
 
     halt 404 if @user.nil?
 
@@ -133,7 +134,7 @@ class StudentsApp < Sinatra::Base
 
     @thesis = @user.theses.last
 
-    if @current_user.non_student?
+    if @current_user && @current_user.non_student?
       @feedback = @user.received_feedbacks.all(active: true)
     end
 
@@ -168,6 +169,8 @@ class StudentsApp < Sinatra::Base
     end
 
     @user = User.first netid: params[:netid]
+
+    @user.public_thesis = params[:user][:public_thesis]
 
     old_thesis = @user.theses.last
     params[:thesis][:id] = nil

@@ -13,6 +13,7 @@ class User
   property :password_hash, BCryptHash
   property :year, Integer
   property :role, String, default: "student"
+  property :public_thesis, Boolean, default: false
 
   has n, :theses
   has 1, :application
