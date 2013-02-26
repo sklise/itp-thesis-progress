@@ -64,6 +64,11 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
+    if @user.non_student?
+      flash.error = "#{@user} is not a student."
+      redirect '/'
+    end
+
     StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
 
     if @user == @current_user
@@ -129,6 +134,11 @@ class StudentsApp < Sinatra::Base
     authenticate unless @user.public_thesis
 
     halt 404 if @user.nil?
+
+    if @user.non_student?
+      flash.error = "#{@user} is does not have a thesis in the system."
+      redirect '/'
+    end
 
     StatHat::API.ez_post_value("Students : Thesis", ENV['STATHAT_EMAIL'], 1)
 
@@ -308,6 +318,12 @@ class StudentsApp < Sinatra::Base
   get '/:netid/?' do
     authenticate
     @user = User.first(netid: params[:netid])
+
+    if @user.non_student?
+      flash.error = "#{@user} does not have a student page."
+      redirect '/'
+    end
+
     @categories = Category.all
 
     # erb :profile
