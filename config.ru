@@ -14,8 +14,8 @@ builder = Rack::Builder.new do
 
   use OmniAuth::Builder do
     provider :saml,
-      :assertion_consumer_service_url => "http://localhost:9393/auth/saml/callback",
-      :issuer                         => "ITP Thesis Site Local",
+      :assertion_consumer_service_url => "http://thesis.itp.io/auth/saml/callback",
+      :issuer                         => "ITP Thesis Site",
       :idp_sso_target_url             => "http://itp.nyu.edu/simplesaml/saml2/idp/SSOService.php",
       :idp_cert                       => ENV['IDP_CERT']
   end
