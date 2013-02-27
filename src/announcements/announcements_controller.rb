@@ -34,6 +34,9 @@ class AnnouncementsApp < Sinatra::Base
 
   get '/' do
     @announcements = Announcement.published.paginate(page: 1)
+
+    @drafts = @current_user.announcements.drafts if @current_user.advisor?
+
     erb :index
   end
 

@@ -59,6 +59,8 @@ class Main < Sinatra::Base
         @sections = @current_user.sections
         @comments = @current_user.sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
 
+        @drafts = @current_user.announcements.drafts
+
         StatHat::API.ez_post_value("Dashboard : Admin", ENV['STATHAT_EMAIL'], 1)
         erb :'dashboards/advisor'
       else

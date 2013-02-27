@@ -3,6 +3,22 @@
 </div>
 
 <div class="col-9">
+
+  <% if @drafts %>
+  <div class="section">
+    <h2>Drafts</h2>
+    <% @drafts.each do |draft| %>
+    <div class="feed-item">
+      <span class="date"><%= longdate draft.updated_at %></span>
+       &mdash; <%= draft.title %> &mdash;
+      <span class="caption"><%= draft.content[0..160] %>...</span>
+
+      <a href="<%= draft.url %>/edit">Edit</a>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+
 <% if @announcements.length == 0 %>
   <% if request.path.match(/announcements\/?$/) %>
   <p>There are no announcements :(</p>
