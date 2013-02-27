@@ -57,7 +57,8 @@
 
 <% if @current_user && @current_user.non_student? %>
 <div class="col-9 float-right">
-  <div class="feedback">
+  <p><a href="#" id="toggle-feedback">Show/Hide Feedback</a></p>
+  <div class="feedback" style="display:none;">
     <h4>Review</h4>
     <form class="feedback-form" action="/feedback/new" method="POST">
       <p>Your comments will not be viewable to any students.</p>
@@ -88,3 +89,12 @@
   </div>
 </div>
 <% end %>
+
+<script>
+  $(document).ready(function () {
+    $('#toggle-feedback').click(function () {
+      $('.feedback').toggle();
+      return false;
+    });
+  })
+</script>
