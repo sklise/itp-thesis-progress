@@ -9,13 +9,13 @@ module Sinatra
           from: ENV['GMAIL_ADDRESS'],
           via: :smtp,
           via_options: {
-            address: 'smtp.gmail.com',
-            port: 587,
-            enable_starttls_auto: true,
-            user_name: ENV['GMAIL_ADDRESS'],
-            :password             => ENV['GMAIL_PASSWORD'],
-            :authentication       => :plain,
-            domain: 'shep.info'
+            address:                'smtp.gmail.com',
+            port:                   587,
+            enable_starttls_auto:   true,
+            user_name:              ENV['GMAIL_ADDRESS'],
+            password:               ENV['GMAIL_PASSWORD'],
+            authentication:         :plain,
+            domain:                 'itp.nyu.edu'
           },
           subject: email_subject,
           body: email_body

@@ -93,13 +93,13 @@ class Announcement
       bcc: emails.join(","),
       via: :smtp,
       via_options: {
-        :address => 'smtp.sendgrid.net',
-        :port => '587',
-        :domain => 'heroku.com',
-        :user_name => ENV['SENDGRID_USERNAME'],
-        :password => ENV['SENDGRID_PASSWORD'],
-        :authentication => :plain,
-        :enable_starttls_auto => true
+        address:                'smtp.gmail.com',
+        port:                   587,
+        enable_starttls_auto:   true,
+        user_name:              ENV['GMAIL_ADDRESS'],
+        password:               ENV['GMAIL_PASSWORD'],
+        authentication:         :plain,
+        domain:                 'itp.nyu.edu'
       },
       from: "#{self.user.netid}@nyu.edu",
       reply_to: "#{self.user.netid}@nyu.edu",
