@@ -75,6 +75,8 @@ class Announcement
   end
 
   def send_email
+    sender = "#{self.user.netid}@nyu.edu"
+
     emails = []
 
     self.sections.users.students.each do |student|
@@ -90,6 +92,7 @@ class Announcement
     marked = markdown.render(self.content || "")
 
     Pony.mail({
+      to: sender,
       bcc: emails.join(","),
       via: :smtp,
       via_options: {
@@ -101,8 +104,8 @@ class Announcement
         authentication:         :plain,
         domain:                 'itp.nyu.edu'
       },
-      from: "#{self.user.netid}@nyu.edu",
-      reply_to: "#{self.user.netid}@nyu.edu",
+      from: sender,
+      reply_to: sender,
       subject: "#{self.title}",
       html_body: marked.to_html,
       body: "#{self.content}"
