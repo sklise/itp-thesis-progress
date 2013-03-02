@@ -96,6 +96,10 @@ class User
     self.role == "faculty"
   end
 
+  def provisional?
+    self.role == "provisional"
+  end
+
   def non_student?
     self.role != "student" && self.role != "provisional"
   end

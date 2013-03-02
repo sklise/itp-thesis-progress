@@ -30,6 +30,11 @@ class AnnouncementsApp < Sinatra::Base
   before do
     env['warden'].authenticate!
     @current_user = env['warden'].user
+
+    if @current_user.provisional?
+      flash.error = "You are not authorized to view that page."
+      redirect "/"
+    end
   end
 
   get '/' do
