@@ -585,6 +585,7 @@ div.markdown-mark {
 
 .post-content {
   margin-top: 1.5em;
+  word-wrap: break-word;
 }
 
 .post-content h1 {
