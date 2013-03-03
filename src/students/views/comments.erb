@@ -6,16 +6,7 @@
   <div class="section">
   <h3>Comments by</h3>
   <% @comments_by.each do |comment| %>
-    <div class="feed-item with-icon">
-      <div class="comment-icon <%= comment.read ? "cread" : "ctext" %>">&nbsp;</div>
-      <% if comment.read %>
-      Read
-      <% else %>
-      Commented on
-      <% end %>
-      <a href="<%= comment.post.url %>"><%= comment.post.title %></a>
-      by <a href="<%= comment.post.user.url %>"><%= comment.post.user %></a> on <span class="date"><%= longdate comment.created_at %></span>
-    </div>
+  <%= erb :'../../views/comment-feed', layout: false, locals: {comment: comment} %>
   <% end %>
   </div>
 </div>
@@ -23,16 +14,7 @@
 <div class="col-5">
   <h3>Comments To</h3>
   <% @comments_to.each do |comment| %>
-    <div class="feed-item with-icon">
-      <div class="comment-icon <%= comment.read ? "cread" : "ctext" %>">&nbsp;</div>
-      <a href="<%= comment.user.url %>"><%= comment.user %></a>
-      <% if comment.read %>
-      read
-      <% else %>
-      commented on
-      <% end %>
-      <a href="<%= comment.post.url %>"><%= comment.post.title %></a> on <span class="date"><%= longdate comment.created_at %></span>
-    </div>
+  <%= erb :'../../views/comment-feed', layout: false, locals: {comment: comment} %>
   <% end %>
   </div>
 </div>

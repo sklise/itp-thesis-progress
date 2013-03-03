@@ -1,0 +1,12 @@
+<div class="feed-item">
+  <div class="comment-icon glyphicons <%= comment.read ? "log_book" : "comments" %>"><i></i></div>
+  <div class="comment-description">
+  <a href="<%= comment.user.url %>"><%= comment.user %></a>
+  <% if comment.read %>
+  read
+  <% else %>
+  commented on
+  <% end %>
+  <a href="<%= comment.post.url %>"><%= comment.post.title %></a> on <span class="date"><%= longdate comment.created_at %></span>
+  </div>
+</div>
