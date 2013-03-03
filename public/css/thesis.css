@@ -1002,24 +1002,19 @@ label.checked:hover,
 
 span.thumbs-up,
 span.thumbs-down {
-  font-size: 0.95em;
-  background-repeat: no-repeat;
-  background-position: .1em center;
-  background-size: 0.75em;
+  font-size: 0.9em;
   display: none;
-  padding: 0 0.2em 0 1em;
+  padding: 0 0 0 0.2em;
 }
 
-span.thumbs-up {
-  /*border: 1px solid rgba(16, 190, 16,.7);*/
+span.thumbs-up,
+span.thumbs-up .glyphicons i:before {
   color: rgb(16, 190, 16);
-  background-image: url('/images/thumb_up.svg');
 }
 
-span.thumbs-down {
-  /*border: 1px solid rgba(214, 19, 19,.7);*/
+span.thumbs-down,
+span.thumbs-down .glyphicons i:before {
   color: rgb(214, 19, 19);
-  background-image: url('/images/thumb_down.svg');
 }
 
 /*****************************************************************************
@@ -1109,9 +1104,12 @@ span.thumbs-down {
   font-style: italic;
 }
 
+.section {
+  clear: both;
+}
+
 .section,
 .section-list {
-  clear: both;
   margin: 0 0 1.5em 0;
 }
 

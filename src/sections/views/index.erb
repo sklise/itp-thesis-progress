@@ -8,7 +8,8 @@
 <script>
   $(document).ready(function () {
     $('#toggle-thumbs').click(function () {
-      $('span.thumb-indicator').toggle();
+      $('span.thumbs-up').toggle();
+      $('span.thumbs-down').toggle();
       return false;
     });
   })
@@ -27,10 +28,10 @@
       <li><a href="<%= student.url %>"><%= student %></a>
         <% if @current_user.non_student? %>
           <% if (tu = student.received_feedbacks.active.all(thumbs_up: true).count) >= 1 %>
-          <span class="thumb-indicator thumbs-up"><%= tu %></span>
+          <span class="thumbs-up"><a class="glyphicons thumbs_up"><i></i></a> <%= tu %></span>
           <% end %>
           <% if (tu = student.received_feedbacks.active.all(thumbs_up: false).count) >= 1 %>
-          <span class="thumb-indicator thumbs-down"><%= tu %></span>
+          <span class="thumbs-down"><a class="glyphicons thumbs_down"><i></i></a> <%= tu %></span>
           <% end %>
         <% end %>
       </li>
