@@ -1002,7 +1002,7 @@ label.checked:hover,
 
 span.thumbs-up,
 span.thumbs-down {
-  font-size: 0.9em;
+  font-size: .9em;
   display: none;
   padding: 0 0 0 0.2em;
 }

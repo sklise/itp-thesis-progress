@@ -15,17 +15,20 @@
 .glyphicons {
   display: inline-block;
   position: relative;
-  padding: .4em 1em .4em 0em;
+  padding: 0.4em 1em 0.4em 0em;
   color: #1d1d1b;
   text-decoration: none;
   *display: inline;
   *zoom: 1;
 }
+
 .glyphicons i:before {
   position: absolute;
   left: 0;
   top: 0;
-  font: 1em/1em 'Glyphicons';
+  line-height: 1em;
+  font-size: inherit;
+  font-family: 'Glyphicons';
   font-style: normal;
   color: #1d1d1b;
 }
