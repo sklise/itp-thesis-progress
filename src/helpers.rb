@@ -1,5 +1,6 @@
 module Sinatra
   class Base
+    include Rack::Utils
 
     helpers do
 
@@ -22,7 +23,23 @@ module Sinatra
         })
       end
 
-      include Rack::Utils
+      def error_logging(request, current_user)
+        StatHat::API.ez_post_value("ERROR", ENV['STATHAT_EMAIL'], 1)
+
+        email_body = "#{request.request_method} : #{request.fullpath}\n\n\n"
+
+        if current_user
+          email_body += "CURRENT_USER: #{current_user}\n\n"
+        end
+
+        email_body += env['sinatra.error'].inspect + "\n\n"
+
+        email_body += env['sinatra.error'].backtrace.join("\n")
+        send_email("ERROR: #{request.fullpath}", email_body)
+
+        erb :'../../views/error'
+      end
+
       alias_method :h, :escape_html
 
       #########################################################################

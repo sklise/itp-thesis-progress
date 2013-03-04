@@ -1,7 +1,27 @@
+Handlebars.registerHelper('time', function(timestamp) {
+  return moment(timestamp).format('MMMM Do YYYY, h:mm:ss a');
+});
+
+Handlebars.registerHelper('md', function(content) {
+  if (typeof content === 'undefined') {
+    return '';
+  } else {
+    return marked(content);
+  }
+});
+
+Handlebars.registerHelper('posturl', function (t) {
+  var netid = $('body').data().netid;
+  return "/students/"+netid+"/"+t.id+"/" + t.slug;
+});
+
 //
 // MODELS
 //
-var Post = Backbone.Model.extend({});
+var Post = Backbone.Model.extend({
+  urlRoot: '/posts'
+});
+
 var Category = Backbone.Model.extend();
 var Assignment = Backbone.Model.extend();
 
@@ -61,9 +81,12 @@ jQuery(function () {
   var PostView = Backbone.View.extend({
     initialize: function(){
       this.render().el;
-      this.model.bind('change:privacy', this.render, this)
+      this.model.bind('change:privacy', this.render, this);
+      this.bind('pending', this.pending, this);
       this.model.assignments.bind('change', this.setAssignment, this);
       this.model.categories.bind('change', this.setCategory, this);
+      this.model.categories.setCategory(this.model.get('category_id'))
+      this.model.assignments.setAssignment(this.model.get('assignment_id'))
     },
 
     el: '#post-form',
@@ -73,7 +96,8 @@ jQuery(function () {
       'blur .post-title' : 'updateTitle',
       'blur textarea' : 'updateContent',
       'click .make-draft' : 'updateDraft',
-      'click .make-publish' : 'updatePublish'
+      'click .make-publish' : 'updatePublish',
+      'click .markdown-mark' : 'toggleMarkdownGuide'
     },
 
     templateSource: $('#post-form-template').html(),
@@ -103,6 +127,10 @@ jQuery(function () {
       this.model.trigger('change:privacy');
     },
 
+    toggleMarkdownGuide: function () {
+      $('#markdown-wrapper').toggle();
+    },
+
     setAssignment: function () {
       var selectedAssignment = this.model.assignments.selectedAssignment();
 
@@ -128,17 +156,49 @@ jQuery(function () {
     },
 
     updateDraft: function () {
-      this.model.set('draft', true);
+      var p = this.model;
+      p.set({
+        'draft': true,
+        'title': S(p.get('title')).escapeHTML().s,
+        'content': HTMLtoXML(p.get('content'))
+      });
       this.publishIt();
     },
 
     updatePublish: function () {
-      this.model.set('draft', false);
+      var p = this.model;
+
+      p.set({
+        'draft': false,
+        'title': S(p.get('title')).escapeHTML().s,
+        'content': HTMLtoXML(p.get('content'))
+      });
       this.publishIt();
     },
 
     publishIt: function () {
-      console.log(this.model.toJSON());
+      this.pending = true;
+      this.trigger("pending");
+
+      var view = this;
+
+      this.model.save(this.model.attributes, {
+        success: function () {
+          if (window.location.pathname === "/posts/new") {
+            window.location.pathname = "/posts/"+view.model.get('id')+"/edit"
+          } else {
+            view.render().el;
+          }
+        },
+        error: function () {
+          view.render().el;
+          view.$el.find('.publish-status').prepend('<p class="error"><strong>There was an error saving your post just now, please try again.</strong></p>');
+        }
+      });
+    },
+
+    pending: function () {
+      this.$el.find('.the-form').addClass('pending');
     }
   });
 
@@ -162,10 +222,10 @@ jQuery(function () {
     templateSource: Handlebars.compile($('#categories-choice-template').html()),
 
     render: function () {
-      this.$el.html(this.templateSource());
+      this.$el.html(this.templateSource({category_id: this.collection.selectedCategory()}));
       this.collection.forEach(function (category) {
         var categoryV = new CategoryView({model: category});
-        this.$el.append(categoryV.render().el);
+        this.$el.find('.categories-place').append(categoryV.render().el);
       }, this);
       return this;
     }
@@ -239,5 +299,5 @@ jQuery(function () {
   post.assignments =  new Assignments(postFormData.assignments);
   post.categories = new Categories(postFormData.categories);
 
-  var postView = new PostView({model: post});
+  window.postView = new PostView({model: post});
 });

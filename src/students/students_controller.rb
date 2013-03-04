@@ -12,22 +12,8 @@ class StudentsApp < Sinatra::Base
   if ENV['RACK_ENV'] == 'production'
     set :raise_errors, Proc.new { false }
     set :show_exceptions, false
-
     error do
-      StatHat::API.ez_post_value("ERROR", ENV['STATHAT_EMAIL'], 1)
-
-      email_body = "#{request.request_method} : #{request.fullpath}\n\n\n"
-
-      if @current_user
-        email_body += "CURRENT_USER: #{@current_user}\n\n"
-      end
-
-      email_body += env['sinatra.error'].inspect + "\n\n"
-
-      email_body += env['sinatra.error'].backtrace.join("\n")
-      send_email("ERROR: #{request.fullpath}", email_body)
-
-      erb :'../../views/error'
+      error_logging(request, env['warden'].user)
     end
   end
 
@@ -40,7 +26,7 @@ class StudentsApp < Sinatra::Base
     authenticate
 
     @posts = Post.published.paginate(page: 1)
-
+    @drafts = Post.drafts.all(user_id: @current_user.id)
     StatHat::API.ez_post_value("Students : All : 1", ENV['STATHAT_EMAIL'], 1)
     erb :index
   end
@@ -208,9 +194,10 @@ class StudentsApp < Sinatra::Base
 
   #############################################################################
   #
-  # POSTS
+  # COMMENTS
   #
   #############################################################################
+
   get '/:netid/comments/?' do
     authenticate
     @user = User.first(netid:params[:netid])
@@ -221,6 +208,12 @@ class StudentsApp < Sinatra::Base
     @comments_to = @user.posts.comments.all(order: :created_at.desc)
     erb :'comments'
   end
+
+  #############################################################################
+  #
+  # POSTS
+  #
+  #############################################################################
 
   get '/:netid/:id/:slug/?' do
     @current_user = env['warden'].user
@@ -243,13 +236,8 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/:netid/:id/:slug/edit/?' do
-    authenticate
     check_user(params[:netid])
-
-    @categories = Category.all
-    @post = Post.first(id: params[:id])
-
-    erb :'progress_new'
+    redirect "/posts/#{params[:id]}/edit"
   end
 
   post '/:netid/:id/:slug/update' do
@@ -283,13 +271,7 @@ class StudentsApp < Sinatra::Base
   end
 
   get '/new' do
-    authenticate
-    @section = @current_user.sections.first
-    @assignments = @section.assignments
-    @assignment = Assignment.get(params[:assignment_id])
-    @categories = Category.all
-    @post = Post.new
-    erb :'progress_new'
+    redirect '/posts/new'
   end
 
   # Route for post submission, new and create.

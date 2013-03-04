@@ -51,6 +51,10 @@ class Post
     all(draft: false, active: true, order: :published_at.desc)
   end
 
+  def self.active
+    all(active: true)
+  end
+
   #############################################################################
   #
   # INSTANCE METHODS

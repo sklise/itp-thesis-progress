@@ -59,6 +59,7 @@ builder = Rack::Builder.new do
   map ('/auth' )                { run AuthenticationManager }
   map ('/comments')             { run CommentsApp }
   map ('/feedback')             { run FeedbackApp }
+  map ('/posts')                { run PostsApp }
   map ('/sections')             { run SectionsApp }
   map ('/students')             { run StudentsApp }
 

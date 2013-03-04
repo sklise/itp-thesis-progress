@@ -6,6 +6,7 @@
   background-color: #eee;
   font-size: 0.75em; /* 12 / 16 */
   padding: 1em 1em;
+margin-bottom: 1.5em;
 }
 
 #post-form .button,
@@ -24,6 +25,10 @@
   vertical-align: baseline;
 }
 
+#post-form .assignment-brief {
+  margin: 1.5em 0;
+}
+
 #post-form .button.selected,
 #post-form .toggle-button.selected {
   background-color: rgb(65, 159, 255);
@@ -36,10 +41,28 @@
   background-color: rgb(0,0,245);
 }
 
-.submit-button {
-
+#post-form .button.publish-button {
+  background-color: rgb(76, 194, 60);
 }
 
-.publish-button {
-  float:right;
+#post-form a.remove,
+.error {
+  color: rgb(245, 53, 53);
+}
+
+#post-form .the-form .cover {
+  display: none;
+}
+
+#post-form .the-form.pending .cover {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255,255,255,0.9);
+  background-image: url('/images/ajax-loader.gif');
+  background-position: center 95%;
+  background-repeat: no-repeat;
 }

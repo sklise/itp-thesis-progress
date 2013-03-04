@@ -107,9 +107,3 @@ input[type="radio"][checked=true] + label{
 }
 
 /* END POST FORM_____________________________________________________________*/
-
-.meta-link {
-  font-size: 0.875em;
-  color: #666464;
-  font-style: normal;
-}

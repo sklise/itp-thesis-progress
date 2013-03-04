@@ -11,6 +11,7 @@ buildify().concat([
   'handlebars.js',
   'chosen.jquery.js',
   'htmlparser.js',
+  'marked.js',
   'main.js',
   'expandingareas.js',
   'image_upload.js'
@@ -21,12 +22,13 @@ buildify().concat([
 process.chdir('../css');
 
 buildify().concat([
+  'glyphicons.css',
   'grid.css',
   'old.css',
-  'thesis.css',
   'chosen.css',
-  'print.css',
-  'progress-form.css'
+  'thesis.css',
+  'progress-form.css',
+  'print.css'
 ])
 .cssmin()
 .save('app.min.css');
