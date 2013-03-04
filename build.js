@@ -4,7 +4,6 @@ process.chdir('public/javascripts');
 
 buildify().concat([
   'jquery.js',
-  'jquery-ui.js',
   'underscore.js',
   'backbone.js',
   'moment.js',
@@ -22,7 +21,6 @@ buildify().concat([
 process.chdir('../css');
 
 buildify().concat([
-  'jquery-ui.css',
   'grid.css',
   'old.css',
   'thesis.css',
