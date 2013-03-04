@@ -59,17 +59,17 @@
 
     </fieldset>
 
-    <div class="spaced-row">
-      <fieldset class="button-labels">
-        <h6>Thesis Privacy</h6>
-        <p>Select "World" to have your thesis be viewable to anyone with the link.</p>
-        <input type="radio" id="private-thesis" name="user[public_thesis]" value="false" <% if !@thesis.user.public_thesis %>checked<% end %>>
-        <label for="private-thesis">NYU</label>
+    <fieldset class="col-4 button-labels">
+      <div class="spaced-row">
+      <h6>Thesis Privacy</h6>
+      <p>Select "World" to have your thesis be viewable to anyone with the link.</p>
+      <input type="radio" id="private-thesis" name="user[public_thesis]" value="false" <% if !@thesis.user.public_thesis %>checked<% end %>>
+      <label for="private-thesis">NYU</label>
 
-        <input type="radio" id="public-thesis" name="user[public_thesis]" value="true" <% if @thesis.user.public_thesis %>checked<% end %>>
-        <label for="public-thesis">WORLD</label>
-      </fieldset>
-    </div>
+      <input type="radio" id="public-thesis" name="user[public_thesis]" value="true" <% if @thesis.user.public_thesis %>checked<% end %>>
+      <label for="public-thesis">WORLD</label>
+      </div>
+    </fieldset>
   </div>
 
   <fieldset class="col-12 row">
