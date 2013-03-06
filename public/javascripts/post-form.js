@@ -171,7 +171,7 @@ jQuery(function () {
       p.set({
         'draft': false,
         'title': S(p.get('title')).escapeHTML().s,
-        'content': HTMLtoXML(p.get('content'))
+        'content': p.get('content')
       });
       this.publishIt();
     },
