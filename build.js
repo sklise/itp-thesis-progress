@@ -3,14 +3,13 @@ var buildify = require('buildify');
 process.chdir('public/javascripts');
 
 buildify().concat([
-  'jquery.js',
-  'underscore.js',
-  'backbone.js',
-  'moment.js',
-  'string.min.js',
-  'handlebars.js',
-  'chosen.jquery.js',
-  'marked.js',
+  'libraries/jquery.js',
+  'libraries/underscore.js',
+  'libraries/backbone.js',
+  'libraries/moment.js',
+  'libraries/string.min.js',
+  'libraries/handlebars.js',
+  'libraries/chosen.jquery.js',
   'main.js',
   'expandingareas.js',
   'image_upload.js'

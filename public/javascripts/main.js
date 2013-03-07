@@ -51,25 +51,7 @@ var confirmDelete = function () {
   }
 }
 
-var submitPost = function (form) {
-
-}
-
 jQuery(function() {
-
-  $('#post-submit button').click(function () {
-    var form = $(this).closest('form');
-
-    var formData = {
-      "draft":        $(this).val(),
-      "title":        S(form.find('#post-title').val()).escapeHTML().s,
-      "content":      HTMLtoXML(form.find('#post-content-form').val())
-    }
-
-    console.dir(formData);
-
-    return false;
-  });
 
   $('.delete-link').click(confirmDelete);
 
