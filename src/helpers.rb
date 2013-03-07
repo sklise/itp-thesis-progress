@@ -109,7 +109,7 @@ module Sinatra
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
         :autolink => true, :space_after_headers => true)
         marked = markdown.render(content || "")
-        marked.to_html
+        Nokogiri::HTML(marked).css('body').inner_html
       end
 
       def excerpt(content)
@@ -117,7 +117,7 @@ module Sinatra
 
         words[29] += " <em>...</em>" if words.length > 30
 
-        mdown(words[0..29].join(" "))
+        Nokogiri::HTML(mdown(words[0..29].join(" "))).css('body').inner_html
       end
     end
   end

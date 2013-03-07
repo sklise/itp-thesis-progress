@@ -11,6 +11,7 @@ gem 'json', '1.7.5'
 
 gem 'RedCloth', '4.2.9'
 gem 'redcarpet', '2.1.1'
+gem 'nokogiri', '1.5.6'
 
 gem 'pony', '1.4'
 gem 'data_mapper', '1.2.0'
