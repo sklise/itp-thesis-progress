@@ -23,7 +23,6 @@ process.chdir('../css');
 buildify().concat([
   'glyphicons.css',
   'grid.css',
-  'old.css',
   'chosen.css',
   'thesis.css',
   'progress-form.css',

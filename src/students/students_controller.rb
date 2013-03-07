@@ -222,7 +222,6 @@ class StudentsApp < Sinatra::Base
     @post = Post.first(id: params[:id], active: true)
 
     # Redirect if the post is a draft
-
     if @post.nil? || (@current_user.nil? && !@post.is_public) || (@post.draft && @post.user_id != @current_user.id )
       flash.error = "Sorry, that post is not viewable."
       redirect "/"
@@ -240,27 +239,6 @@ class StudentsApp < Sinatra::Base
     redirect "/posts/#{params[:id]}/edit"
   end
 
-  post '/:netid/:id/:slug/update' do
-    authenticate
-    check_user(params[:netid])
-
-    @post = Post.first(id: params[:id])
-
-    @post.title = params[:post][:title]
-    @post.content = params[:post][:content]
-    @post.category_id = params[:post][:category_id]
-    @post.draft = params[:post][:draft]
-    @post.is_public = params[:post][:is_public]
-
-    if @post.save
-      flash.success = "Post updated successfully"
-      redirect @post.url
-    else
-      flash.error = "We had a problem updating your post..."
-      redirect "#{@post.url}/edit"
-    end
-  end
-
   get '/:netid/:id/:slug/delete' do
     authenticate
     check_user(params[:netid])
@@ -272,30 +250,6 @@ class StudentsApp < Sinatra::Base
 
   get '/new' do
     redirect '/posts/new'
-  end
-
-  # Route for post submission, new and create.
-  post '/submit' do
-
-  end
-
-  post '/new' do
-    authenticate
-
-    params[:post][:assignment_id] = nil if params[:post][:assignment_id] == ""
-
-    @post = Post.new(params[:post])
-
-    @post.user = @current_user
-
-    if @post.save
-      flash.success = "Post Saved"
-      redirect "#{@post.url}"
-    else
-      raise @post.inspect
-      flash.error = "There was an issue creating that post"
-      redirect "/students/new"
-    end
   end
 
   #############################################################################
