@@ -15,7 +15,7 @@
 .glyphicons {
   display: inline-block;
   position: relative;
-  padding: 0.4em 1em 0.4em 0em;
+  padding: 1em 1em 0.4em 0em;
   color: #1d1d1b;
   text-decoration: none;
   *display: inline;
@@ -33,8 +33,17 @@
   color: #1d1d1b;
 }
 
+#account-nav .glyphicons {
+  padding-top: .5em;
+}
+
+#account-nav .glyphicons i:before {
+  -moz-top: 0.5em;
+  line-height: 1em;
+}
+
 .comment-icon.glyphicons {
-  padding: 0.2em 1em 0.7em 0em;
+  padding: 1em 1em 0.7em 0em;
 }
 
 .comment-icon.glyphicons i:before {
@@ -45,6 +54,7 @@
 a.glyphicons:hover i:before {
   color: rgb(53, 130, 245);
 }
+
 .glyphicons.white i:before {
   color: #fff;
 }
