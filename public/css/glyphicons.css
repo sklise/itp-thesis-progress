@@ -15,7 +15,7 @@
 .glyphicons {
   display: inline-block;
   position: relative;
-  padding: 1em 1em 0.4em 0em;
+  padding: 1em 1em 0.7em 0em;
   color: #1d1d1b;
   text-decoration: none;
   *display: inline;
@@ -34,11 +34,12 @@
 }
 
 #account-nav .glyphicons {
-  padding-top: .5em;
+  padding-top: .25em;
+  padding-bottom: 1em;
 }
 
 #account-nav .glyphicons i:before {
-  line-height: 1em;
+  line-height: 1.5em;
 }
 
 .comment-icon.glyphicons {
