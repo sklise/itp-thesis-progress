@@ -59,11 +59,11 @@
         <li class="username"><%= @current_user.first_name %></li>
 
         <% if @current_user.student? %>
-        <li><a href="/students/new" title="Write a New Post" class="glyphicons pencil"><i></i></a></li>
+        <li><a href="/students/new" title="Write a New Post"><div class="glyphicons pencil"><i></i></div></a></li>
         <% end %>
 
         <% if @current_user.admin? %>
-        <li><a href="/admin" class="glyphicons settings"><i></i></a></li>
+        <li><a href="/admin"><div class="glyphicons settings"><i></i></div></a></li>
         <% end %>
 
         <li><a href="/auth/logout" title="log out" class="glyphicons power"><i></i></a></li>
