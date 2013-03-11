@@ -1,21 +1,8 @@
-require 'uri'
-
-class StudentsApp < Sinatra::Base
+class StudentsApp < ThesisBaseApp
   register WillPaginate::Sinatra
 
-  set :cache, Dalli::Client.new
-  set :enable_cache, true
-  set :logging, true
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
-
-  if ENV['RACK_ENV'] == 'production'
-    set :raise_errors, Proc.new { false }
-    set :show_exceptions, false
-    error do
-      error_logging(request, env['warden'].user)
-    end
-  end
 
   def authenticate
     env['warden'].authenticate!

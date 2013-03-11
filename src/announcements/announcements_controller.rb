@@ -1,31 +1,8 @@
-class AnnouncementsApp < Sinatra::Base
+class AnnouncementsApp < ThesisBaseApp
+  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
+  set :erb, layout: :"../../views/layout"
+
   register WillPaginate::Sinatra
-
-  set :logging, true
-  set :cache, Dalli::Client.new
-  set :enable_cache, true
-  set :views, Proc.new { File.join(root, "views") }
-  set :erb, layout: :'../../views/layout'
-
-  if ENV['RACK_ENV'] == 'production'
-    set :raise_errors, Proc.new { false }
-    set :show_exceptions, false
-
-    error do
-      StatHat::API.ez_post_value("ERROR : #{request.fullpath}", ENV['STATHAT_EMAIL'], 1)
-
-      email_body = ""
-
-      if @current_user
-        email_body += "CURRENT_USER: #{@current_user}\n\n"
-      end
-
-      email_body += env['sinatra.error'].backtrace.join("\n")
-      send_email("ERROR: #{request.fullpath}", email_body)
-
-      erb :'../../views/error'
-    end
-  end
 
   before do
     env['warden'].authenticate!
@@ -134,10 +111,5 @@ class AnnouncementsApp < Sinatra::Base
     @announcement.update(params[:announcement])
     flash.success = "Announcement Updated Successfully."
     redirect @announcement.url
-  end
-
-  not_found do
-    flash.error = "Could not find #{request.fullpath}"
-    redirect "/announcements"
   end
 end

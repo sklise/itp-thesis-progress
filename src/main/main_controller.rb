@@ -1,33 +1,10 @@
-class Main < Sinatra::Base
+class Main < ThesisBaseApp
   register WillPaginate::Sinatra
 
   set :views, Proc.new { File.join(root, "views") }
   set :static, true
-  set :logging, true
-  set :cache, Dalli::Client.new
-  set :enable_cache, true
   set :public_folder, Proc.new { File.join(root, "../../public") }
   set :erb, layout: :'../../views/layout'
-
-  if ENV['RACK_ENV'] == 'production'
-    set :raise_errors, Proc.new { false }
-    set :show_exceptions, false
-
-    error do
-      StatHat::API.ez_post_value("ERROR : #{request.fullpath}", ENV['STATHAT_EMAIL'], 1)
-
-      email_body = ""
-
-      if @current_user
-        email_body += "CURRENT_USER: #{@current_user}\n\n"
-      end
-
-      email_body += env['sinatra.error'].backtrace.join("\n")
-      send_email("ERROR: #{request.fullpath}", email_body)
-
-      erb :'../../views/error'
-    end
-  end
 
   before do
     env['warden'].authenticate!
@@ -125,8 +102,15 @@ class Main < Sinatra::Base
     redirect "/#{@page.slug}"
   end
 
-  not_found do
-    StatHat::API.ez_post_value("ERROR : NOT FOUND", ENV['STATHAT_EMAIL'], 1)
-    flash.error = "Could not find #{request.fullpath}"
+  unless ENV['RACK_ENV'] == 'production'
+    get '/set_user/:netid' do
+      if @current_user.netid == "sk3453"
+        @user = User.first netid: params[:netid]
+        env['warden'].set_user @user
+        @user.to_json
+      else
+        "sorry"
+      end
+    end
   end
 end

@@ -1,19 +1,6 @@
-require 'pp'
-
-class PostsApp < Sinatra::Base
-  set :cache, Dalli::Client.new
-  set :enable_cache, true
-  set :logging, true
+class PostsApp < ThesisBaseApp
   set :views, Proc.new { File.join(root, "views") }
   set :erb, layout: :'../../views/layout'
-
-  if ENV['RACK_ENV'] == 'production'
-    set :raise_errors, Proc.new { false }
-    set :show_exceptions, false
-    error do
-      error_logging(request, env['warden'].user)
-    end
-  end
 
   before do
     env['warden'].authenticate!
