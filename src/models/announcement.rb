@@ -80,11 +80,19 @@ class Announcement
     emails = []
 
     self.sections.users.students.each do |student|
-      emails << "#{student.netid}@nyu.edu"
+      if ENV['RACK_ENV'] == 'production'
+        emails << "#{student.netid}@nyu.edu"
+      else
+        emails << "sk3453+#{student.netid}@nyu.edu"
+      end
     end
 
     self.sections.users.residents.each do |resident|
-      emails << "#{resident.netid}@nyu.edu"
+      if ENV['RACK_ENV'] == 'production'
+        emails << "#{resident.netid}@nyu.edu"
+      else
+        emails << "sk3453+#{resident.netid}@nyu.edu"
+      end
     end
 
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
