@@ -1,3 +1,6 @@
+require 'RedCarpet'
+require 'Pony'
+
 # Announcement
 # Public: Announcements are created by faculty to communicate with students.
 # Announcements should be viewable to all students and should be easy to find.
@@ -27,7 +30,6 @@ class Announcement
 
   before :save do
     publish
-    add_sections
   end
 
   #############################################################################
@@ -121,34 +123,6 @@ class Announcement
   end
 
   private
-
-  # Private: Look at sections_id attr_accessor and everyone, as well as
-  # sections to either add or remove sections.
-  def add_sections
-    # If no section_ids were given a set `everyone` to true.
-    if self.section_ids.nil?
-      self.everyone = true
-    else
-      self.everyone = false
-
-      self.section_ids.each do |section_id|
-        next if !self.sections.get(section_id).nil?
-        self.sections.push Section.first(id: section_id.to_i)
-      end
-    end
-
-    # If `everyone` is true, add all of the sections that aren't already
-    # associated.s
-    if self.everyone == true
-      all_sections = Section.all(year: Date.today.year)
-      all_sections.each do |s|
-        next if self.sections.include?(s)
-
-        self.sections << s
-      end
-      return
-    end
-  end
 
   # Private: Sets published date if resource is saved with draft==false. Will
   # only set the publish date on the first save unless resource is unpublished.
