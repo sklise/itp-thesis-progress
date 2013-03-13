@@ -67,7 +67,7 @@ class Announcement
   end
 
   def send_email=(state)
-    @emailler = state
+    self.send_email
   end
 
   # Public: Instead of removing a model from the DB, mark it as inactive. This

@@ -45,7 +45,7 @@
     <div class="button publish-button make-publish">Post To Site</div>
     <div class="button publish-button make-email">Send Email and Post</div>
 
-    <div class="publish-status">{{#if updated_at}}
+    <div class="publish-status {{#if updated_at}}info{{/if}}">{{#if updated_at}}
     <p><strong>{{#if draft }}DRAFT{{else}}PUBLISHED{{/if}}</strong> Last saved to server: {{time updated_at}}<p>
     <p><a href="{{announcementurl this}}" target="_blank">View Announcement</a></p>
     {{/if}}</div>
