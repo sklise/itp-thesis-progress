@@ -1,6 +1,3 @@
-require 'RedCarpet'
-require 'Pony'
-
 # Announcement
 # Public: Announcements are created by faculty to communicate with students.
 # Announcements should be viewable to all students and should be easy to find.
