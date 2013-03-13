@@ -1,5 +1,5 @@
 class AdminApp < ThesisBaseApp
-  set :views, Proc.new { File.join(root, "views") }
+  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
   set :erb, layout: :'../../views/layout'
 
   before do

@@ -1,4 +1,5 @@
 class AuthenticationManager < Sinatra::Base
+  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
   set :erb, layout: :'../../views/layout'
 
   post '/unauthenticated' do
