@@ -138,25 +138,24 @@ jQuery(function () {
       this.model.set('category_id', id);
     },
 
-    updateDraft: function () {
+    setCleanAttributes: function (callback) {
       var p = this.model;
+
       p.set({
-        'draft': true,
-        'title': S(p.get('title')).escapeHTML().s,
-        'content': p.get('content')
+        'title': S(p.get('title')).escapeHTML().s
       });
-      this.publishIt();
+
+      callback();
+    }
+
+    updateDraft: function () {
+      this.model.set('draft', true);
+      this.setCleanAttributes(this.publishIt);
     },
 
     updatePublish: function () {
-      var p = this.model;
-
-      p.set({
-        'draft': false,
-        'title': S(p.get('title')).escapeHTML().s,
-        'content': p.get('content')
-      });
-      this.publishIt();
+      this.model.set('draft', true);
+      this.setCleanAttributes(this.publishIt)
     },
 
     publishIt: function () {

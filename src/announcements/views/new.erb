@@ -1,9 +1,60 @@
-<div class="col-12">
-  <h1>Create a new Announcement</h1>
+<div id="announcement-form" class="bb-form" data-announcement='<%= h @announcement.to_json %>'
+  data-sections='<%= h @sections.to_json %>'
+  <img src="/images/ajax-loader.gif"/>
 </div>
-<div class="col-9">
-<form action="/announcements/new" method="post">
 
-  <%= erb :form_body, layout: false %>
-</form>
+<script type="text/template" id="section-template">
+  {{name}}
+</script>
+
+<script type="text/template" id="announcement-form-template">
+<div class="col-12">
+  <h1 class="page-title">
+  {{#if id}}Edit{{else}}New{{/if}}  Announcement
+  </h1>
 </div>
+
+<div class="col-9 the-form">
+  <h3>
+    <input type="text" class="announcement-title" placeholder="Title of Announcement..." value="{{title}}"/>
+  </h3>
+
+  <div class="section">
+    <h6>Choose Sections</h6>
+    <div class="sections-place"></div>
+  </div>
+
+  <div class="section">
+    <h6>Content <span class="markdown-mark">&nbsp;</span></h6>
+    <div class="expanding-area" style="background:#eee;">
+      <pre><span></span><br></pre>
+      <textarea id="announcement-content-form" placeholder="Write your announcement here..." style="border-color: #eee;border-bottom: none;">{{content}}</textarea>
+    </div>
+    <div class="info">
+      <h6>Formatting</h6>
+      <p>Announcements are formatted using Markdown. Click the icon to the right of "Content" up above to view a Markdown cheatsheet.</p>
+
+      <h6>Adding Images</h6>
+      <p>To add an image, drag and drop the image inside the textbox. To embed videos, paste the embed code from whatever site you uploaded your video to.</p>
+    </div>
+  </div>
+
+  <div id="announcement-submit" class="section action-buttons">
+    <h6>Publish</h6>
+
+    <div class="button publish-button make-draft">Draft</div>
+    <div class="button publish-button make-publish">Post To Site</div>
+    <div class="button publish-button make-email">Send Email and Post</div>
+
+    {{#if updated_at}}
+    <div class="info publish-status"><p><strong>{{#if draft }}DRAFT{{else}}PUBLISHED{{/if}}</strong> Last saved to server: {{time updated_at}}<p>
+    <p><a href="{{announcementurl this}}" target="_blank">View Announcement</a></p>
+    </div>
+    {{/if}}
+  </div>
+  <div class="cover"></div>
+</div>
+
+</script>
+
+<script src="/javascripts/announcement.js"></script>

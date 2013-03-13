@@ -63,15 +63,14 @@ class AnnouncementsApp < ThesisBaseApp
   #############################################################################
 
   get '/new/?' do
-    require_non_student
-
+    require_admin
     @sections = Section.all
     @announcement = Announcement.new
     erb :new
   end
 
   post '/new/?' do
-    require_non_student
+    require_admin
 
     @announcement = Announcement.create(params[:announcement])
 
@@ -83,7 +82,7 @@ class AnnouncementsApp < ThesisBaseApp
   end
 
   get '/:year/:id/delete' do
-    require_non_student
+    require_admin
 
     Announcement.first(id: params[:id]).delete
 
@@ -91,7 +90,7 @@ class AnnouncementsApp < ThesisBaseApp
   end
 
   get '/:year/:id/edit/?' do
-    require_non_student
+    require_admin
 
     @sections = Section.all
     @announcement = Announcement.published.first(id: params[:id])
@@ -102,7 +101,7 @@ class AnnouncementsApp < ThesisBaseApp
   end
 
   post '/:year/:id/?' do
-    require_non_student
+    require_admin
 
     @announcement = Announcement.published.first(id: params[:id])
 

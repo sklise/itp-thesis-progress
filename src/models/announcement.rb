@@ -60,6 +60,10 @@ class Announcement
   #
   #############################################################################
 
+  def send_email=(state)
+    @emailler = state
+  end
+
   # Public: Instead of removing a model from the DB, mark it as inactive. This
   # is to make deletions recoverable and make it unnecessary to detach all
   # associations before deletion.
