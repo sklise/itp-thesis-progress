@@ -1,11 +1,31 @@
 var Announcement = Backbone.Model.extend({
-  urlRooot: '/announcements'
+  urlRoot: '/announcements'
 });
 
 var Section = Backbone.Model.extend();
 
 var Sections = Backbone.Collection.extend({
-  model: Section
+  model: Section,
+
+  setSections: function (ids) {
+    this.forEach(function (section) {
+      if (_.contains(ids, section.get('id'))) {
+        section.set('selected', true);
+      }
+    })
+  },
+
+  selectedSections: function () {
+    return this.filter(function (section) {
+      return section.get('selected') === true;
+    });
+  },
+
+  selectedSectionIds: function () {
+    return _.map(this.selectedSections(), function (section) {
+      return section.get('id');
+    });
+  }
 });
 
 jQuery(function () {
@@ -16,13 +36,24 @@ jQuery(function () {
     events: {
       'click .markdown-mark': 'toggleMarkdownGuide',
       'blur .announcement-title': 'updateTitle',
-      'blur textarea' : 'updateContent'
+      'blur textarea' : 'updateContent',
+      'click .make-draft' : 'updateDraft',
+      'click .make-publish' : 'updatePublish',
+      'click .make-email' : 'updateEmail'
     },
 
     initialize: function () {
       this.render().el;
-      this.model.bind('change:title', this.render, this);
-      this.model.bind('change:content', this.render, this);
+      this.model.bind('change:title', this.updateTitle, this);
+      this.model.bind('change:content', this.updateContent, this);
+      this.model.sections.bind('change', this.setSections, this);
+      this.bind('pending', this.pending, this);
+
+      this.model.sections.setSections($('#announcement-form').data().sectionids);
+    },
+
+    pending: function () {
+      this.$el.find('.the-form').addClass('pending');
     },
 
     render: function () {
@@ -35,12 +66,19 @@ jQuery(function () {
       return this;
     },
 
-    toggleMarkdownGuide: function () {
-      $('#markdown-wrapper').toggle();
+    setSections: function () {
+      var selectedSections = this.model.sections.selectedSectionIds();
+      this.model.set('section_ids', selectedSections);
+
+      if (selectedSections.length === this.model.sections.length) {
+        this.model.set('everyone', true);
+      } else {
+        this.model.set('everyone', false);
+      }
     },
 
-    updateTitle: function () {
-      this.model.set('title', this.$el.find('.announcement-title').val());
+    toggleMarkdownGuide: function () {
+      $('#markdown-wrapper').toggle();
     },
 
     updateContent: function () {
@@ -48,21 +86,25 @@ jQuery(function () {
     },
 
     updateDraft: function () {
-      this.set('draft', true);
-      this.push();
-    },
-
-    updatePublish: function () {
-      this.set('draft', false);
+      this.model.set('draft', true);
       this.push();
     },
 
     updateEmail: function () {
-      this.set({
+      this.model.set({
         'draft': false,
         'send_email': true
       });
       this.push();
+    },
+
+    updatePublish: function () {
+      this.model.set('draft', false);
+      this.push();
+    },
+
+    updateTitle: function () {
+      this.model.set('title', this.$el.find('.announcement-title').val());
     },
 
     push: function () {
@@ -81,7 +123,7 @@ jQuery(function () {
         },
         error: function () {
           view.render().el;
-          view.$el.find('.publish-status').prepend('<p class="error"><strong>There was an error saving your announcement just now, please try again.</strong></p>');
+          view.$el.find('.publish-status').addClass('info').prepend('<p class="error"><strong>There was an error saving your announcement just now, please try again.</strong></p>');
         }
       });
     }
@@ -140,6 +182,5 @@ jQuery(function () {
 
   window.announcement = new Announcement(announcementData.announcement);
   announcement.sections = new Sections(announcementData.sections);
-
   window.announcementView = new AnnouncementView({model: announcement});
 });

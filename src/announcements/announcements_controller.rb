@@ -51,7 +51,7 @@ class AnnouncementsApp < ThesisBaseApp
   get '/:year/:id/?' do
     @announcement = Announcement.published.first(id: params[:id])
 
-    halt 404 if @announcement.nil?
+    pass if @announcement.nil?
 
     erb :show
   end
@@ -69,16 +69,20 @@ class AnnouncementsApp < ThesisBaseApp
     erb :new
   end
 
-  post '/new/?' do
+  post '/' do
     require_admin
+    content_type :json
+    post_params = JSON.parse(request.body.read)
 
-    @announcement = Announcement.create(params[:announcement])
+    post_params['user_id'] = env['warden'].user.id
 
-    if params[:send_email] && !@announcement.draft
-      @announcement.send_email
+    @announcement = Announcement.new(post_params)
+
+    if @announcement.save
+      @announcement.to_json
+    else
+      halt 500
     end
-
-    redirect @announcement.url
   end
 
   get '/:year/:id/delete' do
@@ -90,25 +94,25 @@ class AnnouncementsApp < ThesisBaseApp
   end
 
   get '/:year/:id/edit/?' do
-    require_admin
-
-    @sections = Section.all
-    @announcement = Announcement.published.first(id: params[:id])
-
-    halt 404 if @announcement.nil?
-
-    erb :edit
+    redirect "/announcements/#{params[:id]}/edit"
   end
 
-  post '/:year/:id/?' do
+  get '/:id/edit' do
     require_admin
+    @sections = Section.all
+    @announcement = Announcement.get(params[:id])
+    erb :new
+  end
 
-    @announcement = Announcement.published.first(id: params[:id])
+  put '/:id' do
+    require_admin
+    content_type :json
+    post_params = JSON.parse(request.body.read)
 
-    halt 404 if @announcement.nil?
+    @announcement = Announcement.get(params[:id])
 
-    @announcement.update(params[:announcement])
-    flash.success = "Announcement Updated Successfully."
-    redirect @announcement.url
+    @announcement.update post_params
+
+    @announcement.to_json
   end
 end

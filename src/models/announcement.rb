@@ -11,7 +11,7 @@ class Announcement
   property :created_at, DateTime
   property :updated_at, DateTime
   property :active, Boolean, default: true
-  property :year, Integer, default: DateTime.now.year, writer: :private
+  property :year, Integer, default: DateTime.now.year
 
   property :title, String, length: 255
   property :content, Text
@@ -25,8 +25,6 @@ class Announcement
   has n, :sections, through: Resource
 
   self.per_page = 15
-
-  attr_accessor :section_ids
 
   before :save do
     publish
@@ -59,6 +57,14 @@ class Announcement
   # INSTANCE METHODS
   #
   #############################################################################
+
+  def section_ids=(ids)
+    self.sections = Section.all(:id => ids)
+  end
+
+  def section_ids
+    self.sections.map {|section| section.id}
+  end
 
   def send_email=(state)
     @emailler = state

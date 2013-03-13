@@ -1,5 +1,4 @@
-<div id="announcement-form" class="bb-form" data-announcement='<%= h @announcement.to_json %>'
-  data-sections='<%= h @sections.to_json %>'
+<div id="announcement-form" class="bb-form" data-announcement='<%= h @announcement.to_json %>' data-sections='<%= h @sections.to_json %>' data-sectionids='<%= @announcement.section_ids.to_json %>'>
   <img src="/images/ajax-loader.gif"/>
 </div>
 
@@ -46,11 +45,10 @@
     <div class="button publish-button make-publish">Post To Site</div>
     <div class="button publish-button make-email">Send Email and Post</div>
 
-    {{#if updated_at}}
-    <div class="info publish-status"><p><strong>{{#if draft }}DRAFT{{else}}PUBLISHED{{/if}}</strong> Last saved to server: {{time updated_at}}<p>
+    <div class="publish-status">{{#if updated_at}}
+    <p><strong>{{#if draft }}DRAFT{{else}}PUBLISHED{{/if}}</strong> Last saved to server: {{time updated_at}}<p>
     <p><a href="{{announcementurl this}}" target="_blank">View Announcement</a></p>
-    </div>
-    {{/if}}
+    {{/if}}</div>
   </div>
   <div class="cover"></div>
 </div>
