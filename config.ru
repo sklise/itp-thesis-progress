@@ -3,7 +3,8 @@ Bundler.require
 require 'bcrypt'
 
 Dir["./src/*.rb"].each {|file| require file }
-Dir["./src/*/*.rb"].each {|file| require file }
+# Dir["./src/*/*.rb"].each {|file| require file }
+require './src/main/main_controller'
 
 builder = Rack::Builder.new do
   use Rack::CommonLogger
@@ -51,20 +52,20 @@ builder = Rack::Builder.new do
     end
   end
 
-  map ('/')                     { run Main }
-  map ('/admin')                { run AdminApp }
-  map ('/announcements')        { run AnnouncementsApp }
-  map ('/assignments')          { run AssignmentsApp }
-  map ('/attachments')          { run AttachmentsApp }
-  map ('/auth' )                { run AuthenticationManager }
-  map ('/comments')             { run CommentsApp }
-  map ('/feedback')             { run FeedbackApp }
-  map ('/posts')                { run PostsApp }
-  map ('/sections')             { run SectionsApp }
-  map ('/students')             { run StudentsApp }
+  map ('/')                     { run Main.new }
+  # map ('/admin')                { run AdminApp }
+  # map ('/announcements')        { run AnnouncementsApp }
+  # map ('/assignments')          { run AssignmentsApp }
+  # map ('/attachments')          { run AttachmentsApp }
+  # map ('/auth' )                { run AuthenticationManager }
+  # map ('/comments')             { run CommentsApp }
+  # map ('/feedback')             { run FeedbackApp }
+  # map ('/posts')                { run PostsApp }
+  # map ('/sections')             { run SectionsApp }
+  # map ('/students')             { run StudentsApp }
 
-  map ('/applications')         { run ApplicationApp }
-  map ('/applications/submit')  { run ApplicationSubmit }
+  # map ('/applications')         { run ApplicationApp }
+  # map ('/applications/submit')  { run ApplicationSubmit }
 
 end
 

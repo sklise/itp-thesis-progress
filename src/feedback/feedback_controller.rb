@@ -1,4 +1,4 @@
-class FeedbackApp < ThesisBaseApp
+class FeedbackApp < Sinatra::Base
   before do
     env['warden'].authenticate!
     @current_user = env['warden'].user

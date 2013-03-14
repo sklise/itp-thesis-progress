@@ -1,10 +1,10 @@
-class Main < ThesisBaseApp
+class Main < Sinatra::Base
   register WillPaginate::Sinatra
 
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
   set :static, true
-  set :public_folder, Proc.new { File.join(root, "../../public") }
-  set :erb, layout: :'../../views/layout'
+  set :public_folder, Proc.new { File.join(File.dirname(__FILE__), "../../public") }
+  set :erb, layout: :"../../views/layout"
+  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
 
   before do
     env['warden'].authenticate!

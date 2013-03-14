@@ -1,4 +1,4 @@
-class AssignmentsApp < ThesisBaseApp
+class AssignmentsApp < Sinatra::Base
   register WillPaginate::Sinatra
 
   set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
