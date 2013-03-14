@@ -20,7 +20,7 @@ module Sinatra
         email_body += env['sinatra.error'].backtrace.join("\n")
         send_email("ERROR: #{request.fullpath}", email_body)
 
-        erb :"#{Proc.new { File.join(File.dirname(__FILE__), "views/error") }}"
+        erb :'../../views/error'
       end
     end
 
