@@ -3,7 +3,6 @@ module Sinatra
     set :logging, true
     set :cache, Dalli::Client.new
     set :enable_cache, true
-    set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
 
     if ENV['RACK_ENV'] == 'production'
       set :raise_errors, Proc.new { false }
@@ -21,7 +20,7 @@ module Sinatra
         email_body += env['sinatra.error'].backtrace.join("\n")
         send_email("ERROR: #{request.fullpath}", email_body)
 
-        erb :'error'
+        erb :"#{Proc.new { File.join(File.dirname(__FILE__), "views/error") }}"
       end
     end
 
