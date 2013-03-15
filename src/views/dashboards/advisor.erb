@@ -7,7 +7,7 @@
 
     <% @announcements.each do |announcement| %>
     <% next if (announcement.sections & @current_user.sections).length == 0 && announcement.sections.length != 0 %>
-    <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+    <%= erb :'announcements/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
     <% end %>
   </div>
 
@@ -55,7 +55,7 @@
   <div class="section">
     <h2>Comments on Posts in Your Sections</h2>
     <% @comments.each do |comment| %>
-    <%= erb :'../../views/comment-feed', layout: false, locals: {comment: comment} %>
+    <%= erb :'comment-feed', layout: false, locals: {comment: comment} %>
     <% end %>
   </div>
 

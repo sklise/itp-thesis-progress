@@ -23,7 +23,7 @@
     <% end %>
 
     <% @comments.each do |comment| %>
-    <%= erb :'../../views/comment-feed', layout: false, locals: {comment: comment} %>
+    <%= erb :'comment-feed', layout: false, locals: {comment: comment} %>
     <% end %>
 
   </div>
@@ -50,7 +50,7 @@
     <h2><a href="<%= @current_user.sections.first.url %>"><%= @current_user.sections.first.name %></a>, Recent Posts</h2>
 
     <% @recent_posts.each do |post| %>
-      <%= erb :'../../students/views/excerpt', layout: false, locals: {post:post} %>
+      <%= erb :'students/excerpt', layout: false, locals: {post:post} %>
     <% end %>
 
   </div>
@@ -63,7 +63,7 @@
 
     <% @announcements.each do |announcement| %>
     <% next if (announcement.sections & @current_user.sections).length == 0 && announcement.sections.length != 0 %>
-    <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+    <%= erb :'announcements/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
     <% end %>
   </div>
 

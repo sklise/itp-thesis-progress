@@ -1,5 +1,5 @@
 <div class="col-3">
-  <%= erb :sidebar, layout: false, locals: {user: @user} %>
+  <%= erb :'students/sidebar', layout: false, locals: {user: @user} %>
 </div>
 
 <div class="col-9">
@@ -31,9 +31,9 @@
 
   <div class="posts">
   <% @posts.each do |post| %>
-    <%= erb :single_list, layout: false, locals: {post: post} %>
+    <%= erb :'students/single_list', layout: false, locals: {post: post} %>
   <% end %>
   </div>
 
-<%= erb :'../../views/pagination', layout: false, locals: {collection: @posts} %>
+<%= erb :pagination, layout: false, locals: {collection: @posts} %>
 </div>

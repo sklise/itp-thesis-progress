@@ -1,8 +1,6 @@
 class AnnouncementsApp < Sinatra::Base
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :"../../views/layout"
-
   register WillPaginate::Sinatra
+  register Sinatra::ThesisApp
 
   before do
     env['warden'].authenticate!
@@ -19,12 +17,12 @@ class AnnouncementsApp < Sinatra::Base
 
     @drafts = @current_user.announcements.drafts if @current_user.advisor?
 
-    erb :index
+    erb :'announcements/index'
   end
 
   get '/everyone/?' do
     @announcements = Announcement.published.paginate(page: 1, everyone: true)
-    erb :index
+    erb :'announcements/index'
   end
 
   get '/section/:year/:section_name/?' do
@@ -32,7 +30,7 @@ class AnnouncementsApp < Sinatra::Base
       slug: params[:section_name],
       year: params[:year]
     }).announcements.published.paginate(page: 1)
-    erb :index
+    erb :'announcements/index'
   end
 
   get '/section/:year/:section_name/page/:page_number/?' do
@@ -40,12 +38,12 @@ class AnnouncementsApp < Sinatra::Base
       slug: params[:section_name],
       year: params[:year]
     }).announcements.published.paginate(page: params[:page_number])
-    erb :index
+    erb :'announcements/index'
   end
 
   get '/page/:page_number/?' do
     @announcements = Announcement.published.paginate(page: params[:page_number])
-    erb :index
+    erb :'announcements/index'
   end
 
   get '/:year/:id/?' do
@@ -53,7 +51,7 @@ class AnnouncementsApp < Sinatra::Base
 
     pass if @announcement.nil?
 
-    erb :show
+    erb :'announcements/show'
   end
 
   #############################################################################
@@ -66,7 +64,7 @@ class AnnouncementsApp < Sinatra::Base
     require_admin
     @sections = Section.all
     @announcement = Announcement.new
-    erb :new
+    erb :'announcements/new'
   end
 
   post '/' do
@@ -101,7 +99,7 @@ class AnnouncementsApp < Sinatra::Base
     require_admin
     @sections = Section.all
     @announcement = Announcement.get(params[:id])
-    erb :new
+    erb :'announcements/new'
   end
 
   put '/:id' do

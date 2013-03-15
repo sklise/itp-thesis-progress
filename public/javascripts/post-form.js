@@ -138,24 +138,14 @@ jQuery(function () {
       this.model.set('category_id', id);
     },
 
-    setCleanAttributes: function (callback) {
-      var p = this.model;
-
-      p.set({
-        'title': S(p.get('title')).escapeHTML().s
-      });
-
-      callback();
-    }
-
     updateDraft: function () {
       this.model.set('draft', true);
-      this.setCleanAttributes(this.publishIt);
+      this.publishIt();
     },
 
     updatePublish: function () {
       this.model.set('draft', true);
-      this.setCleanAttributes(this.publishIt)
+      this.publishIt();
     },
 
     publishIt: function () {

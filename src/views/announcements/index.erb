@@ -47,9 +47,9 @@
   <% end %>
 <% end %>
 
-<%= erb :'../../views/pagination', layout: false, locals: {collection: @announcements} %>
+<%= erb :pagination, layout: false, locals: {collection: @announcements} %>
 </div>
 
 <div class="col-3">
-  <%= erb :section_list, layout: false %>
+  <%= erb :'announcements/section_list', layout: false %>
 </div>

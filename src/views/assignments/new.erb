@@ -1,9 +1,9 @@
 <div class="col-12">
 
   <h2 class="page-title">Create a new Assignment</h2>
-  <form action="<%= @assignment.url %>/update" method="post" class="form">
+  <form action="/assignments/new" method="post" class="form">
 
-    <%= erb :form_body, layout: false, locals: {:@assignment => @assignment} %>
+    <%= erb :'assignments/form_body', layout: false, locals: {:@assignment => @assignment} %>
 
     <button name="assignment[draft]" value="true">Save as Draft</button>
     <button name="assignment[draft]" value="false">Publish Assignment</button>

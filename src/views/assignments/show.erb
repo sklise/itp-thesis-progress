@@ -27,7 +27,7 @@
 <div class="section">
   <h2>Responses</h2>
 <% @assignment.posts.all(draft: false).each do |post| %>
-  <%= erb :'../../students/views/list', layout: false, locals: {post: post} %>
+  <%= erb :'students/list', layout: false, locals: {post: post} %>
 <% end %>
 </div>
 </div>

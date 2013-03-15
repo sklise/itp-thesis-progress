@@ -1,8 +1,6 @@
 class AssignmentsApp < Sinatra::Base
   register WillPaginate::Sinatra
-
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :'../../views/layout'
+  register Sinatra::ThesisApp
 
   before do
     env['warden'].authenticate!
@@ -19,7 +17,7 @@ class AssignmentsApp < Sinatra::Base
       @assignments = Assignment.published.all
     end
 
-    erb :index
+    erb :'assignments/index'
   end
 
   # show
@@ -30,7 +28,7 @@ class AssignmentsApp < Sinatra::Base
 
     require_advisor if @assignment.draft == true
 
-    erb :show
+    erb :'assignments/show'
   end
 
   #############################################################################
@@ -48,7 +46,7 @@ class AssignmentsApp < Sinatra::Base
 
     halt 404 if @assignment.nil? || @assignment.active == false
 
-    erb :edit
+    erb :'assignments/edit'
   end
 
   # new
@@ -59,7 +57,7 @@ class AssignmentsApp < Sinatra::Base
 
     halt 404 if @assignment.nil? || @assignment.active == false
 
-    erb :new
+    erb :'assignments/new'
   end
 
   # create

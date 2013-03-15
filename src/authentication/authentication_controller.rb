@@ -1,6 +1,5 @@
 class AuthenticationManager < Sinatra::Base
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :'../../views/layout'
+  register Sinatra::ThesisApp
 
   post '/unauthenticated' do
     session[:return_to] = env['warden.options'][:attempted_path]
@@ -11,7 +10,7 @@ class AuthenticationManager < Sinatra::Base
 
   get '/login' do
     redirect '/' if env['warden'].authenticated?
-    erb :login
+    erb :'authentication/login'
   end
 
   # This should maybe be a delete request...
@@ -22,7 +21,7 @@ class AuthenticationManager < Sinatra::Base
   end
 
   get '/success' do
-    erb :success, layout: false
+    erb :'authentication/success', layout: false
   end
 
   post '/saml/callback' do

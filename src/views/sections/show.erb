@@ -30,7 +30,7 @@
     <% end %>
 
     <% @section.announcements.published.all(limit: 10).each do |announcement| %>
-      <%= erb :'../../announcements/views/excerpt', layout: false, locals: {announcement:announcement} %>
+      <%= erb :'announcements/excerpt', layout: false, locals: {announcement:announcement} %>
     <% end %>
   </div>
 

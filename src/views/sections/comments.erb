@@ -24,9 +24,9 @@
     <% end %>
 
     <% @comments.each do |comment| %>
-    <%= erb :'../../views/comment-feed', layout: false, locals: {comment: comment} %>
+    <%= erb :'comment-feed', layout: false, locals: {comment: comment} %>
     <% end %>
 
-    <%= erb :'../../views/pagination', layout: false, locals: {collection: @comments} %>
+    <%= erb :pagination, layout: false, locals: {collection: @comments} %>
   </div>
 </div>

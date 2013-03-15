@@ -1,6 +1,5 @@
 class AdminApp < Sinatra::Base
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :'../../views/layout'
+  register Sinatra::ThesisApp
 
   before do
     env['warden'].authenticate!
@@ -10,7 +9,7 @@ class AdminApp < Sinatra::Base
 
   get '/' do
     @site_config = SiteConfig.first
-    erb :config
+    erb :'admin/config'
   end
 
   post '/' do

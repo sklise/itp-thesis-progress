@@ -1,0 +1,11 @@
+<div class="col-9">
+<% if @posts.length == 0 %>
+  <p>There are no posts.</p>
+<% end %>
+
+<% @posts.each do |post| %>
+  <%= erb :'students/list', layout: false, locals: {post: post, :@show_user => true} %>
+<% end %>
+
+<%= erb :pagination, layout: false, locals: {collection: @posts} %>
+</div>

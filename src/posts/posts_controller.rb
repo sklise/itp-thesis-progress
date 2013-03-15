@@ -1,6 +1,5 @@
 class PostsApp < Sinatra::Base
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :"../../views/layout"
+  register Sinatra::ThesisApp
 
   before do
     env['warden'].authenticate!
@@ -13,7 +12,7 @@ class PostsApp < Sinatra::Base
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.new
-    erb :compose
+    erb :'posts/compose'
   end
 
   get '/:id/edit' do
@@ -29,7 +28,7 @@ class PostsApp < Sinatra::Base
       redirect "/"
     end
 
-    erb :compose
+    erb :'posts/compose'
   end
 
   post '/' do

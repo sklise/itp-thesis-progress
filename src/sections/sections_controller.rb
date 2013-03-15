@@ -1,8 +1,6 @@
 class SectionsApp < Sinatra::Base
   register WillPaginate::Sinatra
-
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :'../../views/layout'
+  register Sinatra::ThesisApp
 
   before do
     env['warden'].authenticate!
@@ -11,7 +9,7 @@ class SectionsApp < Sinatra::Base
 
   get '/?' do
     @sections = Section.all(year: 2013)
-    erb :index
+    erb :'sections/index'
   end
 
   # show
@@ -23,7 +21,7 @@ class SectionsApp < Sinatra::Base
       redirect "/sections"
     end
 
-    erb :show
+    erb :'sections/show'
   end
 
   get '/:year/:slug/comments/?' do
@@ -36,7 +34,7 @@ class SectionsApp < Sinatra::Base
 
     @comments = @section.users.posts.comments.paginate(order: :created_at.desc, page: 1)
 
-    erb :comments
+    erb :'sections/comments'
   end
 
   get '/:year/:slug/comments/page/:page_number/?' do
@@ -49,7 +47,7 @@ class SectionsApp < Sinatra::Base
 
     @comments = @section.users.posts.comments.paginate(order: :created_at.desc, page: params[:page_number])
 
-    erb :comments
+    erb :'sections/comments'
   end
 
   #############################################################################
@@ -64,7 +62,7 @@ class SectionsApp < Sinatra::Base
     @advisors = User.advisors
     @section = Section.new
 
-    erb :new
+    erb :'sections/new'
   end
 
   post '/new/?' do
@@ -83,7 +81,7 @@ class SectionsApp < Sinatra::Base
       slug: params[:slug],
     )
 
-    erb :edit
+    erb :'sections/edit'
   end
 
   # update

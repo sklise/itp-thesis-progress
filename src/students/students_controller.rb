@@ -1,8 +1,6 @@
 class StudentsApp < Sinatra::Base
   register WillPaginate::Sinatra
-
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
-  set :erb, layout: :'../../views/layout'
+  register Sinatra::ThesisApp
 
   def authenticate
     env['warden'].authenticate!
@@ -15,14 +13,14 @@ class StudentsApp < Sinatra::Base
     @posts = Post.published.paginate(page: 1)
     @drafts = Post.drafts.all(user_id: @current_user.id)
     StatHat::API.ez_post_value("Students : All : 1", ENV['STATHAT_EMAIL'], 1)
-    erb :index
+    erb :'students/index'
   end
 
   get '/page/:page_number/?' do
     authenticate
     @posts = Post.published.paginate(page: params[:page_number])
     StatHat::API.ez_post_value("Students : All : #{params[:page_number]}", ENV['STATHAT_EMAIL'], 1)
-    erb :index
+    erb :'students/index'
   end
 
   #############################################################################
@@ -49,7 +47,7 @@ class StudentsApp < Sinatra::Base
     end
 
     @posts = Post.published.paginate(page: 1, user: @user)
-    erb :'progress_index'
+    erb :'students/progress_index'
   end
 
   get '/:netid/progress/page/:page_number/?' do
@@ -61,7 +59,7 @@ class StudentsApp < Sinatra::Base
     StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
 
     @posts = Post.published.paginate(page: params[:page_number], user: @user)
-    erb :'progress_index'
+    erb :'students/progress_index'
   end
 
   get '/:netid/progress/:category?' do
@@ -76,7 +74,7 @@ class StudentsApp < Sinatra::Base
 
     @posts = Post.published.paginate(page: 1, user: @user, category_id: @category.id)
 
-    erb :'progress_index'
+    erb :'students/progress_index'
   end
 
   get '/:netid/progress/:category/page/:page_number/?' do
@@ -92,7 +90,7 @@ class StudentsApp < Sinatra::Base
 
     @posts = Post.published.paginate(page: params[:page_number], user: @user, category_id: @category.id)
 
-    erb :'progress_index'
+    erb :'students/progress_index'
   end
 
   #############################################################################
@@ -121,7 +119,7 @@ class StudentsApp < Sinatra::Base
       @feedback = @user.received_feedbacks.all(active: true)
     end
 
-    erb :thesis
+    erb :'students/thesis'
   end
 
   get '/:netid/thesis/edit' do
@@ -137,7 +135,7 @@ class StudentsApp < Sinatra::Base
     @user = User.first(netid: params[:netid])
 
     @thesis = @user.theses.last
-    erb :thesis_edit
+    erb :'students/thesis_edit'
   end
 
   post '/:netid/thesis/update' do
@@ -193,7 +191,7 @@ class StudentsApp < Sinatra::Base
 
     @comments_by = Comment.all(user: @user, order: :created_at.desc)
     @comments_to = @user.posts.comments.all(order: :created_at.desc)
-    erb :'comments'
+    erb :'students/comments'
   end
 
   #############################################################################
@@ -217,7 +215,7 @@ class StudentsApp < Sinatra::Base
     else
       StatHat::API.ez_post_value("Students : Progress : Post", ENV['STATHAT_EMAIL'], 1)
       @current_user = env['warden'].user
-      erb :'progress_show'
+      erb :'students/progress_show'
     end
   end
 

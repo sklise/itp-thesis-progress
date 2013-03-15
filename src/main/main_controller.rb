@@ -1,10 +1,9 @@
 class Main < Sinatra::Base
   register WillPaginate::Sinatra
+  register Sinatra::ThesisApp
 
   set :static, true
   set :public_folder, Proc.new { File.join(File.dirname(__FILE__), "../../public") }
-  set :erb, layout: :"../../views/layout"
-  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
 
   before do
     env['warden'].authenticate!
@@ -13,40 +12,36 @@ class Main < Sinatra::Base
 
   get '/' do
     env['warden'].authenticate!
-    if env['warden'].authenticated?
 
-      if @current_user.student?
-        @drafts = @current_user.posts.drafts
-        @assignments = @current_user.sections.assignments.published.all
-        @comments = @current_user.posts.comments.all(order: :created_at.desc, limit: 10)
-        @announcements = Announcement.published.all(limit: 10)
+    if @current_user.student?
+      @drafts = @current_user.posts.drafts
+      @assignments = @current_user.sections.assignments.published.all
+      @comments = @current_user.posts.comments.all(order: :created_at.desc, limit: 10)
+      @announcements = Announcement.published.all(limit: 10)
 
-        @recent_posts = @current_user.sections.first.students.posts.published.paginate(page: 1)
+      @recent_posts = @current_user.sections.first.students.posts.published.paginate(page: 1)
 
-        StatHat::API.ez_post_value("Dashboard : Student", ENV['STATHAT_EMAIL'], 1)
+      StatHat::API.ez_post_value("Dashboard : Student", ENV['STATHAT_EMAIL'], 1)
 
-        erb :'dashboards/student'
-      elsif @current_user.faculty?
-        @sections = Section.all(year: 2013)
-        StatHat::API.ez_post_value("Dashboard : Faculty", ENV['STATHAT_EMAIL'], 1)
-        erb :'dashboards/faculty'
-      elsif @current_user.admin?
-        # @announcement_drafts = @current_user.announcements.drafts
-        @announcements = Announcement.published.all(limit: 10)
-        @sections = @current_user.sections
-        @comments = @current_user.sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
+      erb :'dashboards/student'
+    elsif @current_user.faculty?
+      @sections = Section.all(year: 2013)
+      StatHat::API.ez_post_value("Dashboard : Faculty", ENV['STATHAT_EMAIL'], 1)
+      erb :'dashboards/faculty'
+    elsif @current_user.admin?
+      # @announcement_drafts = @current_user.announcements.drafts
+      @announcements = Announcement.published.all(limit: 10)
+      @sections = @current_user.sections
+      @comments = @current_user.sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
 
-        @drafts = @current_user.announcements.drafts
+      @drafts = @current_user.announcements.drafts
 
-        StatHat::API.ez_post_value("Dashboard : Admin", ENV['STATHAT_EMAIL'], 1)
-        erb :'dashboards/advisor'
-      else
-        @sections = Section.all(year: 2013)
-        StatHat::API.ez_post_value("Dashboard : Provisional", ENV['STATHAT_EMAIL'], 1)
-        erb :'dashboards/provisional'
-      end
+      StatHat::API.ez_post_value("Dashboard : Admin", ENV['STATHAT_EMAIL'], 1)
+      erb :'dashboards/advisor'
     else
-      erb :front_page
+      @sections = Section.all(year: 2013)
+      StatHat::API.ez_post_value("Dashboard : Provisional", ENV['STATHAT_EMAIL'], 1)
+      erb :'dashboards/provisional'
     end
   end
 
