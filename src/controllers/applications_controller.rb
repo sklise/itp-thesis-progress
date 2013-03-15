@@ -1,9 +1,5 @@
 class ApplicationApp < Sinatra::Base
-  set :logging, true
-  set :cache, Dalli::Client.new
-  set :enable_cache, true
-  set :views, Proc.new { File.join(root, "views") }
-  set :erb, layout: :'../../views/layout'
+  register Sinatra::ThesisApp
 
   before do
     env['warden'].authenticate!
@@ -17,7 +13,7 @@ class ApplicationApp < Sinatra::Base
     @applications = Application.all
     @no_application = @users.has_application(false)
     @submitted = @users.has_application
-    erb :list
+    erb :'applications/list'
   end
 
   get '/printout' do
@@ -60,7 +56,7 @@ class ApplicationApp < Sinatra::Base
     @mentioned_by = Application.all(:preferred_classmates.like => "%"+@user.netid+"%").user
     @mentioned = User.all(netid: @user.application.requested)
 
-    erb :show
+    erb :'applications/show'
   end
 end
 
@@ -89,6 +85,6 @@ class ApplicationSubmit < Sinatra::Base
       flash.error = "There was an error saving your application. Please be sure you have filled out all fields properly and try again. If this problem persists, please contact Steve either in the Residents' Office or by email at sk3453@nyu.edu."
     end
 
-    erb :submit, layout: :'layout'
+    erb :'applications/submit', layout: :'applications/layout'
   end
 end

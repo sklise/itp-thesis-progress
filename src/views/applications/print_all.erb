@@ -4,6 +4,6 @@
   <% @mentioned = @users.all(netid: @user.application.requested) %>
 
   <div class="one-page">
-  <%= erb :show_print, layout: false %>
+  <%= erb :'applications/show_print', layout: false %>
   </div>
 <% end %>

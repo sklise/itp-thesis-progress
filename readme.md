@@ -1,1 +1,1 @@
-![](http://thesis.itp.io/images/logo_maybe_oneline.png)
+![](http://thesis.itp.io/images/thesis.png)
