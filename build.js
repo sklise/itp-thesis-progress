@@ -16,7 +16,7 @@ buildify().concat([
   'image_upload.js'
 ])
 .uglify()
-.save('app.min.js');
+.save('application.min.js');
 
 process.chdir('../css');
 
@@ -29,4 +29,4 @@ buildify().concat([
   'print.css'
 ])
 .cssmin()
-.save('app.min.css');
+.save('application.min.css');
