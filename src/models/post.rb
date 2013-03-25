@@ -83,7 +83,11 @@ class Post
   # slug as a substring of the title.
   def ensure_slug
     if self.slug.nil? || self.slug == ""
-      self.slug = self.title[0..15]
+      if self.title.nil? || self.title == ""
+        self.slug = "untitled"
+      else
+        self.slug = self.title[0..15]
+      end
     end
   end
 
