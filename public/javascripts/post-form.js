@@ -144,7 +144,7 @@ jQuery(function () {
     },
 
     updatePublish: function () {
-      this.model.set('draft', true);
+      this.model.set('draft', false);
       this.publishIt();
     },
 
