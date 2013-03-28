@@ -77,6 +77,10 @@ class Post
     "/students/#{self.user.netid}/#{self.id}/#{self.slug}"
   end
 
+  def edit_url
+    "/posts/#{self.id}/edit"
+  end
+
   private
 
   # Private: Ensure that self.slug is not an empty string or undefined. Set the

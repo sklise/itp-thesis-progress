@@ -7,7 +7,7 @@
 <div class="post single">
   <% if @post.user == @current_user %>
     <p class="published"><%= @post.draft ? "Draft" : "Published" %></p>
-    <p><a href="<%= @post.url %>/edit">Edit</a> <a class='delete-link' href="<%= @post.url %>/delete">Delete</a></p>
+    <p><a href="<%= @post.edit_url %>">Edit</a> <a class='delete-link' href="<%= @post.url %>/delete">Delete</a></p>
   <% end %>
 
   <hgroup>
