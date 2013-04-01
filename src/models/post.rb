@@ -77,13 +77,21 @@ class Post
     "/students/#{self.user.netid}/#{self.id}/#{self.slug}"
   end
 
+  def edit_url
+    "/posts/#{self.id}/edit"
+  end
+
   private
 
   # Private: Ensure that self.slug is not an empty string or undefined. Set the
   # slug as a substring of the title.
   def ensure_slug
     if self.slug.nil? || self.slug == ""
-      self.slug = self.title[0..15]
+      if self.title.nil? || self.title == ""
+        self.slug = "untitled"
+      else
+        self.slug = self.title[0..15]
+      end
     end
   end
 

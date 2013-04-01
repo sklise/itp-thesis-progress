@@ -6,7 +6,7 @@
 <div class="announcement single">
   <% if @current_user.admin? %>
     <p class="published"><%= @announcement.draft ? "Draft" : "Published" %></p>
-    <p><a href="<%= @announcement.url %>/edit">Edit</a> <a class='delete-link' href="<%= @announcement.url %>/delete">Delete</a></p>
+    <p><a href="<%= @announcement.edit_url %>">Edit</a> <a class='delete-link' href="<%= @announcement.url %>/delete">Delete</a></p>
   <% end %>
 
   <hgroup>

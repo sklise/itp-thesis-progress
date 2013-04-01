@@ -83,6 +83,10 @@ class Announcement
     "/announcements/#{self.year}/#{self.id}"
   end
 
+  def edit_url
+    "/announcements/#{self.id}/edit"
+  end
+
   def send_email
     sender = "#{self.user.netid}@nyu.edu"
 
