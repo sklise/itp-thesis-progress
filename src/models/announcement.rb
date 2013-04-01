@@ -86,21 +86,22 @@ class Announcement
   def send_email
     sender = "#{self.user.netid}@nyu.edu"
 
-    emails = []
+    second_batch = nil
+    email_addresses = []
 
     self.sections.users.students.each do |student|
       if ENV['RACK_ENV'] == 'production'
-        emails << "#{student.netid}@nyu.edu"
+        email_addresses << "#{student.netid}@nyu.edu"
       else
-        emails << "sk3453+#{student.netid}@nyu.edu"
+        email_addresses << "sk3453+#{student.netid}@nyu.edu"
       end
     end
 
     self.sections.users.residents.each do |resident|
       if ENV['RACK_ENV'] == 'production'
-        emails << "#{resident.netid}@nyu.edu"
+        email_addresses << "#{resident.netid}@nyu.edu"
       else
-        emails << "sk3453+#{resident.netid}@nyu.edu"
+        email_addresses << "sk3453+#{resident.netid}@nyu.edu"
       end
     end
 
@@ -108,9 +109,14 @@ class Announcement
     :autolink => true, :space_after_headers => true)
     marked = markdown.render(self.content || "")
 
+    if email_addresses.length > 90
+      second_batch = email_addresses[90..email_addresses.length]
+      email_addresses = email_addresses[0..89]
+    end
+
     Pony.mail({
       to: sender,
-      bcc: emails.join(","),
+      bcc: email_addresses.join(","),
       via: :smtp,
       via_options: {
         address:                'smtp.gmail.com',
@@ -127,6 +133,28 @@ class Announcement
       html_body: marked.to_html,
       body: "#{self.content}"
     });
+
+    if second_batch
+      Pony.mail({
+        to: sender,
+        bcc: second_batch.join(","),
+        via: :smtp,
+        via_options: {
+          address:                'smtp.gmail.com',
+          port:                   587,
+          enable_starttls_auto:   true,
+          user_name:              ENV['GMAIL_ADDRESS'],
+          password:               ENV['GMAIL_PASSWORD'],
+          authentication:         :plain,
+          domain:                 'itp.nyu.edu'
+        },
+        from: sender,
+        reply_to: sender,
+        subject: "#{self.title}",
+        html_body: marked.to_html,
+        body: "#{self.content}"
+      });
+    end
   end
 
   private
