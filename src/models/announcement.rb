@@ -133,7 +133,7 @@ class Announcement
       },
       from: sender,
       reply_to: sender,
-      subject: "#{self.title}",
+      subject: "[THESIS] #{self.title}",
       html_body: marked.to_html,
       body: "#{self.content}"
     });
@@ -154,7 +154,7 @@ class Announcement
         },
         from: sender,
         reply_to: sender,
-        subject: "#{self.title}",
+        subject: "[THESIS] #{self.title}",
         html_body: marked.to_html,
         body: "#{self.content}"
       });
