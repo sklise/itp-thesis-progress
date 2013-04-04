@@ -62,6 +62,7 @@ builder = Rack::Builder.new do
   map ('/posts')                { run PostsApp }
   map ('/sections')             { run SectionsApp }
   map ('/students')             { run StudentsApp }
+  map ('/book')                 { run BookMaker }
 
   # map ('/applications')         { run ApplicationApp }
   # map ('/applications/submit')  { run ApplicationSubmit }
