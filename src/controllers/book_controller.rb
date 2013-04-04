@@ -3,9 +3,14 @@ require 'csv'
 class BookMaker < Sinatra::Base
   register Sinatra::ThesisApp
 
+  before do
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
+  end
+
   get '/' do
     @d = Date.today
-    redirect "/book/#{@d.year}-#{@d.month}-#{@d.day}.csv"
+    redirect "/book/thesisbook-#{@d.year}-#{@d.month}-#{@d.day}.csv"
   end
 
   get '/thesisbook-:year-:month-:day.csv' do
