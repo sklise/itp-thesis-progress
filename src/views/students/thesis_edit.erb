@@ -1,85 +1,86 @@
-<div class="col-12">
+<div class="col-10">
 <h1>Your Thesis</h1>
 </div>
 
-<form action="<%= @thesis.user.url %>/thesis/update" method="post" enctype="multipart/form-data">
+<form class="col-10" action="<%= @thesis.user.url %>/thesis/update" method="post" enctype="multipart/form-data">
 
-  <div class="row">
-    <fieldset class="col-8">
-      <div class="spaced-row">
-        <h6 class="inline">Title</h6>
-        <span class='details'>Limit 60 Characters</span>
-        <input type="text" name="thesis[title]" value="<%= @thesis.title %>" placeholder="Thesis Title">
-      </div>
-
-      <div class="spaced-row">
-        <h6class="inline">Synopsis/Elevator Pitch/Abstract</h6>
-        <span class="details">Limit 250 Characters</span>
-        <textarea placeholder="Synopsis" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
-      </div>
-
-      <div class="spaced-row">
-        <h6class="inline">Description</h6>
-        <span class="details">Limit 800 characters</span>
-        <div class="expanding-area">
-        <pre><span></span><br></pre>
-        <textarea name="thesis[description]" class="description skinny" placeholder="Description"><%= @thesis.description %></textarea>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="spaced-row">
-        <h6>Why You Want to Make This</h6>
-        <div class="expanding-area">
-          <pre><span></span><br></pre>
-          <textarea name="thesis[reason]" placeholder="Why You Want to Make This"><%= @thesis.reason %></textarea>
-        </div>
-      </div>
-
-      <div class="spaced-row">
-        <h6>Research Plan</h6>
-        <div class="expanding-area">
-          <pre><span></span><br></pre>
-          <textarea name="thesis[research_plan]" placeholder="Enter a research plan"><%= @thesis.research_plan %></textarea>
-        </div>
-      </div>
-
-    </fieldset>
-
-    <fieldset class="col-4">
-      <div class="spaced-row">
-      <h6>Image</h6>
-      <% if @thesis.image.nil? || @thesis.image == "" %>
-        <p>no image</p>
-      <% else %>
-        <img src="<%= @thesis.image %>" />
-      <% end %>
-
-      <p>Replace your image: <input type="file" name="image"></p>
-      </div>
-
-      <div class="spaced-row">
-        <h6>URL (optional)</h6>
-        <input name="thesis[link]" value="<%= @thesis.link %>" placeholder="http://">
-      </div>
-
-    </fieldset>
-
-    <fieldset class="col-4 button-labels">
-      <div class="spaced-row">
-      <h6>Thesis Privacy</h6>
-      <p>Select "World" to have your thesis be viewable to anyone with the link.</p>
-      <input type="radio" id="private-thesis" name="user[public_thesis]" value="false" <% if !@thesis.user.public_thesis %>checked<% end %>>
-      <label for="private-thesis">NYU</label>
-
-      <input type="radio" id="public-thesis" name="user[public_thesis]" value="true" <% if @thesis.user.public_thesis %>checked<% end %>>
-      <label for="public-thesis">WORLD</label>
-      </div>
-    </fieldset>
+  <div class="spaced-row">
+    <h6 class="inline">Title</h6>
+    <span class='details'>Limit 60 Characters</span>
+    <input type="text" name="thesis[title]" value="<%= @thesis.title %>" placeholder="Thesis Title">
   </div>
 
-  <fieldset class="col-12 row">
-  <input type="submit" value="Save">
+  <div class="spaced-row">
+    <h6 class="inline">Synopsis/Elevator Pitch/Abstract</h6>
+    <span class="details">Limit 250 Characters</span>
+    <textarea placeholder="Synopsis" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
+  </div>
+
+  <div class="spaced-row">
+    <h6 class="inline">Description</h6>
+    <span class="details">Limit 800 characters</span>
+    <div class="expanding-area">
+    <pre><span></span><br></pre>
+    <textarea name="thesis[description]" class="description skinny" placeholder="Description"><%= @thesis.description %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6 class="inline">Tags</h6> <span class="details">Choose 4</span>
+    <select class="chzn-select" multiple data-placeholder="Click or start typing to find tags">
+      <% @tags.each do |tag| %>
+      <option value="<%= tag.id %>"><%= tag.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <hr>
+
+  <div class="spaced-row">
+    <h6>Why You Want to Make This</h6>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[reason]" placeholder="Why You Want to Make This"><%= @thesis.reason %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Research Plan</h6>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[research_plan]" placeholder="Enter a research plan"><%= @thesis.research_plan %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Image</h6>
+    <% if @thesis.image.nil? || @thesis.image == "" %>
+      <p>no image</p>
+    <% else %>
+      <img src="<%= @thesis.image %>" />
+    <% end %>
+
+    <p>Replace your image: <input type="file" name="image"></p>
+  </div>
+
+  <div class="spaced-row">
+    <h6>URL (optional)</h6>
+    <input name="thesis[link]" type="text" value="<%= @thesis.link %>" placeholder="http://">
+  </div>
+
+  <fieldset class="button-labels">
+    <div class="spaced-row">
+    <h6>Thesis Privacy</h6>
+    <p>Select "World" to have your thesis be viewable to anyone with the link.</p>
+    <input type="radio" id="private-thesis" name="user[public_thesis]" value="false" <% if !@thesis.user.public_thesis %>checked<% end %>>
+    <label for="private-thesis">NYU</label>
+
+    <input type="radio" id="public-thesis" name="user[public_thesis]" value="true" <% if @thesis.user.public_thesis %>checked<% end %>>
+    <label for="public-thesis">WORLD</label>
+    </div>
   </fieldset>
+
+
+  <input type="submit" value="Save">
+
 </form>
