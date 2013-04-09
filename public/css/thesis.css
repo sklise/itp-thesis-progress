@@ -99,6 +99,15 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: baseline;
 }
 
+hr {
+  margin: 3em 25% 1.5em;
+  outline: none;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #fff;
+  border-left: none;
+  border-right: none;
+}
+
 html {
   font-size: 100%; /* 16px */
   line-height: 1.5em; /* 24px */
@@ -1173,3 +1182,7 @@ ul.printed-tags li {
 }
 
 /*#middle { background-image: url('/images/grid.gif'); background-position-y: 0.75em;}*/
+
+.inline {
+  display: inline;
+}
