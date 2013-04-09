@@ -257,6 +257,9 @@ input:focus, textarea:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -webkit-box-shadow: 0 1px 3px rgba(128,128,128,0.4) inset;
+  -moz-box-shadow: 0 1px 3px rgba(128,128,128,0.4) inset;
+  box-shadow: 0 1px 3px rgba(128,128,128,0.4) inset;
 }
 
 input[type=submit]:hover,
@@ -1185,4 +1188,21 @@ ul.printed-tags li {
 
 .inline {
   display: inline;
+}
+
+@media print {
+
+  #top, #bottom, #flash, .dont-print {
+    display: none;
+  }
+
+  a, a:hover {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .one-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
 }
