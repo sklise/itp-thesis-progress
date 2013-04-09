@@ -10,6 +10,8 @@ class User
   property :netid, String, length: 32
   property :first_name, String, length: 128
   property :last_name, String, length: 128
+  property :preferred_first, String, length: 128
+  property :preferred_last, String, length: 128
   property :password_hash, BCryptHash
   property :year, Integer
   property :role, String, default: "student"
