@@ -159,6 +159,8 @@ class StudentsApp < Sinatra::Base
     params[:thesis][:created_at] = nil
     new_thesis = Thesis.new(old_thesis.attributes.merge(params[:thesis]))
 
+    new_thesis.tags = Tag.all(id: params[:tags])
+
     if params[:image]
       image_path = "#{@user.netid}-#{Time.now.to_i}/#{URI.escape(params[:image][:filename].gsub(" ","_"))}"
 

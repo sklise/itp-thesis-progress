@@ -1,3 +1,5 @@
+<script src="/javascripts/thesis-edit.js"></script>
+
 <div class="col-10">
 <h1>Your Thesis</h1>
 </div>
@@ -6,30 +8,30 @@
 
   <div class="spaced-row">
     <h6 class="inline">Title</h6>
-    <span class='details'>Limit 60 Characters</span>
-    <input type="text" name="thesis[title]" value="<%= @thesis.title %>" placeholder="Thesis Title">
+    <span class='char-counts'><span data-max='60' id="title-count">60</span> Characters Remaining</span>
+    <input id="thesis-title-input" type="text" name="thesis[title]" value="<%= @thesis.title %>" placeholder="Thesis Title">
   </div>
 
   <div class="spaced-row">
     <h6 class="inline">Synopsis/Elevator Pitch/Abstract</h6>
-    <span class="details">Limit 250 Characters</span>
-    <textarea placeholder="Synopsis" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
+    <span class="char-counts"><span data-max="250" id="synopsis-count">250</span> Characters Remaining</span>
+    <textarea id="thesis-synopsis-input" placeholder="Synopsis" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
   </div>
 
   <div class="spaced-row">
     <h6 class="inline">Description</h6>
-    <span class="details">Limit 800 characters</span>
+    <span class="char-counts"><span data-max='800' id="description-count">800</span> Characters Remaining</span>
     <div class="expanding-area">
     <pre><span></span><br></pre>
-    <textarea name="thesis[description]" class="description skinny" placeholder="Description"><%= @thesis.description %></textarea>
+    <textarea id="thesis-description-input" name="thesis[description]" class="description skinny" placeholder="Description"><%= @thesis.description %></textarea>
     </div>
   </div>
 
   <div class="spaced-row">
-    <h6 class="inline">Tags</h6> <span class="details">Choose 4</span>
-    <select class="chzn-select" multiple data-placeholder="Click or start typing to find tags">
+    <h6 class="inline">Tags</h6> <span class="char-counts">Choose 4</span>
+    <select name="tags[]" class="chzn-select" multiple data-placeholder="Click or start typing to find tags">
       <% @tags.each do |tag| %>
-      <option value="<%= tag.id %>"><%= tag.name %></option>
+      <option value="<%= tag.id %>" <%= "selected" if @thesis.tags.include?(tag) %>><%= tag.name %></option>
       <% end %>
     </select>
   </div>

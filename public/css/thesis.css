@@ -1130,11 +1130,26 @@ button.small {
 }
 
 /* DETAILS: author, post date and category */
-.details {
+.details,
+.char-counts {
   color: #555;
   font-size: 0.875em; /* 14 / 16 */
   line-height: 1.714285714em; /* 24 / 14 */
   margin: 0;
+}
+
+.char-counts {
+  float: right;
+}
+
+.over {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+.danger-zone {
+  color: rgb(207, 9, 9);
+  font-weight: bold;
 }
 
 .delete-link {
