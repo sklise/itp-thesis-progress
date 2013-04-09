@@ -28,7 +28,7 @@
 <% else %>
   <% @announcements.each do |announcement| %>
   <div class='announcement'>
-    <hgroup>
+    <div class="hgroup">
     <h1><a href="<%= announcement.url %>"><%= announcement.title %></a></h1>
     <h2 class="author"><em>by</em> <%= announcement.user %></h2>
     <h3 class="date"><%= longdate(announcement.published_at || announcement.updated_at) %></h3>
@@ -38,7 +38,7 @@
       <%= list( announcement.sections, {:attribute => :name, :default => "all sections"}) %>
       <% end %>
     </h4>
-    </hgroup>
+    </div>
 
     <div class="announcement-content">
     <%= mdown(announcement.content) %>

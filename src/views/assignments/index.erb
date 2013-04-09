@@ -16,7 +16,7 @@
 <% else %>
   <% @assignments.each do |assignment| %>
   <div class='announcement'>
-    <hgroup>
+    <div class="hgroup">
       <h6><%= assignment.created_at.strftime("%m/%d/%y") %></h6>
       <h2><a href="<%= assignment.url %>"><%= assignment.title %></a></h2>
       <h3 class="author"><em>by</em> <%= assignment.user %></h3>
@@ -25,7 +25,7 @@
       <% else %>
       <%= list( assignment.sections, {:attribute => :name, :default => "all sections"}) %>
       <% end %>
-    </hgroup>
+    </div>
 
     <div>
       <%= mdown assignment.brief %>

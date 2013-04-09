@@ -10,13 +10,13 @@
     <p><a href="<%= @post.edit_url %>">Edit</a> <a class='delete-link' href="<%= @post.url %>/delete">Delete</a></p>
   <% end %>
 
-  <hgroup>
+  <div class="hgroup">
   <h1><%= @post.title %></h1>
   <h3 class='date'><%= longdate(@post.published_at || @post.updated_at) %></h3>
   <% if @post.category %>
   <h4 class="category"><a href="<%= @post.user.url %>/progress/<%= @post.category.slug %>"><%= @post.category %></a></h4>
   <% end %>
-  </hgroup>
+  </div>
   <div class="post-content">
     <%= mdown @post.content %>
   </div>

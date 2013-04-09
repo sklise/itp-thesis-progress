@@ -1,12 +1,12 @@
 <div class="post">
-  <hgroup>
+  <div class="hgroup">
   <h1><a href="<%= post.url %>"><%= post.title %></a></h1>
   <h2><a href="<%= post.user.url %>"><%= post.user %></a></h2>
   <h3 class="date"><%= longdate post.published_at %></h3>
   <% if post.category %>
   <h4 class="category"><a href="<%= post.user.url %>/progress/<%= post.category.slug %>"><%= post.category %></a></h4>
   <% end %>
-  </hgroup>
+  </div>
 
   <div class="post-content">
     <%= mdown post.content %>
