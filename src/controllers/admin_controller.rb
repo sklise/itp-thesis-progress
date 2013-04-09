@@ -23,4 +23,6 @@ class AdminApp < Sinatra::Base
 
     redirect '/admin'
   end
+
+  # tags
 end

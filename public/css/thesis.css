@@ -220,7 +220,8 @@ textarea {
 }
 
 input[type=text],
-input[type=password] {
+input[type=password],
+select {
   display: block;
   font: inherit;
   padding: 10px;

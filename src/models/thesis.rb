@@ -13,8 +13,12 @@ class Thesis
   property :link, String, length: 255
 
   property :image, Text
-
   property :user_id, Integer
 
   belongs_to :user
+  has n, :tags, through: Resource
+
+  def permalink
+    "http://thesis.itp.io/#{self.user.netid}/thesis"
+  end
 end

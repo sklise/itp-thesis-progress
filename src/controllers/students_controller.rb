@@ -126,6 +126,7 @@ class StudentsApp < Sinatra::Base
     authenticate
     check_user(params[:netid])
 
+    @tags = Tag.all
     @site_config = SiteConfig.first
     if @site_config.thesis_lock
       flash.error = "Edits to thesis summaries are currently locked for review."
