@@ -4,22 +4,35 @@ class AdminApp < Sinatra::Base
   before do
     env['warden'].authenticate!
     @current_user = env['warden'].user
-    require_admin
   end
 
   get '/' do
-    @site_config = SiteConfig.first
-    erb :'admin/config'
+    if @current_user.admin?
+      @site_config = SiteConfig.first
+      erb :'admin/config'
+    else
+      erb :'admin/profile'
+    end
+
   end
 
   post '/' do
-    @site_config = SiteConfig.first
+    if @current_user.admin?
+      @site_config = SiteConfig.first
 
-    if params[:thesis_lock].nil?
-      params[:thesis_lock] = false
+      if params[:thesis_lock].nil?
+        params[:thesis_lock] = false
+      end
+
+      @site_config.update(params)
+    else
+      @user = User.get @current_user.id
+
+      @user.preferred_first = params[:preferred_first]
+      @user.preferred_last = params[:preferred_last]
+
+      @user.save
     end
-
-    @site_config.update(params)
 
     redirect '/admin'
   end

@@ -163,6 +163,6 @@ class User
   end
 
   def to_s
-    "#{first_name} #{last_name}"
+    "#{preferred_first || first_name} #{preferred_last || last_name}"
   end
 end

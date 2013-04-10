@@ -1,0 +1,17 @@
+<div class="col-10">
+  <h2>Your Profile</h2>
+
+  <form action="/admin" method="POST">
+    <div class='spaced-row'>
+      <h6>Preferred First Name</h6>
+      <input type="text" name="preferred_first" value="<%= @current_user.preferred_first || @current_user.first_name %>" />
+    </div>
+
+    <div class="spaced-row">
+      <h6>Preferred Last Name</h6>
+      <input type="text" name="preferred_last" value="<%= @current_user.preferred_last || @current_user.last_name %>" />
+    </div>
+
+    <input type="submit" value="Update Profile"/>
+  </form>
+</div>

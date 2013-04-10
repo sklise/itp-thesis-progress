@@ -60,10 +60,7 @@
         <li><a href="/students/new" title="Write a New Post"><div class="glyphicons pencil"><i></i></div></a></li>
         <% end %>
 
-        <% if @current_user.admin? %>
         <li><a href="/admin"><div class="glyphicons settings"><i></i></div></a></li>
-        <% end %>
-
         <li><a href="/auth/logout" title="log out" class="glyphicons power"><i></i></a></li>
       </ul>
     <% else %>
