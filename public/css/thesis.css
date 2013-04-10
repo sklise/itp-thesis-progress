@@ -1142,14 +1142,24 @@ button.small {
   float: right;
 }
 
-.over {
+span.over {
   color: rgb(255, 0, 0);
   font-weight: bold;
+}
+
+input.over,
+.submit-status {
+  background: rgba(207, 9, 9, 0.6);
 }
 
 .danger-zone {
   color: rgb(207, 9, 9);
   font-weight: bold;
+}
+
+.submit-status {
+  display: none;
+  padding: 0.5em 1em;
 }
 
 .delete-link {

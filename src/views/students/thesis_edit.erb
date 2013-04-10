@@ -4,7 +4,7 @@
 <h1>Your Thesis</h1>
 </div>
 
-<form class="col-10" action="<%= @thesis.user.url %>/thesis/update" method="post" enctype="multipart/form-data">
+<form id="thesis-update-form" class="col-10" action="<%= @thesis.user.url %>/thesis/update" method="post" enctype="multipart/form-data">
 
   <div class="spaced-row">
     <h6 class="inline">Title</h6>
@@ -28,8 +28,8 @@
   </div>
 
   <div class="spaced-row">
-    <h6 class="inline">Tags</h6> <span class="char-counts">Choose 4</span>
-    <select name="tags[]" class="chzn-select" multiple data-placeholder="Click or start typing to find tags">
+    <h6 class="inline">Tags</h6> <span class="char-counts">Choose <span data-max="4" id="tags-count">4</span></span>
+    <select id="thesis-tags-input" name="tags[]" class="chzn-select" multiple data-placeholder="Click or start typing to find tags">
       <% @tags.each do |tag| %>
       <option value="<%= tag.id %>" <%= "selected" if @thesis.tags.include?(tag) %>><%= tag.name %></option>
       <% end %>
@@ -83,6 +83,6 @@
   </fieldset>
 
 
-  <input type="submit" value="Save">
+  <input type="submit" value="Save"><span class="submit-status"></span>
 
 </form>
