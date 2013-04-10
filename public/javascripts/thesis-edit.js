@@ -48,7 +48,12 @@ var bindCharCounts = function (inputs) {
 var remainingCharacters = function (name) {
   var input = $('#thesis-' + name + '-input');
   var countDiv = $('#' + name + '-count');
-  var l = input.val().length;
+  var inputVal = input.val();
+  var l = 0;
+
+  if (inputVal !== null) {
+    l = inputVal.length;
+  }
 
   var max = countDiv.data()['max'];
   var remaining = countDiv.data()['max'] - l;
