@@ -1216,6 +1216,24 @@ ul.printed-tags li {
   display: inline;
 }
 
+.admin-tag-list {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+.admin-tag-list input {
+  margin-bottom: 0;
+}
+
+.admin-tag-list li {
+  line-height: 2.5em;
+  padding: 0.25em 0.25em 0.25em 0.5em;
+}
+
+.admin-tag-list li:nth-child(2n) {
+  background-color: #efefef;
+}
+
 @media print {
 
   #top, #bottom, #flash, .dont-print {

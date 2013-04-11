@@ -19,7 +19,7 @@ class API < Sinatra::Base
     @tags.to_json
   end
 
-  post '/tags/?' do
+  post '/tags' do
     require_admin
     json = JSON.parse(request.body.read)
 
