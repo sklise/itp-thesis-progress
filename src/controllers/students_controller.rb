@@ -124,11 +124,15 @@ class StudentsApp < Sinatra::Base
 
   get '/:netid/thesis/edit' do
     authenticate
-    check_user(params[:netid])
+
+    unless (env['warden'].user.netid == params[:netid] || env['warden'].user.advisor?)
+      flash.error = "That page belongs to #{params[:netid]}"
+      redirect request.referrer
+    end
 
     @tags = Tag.all(order: :name.asc)
     @site_config = SiteConfig.first
-    if @site_config.thesis_lock
+    if @site_config.thesis_lock && !env['warden'].user.advisor?
       flash.error = "Edits to thesis summaries are currently locked for review."
       redirect "/students/#{params[:netid]}/thesis"
     end
