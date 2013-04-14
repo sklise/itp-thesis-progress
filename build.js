@@ -26,6 +26,7 @@ buildify().concat([
   'grid.css',
   'chosen.css',
   'thesis.css',
+  'sections.css',
   'progress-form.css'
 ])
 .cssmin()

@@ -20,12 +20,12 @@
     <h3>
       <a href="<%= section.path %>"><%= section.name %></a>
     </h3>
-    <p>
+    <p class="section-advisor">
       <%= section.advisor %>
     </p>
     <ul style="list-style-type: none;margin:0 0 1.5em;">
       <% section.students.all(order: :first_name.asc).each do |student| %>
-      <li><a href="<%= student.url %>"><%= student %></a>
+      <li><a class="student-link" href="<%= student.url %>"><%= student %></a>
         <% if @current_user.non_student? %>
           <% if (tu = student.received_feedbacks.active.all(thumbs_up: true).count) >= 1 %>
           <span class="thumbs-up"><a class="glyphicons thumbs_up"><i></i></a> <%= tu %></span>
