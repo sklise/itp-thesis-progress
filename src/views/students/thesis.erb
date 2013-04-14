@@ -16,7 +16,13 @@
 
   <% if !@thesis.image.nil? && @thesis.image.length > 0 %>
   <div class="spaced-row">
-  <a href="<%= @thesis.image %>" target="_blank"><img class="thesis-image" src="<%= @thesis.image %>" /></a>
+  <a href="<%= @thesis.image %>" target="_blank">
+    <% if @thesis.image.match(/\.pdf$/) %>
+    <%= @thesis.image %>
+    <% else %>
+    <img class="thesis-image" src="<%= @thesis.image %>" />
+    <% end %>
+  </a>
   </div>
   <% end %>
 
