@@ -55,7 +55,7 @@
   </div>
 
   <div class="spaced-row">
-    <h6>Image</h6>
+    <h6>Website Image</h6>
     <% if @thesis.image.nil? || @thesis.image == "" %>
       <p>no image</p>
     <% else %>
@@ -63,6 +63,23 @@
     <% end %>
 
     <p>Replace your image: <input type="file" name="image"></p>
+  </div>
+
+  <div class="spaced-row highlight">
+    <h6>Book Image</h6>
+    <p class="strong">This is the image for the Thesis Book.</p>
+
+    <p class="strong">PLEASE SUBMIT YOUR IMAGE AS A PDF</p>
+
+    <p>This image must be 10.5" x 2.25". For complete details <a href="http://thesis.itp.io/announcements/2013/70" target="_blank">click here</a></p>
+
+    <% if @thesis.user.book_image_url.nil? || @thesis.user.book_image_url == "" %>
+      <p>no image</p>
+    <% else %>
+      <a target="_blank" href="<%= @thesis.user.book_image_url %>"><%= @thesis.user.book_image_url %></a>
+    <% end %>
+
+    <p>Replace your image: <input type="file" name="user[book_image_url]"></p>
   </div>
 
   <div class="spaced-row">

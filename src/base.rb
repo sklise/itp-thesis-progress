@@ -38,16 +38,6 @@ module Sinatra
           flash.error = "Could not find #{request.fullpath}"
           redirect "/"
         end
-      else
-        app.get '/set_user/:netid' do
-          if @current_user.netid == "sk3453"
-            @user = User.first netid: params[:netid]
-            env['warden'].set_user @user
-            @user.to_json
-          else
-            "sorry"
-          end
-        end
       end
 
     end

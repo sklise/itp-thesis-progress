@@ -1143,15 +1143,6 @@ span.thumbs-down .glyphicons i:before {
   font-style: italic;
 }
 
-.section {
-  clear: both;
-}
-
-.section,
-.section-list {
-  margin: 0 0 1.5em 0;
-}
-
 /* BUTTONS */
 button.small {
   padding-top: 0em;
@@ -1267,6 +1258,16 @@ ul.printed-tags li {
 
 .admin-tag-list li:nth-child(2n) {
   background-color: #efefef;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.highlight {
+  background-color: #ffe87a;
+  border: 1px solid #f0c02a;
+  padding: 0.5em 0.25em;
 }
 
 @media print {

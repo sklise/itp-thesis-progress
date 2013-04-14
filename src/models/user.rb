@@ -16,6 +16,7 @@ class User
   property :year, Integer
   property :role, String, default: "student"
   property :public_thesis, Boolean, default: false
+  property :book_image_url, String, length: 255
   property :role, String, default: "provisional"
 
   has n, :theses

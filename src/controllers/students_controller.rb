@@ -154,6 +154,14 @@ class StudentsApp < Sinatra::Base
        new_thesis.image = "http://itp-thesis.s3.amazonaws.com/" + image_path
     end
 
+    if params[:user][:book_image_url]
+      image_path = "#{@user.netid}/book_image.pdf"
+
+      AWS::S3::Base.establish_connection!(:access_key_id => ENV['S3_ACCESS_KEY'], :secret_access_key => ENV['S3_SECRET_KEY'])
+      AWS::S3::S3Object.store(image_path, open(params[:user][:book_image_url][:tempfile]), "itp-thesis", access: :public_read)
+       @user.book_image_url = "http://itp-thesis.s3.amazonaws.com/" + image_path
+    end
+
     @user.theses << new_thesis
 
     if @user.save

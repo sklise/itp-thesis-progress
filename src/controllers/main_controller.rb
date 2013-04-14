@@ -99,13 +99,9 @@ class Main < Sinatra::Base
 
   unless ENV['RACK_ENV'] == 'production'
     get '/set_user/:netid' do
-      if @current_user.netid == "sk3453"
-        @user = User.first netid: params[:netid]
-        env['warden'].set_user @user
-        @user.to_json
-      else
-        "sorry"
-      end
+      @user = User.first netid: params[:netid]
+      env['warden'].set_user @user
+      @user.to_json
     end
   end
 end
