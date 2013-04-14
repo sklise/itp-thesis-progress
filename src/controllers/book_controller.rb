@@ -26,7 +26,9 @@ class BookMaker < Sinatra::Base
       csv << ["Name", "Title", "Elevator", "Description", "PhotoURL", "URL"]
 
       @theses.each do |thesis|
-        csv << ["#{thesis.user}", "#{thesis.title}", "#{thesis.elevator_pitch}", "#{thesis.description}", "#{thesis.image}", "http://thesis.itp.io/students/#{thesis.user.netid}"]
+        image = thesis.user.book_image_url ? thesis.user.book_image_url : thesis.image
+
+        csv << ["#{thesis.user}", "#{thesis.title}", "#{thesis.elevator_pitch}", "#{thesis.description}", "#{image}", "http://thesis.itp.io/students/#{thesis.user.netid}"]
       end
     end
 
