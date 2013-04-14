@@ -10,6 +10,7 @@ buildify().concat([
   'libraries/string.min.js',
   'libraries/handlebars.js',
   'libraries/chosen.jquery.js',
+  'libraries/marked.js',
   'handlebars-helpers.js',
   'main.js',
   'expandingareas.js',

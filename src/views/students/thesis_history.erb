@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/css/thesis-history.css" type="text/css" />
+<script src='/javascripts/thesis-history.js'></script>
+
+<div class="col-3">
+  <%= erb :'students/sidebar', layout: false, locals: {user: @user} %>
+</div>
+
+<div class="col-9" id="thesis-history-container" data-theses="<%= h @theses.to_json %>">
+</div>
+
+<script type="text/template" id="thesis-container-template">
+<ul id="thesis-timeline">
+</ul>
+
+<div id="thesis-history-content">
+</div>
+</script>
+
+<script type="text/template" id="thesis-node-template">
+  {{ shortDate created_at }}
+</script>
+
+<script type="text/template" id="thesis-history-template">
+  <div class="spaced-row">
+    <h1>{{#if title}}{{ title }}{{else}}Untitled{{/if}}</h1>
+  </div>
+
+  {{#if elevator_pitch}}
+  <div class="spaced-row">
+    <div class="elevator-pitch">{{ elevator_pitch }}</div>
+  </div>
+  {{/if}}
+
+  {{#if image}}
+  <div class="spaced-row">
+    <a href="{{ image }}" target="_blank"><img style="width: 100%;" src="{{ image }}" /></a>
+  </div>
+  {{/if}}
+
+  <div class="spaced-row">
+    <h6>Description</h6>
+    <div>
+    {{#if description}}{{{ md description }}}{{/if}}
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Why You Want to Make This</h6>
+    {{#if reason}}{{{ md reason }}}{{/if}}
+  </div>
+
+
+  <div class="spaced-row">
+    <h6>Research Plan</h6>
+    {{#if research_plan}}{{{ md research_plan }}}{{/if}}
+  </div>
+
+  <div class="spaced-row">
+    <h6>URL</h6>
+    <a class="thesis-link" href="{{ link }}">{{ link }}</a>
+  </div>
+</script>

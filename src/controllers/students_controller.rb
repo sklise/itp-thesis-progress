@@ -165,6 +165,23 @@ class StudentsApp < Sinatra::Base
     end
   end
 
+  get '/:netid/thesis/history' do
+    @user = User.first(netid: params[:netid])
+    @current_user = env['warden'].user
+    authenticate unless @user.public_thesis
+
+    halt 404 if @user.nil?
+
+    if @user.non_student?
+      flash.error = "#{@user} does not have a thesis in the system."
+      redirect '/'
+    end
+
+    @theses = @user.theses
+
+    erb :'students/thesis_history'
+  end
+
   #############################################################################
   #
   # COMMENTS

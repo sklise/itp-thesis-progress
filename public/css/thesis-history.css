@@ -7,5 +7,14 @@
   display: inline-block;
   padding: 0.25em 0.35em;
   margin: 0 0.25em 0 0;
+}
+
+#thesis-timeline li:hover {
   background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+#thesis-timeline li.current {
+  background-color: #7a46bf;
+  color: #ffffff;
 }

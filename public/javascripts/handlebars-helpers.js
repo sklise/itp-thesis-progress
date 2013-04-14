@@ -6,6 +6,10 @@ Handlebars.registerHelper('md', function(content) {
   }
 });
 
+Handlebars.registerHelper('shortDate', function(timestamp) {
+  return moment(timestamp).format('M/D')
+})
+
 Handlebars.registerHelper('time', function(timestamp) {
   return moment(timestamp).format('MMMM Do YYYY, h:mm:ss a');
 });
