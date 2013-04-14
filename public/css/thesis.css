@@ -149,7 +149,7 @@ h6 {
   letter-spacing: 0.1em;
   font-size: 0.875em; /* 14 / 16 */
   margin-top: 0;
-  line-height: 2.571428571em;
+  line-height: 1.714285714em;
 }
 
 /*
@@ -506,13 +506,29 @@ div.markdown-mark {
  *
  *****************************************************************************/
 
-.student-sidebar h1 {
-
-}
-
 .student-sidebar ul {
   margin: 0 0 1.5em;
   list-style-type: none;
+}
+
+.student-sidebar li {
+  line-height: 1.25em;
+  margin: 0.25em 0;
+}
+
+.student-sidebar li a {
+  color: #666;
+}
+
+.student-sidebar li.current {
+  border-left: 3px solid rgb(53, 130, 245);
+  border-left: 3px solid #7a46bf;
+  margin-left: -6px;
+  padding-left: 3px;
+}
+
+.student-sidebar li.current a {
+  color: #000;
 }
 
 /*****************************************************************************
@@ -720,9 +736,6 @@ div.markdown-mark {
 .excerpt {
   border-bottom: .0625em solid #ddd; /* 1 / 24 */
   padding: 0.75em 0 0.6875em 0;
-  /*margin: 0 0 0.75em 0;*/
-  /*font-size: 0.875em;*/
-  /*line-height: 1.714285714em;*/
 }
 
 .excerpt .content {
@@ -1059,6 +1072,23 @@ span.thumbs-down .glyphicons i:before {
 .student-summary .quick-links a:hover {
   color: rgb(0, 0, 245);
 }
+
+/*****************************************************************************
+ *
+ * THESIS PAGE
+ *
+ *****************************************************************************/
+
+.elevator-pitch {
+  font-size: 1.125em; /* 18px */
+  line-height: 1.333333333em; /* 24 / 18 */
+}
+
+.thesis-image {
+  max-width: 100%;
+  max-height: 30em;
+}
+
 
 /*****************************************************************************
  *

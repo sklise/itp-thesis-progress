@@ -3,30 +3,27 @@
 </div>
 
 <div class="col-9">
-  <h2>Thesis</h2>
-  <% if @user == @current_user || @current_user.advisor? %>
-  <a href="<%= @user.url %>/thesis/edit">Edit</a>
+  <div class="spaced-row">
+    <h1><%= @thesis.title %></h1>
+    <% if @user == @current_user #|| @current_user.advisor? %>
+    <div style="float:right;"><a href="<%= @user.url %>/thesis/edit">Edit</a></div>
+    <% end %>
+  </div>
+
+  <div class="spaced-row">
+    <div class="elevator-pitch"><%= @thesis.elevator_pitch %></div>
+  </div>
+
+  <% if !@thesis.image.nil? && @thesis.image.length > 0 %>
+  <div class="spaced-row">
+  <a href="<%= @thesis.image %>" target="_blank"><img class="thesis-image" src="<%= @thesis.image %>" /></a>
+  </div>
   <% end %>
-</div>
 
-<% if @current_user.nil? %>
-<div class="col-3">&nbsp;</div>
-<% end %>
-
-<div class="col-6">
-  <div class="spaced-row">
-    <h6>Title</h6>
-    <h3><%= @thesis.title %></h3>
-  </div>
-
-  <div class="spaced-row">
-    <h6>Elevator Pitch</h6>
-    <%= @thesis.elevator_pitch %>
-  </div>
 
   <div class="spaced-row">
     <h6>Description</h6>
-    <div class="post-content">
+    <div>
     <%= mdown @thesis.description %>
     </div>
   </div>
@@ -41,18 +38,11 @@
     <%= mdown @thesis.research_plan %>
   </div>
 
-</div>
-
-<div class="col-3">
-  <div class="spaced-row">
-  <h6>Image</h6>
-  <a href="<%= @thesis.image %>" target="_blank"><img style="width: 100%;"src="<%= @thesis.image %>" /></a>
-  </div>
-
   <div class="spaced-row">
     <h6>URL</h6>
     <a class="thesis-link" href="<%= @thesis.link %>"><%= @thesis.link %></a>
   </div>
+
 </div>
 
 <% if @current_user && @current_user.non_student? %>

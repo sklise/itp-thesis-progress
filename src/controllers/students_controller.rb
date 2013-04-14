@@ -100,26 +100,7 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/thesis/?' do
-    @user = User.first(netid: params[:netid])
-    @current_user = env['warden'].user
-    authenticate unless @user.public_thesis
-
-    halt 404 if @user.nil?
-
-    if @user.non_student?
-      flash.error = "#{@user} does not have a thesis in the system."
-      redirect '/'
-    end
-
-    StatHat::API.ez_post_value("Students : Thesis", ENV['STATHAT_EMAIL'], 1)
-
-    @thesis = @user.theses.last
-
-    if @current_user && @current_user.non_student?
-      @feedback = @user.received_feedbacks.all(active: true)
-    end
-
-    erb :'students/thesis'
+    redirect "/students/#{params[:netid]}"
   end
 
   get '/:netid/thesis/edit' do
@@ -177,7 +158,7 @@ class StudentsApp < Sinatra::Base
 
     if @user.save
       flash.success = "Thesis summary."
-      redirect "#{@user.url}/thesis"
+      redirect "#{@user.url}"
     else
       flash.error = "There was an error updating your thesis."
       redirect "#{@user.url}/thesis/edit"
@@ -251,21 +232,25 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/?' do
-    authenticate
     @user = User.first(netid: params[:netid])
+    @current_user = env['warden'].user
+    authenticate unless @user.public_thesis
+
+    halt 404 if @user.nil?
 
     if @user.non_student?
-      flash.error = "#{@user} does not have a student page."
+      flash.error = "#{@user} does not have a thesis in the system."
       redirect '/'
     end
 
-    @categories = Category.all
+    StatHat::API.ez_post_value("Students : Thesis", ENV['STATHAT_EMAIL'], 1)
 
-    # erb :profile
-    if @current_user.faculty?
-      redirect "/students/#{params[:netid]}/thesis"
-    else
-      redirect "/students/#{params[:netid]}/progress"
+    @thesis = @user.theses.last
+
+    if @current_user && @current_user.non_student?
+      @feedback = @user.received_feedbacks.all(active: true)
     end
+
+    erb :'students/thesis'
   end
 end
