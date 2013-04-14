@@ -743,17 +743,18 @@ div.markdown-mark {
   font-weight: bold;
 }
 
-.feed-item {
-  border-bottom: .071428571em solid #ddd; /* 1 / 14 */
-  font-size: 0.875em; /* 14 / 16 */
-  line-height: 1.142857143em; /* 16 / 14 */
-  padding: 1.107142857em 0 1.107142857em;
-}
-
+.feed-item,
 .assignment-list {
   border-bottom: .071428571em solid #ddd; /* 1 / 14 */
   font-size: 0.875em; /* 14 / 16 */
   line-height: 1.142857143em; /* 16 / 14 */
+}
+
+.feed-item {
+  padding: 1.107142857em 0 1.107142857em;
+}
+
+.assignment-list {
   padding: 0 0 1.107142857em;
   margin-bottom: 1.107142857em;
 }

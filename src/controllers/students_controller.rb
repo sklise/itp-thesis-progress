@@ -107,7 +107,7 @@ class StudentsApp < Sinatra::Base
     halt 404 if @user.nil?
 
     if @user.non_student?
-      flash.error = "#{@user} is does not have a thesis in the system."
+      flash.error = "#{@user} does not have a thesis in the system."
       redirect '/'
     end
 
