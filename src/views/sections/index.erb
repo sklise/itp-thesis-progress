@@ -23,7 +23,7 @@
     <p class="section-advisor">
       <%= section.advisor %>
     </p>
-    <ul style="list-style-type: none;margin:0 0 1.5em;">
+    <ul style="list-style-type: none; margin:0 0 1.5em;">
       <% section.students.all(order: :first_name.asc).each do |student| %>
       <li><a class="student-link" href="<%= student.url %>"><%= student %></a>
         <% if @current_user.non_student? %>

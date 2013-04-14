@@ -6,6 +6,11 @@
   color: rgb(53, 130, 245);
 }
 
+.section-list ul {
+  list-style-type: none;
+  margin: 0 0 1.5em;
+}
+
 .student-link {
-  color: #666;
+  color: #000;
 }

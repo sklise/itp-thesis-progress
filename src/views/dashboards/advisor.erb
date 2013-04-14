@@ -30,7 +30,7 @@
   <h3><a href="<%= section.url %>"><%= section.name %></a></h3>
   <ul>
   <% section.users.students.each do |student| %>
-    <li><a href="<%= student.url %>"><%= student %></a></li>
+    <li><a class="student-link" href="<%= student.url %>"><%= student %></a></li>
   <% end %>
   </ul>
 </div>
