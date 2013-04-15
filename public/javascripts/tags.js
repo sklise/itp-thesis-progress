@@ -60,7 +60,7 @@ $(function () {
       return this;
     },
 
-    save: function () {
+    save: function (event) {
       if (event.keyCode === 13) {
         var tagname = this.$el.find('input').val();
 
@@ -96,7 +96,7 @@ $(function () {
       return this;
     },
 
-    save: function () {
+    save: function (event) {
       if (event.keyCode === 13) {
         this.model.set('name', this.$el.find('input').val());
         this.model.save();
