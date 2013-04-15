@@ -30,10 +30,17 @@ class StudentsApp < Sinatra::Base
   #############################################################################
 
   get '/:netid/progress/?' do
-    authenticate
-    @user = User.first netid: params[:netid]
+    @user = User.first(netid: params[:netid])
 
     halt 404 if @user.nil?
+
+    if !env['warden'].authenticated?
+      @posts = Post.published.all(is_public: true).paginate(page: 1, user: @user)
+      authenticate if @posts.length == 0
+    else
+      authenticate
+      @posts = Post.published.paginate(page: 1, user: @user)
+    end
 
     if @user.non_student?
       flash.error = "#{@user} is not a student."
@@ -42,11 +49,12 @@ class StudentsApp < Sinatra::Base
 
     StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
 
+    @current_user = env['warden'].user
+
     if @user == @current_user
       @drafts = @user.posts.drafts
     end
 
-    @posts = Post.published.paginate(page: 1, user: @user)
     erb :'students/progress_index'
   end
 
@@ -259,6 +267,7 @@ class StudentsApp < Sinatra::Base
   get '/:netid/?' do
     @user = User.first(netid: params[:netid])
     @current_user = env['warden'].user
+
     authenticate unless @user.public_thesis
 
     halt 404 if @user.nil?
