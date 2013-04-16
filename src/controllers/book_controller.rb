@@ -35,4 +35,15 @@ class BookMaker < Sinatra::Base
     csv_string
   end
 
+  get '/:netid' do
+    @user = User.first netid: params[:netid]
+    halt 404 if @user.nil? || !@user.student?
+
+    @posts = @user.posts.published.reverse
+    @theses = @user.theses
+    @thesis = @theses.last
+
+    erb :'book/student', layout: :'book/layout'
+  end
+
 end

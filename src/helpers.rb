@@ -95,6 +95,11 @@ module Sinatra
         Nokogiri::HTML(marked).css('body').inner_html
       end
 
+      def for_print(content)
+        c = content.gsub(/([^\!])?\[([^\]]*)\] ?\((https?:\/\/[^\s<]+[^<.,:;"')\]\s])\)/, '\1\2 [\3]')
+        mdown(c)
+      end
+
       def excerpt(content)
         words = content.split(/ /)
 

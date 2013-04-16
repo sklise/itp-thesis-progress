@@ -1,0 +1,37 @@
+<div class="page">
+  <h1><%= @thesis.title %></h1>
+  <h2><%= @user %></h2>
+
+  <img src="<%= @thesis.image %>" />
+</div>
+
+<div id="thesis-summary">
+  <h2><%= @thesis.title %></h2>
+
+  <div id='thesis-synopsis'>
+    <%= @thesis.elevator_pitch %>
+  </div>
+
+  <h4>Description</h4>
+  <div class="thesis-description"><%= for_print @thesis.description %></div>
+
+  <h4>Motivation</h4>
+  <div class="thesis-reason"><%= for_print @thesis.reason %></div>
+
+  <h4>Research Plan</h4>
+  <div class="thesis-plan"><%= for_print @thesis.research_plan %></div>
+</div>
+
+<div id="progress">
+  <% @posts.each do |post| %>
+  <div class="post">
+    <h2><%= post.title %></h2>
+    <h3><%= post.category %></h3>
+    <h4><%= longdate post.published_at %></h4>
+
+    <div class="post-content"><%= for_print post.content %></div>
+
+    <div class="permalink">Permalink: thesis.itp.io<%= post.url %></div>
+  </div>
+  <% end %>
+</div>
