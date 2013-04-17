@@ -1,3 +1,15 @@
+<script type="text/javascript" src="/javascripts/d3.js"></script>
+
+<style>
+.chart text {
+  font-size: 12px;
+}
+.chart rect {
+  fill: steelblue;
+  stroke: white;
+}
+</style>
+
 <div class="col-12">
   <h2>Thesis Summary Lock</h2>
   <form action="/admin" method="POST">
@@ -9,7 +21,57 @@
   </form>
 
   <h2>Tags</h2>
+
+  <div id="tag-usage"></div>
+
+
   <ul id="tags" class="admin-tag-list" data-tags="<%= @tags %>"></ul>
 
   <script src="/javascripts/tags.js" type="text/javascript"></script>
 </div>
+
+<script>
+  var data = [
+    <% @tags.each do |tag| %>
+    {"name": "<%= tag.name %>", "count": <%= tag.theses.users.count %>},
+    <% end %>
+  ];
+
+  var w = 20,
+      h = 200;
+
+  var x = d3.scale.linear()
+      .domain([0, 1])
+      .range([0, w]);
+
+  var y = d3.scale.linear()
+      .domain([0, _.max(data, function(d){return d.count})['count']])
+      .rangeRound([0, h]);
+
+  var chart = d3.select('#tag-usage').append('svg')
+    .attr("class","chart")
+    .attr("width", w * data.length - 1)
+    .attr("height", h + 200);
+
+  chart.selectAll("rect")
+    .data(_.sortBy(data, function (d) { return d.name; }))
+  .enter().append("rect")
+    .attr("x", function(d, i) { return x(i) - .5; })
+    .attr("y", function(d) { return h - y(d.count) - .5; })
+    .attr("width", w)
+    .attr("height", function(d) { return y(d.count); })
+
+  chart.selectAll("text")
+    .data(_.sortBy(data, function (d) { return d.name; }))
+  .enter().append("text")
+    .attr("transform", function (d, i) { return "translate("+ x(i + 0.7) + "," + h + ")rotate(-90)";})
+    .attr("text-anchor", "end")
+    .text(function (d) { return d['name']});
+
+  chart.append("line")
+    .attr("x1", 0)
+    .attr("x2", w * data.length)
+    .attr("y1", h - y(3))
+    .attr("y2", h - y(3))
+    .style("stroke", "#000");
+</script>

@@ -9,6 +9,7 @@ class AdminApp < Sinatra::Base
   get '/' do
     if @current_user.admin?
       @site_config = SiteConfig.first
+      @tags = Tag.all
       erb :'admin/config'
     else
       erb :'admin/profile'
