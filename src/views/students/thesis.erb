@@ -49,6 +49,11 @@
     <a class="thesis-link" href="<%= @thesis.link %>"><%= @thesis.link %></a>
   </div>
 
+  <div class="spaced-row">
+    <h6>Book Image</h6>
+    <a href="<%= @thesis.user.book_image_url %>"><%= @thesis.user.book_image_url %></a>
+  </div>
+
 </div>
 
 <% if @current_user && @current_user.non_student? %>
