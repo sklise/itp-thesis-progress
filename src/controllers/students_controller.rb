@@ -134,7 +134,12 @@ class StudentsApp < Sinatra::Base
 
   post '/:netid/thesis/update' do
     authenticate
-    check_user(params[:netid])
+
+    unless (env['warden'].user.netid == params[:netid] || env['warden'].user.advisor?)
+      flash.error = "That page belongs to #{params[:netid]}"
+      redirect request.referrer
+    end
+
     content_type :json
 
     @site_config = SiteConfig.first
