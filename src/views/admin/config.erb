@@ -31,11 +31,7 @@
 </div>
 
 <script>
-  var data = [
-    <% @tags.each do |tag| %>
-    {"name": "<%= tag.name %>", "count": <%= tag.theses.users.count %>},
-    <% end %>
-  ];
+  var data = <%= @tag_array.to_json %>;
 
   var w = 20,
       h = 200;

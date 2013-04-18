@@ -9,7 +9,31 @@ class AdminApp < Sinatra::Base
   get '/' do
     if @current_user.admin?
       @site_config = SiteConfig.first
+
       @tags = Tag.all
+      @tag_hash = {}
+
+      @tags.each do |tag|
+        @tag_hash[tag.name] = {name: tag.name, count: 0}
+      end
+
+      @theses = []
+
+      User.students.each do |student|
+        @theses << student.theses.last
+      end
+
+      @theses.each do |thesis|
+        thesis.tags.each do |tag|
+          @tag_hash[tag.name][:count] += 1
+        end
+      end
+
+      @tag_array = []
+      @tag_hash.each do |k,v|
+        @tag_array << v
+      end
+
       erb :'admin/config'
     else
       erb :'admin/profile'
