@@ -17,7 +17,7 @@ buildify().concat([
   'image_upload.js'
 ])
 .uglify()
-.save('application.min.js');
+.save('application123.min.js');
 
 process.chdir('../css');
 
@@ -30,4 +30,4 @@ buildify().concat([
   'progress-form.css'
 ])
 .cssmin()
-.save('application.min.css');
+.save('application123.min.css');
