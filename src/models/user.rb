@@ -57,6 +57,10 @@ class User
   # INSTANCE METHODS
   #
 
+  def thesis
+    self.theses.last
+  end
+
   def password
     @password ||= Password.new(password_hash)
   end

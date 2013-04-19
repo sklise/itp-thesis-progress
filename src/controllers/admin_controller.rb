@@ -10,7 +10,7 @@ class AdminApp < Sinatra::Base
     if @current_user.admin?
       @site_config = SiteConfig.first
 
-      @tags = Tag.all
+      @tags = Tag.all(fields: [:name, :id])
       @tag_hash = {}
 
       @tags.each do |tag|
@@ -20,7 +20,7 @@ class AdminApp < Sinatra::Base
       @theses = []
 
       User.students.each do |student|
-        @theses << student.theses.last
+        @theses << student.thesis
       end
 
       @theses.each do |thesis|
