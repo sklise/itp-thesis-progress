@@ -1,4 +1,5 @@
 var buildify = require('buildify');
+var exec = require('child_process').exec;
 
 process.chdir('public/javascripts');
 
@@ -17,7 +18,7 @@ buildify().concat([
   'image_upload.js'
 ])
 .uglify()
-.save('application123.min.js');
+.save('application.min.js');
 
 process.chdir('../css');
 
@@ -30,4 +31,10 @@ buildify().concat([
   'progress-form.css'
 ])
 .cssmin()
-.save('application123.min.css');
+.save('application.min.css');
+
+exec('heroku releases --app itpthesisprogress', function (err, resp) {
+  if (err) return;
+  var rev = resp.split(/\n/)[1].split(' ')[0] || 'v1';
+  exec("heroku config:add REV="+rev + " --app itpthesisprogress", function(e,r) {console.log(e,r)});
+});
