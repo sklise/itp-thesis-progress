@@ -15,7 +15,7 @@ class BookMaker < Sinatra::Base
 
   get '/thesisbook-:year-:month-:day.csv' do
     content_type :text
-    @students = User.students.all(year: 2013, order: :last_name.asc)
+    @students = User.students.all(year: 2013, order: :first_name.asc)
     @theses = []
 
     @students.each do |student|
