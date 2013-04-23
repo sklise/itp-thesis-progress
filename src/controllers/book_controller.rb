@@ -23,12 +23,20 @@ class BookMaker < Sinatra::Base
     end
 
     csv_string = CSV.generate do |csv|
-      csv << ["Name", "Title", "Elevator", "Description", "PhotoURL", "URL", "TAGS", "IMAGE URL"]
+      csv << ["Name", "Title", "Elevator", "Description", "PhotoURL", "URL", "TAGS", "@imagepath"]
 
       @theses.each do |thesis|
         image = thesis.user.book_image_url ? thesis.user.book_image_url : thesis.image
 
-        csv << ["#{thesis.user}", "#{thesis.title}", "#{thesis.elevator_pitch.gsub(/\r\n/, '<OYEZ>')}", "#{thesis.description.gsub(/\r\n/, '<OYEZ>')}", "http://itp-thesis.s3.amazonaws.com/2013/#{thesis.user.netid}.pdf", "http://thesis.itp.io/#{thesis.user.netid}", "#{thesis.tags.map{|x| x.name}.join(";")}", "#{image}"]
+        csv << [
+          "#{thesis.user}",
+          "#{thesis.title}",
+          "#{thesis.elevator_pitch.gsub(/\r\n/, '<OYEZ>')}",
+          "#{thesis.description.gsub(/\r\n/, '<OYEZ>')}",
+          "http://itp-thesis.s3.amazonaws.com/2013/#{thesis.user.netid}.pdf",
+          "http://thesis.itp.io/#{thesis.user.netid}",
+          "#{thesis.tags.map{|x| x.name}.join(";")}",
+          "Desktop:2013:book_images:#{thesis.user.netid}.pdf"]
       end
     end
 
