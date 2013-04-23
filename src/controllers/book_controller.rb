@@ -28,6 +28,8 @@ class BookMaker < Sinatra::Base
       @theses.each do |thesis|
         image = thesis.user.book_image_url ? thesis.user.book_image_url : thesis.image
 
+        tags = thesis.tags.map{|x| x.name.gsub(/[\/ ]/,"_")}
+
         csv << [
           "#{thesis.user}",
           "#{thesis.title}",
@@ -37,10 +39,10 @@ class BookMaker < Sinatra::Base
           "http://thesis.itp.io/#{thesis.user.netid}",
           "#{thesis.tags.map{|x| x.name}.join(";")}",
           "Dropbox:ITP_THESIS_BOOK:book_images:#{thesis.user.netid}.pdf",
-          "Dropbox:ITP_THESIS_BOOK:tags:#{thesis.tags[0].to_s.gsub(/[\/ ]/,"_") || "notag"}.pdf",
-          "Dropbox:ITP_THESIS_BOOK:tags:#{thesis.tags[1].to_s.gsub(/[\/ ]/,"_") || "notag"}.pdf",
-          "Dropbox:ITP_THESIS_BOOK:tags:#{thesis.tags[2].to_s.gsub(/[\/ ]/,"_") || "notag"}.pdf",
-          "Dropbox:ITP_THESIS_BOOK:tags:#{thesis.tags[3].to_s.gsub(/[\/ ]/,"_") || "notag"}.pdf",
+          "Dropbox:ITP_THESIS_BOOK:tags:#{tags[0] || "notag"}.pdf",
+          "Dropbox:ITP_THESIS_BOOK:tags:#{tags[1] || "notag"}.pdf",
+          "Dropbox:ITP_THESIS_BOOK:tags:#{tags[2] || "notag"}.pdf",
+          "Dropbox:ITP_THESIS_BOOK:tags:#{tags[3] || "notag"}.pdf",
         ]
       end
     end
