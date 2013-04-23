@@ -7,19 +7,19 @@
 <form id="thesis-update-form" class="col-10" action="<%= @thesis.user.url %>/thesis/update" method="post" enctype="multipart/form-data">
 
   <div class="spaced-row">
-    <h6 class="inline">Title</h6>
+    <h6 class="inline">Title <span class="details error">for thesis book</span></h6>
     <span class='char-counts'><span data-max='60' id="title-count">60</span> Characters Remaining</span>
     <input id="thesis-title-input" type="text" name="thesis[title]" value="<%= @thesis.title %>" placeholder="Thesis Title">
   </div>
 
   <div class="spaced-row">
-    <h6 class="inline">Synopsis/Elevator Pitch/Abstract</h6>
+    <h6 class="inline">Synopsis/Elevator Pitch/Abstract <span class="details error">for thesis book</span></h6>
     <span class="char-counts"><span data-max="250" id="synopsis-count">250</span> Characters Remaining</span>
     <textarea id="thesis-synopsis-input" placeholder="Synopsis" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
   </div>
 
   <div class="spaced-row">
-    <h6 class="inline">Description</h6>
+    <h6 class="inline">Description <span class="details error">for thesis book</span></h6>
     <span class="char-counts"><span data-max='750' id="description-count">750</span> Characters Remaining</span>
     <div class="expanding-area">
     <pre><span></span><br></pre>
@@ -28,12 +28,31 @@
   </div>
 
   <div class="spaced-row">
-    <h6 class="inline">Tags</h6> <span class="char-counts">Choose <span data-max="4" id="tags-count">4</span></span>
+    <h6 class="inline">Tags <span class="details error">for thesis book</span></h6> <span class="char-counts">Choose <span data-max="4" id="tags-count">4</span></span>
     <select id="thesis-tags-input" name="tags[]" class="chzn-select" multiple data-placeholder="Click or start typing to find tags">
       <% @tags.each do |tag| %>
       <option value="<%= tag.id %>" <%= "selected" if @thesis.tags.include?(tag) %>><%= tag.name %></option>
       <% end %>
     </select>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Book Image <span class="details error">for thesis book</span></h6>
+    <div class="highlight">
+      <p class="strong">This is the image for the Thesis Book.</p>
+
+      <p class="strong">PLEASE SUBMIT YOUR IMAGE AS A PDF</p>
+
+      <p>This image must be 10.5" x 2.25". For complete details <a href="http://thesis.itp.io/announcements/2013/70" target="_blank">click here</a></p>
+
+      <% if @thesis.user.book_image_url.nil? || @thesis.user.book_image_url == "" %>
+        <p>no image</p>
+      <% else %>
+        <a target="_blank" href="<%= @thesis.user.book_image_url %>"><%= @thesis.user.book_image_url %></a>
+      <% end %>
+
+      <p>Replace your image: <input type="file" name="user[book_image_url]"></p>
+    </div>
   </div>
 
   <hr>
@@ -55,6 +74,50 @@
   </div>
 
   <div class="spaced-row">
+    <h6>Personal Statement</h6>
+    <p>including goals, rationale</p>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[personal_statement]"><%= @thesis.personal_statement %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Design Process</h6>
+    <p>including description of target audience, use location, key features, functionality, look and feel</p>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[design_process]"><%= @thesis.design_process %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Production Process</h6>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[production_process]"><%= @thesis.production_process %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>User Testing</h6>
+    <p>Approach and Results</p>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[user_testing]"><%= @thesis.user_testing %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Feedback/Revision</h6>
+    <p>How did feedback alter your design/concept?</p>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[feedback]"><%= @thesis.feedback %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
     <h6>Website Image</h6>
     <% if @thesis.image.nil? || @thesis.image == "" %>
       <p>no image</p>
@@ -65,23 +128,6 @@
     <p>Replace your image: <input type="file" name="image"></p>
   </div>
 
-  <div class="spaced-row highlight">
-    <h6>Book Image</h6>
-    <p class="strong">This is the image for the Thesis Book.</p>
-
-    <p class="strong">PLEASE SUBMIT YOUR IMAGE AS A PDF</p>
-
-    <p>This image must be 10.5" x 2.25". For complete details <a href="http://thesis.itp.io/announcements/2013/70" target="_blank">click here</a></p>
-
-    <% if @thesis.user.book_image_url.nil? || @thesis.user.book_image_url == "" %>
-      <p>no image</p>
-    <% else %>
-      <a target="_blank" href="<%= @thesis.user.book_image_url %>"><%= @thesis.user.book_image_url %></a>
-    <% end %>
-
-    <p>Replace your image: <input type="file" name="user[book_image_url]"></p>
-  </div>
-
   <div class="spaced-row">
     <h6>URL (optional)</h6>
     <input name="thesis[link]" type="text" value="<%= @thesis.link %>" placeholder="http://">
@@ -90,7 +136,8 @@
   <fieldset class="button-labels">
     <div class="spaced-row">
     <h6>Thesis Privacy</h6>
-    <p>Select "World" to have your thesis be viewable to anyone with the link.</p>
+    <p>Select "World" to have your thesis be viewable to anyone with the link. At the end of the semester, your thesis will become public.</p>
+
     <input type="radio" id="private-thesis" name="user[public_thesis]" value="false" <% if !@thesis.user.public_thesis %>checked<% end %>>
     <label for="private-thesis">NYU</label>
 

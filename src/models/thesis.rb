@@ -12,6 +12,14 @@ class Thesis
   property :research_plan, Text # limit to 150 words
   property :link, String, length: 255
 
+  property :personal_statement, Text
+  property :design_process, Text
+  property :production_process, Text
+  property :user_testing, Text
+  property :feedback, Text
+  property :conclusions, Text
+  property :next_steps, Text
+
   property :image, Text
   property :user_id, Integer
 

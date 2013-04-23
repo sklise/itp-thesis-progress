@@ -1286,3 +1286,27 @@ ul.printed-tags li {
     page-break-inside: avoid;
   }
 }
+
+input[type=file] {
+  /*font-size: 85%;*/
+  padding: 0em 0.25em 0.25em;
+  margin: 0.25em;
+}
+
+#thesis-update-form h6 {
+  text-transform: none;
+}
+
+#thesis-update-form input[type="text"],
+#thesis-update-form textarea,
+#thesis-update-form .chzn-choices,
+#thesis-update-form input[type=file] {
+  background-color: #fafafa;
+}
+
+#thesis-update-form input[type="text"]:focus,
+#thesis-update-form textarea:focus,
+#thesis-update-form .chzn-container-active .chzn-choices,
+#thesis-update-form input[type=file]:focus {
+  background-color: #fff;
+}
