@@ -2,6 +2,20 @@ class Main < Sinatra::Base
   register WillPaginate::Sinatra
   register Sinatra::ThesisApp
 
+  uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379")
+  redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+
+  redis.del('itpthesis:users')
+  redis.del('itpthesis:pages')
+
+  User.students.each do |s|
+    redis.sadd('itpthesis:users', s.netid)
+  end
+
+  Page.all.each do |p|
+    redis.sadd('itpthesis:pages', p.slug)
+  end
+
   set :static, true
   set :public_folder, Proc.new { File.join(File.dirname(__FILE__), "../../public") }
 
@@ -52,11 +66,12 @@ class Main < Sinatra::Base
   #############################################################################
 
   get '/:page' do
-    @pages = Page.all
 
-    pass if !@pages.slugs.include?(params[:page])
+    redirect "/students/#{params[:page]}" if redis.sismember('itpthesis:users', params[:page])
 
-    @page = @pages.first(slug: params[:page])
+    pass if !redis.sismember('itpthesis:pages', params[:page])
+
+    @page = Page.first(slug: params[:page])
 
     StatHat::API.ez_post_value("Pages : View : #{@page.title}", ENV['STATHAT_EMAIL'], 1)
 

@@ -25,3 +25,5 @@ gem 'omniauth-saml', '1.0.0'
 
 gem 'rack-flash3', '1.0.1', require: 'rack/flash'
 gem 'stathat', '0.0.5'
+
+gem 'redis'
