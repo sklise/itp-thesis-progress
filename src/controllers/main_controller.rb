@@ -19,13 +19,9 @@ class Main < Sinatra::Base
   set :static, true
   set :public_folder, Proc.new { File.join(File.dirname(__FILE__), "../../public") }
 
-  before do
-    env['warden'].authenticate!
-    @current_user = env['warden'].user
-  end
-
   get '/' do
     env['warden'].authenticate!
+    @current_user = env['warden'].user
 
     if @current_user.student?
       @drafts = @current_user.posts.drafts
@@ -66,8 +62,10 @@ class Main < Sinatra::Base
   #############################################################################
 
   get '/:page' do
-
     redirect "/students/#{params[:page]}" if redis.sismember('itpthesis:users', params[:page])
+
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
 
     pass if !redis.sismember('itpthesis:pages', params[:page])
 
@@ -79,12 +77,17 @@ class Main < Sinatra::Base
   end
 
   get '/page/new' do
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
     require_admin
+
     @page = Page.new
     erb :'pages/new'
   end
 
   post '/page/new' do
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
     require_admin
 
     @page = Page.create(params[:page_form])
@@ -93,7 +96,10 @@ class Main < Sinatra::Base
   end
 
   get '/:page/edit' do
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
     require_admin
+
     @pages = Page.all
     pass if !@pages.slugs.include?(params[:page])
     @page = @pages.first(slug: params[:page])
@@ -104,7 +110,10 @@ class Main < Sinatra::Base
   end
 
   post '/:page' do
+    env['warden'].authenticate!
+    @current_user = env['warden'].user
     require_admin
+
     @page = Page.first(slug: params[:page])
     @page.update(params[:page_form])
 
