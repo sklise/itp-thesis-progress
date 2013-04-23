@@ -28,7 +28,7 @@ class BookMaker < Sinatra::Base
       @theses.each do |thesis|
         image = thesis.user.book_image_url ? thesis.user.book_image_url : thesis.image
 
-        csv << ["#{thesis.user}", "#{thesis.title}", "#{thesis.elevator_pitch.gsub(/\r\n/, '<OYEZ>')}", "#{thesis.description.gsub(/\r\n/, '<OYEZ>')}", "#{image}", "http://thesis.itp.io/#{thesis.user.netid}", "#{thesis.tags.map{|x| x.name}.join(";")}", "http://itp-thesis.s3.amazonaws.com/2013/#{thesis.user.netid}.pdf"]
+        csv << ["#{thesis.user}", "#{thesis.title}", "#{thesis.elevator_pitch.gsub(/\r\n/, '<OYEZ>')}", "#{thesis.description.gsub(/\r\n/, '<OYEZ>')}", "http://itp-thesis.s3.amazonaws.com/2013/#{thesis.user.netid}.pdf", "http://thesis.itp.io/#{thesis.user.netid}", "#{thesis.tags.map{|x| x.name}.join(";")}", "#{image}"]
       end
     end
 
