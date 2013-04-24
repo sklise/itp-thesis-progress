@@ -45,14 +45,51 @@
   </div>
 
   <div class="spaced-row">
+    <h6>Personal Statement</h6>
+    <%= mdown @thesis.personal_statement %>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Design Process</h6>
+    <%= mdown @thesis.design_process %>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Production Process</h6>
+    <%= mdown @thesis.production_process %>
+  </div>
+
+  <div class="spaced-row">
+    <h6>User Testing</h6>
+    <%= mdown @thesis.user_testing %>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Feedback</h6>
+    <%= mdown @thesis.feedback %>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Conclusions</h6>
+    <%= mdown @thesis.conclusions %>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Next Steps</h6>
+    <%= mdown @thesis.next_steps %>
+  </div>
+
+  <div class="spaced-row">
     <h6>URL</h6>
     <a class="thesis-link" href="<%= @thesis.link %>"><%= @thesis.link %></a>
   </div>
 
+  <% if @current_user %>
   <div class="spaced-row">
     <h6>Book Image</h6>
     <a href="<%= @thesis.user.book_image_url %>"><%= @thesis.user.book_image_url %></a>
   </div>
+  <% end %>
 
 </div>
 
