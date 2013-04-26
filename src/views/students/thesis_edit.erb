@@ -58,27 +58,18 @@
   <hr>
 
   <div class="spaced-row">
-    <h6>Why You Want to Make This</h6>
-    <div class="expanding-area">
-      <pre><span></span><br></pre>
-      <textarea name="thesis[reason]" placeholder="Why You Want to Make This"><%= @thesis.reason %></textarea>
-    </div>
-  </div>
-
-  <div class="spaced-row">
-    <h6>Research Plan</h6>
-    <div class="expanding-area">
-      <pre><span></span><br></pre>
-      <textarea name="thesis[research_plan]" placeholder="Enter a research plan"><%= @thesis.research_plan %></textarea>
-    </div>
-  </div>
-
-  <div class="spaced-row">
     <h6>Personal Statement</h6>
-    <p>including goals, rationale</p>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[personal_statement]"><%= @thesis.personal_statement %></textarea>
+      <textarea name="thesis[reason]" placeholder="Why you wanted to do this project, what/ who have been major influences, ITP courses that led you to this, etc."><%= @thesis.reason %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Research</h6>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[research_plan]" placeholder="Your research process for thesis."><%= @thesis.research_plan %></textarea>
     </div>
   </div>
 
