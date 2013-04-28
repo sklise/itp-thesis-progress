@@ -18,7 +18,6 @@ class Thesis
   property :user_testing, Text
   property :feedback, Text
   property :conclusions, Text
-  property :next_steps, Text
 
   property :image, Text
   property :user_id, Integer

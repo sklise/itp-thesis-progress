@@ -13,9 +13,9 @@
   </div>
 
   <div class="spaced-row">
-    <h6 class="inline">Synopsis/Elevator Pitch/Abstract <span class="details error">for thesis book</span></h6>
+    <h6 class="inline">Synopsis <span class="details error">for thesis book</span></h6>
     <span class="char-counts"><span data-max="250" id="synopsis-count">250</span> Characters Remaining</span>
-    <textarea id="thesis-synopsis-input" placeholder="Synopsis" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
+    <textarea id="thesis-synopsis-input" placeholder="AKA elevator pitch" name="thesis[elevator_pitch]"><%= @thesis.elevator_pitch %></textarea>
   </div>
 
   <div class="spaced-row">
@@ -23,7 +23,7 @@
     <span class="char-counts"><span data-max='750' id="description-count">750</span> Characters Remaining</span>
     <div class="expanding-area">
     <pre><span></span><br></pre>
-    <textarea id="thesis-description-input" name="thesis[description]" class="description skinny" placeholder="Description"><%= @thesis.description %></textarea>
+    <textarea id="thesis-description-input" name="thesis[description]" class="description skinny" placeholder="What is it? Who is the target audience? Where will it be used? What are the key features and functionality, look and feel."><%= @thesis.description %></textarea>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
     <h6>Personal Statement</h6>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[reason]" placeholder="Why you wanted to do this project, what/ who have been major influences, ITP courses that led you to this, etc."><%= @thesis.reason %></textarea>
+      <textarea name="thesis[reason]" placeholder="Why you wanted to make it (including goals, rationale), Influences (personal, courses, teachers, other projects of your own or others)"><%= @thesis.reason %></textarea>
     </div>
   </div>
 
@@ -69,16 +69,15 @@
     <h6>Research</h6>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[research_plan]" placeholder="Your research process for thesis."><%= @thesis.research_plan %></textarea>
+      <textarea name="thesis[research_plan]" placeholder="What research did you do. Who you talked to, what you read, etc. What did you have to learn to do your project? Relevant Background info, related projects in the files, how it's different from similar projects."><%= @thesis.research_plan %></textarea>
     </div>
   </div>
 
   <div class="spaced-row">
     <h6>Design Process</h6>
-    <p>including description of target audience, use location, key features, functionality, look and feel</p>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[design_process]"><%= @thesis.design_process %></textarea>
+      <textarea name="thesis[design_process]" placeholder="How you made it from the design angle. How it evolved over the course of the semester? Why did you change it? What you had to leave behind, Blind alleys?"><%= @thesis.design_process %></textarea>
     </div>
   </div>
 
@@ -86,25 +85,31 @@
     <h6>Production Process</h6>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[production_process]"><%= @thesis.production_process %></textarea>
+      <textarea name="thesis[production_process]" placeholder="How  you made it from the building and technological angle. Include fabrication process, or software used and any workshops taken."><%= @thesis.production_process %></textarea>
     </div>
   </div>
 
   <div class="spaced-row">
-    <h6>User Testing</h6>
-    <p>Approach and Results</p>
+    <h6>User Testing (Approach and Results)</h6>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[user_testing]"><%= @thesis.user_testing %></textarea>
+      <textarea name="thesis[user_testing]" placeholder="Show evidence of user testing and what you learned from it. Your approach and results."><%= @thesis.user_testing %></textarea>
     </div>
   </div>
 
   <div class="spaced-row">
-    <h6>Feedback/Revision</h6>
-    <p>How did feedback alter your design/concept?</p>
+    <h6>Feedback</h6>
     <div class="expanding-area">
       <pre><span></span><br></pre>
-      <textarea name="thesis[feedback]"><%= @thesis.feedback %></textarea>
+      <textarea name="thesis[feedback]" placeholder="What criticism and feedback did you get?How did feedback alter your design/concept? What crit did you take, what did you decide not to take? Who gave your feedback? What was most helpful?"><%= @thesis.feedback %></textarea>
+    </div>
+  </div>
+
+  <div class="spaced-row">
+    <h6>Conclusions</h6>
+    <div class="expanding-area">
+      <pre><span></span><br></pre>
+      <textarea name="thesis[conclusions]" placeholder="What you learned: include surprises, obstacles, challenges, observations, implications, lessons learned. If you are going to take it further, what are your next steps?"><%= @thesis.feedback %></textarea>
     </div>
   </div>
 
