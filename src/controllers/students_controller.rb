@@ -273,7 +273,7 @@ class StudentsApp < Sinatra::Base
     @user = User.first(netid: params[:netid])
     @current_user = env['warden'].user
 
-    authenticate unless @user.public_thesis
+    # authenticate unless @user.public_thesis
 
     halt 404 if @user.nil?
 
