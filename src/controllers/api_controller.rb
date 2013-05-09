@@ -98,4 +98,43 @@ class API < Sinatra::Base
 
     @post.to_json
   end
+
+  ####################################################
+  #
+  #  THESIS REVIEWS
+  #
+  ####################################################
+  post '/review' do
+    require_non_student
+    json = JSON.parse(request.body.read)
+
+    @review = Review.new(json)
+
+    if @review.save
+      @review.to_json
+    else
+      halt 500
+    end
+  end
+
+  get '/reviews/:id' do
+    require_non_student
+    @review = Review.get(params[:id])
+
+    halt 404 if @review.nil?
+
+    @review.to_json
+  end
+
+  put '/reviews/:id' do
+    require_non_student
+    json = JSON.parse(request.body.read)
+
+    @review = Review.get(params[:id])
+
+    halt 404 if @review.nil?
+
+    @review.update(json)
+    @review.to_json
+  end
 end

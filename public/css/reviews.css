@@ -1,0 +1,50 @@
+.section-listing {
+  display: none;
+  list-style: none;
+  margin: 0.15em 2px 0.5em 0;
+  border-left: 3px solid #c0e0ff;
+}
+
+.student-listing {
+  background: #fefef0;
+  border-bottom: 1px solid #f7f7c5;
+  border-top: 1px solid #fff;
+}
+
+.student-listing.complete {
+  background: #f0fef0;
+}
+
+.section-heading {
+  font-weight: bold;
+  padding: 0.05em 0 0.05em 0.25em;
+}
+
+.section-heading:hover,
+.section-heading:active {
+  cursor: pointer;
+  background: #c0e0ff;
+}
+
+.student-heading {
+  padding: 0.15em 0 0.15em 0.5em;
+}
+
+.student-heading:hover,
+.student-heading:active {
+  background-color: #ffffc6;
+  outline: 1px solid #f7e354;
+  cursor: pointer;
+}
+
+.student-name, .thesis-title {
+}
+
+.thesis-title {
+}
+
+#section-scroll {
+  height: 700px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

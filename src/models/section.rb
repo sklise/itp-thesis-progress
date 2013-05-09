@@ -14,7 +14,7 @@ class Section
   end
 
   def students
-    users.all role: "student"
+    users.all role: "student", order: "first_name"
   end
 
   def advisor

@@ -62,5 +62,12 @@ class AdminApp < Sinatra::Base
     redirect '/admin'
   end
 
-  # tags
+  get '/reviews' do
+    require_non_student
+
+    @reviews = Review.all(:reviewer_id => @current_user.id)
+
+    @sections = Section.all
+    erb :'admin/reviews'
+  end
 end

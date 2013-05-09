@@ -1,0 +1,161 @@
+<script>
+  var Review = Backbone.Model.extend({
+    urlRoot: '/api/reviews/'
+  });
+
+  var Reviews = Backbone.Collection.extend({
+    model: Review,
+    url: '/api/reviews/',
+
+    getCurrent: function () {
+      return this.current;
+    },
+
+    setCurrent: function (data) {
+      var first = _.find(this.models, function (review) {
+        return review.get('student_id') === data.id;
+      });
+
+      if (typeof first === 'undefined') {
+        this.current = new Review({
+          student_id: data.id,
+          student_name: data.name,
+          thesis_title: data.title
+        });
+      } else {
+        this.current = first;
+      }
+      this.trigger('set:current');
+    }
+  });
+
+  var ListView = Backbone.View.extend({
+    el: '#section-scroll',
+
+    initialize: function () {
+    },
+
+    events: {
+      'click .student-listing' : 'setForm'
+    },
+
+    setForm: function (e) {
+      var stu = $(e.target).closest('.student-listing');
+
+      this.collection.setCurrent(stu.data());
+    },
+
+    render: function () {
+      return this;
+    }
+  });
+
+  var ReviewView = Backbone.View.extend({
+    el: '#review-section',
+
+    initialize: function () {
+      this.collection.bind('set:current', this.render, this);
+    },
+
+    events: {
+      'keypress textarea': 'update',
+      'blur textarea' : 'updateSave'
+    },
+
+    updateSave: function (event) {
+      this.update(event);
+      this.save();
+    },
+
+    save: function () {
+      this.collection.getCurrent().save();
+    },
+
+    update: function (event) {
+      var value = $(event.target).val();
+      var fieldName = $(event.target).attr('id');
+      var model = this.collection.getCurrent();
+      model.set(fieldName, value);
+    },
+
+    render: function () {
+      this.$el.empty();
+      var template = Handlebars.compile($('#review-form-template').html());
+      var currentReview = this.collection.getCurrent();
+
+      this.$el.html(template(currentReview.toJSON()));
+      return this;
+    }
+  });
+
+  $(document).ready(function () {
+    $('.section-heading').click(function () {
+      var slug = $(this).data().slug;
+      $('.section-listing[id!="section-'+slug+'"]').hide();
+      $('#section-'+slug).toggle();
+    });
+
+    reviews = new Reviews(<%= @reviews.to_json %>);
+    lv = new ListView({collection: reviews});
+    rv = new ReviewView({collection: reviews});
+  });
+</script>
+
+<link rel="stylesheet" href="/css/reviews.css" />
+
+<div class="col-3" id="section-scroll">
+<% @sections.each do |section| %>
+  <div class="section-heading" data-slug="<%= section.slug %>"><%= section.advisor.first_name %>: <%= section.name %></div>
+  <ul class="section-listing" id="section-<%= section.slug %>">
+    <% section.students.each do |student| %>
+    <li class="student-listing" data-id="<%= student.id %>" data-name="<%= student.to_s %>" data-title="<%= student.thesis.title %>">
+      <div class="student-heading">
+        <div><%= student %></div>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
+
+<div class="col-9" id="review-section">
+
+</div>
+
+<script type="text/template" id="review-form-template">
+  <h5 class="student-name">{{student_name}}</h5>
+  <h5 class="thesis-title">{{thesis_title}}</h5>
+  <div class="presentation-time"></div>
+
+  <div class="question-section" id="proof-of-concept-section">
+    <div class="ajax-status"></div>
+    <label for="proof_of_concept" class="required">
+      Did this project meet the basic proof-of-concept requirement for an ITP Thesis? If not, elaborate?
+    </label>
+    <textarea id="proof_of_concept">{{proof_of_concept}}</textarea>
+  </div>
+
+  <div class="question-section" id="strongest-part-status">
+    <div class="ajax-status"></div>
+    <label for="strongest_part">
+      What are the strongest parts of the project?
+    </label>
+    <textarea id="strongest_part">{{strongest_part}}</textarea>
+  </div>
+
+  <div class="questionPsection" id="project-life-section">
+    <div class="ajax-status"></div>
+    <label for="project_life">
+      Do you think this project has a life IRW after Thesis? How? Where?
+    </label>
+    <textarea id="project_life">{{project_life}}</textarea>
+  </div>
+
+  <div class="question-section" id="presentation-quality-section">
+    <div class="ajax-status"></div>
+    <label for="presentation_quality">
+      How was the Presentation? Clear? Engaging? Not? Suggestions?
+    </label>
+    <textarea id="presentation_quality">{{presentation_quality}}</textarea>
+  </div>
+</script>
