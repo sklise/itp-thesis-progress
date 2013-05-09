@@ -19,7 +19,7 @@ class API < Sinatra::Base
     @tags.to_json
   end
 
-  post '/tags' do
+  post '/tags/?' do
     require_admin
     json = JSON.parse(request.body.read)
 
@@ -104,11 +104,12 @@ class API < Sinatra::Base
   #  THESIS REVIEWS
   #
   ####################################################
-  post '/review' do
+  post '/reviews/?' do
     require_non_student
     json = JSON.parse(request.body.read)
 
     @review = Review.new(json)
+    @review.reviewer_id = @current_user.id
 
     if @review.save
       @review.to_json

@@ -337,6 +337,10 @@ button:hover {
   margin: -.5em auto .75em;
 }
 
+#flash a {
+  color: #222;
+}
+
 .message-success {
   background-color: rgba(68, 202, 71, 0.54);
   border: 1.5px solid rgba(68, 202, 71, 1);
@@ -345,6 +349,11 @@ button:hover {
 .message-error {
   background-color: rgba(202, 68, 71, 0.54);
   border: 1.5px solid rgba(202, 68, 71, 1);
+}
+
+.message-notification {
+  background-color: rgba(48, 199, 213, 0.54);
+  border: 1.5px solid rgba(48, 199, 213, 1);
 }
 
 /*****************************************************************************

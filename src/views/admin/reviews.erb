@@ -64,14 +64,22 @@
 
     updateSave: function (event) {
       this.update(event);
+      this.$el.find('h5').attr('class', 'pending');
       this.save();
     },
 
     save: function () {
-      this.collection.getCurrent().save();
+      var view = this;
+      var model = this.collection.getCurrent();
+      model.save(model.attributes, {
+        success: function (model) {
+          view.$el.find('h5').attr('class', 'synced');
+        }
+      });
     },
 
     update: function (event) {
+      this.$el.find('h5').attr('class', 'changed');
       var value = $(event.target).val();
       var fieldName = $(event.target).attr('id');
       var model = this.collection.getCurrent();
@@ -103,6 +111,10 @@
 
 <link rel="stylesheet" href="/css/reviews.css" />
 
+<div class="col-12">
+  <h1 class="page-title">Thesis Week Reviews</h1>
+</div>
+
 <div class="col-3" id="section-scroll">
 <% @sections.each do |section| %>
   <div class="section-heading" data-slug="<%= section.slug %>"><%= section.advisor.first_name %>: <%= section.name %></div>
@@ -119,16 +131,18 @@
 </div>
 
 <div class="col-9" id="review-section">
-
+  Click on a section name and then a student name to write a review.
 </div>
 
 <script type="text/template" id="review-form-template">
-  <h5 class="student-name">{{student_name}}</h5>
-  <h5 class="thesis-title">{{thesis_title}}</h5>
+  <h5>
+    <span class="student-name">{{student_name}}</span> :
+    <span class="thesis-title">{{thesis_title}}</span>
+  </h5>
+  <div id="ajax-status"></div>
   <div class="presentation-time"></div>
 
   <div class="question-section" id="proof-of-concept-section">
-    <div class="ajax-status"></div>
     <label for="proof_of_concept" class="required">
       Did this project meet the basic proof-of-concept requirement for an ITP Thesis? If not, elaborate?
     </label>
@@ -136,7 +150,6 @@
   </div>
 
   <div class="question-section" id="strongest-part-status">
-    <div class="ajax-status"></div>
     <label for="strongest_part">
       What are the strongest parts of the project?
     </label>
@@ -144,7 +157,6 @@
   </div>
 
   <div class="questionPsection" id="project-life-section">
-    <div class="ajax-status"></div>
     <label for="project_life">
       Do you think this project has a life IRW after Thesis? How? Where?
     </label>
@@ -152,7 +164,6 @@
   </div>
 
   <div class="question-section" id="presentation-quality-section">
-    <div class="ajax-status"></div>
     <label for="presentation_quality">
       How was the Presentation? Clear? Engaging? Not? Suggestions?
     </label>

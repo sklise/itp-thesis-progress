@@ -13,5 +13,5 @@ class Review
   property :proof_of_concept, Text
   property :strongest_part, Text
   property :project_life, Text
-  property :presentation_life, Text
+  property :presentation_quality, Text
 end
