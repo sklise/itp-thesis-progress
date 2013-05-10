@@ -138,4 +138,21 @@ class API < Sinatra::Base
     @review.update(json)
     @review.to_json
   end
+
+  get '/thesisweek/schedule' do
+    @presentations = Presentation.all order: :presentation_time.asc
+
+    response = []
+
+    @presentations.each do |p|
+      temp = p.attributes
+      temp[:thesis] = p.user.thesis.title
+      temp[:advisor] = p.user.students_advisor.to_s
+      temp[:date] = p.presentation_time.day
+      temp[:weekday] = p.presentation_time.wday
+      temp[:time] = "#{p.presentation_time.hour}:#{p.presentation_time.minute}"
+      response << temp
+    end
+    response.to_json
+  end
 end
