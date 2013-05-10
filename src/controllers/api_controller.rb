@@ -146,6 +146,7 @@ class API < Sinatra::Base
 
     @presentations.each do |p|
       temp = p.attributes
+      temp[:student] = p.user.to_s
       temp[:thesis] = p.user.thesis.title
       temp[:advisor] = p.user.students_advisor.to_s
       temp[:date] = p.presentation_time.day
