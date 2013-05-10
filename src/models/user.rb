@@ -21,6 +21,7 @@ class User
 
   has n, :theses
   has 1, :application
+  has 1, :presentation
   has n, :posts
   has n, :announcements
   has n, :assignments
