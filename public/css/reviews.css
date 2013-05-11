@@ -51,9 +51,8 @@
 }
 
 #review-section h5 {
-  border-left: 4px solid #ccc;
   line-height: 1em;
-  padding: 0.25em 0 0.25em 0.25em;
+  padding: 0.25em 0 0.25em;
 }
 
 #review-section h5.changed {
@@ -67,3 +66,64 @@
 #review-section h5.synced {
   border-left-color: green;
 }
+
+#review-section .button {
+  background-color: rgb(121,121,121);
+  color: #fff;
+  display: inline-block;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  line-height: 1em;
+  margin: 0 0.428571428em 0.428571428em 0;
+  padding: 0.5em 0.75em;
+  vertical-align: baseline;
+  background-color: rgb(76, 194, 60);
+}
+
+#review-section .button .glyphicons {
+  display: inline-block;
+  padding: 0 0.25em 0 0;
+}
+
+#review-section .button:hover {
+  cursor: pointer;
+  background-color: rgb(76, 194, 60);
+}
+
+#review-section .button .glyphicons i:before {
+  color: rgb(56, 134, 70);
+  position: relative;
+  top: 0.15em;
+  line-height: 1em;
+}
+
+#review-section.changed .button {
+  background-color: #777;
+}
+
+@-webkit-keyframes animatedBackground {
+  from { background-position: 0 0; }
+  to { background-position: 100% 0; }
+}
+
+#review-section.pending .button {
+  color: #777;
+  background: url('/images/stripe.png');
+  background-position: 0px 0px;
+  background-repeat: repeat;
+  -webkit-animation: animatedBackground 10s linear infinite;
+}
+
+#review-section.changed .button .glyphicons i:before {
+  color: #ccc;
+}
+
+#review-section.synced .button .glyphicons i:before {
+  color: rgb(56, 134, 70);
+}
+
+#review-section.pending .button .glyphicons i:before {
+  color: yellow;

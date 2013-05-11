@@ -59,12 +59,15 @@
 
     events: {
       'keypress textarea': 'update',
-      'blur textarea' : 'updateSave'
+      'click .button' : 'updateSave'
     },
 
     updateSave: function (event) {
       this.update(event);
-      this.$el.find('h5').attr('class', 'pending');
+      this.$el
+        .addClass('pending')
+        .removeClass('changed')
+        .removeClass('synced');
       this.save();
     },
 
@@ -73,13 +76,20 @@
       var model = this.collection.getCurrent();
       model.save(model.attributes, {
         success: function (model) {
-          view.$el.find('h5').attr('class', 'synced');
+
+          view.$el
+            .addClass('synced')
+            .removeClass('changed')
+            .removeClass('pending');
         }
       });
     },
 
     update: function (event) {
-      this.$el.find('h5').attr('class', 'changed');
+      this.$el
+        .addClass('changed')
+        .removeClass('synced')
+        .removeClass('pending');
       var value = $(event.target).val();
       var fieldName = $(event.target).attr('id');
       var model = this.collection.getCurrent();
@@ -158,7 +168,7 @@
 
   <div class="questionPsection" id="project-life-section">
     <label for="project_life">
-      Do you think this project has a life IRW after Thesis? How? Where?
+      Do you think this project has a life in the real world after Thesis? How? Where?
     </label>
     <textarea id="project_life">{{project_life}}</textarea>
   </div>
@@ -168,5 +178,11 @@
       How was the Presentation? Clear? Engaging? Not? Suggestions?
     </label>
     <textarea id="presentation_quality">{{presentation_quality}}</textarea>
+  </div>
+
+  <div class="action-buttons">
+    <div class="button publish-button"><div class="glyphicons cloud"><i></i></div> Save</div>
+
+    <span class="details">If the button is green, the form is saved. If it's gray, there are unsaved changes</span>
   </div>
 </script>
