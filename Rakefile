@@ -34,3 +34,27 @@ task :users_from_csv do
     raise "There was a problem loading the csv you specified."
   end
 end
+
+task :summary do
+  @sections = Section.all
+
+  text = []
+
+  @sections.each do |section|
+    text << "\n"
+    text << "# #{section.name} - #{section.advisor}"
+    text << "###################"
+
+    section.students.each do |student|
+      text << "\n"
+      text << "#{student}"
+      text << "#{student.thesis.title}"
+      text << "#{student.thesis.elevator_pitch}"
+      text << "#{student.thesis.link}"
+    end
+  end
+
+  File.open('summary.txt', 'w') do |f|
+    f.write text.join("\n")
+  end
+end
