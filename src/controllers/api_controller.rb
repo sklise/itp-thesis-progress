@@ -156,4 +156,14 @@ class API < Sinatra::Base
     end
     response.to_json
   end
+
+  get '/student_list' do
+    content_type :html
+    @students = User.students.all(order: :first_name)
+    output = ""
+    @students.each do |student|
+      output += "<p>#{student.to_s}</p>"
+    end
+    output
+  end
 end
