@@ -16,12 +16,13 @@
         return review.get('student_id') === data.id;
       });
 
-      if (typeof first === 'undefined') {
+      if (!first) {
         this.current = new Review({
           student_id: data.id,
           student_name: data.name,
           thesis_title: data.title
         });
+        this.add(this.current);
       } else {
         this.current = first;
       }
@@ -59,11 +60,12 @@
 
     events: {
       'keypress textarea': 'update',
+      'blur textarea': 'update',
+      'change textarea': 'update',
       'click .button' : 'updateSave'
     },
 
     updateSave: function (event) {
-      this.update(event);
       this.$el
         .addClass('pending')
         .removeClass('changed')
@@ -74,9 +76,15 @@
     save: function () {
       var view = this;
       var model = this.collection.getCurrent();
+
+      _.forEach(view.$el.find('textarea'), function (ta) {
+        var fieldName = $(ta).attr('id');
+        var val = $(ta).val();
+        model.set(fieldName, val);
+      });
+
       model.save(model.attributes, {
         success: function (model) {
-
           view.$el
             .addClass('synced')
             .removeClass('changed')
