@@ -70,4 +70,20 @@ class AdminApp < Sinatra::Base
     @sections = Section.all
     erb :'admin/reviews'
   end
+
+  get '/reviews/students' do
+    require_non_student
+
+    @students = User.all(:role => "student", order: :first_name)
+
+    erb :'admin/reviews_index'
+  end
+
+  get '/reviews/:netid' do
+    require_non_student
+    @students = User.all(:role => "student", order: :first_name)
+    @student = User.first(:netid => params[:netid])
+    @reviews = Review.all(:student_id => @student.id)
+    erb :'admin/reviews_show'
+  end
 end

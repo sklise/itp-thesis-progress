@@ -1,0 +1,5 @@
+<ul>
+<% @students.each do |student| %>
+  <li><a href="/admin/reviews/<%= student.netid %>"><%= student %></a></li>
+<% end %>
+</ul>

@@ -127,3 +127,14 @@
 
 #review-section.pending .button .glyphicons i:before {
   color: yellow;
+}
+
+.review-listing {
+  border-bottom: 1px solid #777;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+
+.review-section {
+  margin-bottom: 1em;
+}

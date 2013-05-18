@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/reviews.css">
+<div class="col-3">
+<ul>
+<% @students.each do |student| %>
+  <li><a href="/admin/reviews/<%= student.netid %>"><%= student %></a></li>
+<% end %>
+</ul>
+</div>
+
+<div class="col-9">
+<h3><%= @student %></h3>
+
+<% @reviews.each do |review| %>
+  <div class="review-listing">
+    <h4><%= User.first(id: review.reviewer_id) %></h4>
+
+    <h6>Proof of Concept</h6>
+    <div class="review-section"><%= mdown review.proof_of_concept %></div>
+
+    <h6>Strongest Part</h6>
+    <div class="review-section"><%= mdown review.strongest_part %></div>
+
+    <h6>Project Life</h6>
+    <div class="review-section"><%= mdown review.project_life %></div>
+
+    <h6>Presentation Quality</h6>
+    <div class="review-section"><%= mdown review.presentation_quality %></div>
+  </div>
+<% end %>
+</div>
