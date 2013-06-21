@@ -16,7 +16,7 @@ builder = Rack::Builder.new do
     provider :saml,
       :assertion_consumer_service_url => ENV['SITE_DOMAIN'] + "/auth/saml/callback",
       :issuer                         => ENV['SAML_ISSUER'],
-      :idp_sso_target_url             => "http://itp.nyu.edu/simplesaml/saml2/idp/SSOService.php",
+      :idp_sso_target_url             => "https://itp.nyu.edu/simplesaml/saml2/idp/SSOService.php",
       :idp_cert                       => ENV['IDP_CERT']
   end
 
