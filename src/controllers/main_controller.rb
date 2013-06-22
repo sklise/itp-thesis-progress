@@ -30,6 +30,7 @@ class Main < Sinatra::Base
     end
   end
 
+  # Dashboard page. Create a dashboard to match all user roles.
   get '/dashboard' do
     env['warden'].authenticate!
     @current_user = env['warden'].user
@@ -140,6 +141,8 @@ class Main < Sinatra::Base
     redirect "/#{@page.slug}"
   end
 
+  # Route to only use in Development to set your user to any netid to view the
+  # site as another person.
   unless ENV['RACK_ENV'] == 'production'
     get '/set_user/:netid' do
       @user = User.first netid: params[:netid]
