@@ -1,0 +1,31 @@
+.post-feed {
+  margin: 0 0;
+  border-bottom: 1px solid #ddd;
+
+  a {
+    color: inherit;
+    display: block;
+    padding: 0.5em 0.25em;
+  }
+
+  a:hover {
+    background-color: #F0D5FF;
+    text-decoration: none;
+  }
+
+  .title {
+  }
+
+  .category {
+    background: #D588FF;
+    color: #fff;
+    font-weight: 300;
+    right: 0.25em;
+    position: absolute;
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    margin: 0 0.2em;
+    font-size: 0.9em;
+    line-height: 1.5em;
+  }
+}

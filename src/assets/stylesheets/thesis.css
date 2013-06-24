@@ -1,44 +1,3 @@
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  font: inherit;
-  position: relative;
-  vertical-align: baseline;
-  margin: 0;
-  padding: 0;
-}
-
-html, body, div, span, p, blockquote, pre, a, code, em, img, ol, ul, li, fieldset, form, label, article, aside, canvas, footer, header, .hgroup, nav, section, audio, video {
-  border: 0;
-}
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, div figcaption, figure,
-footer, header, .hgroup, menu, nav, section {
-  display: block;
-  position: relative;
-}
-
-/*****************************************************************************
- *
- * DECLARE ALL FONTS HERE, AND NOWHERE ELSE
- *
- *****************************************************************************/
-
-html {
-  font-family: "Source Sans Pro","Helvetica", sans-serif;
-}
-
-blockquote,
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
-}
-
-code {
-  font-family: 'source code pro';
-}
-
 /*****************************************************************************
  *
  * NATIVE HTML ELEMENTS, LISTED ALPHABETICALLY
@@ -407,16 +366,6 @@ button:hover {
   text-align: right;
 }
 
-h1.page-title {
-  margin-top: 0;
-  line-height: 1.5em;
-  font-size: 1em;
-}
-
-h1.page-title a {
-  color: #000;
-}
-
 /*****************************************************************************
  *
  * MARKDOWN GUIDE
@@ -765,10 +714,6 @@ div.markdown-mark {
   line-height: 1.5em;
 }
 
-.title {
-  font-weight: bold;
-}
-
 .feed-item,
 .assignment-list {
   border-bottom: .071428571em solid #ddd; /* 1 / 14 */
@@ -1046,44 +991,6 @@ span.thumbs-up .glyphicons i:before {
 span.thumbs-down,
 span.thumbs-down .glyphicons i:before {
   color: rgb(214, 19, 19);
-}
-
-/*****************************************************************************
- *
- * STUDENT SUMMARY
- *
- *****************************************************************************/
-
-.student-summary {
-  margin-bottom: 3em;
-}
-
-.student-summary h4 {
-  margin: 0;
-  line-height: 2em;
-}
-
-.student-summary .quick-links {
-  font-size: 0.875em; /* 14 / 16 */
-  line-height: 1.714285714em; /* 24 / 14 */
-}
-
-.student-summary .quick-links {
-  list-style-type: none;
-  margin: 0;
-}
-
-.student-summary .quick-links li {
-  display: inline-block;
-  margin: 0 1em 0 0;
-}
-
-.student-summary .quick-links a {
-  color: #777;
-}
-
-.student-summary .quick-links a:hover {
-  color: rgb(0, 0, 245);
 }
 
 /*****************************************************************************

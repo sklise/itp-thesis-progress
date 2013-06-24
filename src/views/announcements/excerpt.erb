@@ -1,4 +1,5 @@
-<div class="excerpt">
-  <div class="title"><a href="<%= announcement.url %>"><%= announcement.title %></a></div>
-  <div class="date"><%= longdate announcement.published_at %> — <%= announcement.user %></div>
+<div class="announcement-excerpt">
+  <div class="author"><%= announcement.user %></div>
+  <div class="date"><%= shortdate announcement.published_at %></div>
+  <h3 class="title"><a href="<%= announcement.url %>"><%= announcement.title %></a></h3>
 </div>

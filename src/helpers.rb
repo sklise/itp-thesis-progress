@@ -74,7 +74,7 @@ module Sinatra
       end
 
       def shortdate(d)
-        d.strftime("%m/%d")
+        d.strftime("%_m/%e")
       end
 
       def list(collection, options)

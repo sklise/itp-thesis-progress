@@ -1,0 +1,53 @@
+.section {
+  clear: both;
+}
+
+.section,
+.section-list {
+  margin: 0 0 1.5em 0;
+}
+
+.section-advisor {
+  font-weight: bold;
+}
+
+.section-list h3 a {
+  color: rgb(53, 130, 245);
+}
+
+.section-list ul {
+  list-style-type: none;
+  margin: 0 0 1.5em;
+}
+
+.student-link {
+  color: #000;
+}
+
+.student-summary {
+  margin-bottom: 3em;
+
+  h6 {
+    margin-top: 0.5em;
+  }
+
+  .quick-links {
+    font-size: 0.875em; /* 14 / 16 */
+    line-height: 1.714285714em; /* 24 / 14 */
+    list-style-type: none;
+    margin: 0;
+  }
+
+  .quick-links li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+  }
+
+  .quick-links a {
+    color: #777;
+  }
+
+  .quick-links a:hover {
+    color: rgb(0, 0, 245);
+  }
+}

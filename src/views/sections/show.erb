@@ -7,9 +7,9 @@
   <% end %>
 </div>
 
-<div class="col-3">
+<div class="col-4">
   <% unless @current_user.provisional? %>
-  <div class="section">
+  <div class="section outlined">
     <h2>Announcements</h2>
 
     <% if @current_user.advisor? %>
@@ -22,17 +22,14 @@
   </div>
 
   <div class="section">
-    <a href="<%= @section.url %>/comments">Comments</a>
+    <p><a href="<%= @section.url %>/comments">Comments</a></p>
+    <p><a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu,<%= @section.users.residents.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>'>Email Students</a></p>
   </div>
   <% end %>
 </div>
 
-<div class="col-9">
+<div class="col-8">
   <div class="section">
-
-    <h2>Students</h2>
-    <a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu,<%= @section.users.residents.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>'>Email Students</a>
-
   <% @section.students.all(order: :first_name.asc).each do |student| %>
     <div class="student-summary">
       <h3><a href="<%= student.url %>"><%= student %></a></h3>
@@ -44,8 +41,15 @@
 
       <h6>Recent Posts</h6>
       <% student.posts.published.all(limit: 5).each do |post| %>
-      <div class="feed-item">
-      <a href="<%= post.url %>"><%= post.title %></a> <span class="category"><%= post.category %></span> <span class="date"><%= longdate post.published_at %></span>
+      <div class="post-feed">
+        <a href="<%= post.url %>">
+          <span class="date"><%= longdate post.published_at %> &nbsp;</span>
+          <span class="title"><%= post.title %></span>
+
+          <% if post.category %>
+          <div class="category"><%= post.category %></div>
+          <% end %>
+          </a>
       </div>
       <% end %>
     </div>

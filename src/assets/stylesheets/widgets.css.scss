@@ -1,0 +1,28 @@
+div.outlined {
+  border: 1px solid #aaa;
+
+  h2 {
+    border-bottom: 1px solid #aaa;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  & > *,
+  h2 {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  & div:last-child {
+    border-bottom: none;
+  }
+}
+
+h2.outlined {
+  border: 1px solid #aaa;
+}
+
+h1.page-title {
+  font-size: 1.25em;
+  margin: 0 0 0.25em;
+}

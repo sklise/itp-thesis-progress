@@ -1,77 +1,79 @@
-<div class="col-4 float-right">
+<div id="dashboard">
+  <div class="col-4 float-right">
 
-  <div class="section">
-    <h2><a href="/announcements">Announcements</a></h2>
+    <div class="section outlined">
+      <h2><a href="/announcements">Announcements</a></h2>
 
-    <p><a href="/announcements/new">New Announcement</a></p>
+      <p><a href="/announcements/new">New Announcement</a></p>
 
-    <% @announcements.each do |announcement| %>
-    <% next if (announcement.sections & @current_user.sections).length == 0 && announcement.sections.length != 0 %>
-    <%= erb :'announcements/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
-    <% end %>
-  </div>
+      <% @announcements.each do |announcement| %>
+      <% next if (announcement.sections & @current_user.sections).length == 0 && announcement.sections.length != 0 %>
+      <%= erb :'announcements/excerpt', layout: false, locals: {announcement:announcement, :@show_sections => true} %>
+      <% end %>
+    </div>
 
 
-  <div class="section">
-    <h2>Information</h2>
-    <% Page.all.each do |page| %>
-      <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
-    <% end %>
-  </div>
-</div>
-
-<div class="col-8">
-  <div id="flash">
-    <div class="message-notification">
-      <a href="/admin/reviews">Click here to fill out Thesis Week Reviews</a>
+    <div class="section outlined">
+      <h2>Information</h2>
+      <% Page.all.each do |page| %>
+        <p><a href="/<%= page.slug %>"><%= page.title %></a></p>
+      <% end %>
     </div>
   </div>
 
+  <div class="col-8">
+    <div id="flash">
+      <div class="message-notification">
+        <a href="/admin/reviews">Click here to fill out Thesis Week Reviews</a>
+      </div>
+    </div>
 
-  <h2>Your Sections</h2>
-</div>
 
-<% @sections.each do |section| %>
+    <h2>Your Sections</h2>
+  </div>
 
-<div class="col-4 section-list">
-  <h3><a href="<%= section.url %>"><%= section.name %></a></h3>
-  <ul>
-  <% section.users.students.each do |student| %>
-    <li><a class="student-link" href="<%= student.url %>"><%= student %></a></li>
+  <% @sections.each do |section| %>
+
+  <div class="col-4 section-list">
+    <h3><a href="<%= section.url %>"><%= section.name %></a></h3>
+    <ul>
+    <% section.users.students.each do |student| %>
+      <li><a class="student-link" href="<%= student.url %>"><%= student %></a></li>
+    <% end %>
+    </ul>
+  </div>
   <% end %>
-  </ul>
-</div>
-<% end %>
 
-<div class="col-8" style="clear:left;">
-  <% if @drafts %>
-  <div class="section">
-    <h2>Drafts</h2>
-    <% @drafts.each do |draft| %>
+  <div class="col-8" style="clear:left;">
+    <% if @drafts.length > 0 %>
+    <div class="section">
+      <h2>Drafts</h2>
+      <% @drafts.each do |draft| %>
+      <div class="feed-item">
+        <span class="date"><%= longdate draft.updated_at %></span>
+         &mdash; <%= draft.title %> &mdash;
+        <span class="caption"><%= (draft.content || "")[0..160] %>...</span>
+
+        <a href="<%= draft.url %>/edit">Edit</a>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="section">
+      <h2>Comments on Posts in Your Sections</h2>
+      <% @comments.each do |comment| %>
+      <%= erb :'comment-feed', layout: false, locals: {comment: comment} %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-8">
+    <h2>Recent Posts</h2>
+    <% @sections.users.students.posts.all(draft: false, order: :published_at.desc, limit: 10).each do |post| %>
     <div class="feed-item">
-      <span class="date"><%= longdate draft.updated_at %></span>
-       &mdash; <%= draft.title %> &mdash;
-      <span class="caption"><%= (draft.content || "")[0..160] %>...</span>
-
-      <a href="<%= draft.url %>/edit">Edit</a>
+      <span class="date"><%= longdate post.published_at %></span> &mdash; <%= post.user %> <a href="<%= post.url %>"><%= post.title %></a>
     </div>
     <% end %>
   </div>
-  <% end %>
-
-  <div class="section">
-    <h2>Comments on Posts in Your Sections</h2>
-    <% @comments.each do |comment| %>
-    <%= erb :'comment-feed', layout: false, locals: {comment: comment} %>
-    <% end %>
-  </div>
-</div>
-
-<div class="col-8">
-  <h2>Recent Posts</h2>
-  <% @sections.users.students.posts.all(draft: false, order: :published_at.desc, limit: 10).each do |post| %>
-  <div class="feed-item">
-    <span class="date"><%= longdate post.published_at %></span> &mdash; <%= post.user %> <a href="<%= post.url %>"><%= post.title %></a>
-  </div>
-  <% end %>
 </div>
