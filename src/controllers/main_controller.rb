@@ -37,7 +37,6 @@ class Main < Sinatra::Base
 
     if @current_user.student?
       @drafts = @current_user.posts.drafts
-      @assignments = @current_user.sections.assignments.published.all
       @comments = @current_user.posts.comments.all(order: :created_at.desc, limit: 10)
       @announcements = Announcement.published.all(limit: 10)
 

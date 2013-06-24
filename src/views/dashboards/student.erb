@@ -30,23 +30,6 @@
 
   <div class="section">
 
-    <h2>Assignments</h2>
-
-    <% @assignments.each do |assignment| %>
-
-    <div class="assignment-list">
-      <h3 class="title"><span class="date"><%= longdate assignment.created_at %></span> &mdash; <strong><a href="<%= assignment.url %>"><%= assignment.title %></a></strong></h3>
-      <div><%= mdown assignment.brief %></div>
-
-      <a class="reply-link" href="/students/new?assignment_id=<%= assignment.id %>">Write a post for this assignment</a>
-    </div>
-
-    <% end %>
-
-  </div>
-
-  <div class="section">
-
     <h2><a href="<%= @current_user.sections.first.url %>"><%= @current_user.sections.first.name %></a>, Recent Posts</h2>
 
     <% @recent_posts.each do |post| %>

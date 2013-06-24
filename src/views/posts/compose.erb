@@ -1,15 +1,6 @@
-<div id="post-form" class="bb-form" data-post='<%= h @post.to_json %>' data-assignments='<%= h @assignments.to_json %>' data-categories='<%= h @categories.to_json %>'>
+<div id="post-form" class="bb-form" data-post='<%= h @post.to_json %>' data-categories='<%= h @categories.to_json %>'>
   <img src="/images/ajax-loader.gif">
 </div>
-
-<script type="text/template" id="assignments-choice-template">
-<h6>Assignment</h6>
-<select class="assignments-select">
-<option value="">Select an Assignment</option>
-</select>
-
-<div class="assignment-brief">{{{md brief}}}</div>
-</script>
 
 <script type="text/template" id="categories-choice-template">
 <h6>Category</h6>
@@ -40,9 +31,6 @@
   </h3>
 
   <div class="categories-choice section">
-  </div>
-
-  <div class="assignments-choice section">
   </div>
 
   <div class="section">

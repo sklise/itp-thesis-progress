@@ -6,31 +6,10 @@ var Post = Backbone.Model.extend({
 });
 
 var Category = Backbone.Model.extend();
-var Assignment = Backbone.Model.extend();
 
 //
 // COLLECTIONS
 //
-var Assignments = Backbone.Collection.extend({
-  model: Assignment,
-
-  selectedAssignment : function () {
-    return this.find(function (assignment) {
-      return assignment.get('selected') === true;
-    })
-  },
-
-  setAssignment: function (assignmentId) {
-    this.forEach(function (assignment) {
-      if (assignment.get('id') === parseInt(assignmentId)) {
-        assignment.set('selected', true);
-      } else {
-        assignment.unset('selected');
-      }
-    });
-  }
-});
-
 var Categories = Backbone.Collection.extend({
   model: Category,
 
@@ -66,10 +45,8 @@ jQuery(function () {
       this.render().el;
       this.model.bind('change:privacy', this.render, this);
       this.bind('pending', this.pending, this);
-      this.model.assignments.bind('change', this.setAssignment, this);
       this.model.categories.bind('change', this.setCategory, this);
       this.model.categories.setCategory(this.model.get('category_id'))
-      this.model.assignments.setAssignment(this.model.get('assignment_id'))
     },
 
     el: '#post-form',
@@ -89,7 +66,6 @@ jQuery(function () {
       var template = Handlebars.compile( this.templateSource );
       this.$el.html( template(this.model.toJSON()) );
 
-      this.assignmentsSelect = new AssignmentsView({collection: this.model.assignments});
       this.categorySelect = new CategoriesView({collection: this.model.categories});
 
       bindExpandingAreas();
@@ -112,16 +88,6 @@ jQuery(function () {
 
     toggleMarkdownGuide: function () {
       $('#markdown-wrapper').toggle();
-    },
-
-    setAssignment: function () {
-      var selectedAssignment = this.model.assignments.selectedAssignment();
-
-      if (typeof selectedAssignment === 'undefined') {
-        this.model.set('assignment_id', null)
-      } else {
-        this.model.set('assignment_id', selectedAssignment.get('id'));
-      }
     },
 
     setCategory: function (e) {
@@ -227,48 +193,9 @@ jQuery(function () {
     }
   })
 
-  var AssignmentsView = Backbone.View.extend({
-    initialize: function () {
-      this.render().el;
-      this.collection.bind('change', this.render, this);
-    },
-
-    events: {
-      'change .assignments-select' : 'chooseAssignment'
-    },
-
-    el: '.assignments-choice',
-
-    templateSource: $('#assignments-choice-template').html(),
-
-    chooseAssignment: function () {
-      this.collection.setAssignment(this.$el.find('.assignments-select').first().val());
-    },
-
-    render: function () {
-      var template = Handlebars.compile(this.templateSource);
-      var c = this.collection.toJSON();
-      var templateModel = {};
-
-      var selectedAssignment = this.collection.selectedAssignment()
-
-      if (typeof selectedAssignment !== 'undefined' ) {
-        templateModel = selectedAssignment.toJSON();
-      }
-      this.$el.html(template( templateModel ));
-      this.collection.forEach(function (assignment) {
-        var assignmentTemplate = Handlebars.compile('<option {{#if selected}}selected{{/if}} value="{{ id }}">{{ title }}</option>')(assignment.toJSON());
-        this.$el.find('.assignments-select').append(assignmentTemplate);
-      }, this);
-      $('.assignments-select').chosen();
-      return this;
-    }
-  });
-
   var postFormData = $('#post-form').data();
 
   window.post = new Post(postFormData.post);
-  post.assignments =  new Assignments(postFormData.assignments);
   post.categories = new Categories(postFormData.categories);
 
   window.postView = new PostView({model: post});

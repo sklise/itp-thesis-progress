@@ -8,7 +8,6 @@ class PostsApp < Sinatra::Base
 
   get '/new' do
     @section = env['warden'].user.sections.first
-    @assignments = @section.assignments
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.new
@@ -17,7 +16,6 @@ class PostsApp < Sinatra::Base
 
   get '/:id/edit' do
     @section = env['warden'].user.sections.first
-    @assignments = @section.assignments
     @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.active.get(params[:id])

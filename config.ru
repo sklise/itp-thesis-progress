@@ -54,7 +54,6 @@ builder = Rack::Builder.new do
   map ('/')                     { run Main }
   map ('/admin')                { run AdminApp }
   map ('/announcements')        { run AnnouncementsApp }
-  map ('/assignments')          { run AssignmentsApp }
   map ('/attachments')          { run AttachmentsApp }
   map ('/auth' )                { run AuthenticationManager }
   map ('/comments')             { run CommentsApp }
@@ -64,6 +63,9 @@ builder = Rack::Builder.new do
   map ('/students')             { run StudentsApp }
   map ('/book')                 { run BookMaker }
   map ('/api')                  { run API }
+
+  # deprecated
+  map ('/assignments')          { run AssignmentsApp }
 
   # map ('/applications')         { run ApplicationApp }
   # map ('/applications/submit')  { run ApplicationSubmit }
