@@ -19,8 +19,6 @@ module Sinatra
 
       if app.production?
         app.error do
-          StatHat::API.ez_post_value("ERROR : #{request.fullpath}", ENV['STATHAT_EMAIL'], 1)
-
           email_body = ""
 
           if @current_user
@@ -34,7 +32,6 @@ module Sinatra
         end
 
         app.not_found do
-          StatHat::API.ez_post_value("ERROR : NOT FOUND", ENV['STATHAT_EMAIL'], 1)
           flash.error = "Could not find #{request.fullpath}"
           redirect "/"
         end

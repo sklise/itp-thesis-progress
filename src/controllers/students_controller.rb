@@ -12,14 +12,12 @@ class StudentsApp < Sinatra::Base
 
     @posts = Post.published.paginate(page: 1)
     @drafts = Post.drafts.all(user_id: @current_user.id)
-    StatHat::API.ez_post_value("Students : All : 1", ENV['STATHAT_EMAIL'], 1)
     erb :'students/index'
   end
 
   get '/page/:page_number/?' do
     authenticate
     @posts = Post.published.paginate(page: params[:page_number])
-    StatHat::API.ez_post_value("Students : All : #{params[:page_number]}", ENV['STATHAT_EMAIL'], 1)
     erb :'students/index'
   end
 
@@ -47,8 +45,6 @@ class StudentsApp < Sinatra::Base
       redirect '/'
     end
 
-    StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
-
     @current_user = env['warden'].user
 
     if @user == @current_user
@@ -64,8 +60,6 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    StatHat::API.ez_post_value("Students : Progress", ENV['STATHAT_EMAIL'], 1)
-
     @posts = Post.published.paginate(page: params[:page_number], user: @user)
     erb :'students/progress_index'
   end
@@ -77,8 +71,6 @@ class StudentsApp < Sinatra::Base
 
     # Stop here if no user was found with a matching netid.
     halt 404 if @user.nil?
-
-    StatHat::API.ez_post_value("Students : Progress : Category", ENV['STATHAT_EMAIL'], 1)
 
     @posts = Post.published.paginate(page: 1, user: @user, category_id: @category.id)
 
@@ -93,8 +85,6 @@ class StudentsApp < Sinatra::Base
     halt 404 if @user.nil?
 
     @category = Category.first slug: params[:category]
-
-    StatHat::API.ez_post_value("Students : Progress : Category", ENV['STATHAT_EMAIL'], 1)
 
     @posts = Post.published.paginate(page: params[:page_number], user: @user, category_id: @category.id)
 
@@ -239,7 +229,6 @@ class StudentsApp < Sinatra::Base
     elsif !@post.is_public && !env['warden'].authenticated?
       env['warden'].authenticate!
     else
-      StatHat::API.ez_post_value("Students : Progress : Post", ENV['STATHAT_EMAIL'], 1)
       @current_user = env['warden'].user
       erb :'students/progress_show'
     end
@@ -281,8 +270,6 @@ class StudentsApp < Sinatra::Base
       flash.error = "#{@user} does not have a thesis in the system."
       redirect '/'
     end
-
-    StatHat::API.ez_post_value("Students : Thesis", ENV['STATHAT_EMAIL'], 1)
 
     @thesis = @user.theses.last
 

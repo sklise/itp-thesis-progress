@@ -42,12 +42,9 @@ class Main < Sinatra::Base
 
       @recent_posts = @current_user.sections.first.students.posts.published.paginate(page: 1)
 
-      StatHat::API.ez_post_value("Dashboard : Student", ENV['STATHAT_EMAIL'], 1)
-
       erb :'dashboards/student'
     elsif @current_user.faculty?
       @sections = Section.all(year: 2013)
-      StatHat::API.ez_post_value("Dashboard : Faculty", ENV['STATHAT_EMAIL'], 1)
       erb :'dashboards/faculty'
     elsif @current_user.admin?
       # @announcement_drafts = @current_user.announcements.drafts
@@ -57,11 +54,10 @@ class Main < Sinatra::Base
 
       @drafts = @current_user.announcements.drafts
 
-      StatHat::API.ez_post_value("Dashboard : Admin", ENV['STATHAT_EMAIL'], 1)
       erb :'dashboards/advisor'
     else
       @sections = Section.all(year: 2013)
-      StatHat::API.ez_post_value("Dashboard : Provisional", ENV['STATHAT_EMAIL'], 1)
+
       erb :'dashboards/provisional'
     end
   end
@@ -90,7 +86,6 @@ class Main < Sinatra::Base
 
     @page = Page.first(slug: params[:page])
 
-    StatHat::API.ez_post_value("Pages : View : #{@page.title}", ENV['STATHAT_EMAIL'], 1)
 
     erb :'pages/show'
   end
@@ -123,7 +118,6 @@ class Main < Sinatra::Base
     pass if !@pages.slugs.include?(params[:page])
     @page = @pages.first(slug: params[:page])
 
-    StatHat::API.ez_post_value("Pages : Edit : #{@page.title}", ENV['STATHAT_EMAIL'], 1)
 
     erb :'pages/edit'
   end
@@ -136,7 +130,6 @@ class Main < Sinatra::Base
     @page = Page.first(slug: params[:page])
     @page.update(params[:page_form])
 
-    StatHat::API.ez_post_value("Pages : Update : #{@page.title}", ENV['STATHAT_EMAIL'], 1)
     redirect "/#{@page.slug}"
   end
 
