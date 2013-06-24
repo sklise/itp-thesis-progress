@@ -64,6 +64,15 @@ builder = Rack::Builder.new do
   map ('/book')                 { run BookMaker }
   map ('/api')                  { run API }
 
+  # Asset Pipeline
+  map '/assets' do
+    environment = Sprockets::Environment.new
+    environment.append_path 'src/assets/javascripts'
+    environment.append_path 'src/assets/stylesheets'
+    run environment
+  end
+
+
   # deprecated
   map ('/assignments')          { run AssignmentsApp }
 
