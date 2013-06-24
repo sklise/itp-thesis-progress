@@ -8,19 +8,6 @@
 </div>
 
 <div class="col-3">
-  <div class="section">
-    <h2>Assignments</h2>
-    <% if @current_user.advisor? %>
-    <p><a href="/assignments/new">New Assignment</a></p>
-    <% end %>
-
-    <% @section.assignments.published.each do |assignment| %>
-    <div class="feed-item">
-      <span class="date"><%= longdate assignment.created_at %></span> &mdash; <a href="/assignments/<%= assignment.year %>/<%= assignment.id %>"><%= assignment.title %></a>
-    </div>
-    <% end %>
-  </div>
-
   <% unless @current_user.provisional? %>
   <div class="section">
     <h2>Announcements</h2>
