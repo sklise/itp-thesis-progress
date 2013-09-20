@@ -7,6 +7,7 @@ gem 'rack-flash3', '1.0.1', require: 'rack/flash'
 gem 'redis'
 
 # caching
+gem 'memcachier'
 gem 'dalli', '1.0.5'
 
 # markdown support
