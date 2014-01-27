@@ -160,7 +160,7 @@ class API < Sinatra::Base
 
   get '/student_list' do
     content_type :html
-    @students = User.all(order: :first_name, role: "student")
+    @students = User.all(order: :first_name, role: "student", year: ENV['CURRENT_YEAR'])
     output = ""
     @students.each do |student|
       output += "<p>#{student.to_s}</p>"
