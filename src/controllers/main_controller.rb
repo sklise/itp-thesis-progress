@@ -37,7 +37,7 @@ class Main < Sinatra::Base
 
     if @current_user.student?
       @drafts = @current_user.posts.drafts
-      @comments = @current_user.posts.comments.all(order: :created_at.desc, limit: 10)
+      @comments = @current_user.posts.comments.all(order: :created_at.desc, limit: 10, :created_at.gt => DateTime.parse("#{ENV['CURRENT_YEAR']}/1/1"))
       @announcements = Announcement.published.all(limit: 10)
 
       @recent_posts = @current_user.sections.first.students.posts.published.paginate(page: 1)
@@ -50,7 +50,7 @@ class Main < Sinatra::Base
       # @announcement_drafts = @current_user.announcements.drafts
       @announcements = Announcement.published.all(limit: 10)
       @sections = @current_user.current_sections
-      @comments = @current_user.current_sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
+      @comments = @current_user.current_sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false, :created_at.gt => DateTime.parse("#{ENV['CURRENT_YEAR']}/1/1"))
 
       @drafts = @current_user.announcements.drafts
 

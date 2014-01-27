@@ -2,7 +2,7 @@ class FeedbackApp < Sinatra::Base
   before do
     env['warden'].authenticate!
     @current_user = env['warden'].user
-    require_non_student
+    require_adult
   end
 
   post '/new' do

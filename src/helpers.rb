@@ -47,6 +47,13 @@ module Sinatra
         end
       end
 
+      def require_adult
+        unless env['warden'].user.advisor? || env['warden'].user.faculty?
+          flash.error = "You are not authorized to access that page."
+          redirect '/'
+        end
+      end
+
       # Advisor, Faculty or Resident
       def require_non_student
         unless env['warden'].user.non_student?
