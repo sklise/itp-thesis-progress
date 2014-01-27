@@ -57,7 +57,7 @@ class SectionsApp < Sinatra::Base
   #############################################################################
 
   get '/new/?' do
-    require_advisor
+    require_admin
 
     @advisors = User.advisors
     @section = Section.new
@@ -66,7 +66,7 @@ class SectionsApp < Sinatra::Base
   end
 
   post '/new/?' do
-    require_advisor
+    require_admin
 
     @section = Section.create(params[:section])
     redirect @section.url
@@ -74,7 +74,7 @@ class SectionsApp < Sinatra::Base
 
   # edit
   get '/:year/:slug/edit/?' do
-    require_advisor
+    require_admin
 
     @section = Section.first(
       year: params[:year],
@@ -86,7 +86,7 @@ class SectionsApp < Sinatra::Base
 
   # update
   post '/:year/:slug/update/?' do
-    require_advisor
+    require_admin
     @section = Section.first(year: params[:year], slug: params[:slug])
     @section.update(name: params[:section][:name], slug: params[:section][:slug] )
 
