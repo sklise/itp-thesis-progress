@@ -67,21 +67,27 @@ class AdminApp < Sinatra::Base
 
     @reviews = Review.all(:reviewer_id => @current_user.id)
 
-    @sections = Section.all
+    @sections = Section.current_year
     erb :'admin/reviews'
   end
 
   get '/reviews/students' do
     require_non_student
 
-    @students = User.all(:role => "student", order: :first_name)
+    @students = User.all(
+      :role => "student",
+      :order => :first_name,
+      :year => ENV['CURRENT_YEAR'])
 
     erb :'admin/reviews_index'
   end
 
   get '/reviews/:netid' do
     require_non_student
-    @students = User.all(:role => "student", order: :first_name)
+    @students = User.all(
+      :role => "student",
+      :order => :first_name,
+      :year => ENV['CURRENT_YEAR'])
     @student = User.first(:netid => params[:netid])
     @reviews = Review.all(:student_id => @student.id)
     erb :'admin/reviews_show'

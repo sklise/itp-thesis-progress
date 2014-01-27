@@ -13,6 +13,10 @@ class Section
     "/sections/#{year}/#{slug}"
   end
 
+  def self.current_year
+    all(:year => ENV['CURRENT_YEAR'])
+  end
+
   def students
     users.all role: "student", order: "first_name"
   end

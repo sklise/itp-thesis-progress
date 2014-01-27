@@ -1,7 +1,7 @@
 <h4>View By Section</h4>
 <ul>
   <li><a href="/announcements/everyone">Everyone</a></li>
-  <% Section.all.each do |section| %>
+  <% Section.current_year.each do |section| %>
   <li>
     <a href="/announcements/section/<%= section.year %>/<%= section.slug %>"><%= section.name %></a>
   </li>
