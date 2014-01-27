@@ -14,7 +14,7 @@ class SectionsApp < Sinatra::Base
 
   # show
   get '/:year/:slug/?' do
-    @section = Section.first( year: params[:year], slug: params[:slug])
+    @section = Section.first(year: params[:year], slug: params[:slug])
 
     if @section.nil?
       flash.error = "We couldn't find the section you were looking for."
@@ -61,6 +61,7 @@ class SectionsApp < Sinatra::Base
 
     @advisors = User.advisors
     @section = Section.new
+    @students = User.students(2013)
 
     erb :'sections/new'
   end
@@ -68,7 +69,12 @@ class SectionsApp < Sinatra::Base
   post '/new/?' do
     require_admin
 
-    @section = Section.create(params[:section])
+    @section = Section.new(params[:section])
+
+    users = User.all(:id => params[:students].map{|i| i.to_i} + [params[:advisor_id]])
+    @section.users = users
+    @section.save
+
     redirect @section.url
   end
 
@@ -80,6 +86,7 @@ class SectionsApp < Sinatra::Base
       year: params[:year],
       slug: params[:slug],
     )
+    @students = User.students
 
     erb :'sections/edit'
   end
@@ -89,6 +96,10 @@ class SectionsApp < Sinatra::Base
     require_admin
     @section = Section.first(year: params[:year], slug: params[:slug])
     @section.update(name: params[:section][:name], slug: params[:section][:slug] )
+
+    users = User.all(:id => params[:students].map{|i| i.to_i} + [params[:advisor_id]])
+    @section.users = users
+    @section.save
 
     redirect @section.url
   end

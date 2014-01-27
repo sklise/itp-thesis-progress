@@ -23,7 +23,9 @@
 
   <div class="section">
     <p><a href="<%= @section.url %>/comments">Comments</a></p>
+    <% if @section.students.length > 0 %>
     <p><a href='mailto:<%= @section.students.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>?cc=<%= @section.advisor.netid %>@nyu.edu,<%= @section.users.residents.map {|s| "#{s.netid}@nyu.edu"}.join(",") %>'>Email Students</a></p>
+    <% end %>
   </div>
   <% end %>
 </div>

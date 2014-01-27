@@ -1,12 +1,24 @@
 <form action="/sections/new" method="POST">
+  <h6>Section Name</h6>
   <input type="text" name="section[name]" placeholder="Name of Section" value="<%= @section.name %>" />
-  <input type="text" name="section[slug]" placeholder="(Optional) enter a slug for the url, like the name only without spaces." value="<%= @section.slug %>"/>
-  <input type="text" year="section[year]" placeholder="year" value="<%= @section.year %>"/>
 
+  <input type="text" name="section[slug]" placeholder="(Optional) enter a slug for the url, like the name only without spaces." value="<%= @section.slug %>"/>
+
+  <h6>Advisor</h6>
   <select class="chzn-select" name="advisor_id" data-placeholder="Choose an advisor">
   <% @advisors.each do |advisor| %>
   <option value="<%= advisor.id %>"><%= advisor %></option>
   <% end %>
   </select>
+
+  <h6>Students</h6>
+  <div style="min-height:500px;">
+  <p>Click in the box and start typing out students' names. There is autocomplete.</p>
+  <select class="chzn-select" multiple data-placeholder="Add Students" name="students[]">
+    <% @students.each do |student| %>
+    <option value="<%= student.id %>"><%= student %></option>
+    <% end %>
+  </select>
+  </div>
   <input type="submit">
 </form>
