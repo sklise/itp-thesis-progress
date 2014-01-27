@@ -63,7 +63,7 @@ class AdminApp < Sinatra::Base
   end
 
   get '/reviews' do
-    require_non_student
+    require_adult
 
     @reviews = Review.all(:reviewer_id => @current_user.id)
 
@@ -72,7 +72,7 @@ class AdminApp < Sinatra::Base
   end
 
   get '/reviews/students' do
-    require_non_student
+    require_adult
 
     @students = User.all(
       :role => "student",
@@ -83,7 +83,7 @@ class AdminApp < Sinatra::Base
   end
 
   get '/reviews/:netid' do
-    require_non_student
+    require_adult
     @students = User.all(
       :role => "student",
       :order => :first_name,
