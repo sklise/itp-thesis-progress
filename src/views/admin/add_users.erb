@@ -1,0 +1,17 @@
+<div class="col-12">
+  <h1>Add Users</h1>
+
+  <p>In the textarea below, paste a CSV of the form: </p>
+  <pre><code>First name, Last name, netid</code></pre>
+  <p>Then select which role to create users with</p>
+
+  <form action="/admin/users" method="POST">
+    <select class="chzn-select" name="role">
+      <option value="student">Student</option>
+      <option value="advisor">Advisor</option>
+      <option value="resident">Resident</option>
+    </select>
+    <textarea name="users"></textarea>
+    <input type="submit">
+  </form>
+</div>

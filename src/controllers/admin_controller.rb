@@ -92,4 +92,26 @@ class AdminApp < Sinatra::Base
     @reviews = Review.all(:student_id => @student.id)
     erb :'admin/reviews_show'
   end
+
+  get '/users/add' do
+    require_non_student
+    erb :'admin/add_users'
+  end
+
+  post '/users' do
+    require_non_student
+
+    users = params[:users].split("\r\n").map({|m| m.split(",")})
+    users.each do |user|
+      if user.length == 3
+      @user = User.first_or_create(:netid => user[2])
+      @user.update(
+        :first_name => users[0]
+        :last_name => users[1]
+        :role => params[:role]
+      )
+      "ok"
+    end
+
+  end
 end
