@@ -1,4 +1,4 @@
-<form action="<%= @section.url %>/update" method="POST">
+<form action="<%= @section.url %>/update" method="POST" style="min-height:800px;">
 
   <h6>Section Name</h6>
   <p>This is how the section will appear throughout the site.</p>
@@ -10,6 +10,14 @@
 
   <h6>Students</h6>
   <p>If you need to change the students in your section, please get in touch with Steve Klise sk3453@nyu.edu.</p>
+
+  <h6>Students</h6>
+  <p>Click in the box and start typing out students' names. There is autocomplete.</p>
+  <select class="chzn-select" multiple data-placeholder="Add Students" name="students[]">
+    <% @students.each do |student| %>
+    <option value="<%= student.id %>"><%= student %></option>
+    <% end %>
+  </select>
 
   <input type="submit">
 </form>
