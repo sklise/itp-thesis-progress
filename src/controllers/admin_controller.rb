@@ -101,7 +101,7 @@ class AdminApp < Sinatra::Base
   post '/users' do
     require_non_student
 
-    users = params[:users].split("\r\n").map({|m| m.split(",")})
+    users = params[:users].split("\r\n").map{|m| m.split(",")}
     users.each do |user|
       if user.length == 3
         @user = User.first_or_create(:netid => user[2])
