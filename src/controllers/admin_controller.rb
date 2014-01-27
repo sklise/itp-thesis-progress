@@ -106,8 +106,8 @@ class AdminApp < Sinatra::Base
       if user.length == 3
       @user = User.first_or_create(:netid => user[2])
       @user.update(
-        :first_name => users[0]
-        :last_name => users[1]
+        :first_name => users[0],
+        :last_name => users[1],
         :role => params[:role]
       )
       "ok"
