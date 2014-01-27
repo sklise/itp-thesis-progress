@@ -104,14 +104,14 @@ class AdminApp < Sinatra::Base
     users = params[:users].split("\r\n").map({|m| m.split(",")})
     users.each do |user|
       if user.length == 3
-      @user = User.first_or_create(:netid => user[2])
-      @user.update(
-        :first_name => users[0],
-        :last_name => users[1],
-        :role => params[:role]
-      )
-      "ok"
+        @user = User.first_or_create(:netid => user[2])
+        @user.update(
+          :first_name => users[0],
+          :last_name => users[1],
+          :role => params[:role]
+        )
+      end
     end
-
+    "ok"
   end
 end
