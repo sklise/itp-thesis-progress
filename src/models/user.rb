@@ -38,7 +38,7 @@ class User
     all role: "advisor"
   end
 
-  def self.students(year=nil)
+  def self.students(year=ENV['CURRENT_YEAR'])
     if year.nil?
       all(role: "student")
     else
@@ -46,7 +46,7 @@ class User
     end
   end
 
-  def self.residents(year=nil)
+  def self.residents(year=ENV['CURRENT_YEAR'])
     if year.nil?
       all(role: "resident")
     else
@@ -57,6 +57,10 @@ class User
   #
   # INSTANCE METHODS
   #
+
+  def current_sections
+    self.sections.all(:year => ENV['CURRENT_YEAR'])
+  end
 
   def thesis
     self.theses.last
@@ -114,51 +118,51 @@ class User
 
   # Return a student's advisor. If the user is an advisor, return nil
   def students_advisor
-    return nil if self.advisor?
+    return nil if self.advisor? || self.provisional?
 
-    self.sections.first.advisor
+    self.current_sections.first.advisor
   end
 
   # Return User's posts that are assignments
-  def completed_assignments
-    return [] if self.role != "student"
+  # def completed_assignments
+  #   return [] if self.role != "student"
 
-    if self.posts.length == 0
-      []
-    else
-      assignment_posts = self.posts.all(:assignment_id.not => nil)
-    end
-  end
+  #   if self.posts.length == 0
+  #     []
+  #   else
+  #     assignment_posts = self.posts.all(:assignment_id.not => nil)
+  #   end
+  # end
 
   # Just the ids of assignments completed by student
-  def assignment_ids
-    return [] if self.role != "student"
+  # def assignment_ids
+  #   return [] if self.role != "student"
 
-    assignment_posts = completed_assignments
+  #   assignment_posts = completed_assignments
 
-    assignment_ids = []
+  #   assignment_ids = []
 
-    assignment_posts.each do |post|
-      assignment_ids << post.assignment_id
-    end
+  #   assignment_posts.each do |post|
+  #     assignment_ids << post.assignment_id
+  #   end
 
-    assignment_ids
-  end
+  #   assignment_ids
+  # end
 
-  #
-  def open_assignments
-    return [] if self.role != "student"
+  # #
+  # def open_assignments
+  #   return [] if self.role != "student"
 
-    assignments = []
+  #   assignments = []
 
-    sections.each do |section|
-      section.assignments.each do |assignment|
-        assignments << assignment if !assignment_ids.include? assignment.id
-      end
-    end
+  #   sections.each do |section|
+  #     section.assignments.each do |assignment|
+  #       assignments << assignment if !assignment_ids.include? assignment.id
+  #     end
+  #   end
 
-    assignments
-  end
+  #   assignments
+  # end
 
   def self.has_application(yes_or_no=nil)
     if yes_or_no.nil? || yes_or_no
