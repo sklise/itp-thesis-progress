@@ -40,7 +40,7 @@ class StudentsApp < Sinatra::Base
       @posts = Post.published.paginate(page: 1, user: @user)
     end
 
-    if @user.non_student?
+    if @user.theses.length == 0
       flash.error = "#{@user} is not a student."
       redirect '/'
     end
@@ -183,7 +183,7 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    if @user.non_student?
+    if @user.theses.length == 0
       flash.error = "#{@user} does not have a thesis in the system."
       redirect '/'
     end
@@ -266,14 +266,14 @@ class StudentsApp < Sinatra::Base
 
     halt 404 if @user.nil?
 
-    if @user.non_student?
+    if @user.theses.length == 0
       flash.error = "#{@user} does not have a thesis in the system."
       redirect '/'
     end
 
     @thesis = @user.theses.last
 
-    if @current_user && @current_user.non_student?
+    if @current_user && @current_user.adult
       @feedback = @user.received_feedbacks.all(active: true)
     end
 

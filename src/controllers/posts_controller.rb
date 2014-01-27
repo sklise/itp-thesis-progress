@@ -7,8 +7,7 @@ class PostsApp < Sinatra::Base
   end
 
   get '/new' do
-    @section = env['warden'].user.sections.first
-    @assignment = Assignment.get(params[:assignment_id])
+    @section = env['warden'].user.sections.current_year.first
     @categories = Category.all
     @post = Post.new
     erb :'posts/compose'
@@ -16,7 +15,6 @@ class PostsApp < Sinatra::Base
 
   get '/:id/edit' do
     @section = env['warden'].user.sections.first
-    @assignment = Assignment.get(params[:assignment_id])
     @categories = Category.all
     @post = Post.active.get(params[:id])
     check_user(@post.user.netid)

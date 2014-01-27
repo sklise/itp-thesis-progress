@@ -40,7 +40,7 @@ class Post
   #
   # Returns a DataMapper Collection.
   def self.drafts
-    all(draft: true, active: true, order: :updated_at.desc)
+    all(draft: true, active: true, order: :updated_at.desc, :created_at.gt => ENV['CURRENT_YEAR'])
   end
 
   # Public: Return all active resources marked as published, sorted in reverse
@@ -48,7 +48,7 @@ class Post
   #
   # Returns a DataMapper Collection.
   def self.published
-    all(draft: false, active: true, order: :published_at.desc)
+    all(draft: false, active: true, order: :published_at.desc, :created_at.gt => ENV['CURRENT_YEAR'])
   end
 
   def self.active

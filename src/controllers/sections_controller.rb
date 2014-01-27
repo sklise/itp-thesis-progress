@@ -8,7 +8,7 @@ class SectionsApp < Sinatra::Base
   end
 
   get '/?' do
-    @sections = Section.all(year: 2013)
+    @sections = Section.current_year
     erb :'sections/index'
   end
 
