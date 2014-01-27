@@ -44,19 +44,19 @@ class Main < Sinatra::Base
 
       erb :'dashboards/student'
     elsif @current_user.faculty?
-      @sections = Section.all(year: 2013)
+      @sections = Section.all(year: ENV['CURRENT_YEAR'])
       erb :'dashboards/faculty'
     elsif @current_user.admin?
       # @announcement_drafts = @current_user.announcements.drafts
       @announcements = Announcement.published.all(limit: 10)
-      @sections = @current_user.sections
-      @comments = @current_user.sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
+      @sections = @current_user.current_sections
+      @comments = @current_user.current_sections.users.posts.comments.all(order: :created_at.desc, limit: 20, :user_id.not => @current_user.id, read: false)
 
       @drafts = @current_user.announcements.drafts
 
       erb :'dashboards/advisor'
     else
-      @sections = Section.all(year: 2013)
+      @sections = Section.current_year
 
       erb :'dashboards/provisional'
     end
@@ -83,10 +83,7 @@ class Main < Sinatra::Base
     @current_user = env['warden'].user
 
     pass if !redis.sismember('itpthesis:pages', params[:page])
-
     @page = Page.first(slug: params[:page])
-
-
     erb :'pages/show'
   end
 
@@ -135,11 +132,11 @@ class Main < Sinatra::Base
 
   # Route to only use in Development to set your user to any netid to view the
   # site as another person.
-  unless ENV['RACK_ENV'] == 'production'
-    get '/set_user/:netid' do
-      @user = User.first netid: params[:netid]
-      env['warden'].set_user @user
-      @user.to_json
-    end
-  end
+  # unless ENV['RACK_ENV'] == 'production'
+  #   get '/set_user/:netid' do
+  #     @user = User.first netid: params[:netid]
+  #     env['warden'].set_user @user
+  #     @user.to_json
+  #   end
+  # end
 end
