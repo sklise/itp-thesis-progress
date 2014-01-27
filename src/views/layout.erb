@@ -56,9 +56,9 @@
       <% if @current_user.student? %>
         <li><a href="<%= @current_user.url %>/thesis">Thesis Summary</a></li>
         <li><a href="<%= @current_user.url %>/progress">Your Progress</a></li>
-        <li><a href="<%= @current_user.sections.first.url %>">Your Class</a></li>
+        <li><a href="<%= @current_user.current_sections.first.url %>">Your Class</a></li>
       <% elsif @current_user.admin? %>
-        <% env['warden'].user.sections.each do |section| %>
+        <% env['warden'].user.current_sections.each do |section| %>
         <li><a href="<%= section.url %>"><%= section.name %></a></li>
         <% end %>
         <li><a href="/page/new">New Page</a></li><li><a href="/announcements/new">New Announcement</a></li>
@@ -70,8 +70,8 @@
         <li><a href="/students/new" title="Write a New Post"><div class="glyphicons pencil"><i></i></div></a></li>
         <% end %>
 
-        <li><a href="/admin"><div class="glyphicons settings"><i></i></div></a></li>
-        <li><a href="/auth/logout" title="log out" class="glyphicons power"><i></i></a></li>
+        <li><a href="/admin"><% if @current_user.admin? %>Admin<% else %>Settings<% end %></a></li>
+        <li><a href="/auth/logout" title="log out">Logout</a></li>
       </ul>
     <% else %>
       <a href="/auth/login">Log In</a>
@@ -114,8 +114,8 @@
 
     <div class="col-4">
       <h2>Feedback/Issues</h2>
-      <p>Please report any bugs to Steve Klise: sk3453@nyu.edu</p>
-      <p>You can also write a bug report <a href="https://github.com/stevenklise/itp-thesis-progress/issues">here</a>.</p>
+      <p>Please report any bugs to Karl Ward: kw1213@nyu.edu</p>
+      <p>You can also write a bug report <a href="https://github.com/sklise/itp-thesis-progress/issues">here</a>.</p>
     </div>
     <div style="clear:both;height:0;">&nbsp;</div>
   </div>
