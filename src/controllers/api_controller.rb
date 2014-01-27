@@ -105,7 +105,7 @@ class API < Sinatra::Base
   #
   ####################################################
   post '/reviews/?' do
-    require_non_student
+    require_adult
     json = JSON.parse(request.body.read)
 
     @review = Review.new(json)
@@ -119,7 +119,7 @@ class API < Sinatra::Base
   end
 
   get '/reviews/:id' do
-    require_non_student
+    require_adult
     @review = Review.get(params[:id])
 
     halt 404 if @review.nil?
@@ -128,7 +128,7 @@ class API < Sinatra::Base
   end
 
   put '/reviews/:id' do
-    require_non_student
+    require_adult
     json = JSON.parse(request.body.read)
 
     @review = Review.get(params[:id])
