@@ -61,7 +61,7 @@ class SectionsApp < Sinatra::Base
 
     @advisors = User.advisors
     @section = Section.new
-    @students = User.students(2013)
+    @students = User.students
 
     erb :'sections/new'
   end
